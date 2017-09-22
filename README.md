@@ -24,8 +24,7 @@ It can also be used as a diff tool for Git or Mercurial.
 
 ## Installation
 
-Download and Run the Installer .
-[ExcelMergeSetup.msi]()
+Download ExcelMergeSetup.msi from [here](https://github.com/skanmera/ExcelMerge/releases/) and Run.
 
 ## Usage
 
