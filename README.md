@@ -58,9 +58,9 @@ ExcelMerge.GUI diff [Options]
 .gitconfig
 ```
 [diff]
-tool = WinMerge
+tool = ExcelMerge
 
-[difftool "WinMerge"]
+[difftool "ExcelMerge"]
 cmd = \"C:/Program Files (x86)/ExcelMerge/ExcelMerge.GUI.exe\" diff -s \"$LOCAL\" -d \"$REMOTE\" -c WinMerge -i -w -v -k 
 
 [alias]
