@@ -1,0 +1,211 @@
+﻿<UserControl x:Class="ExcelMerge.GUI.Views.DiffView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
+             xmlns:behavior="clr-namespace:ExcelMerge.GUI.Behaviors"
+             xmlns:fg="clr-namespace:FastWpfGrid;assembly=FastWpfGrid"
+             xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="DiffButton" Content="{x:Static props:Resources.Button_ExtractDiff}" Grid.Column="0" Grid.ColumnSpan="2" Click="DiffButton_Click" Margin="1"
+                    IsEnabled="{Binding Executable}"/>
+
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+
+                <!--SrcPath-->
+            <TextBox x:Name="SrcPathTextBox" Grid.Row="0" Grid.Column="0" AcceptsReturn="False" Margin="1"
+                     AllowDrop="True"
+                     Text="{Binding SrcPath}"
+                     Tag="0"
+                     TextChanged="SrcPathTextBox_TextChanged"
+                     ToolTip="{x:Static props:Resources.ToolTip_SrcFilePath}"
+                     >
+                <i:Interaction.Behaviors>
+                    <behavior:DragAcceptBehavior 
+                        Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <ComboBox x:Name="SrcSheetCombobox" Grid.Row="0" Grid.Column="1" Margin="0,0,5,0"
+                      SelectionChanged="SrcSheetCombobox_SelectionChanged"
+                      ToolTip="{x:Static props:Resources.ToolTip_SrcSheet}"/>
+
+        </Grid>
+
+        <Button x:Name="SwapButton" Grid.Row="0" Grid.Column="3" Content="↔" Click="SwapButton_Click"
+                ToolTip="Swap left and right"/>
+
+        <Grid Grid.Column="4" Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+
+                <!--DstPath-->
+            <TextBox x:Name="DstPathTextBox" Grid.Row="0" Grid.Column="1" AcceptsReturn="False" Margin="1"
+                     AllowDrop="True"
+                     Text="{Binding DstPath}"
+                     Tag="1"
+                     TextChanged="DstPathTextBox_TextChanged"
+                     ToolTip="{x:Static props:Resources.ToolTip_DstFilePath}"
+                     >
+                <i:Interaction.Behaviors>
+                    <behavior:DragAcceptBehavior 
+                        Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <ComboBox x:Name="DstSheetCombobox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0"
+                      SelectionChanged="DstSheetCombobox_SelectionChanged"
+                      ToolTip="{x:Static props:Resources.ToolTip_DstSheet}"/>
+
+        </Grid>
+
+        <GridSplitter Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Height="5" VerticalAlignment="Center"/>
+
+        <!--Src Location Grid-->
+        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="0" Grid.Row="2" Margin="5, 5, 5, 20">
+            <Grid x:Name="SrcLocationGrid" ShowGridLines="False"
+                  MouseDown="SrcLocationGrid_MouseDown" MouseMove="SrcLocationGrid_MouseMove" MouseWheel="SrcLocationGrid_MouseWheel"
+                  Background="#00000000"
+                  >
+                <Rectangle x:Name="SrcViewRectangle" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Fill="LightBlue" Opacity="0.5" 
+                           Width="{Binding ActualWidth, ElementName=SrcLocationGrid}" 
+                           Height="{Binding ActualHeight, ElementName=SrcLocationGrid}"
+                           Panel.ZIndex="1"
+                           />
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="2" Margin="5, 5, 5, 20"
+                SizeChanged="LocationSizeChanged"/>
+
+        <!--Dst Location Grid-->
+        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="2" Margin="5, 5, 5, 20">
+            <Grid x:Name="DstLocationGrid" ShowGridLines="False"
+                  MouseDown="DstLocationGrid_MouseDown" MouseMove="DstLocationGrid_MouseMove" MouseWheel="DstLocationGrid_MouseWheel"
+                  Background="#00000000"
+                  >
+                <Rectangle x:Name="DstViewRectangle" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Fill="LightBlue" Opacity="0.5" 
+                           Width="{Binding ActualWidth, ElementName=DstLocationGrid}" 
+                           Height="{Binding ActualHeight, ElementName=DstLocationGrid}"
+                           Panel.ZIndex="1"
+                           />
+            </Grid>
+        </Border>
+
+        <!--Src Grid-->
+        <fg:FastGridControl x:Name="SrcDataGrid" Grid.Column="2" Grid.Row="2" Margin="1, 45, 1, 1"
+                            IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
+                            UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
+                            IsReadOnly="True"
+                            SizeChanged="SrcDataGrid_SizeChanged"
+                            SelectedCellsChanged="SrcDataGrid_SelectedCellsChanged"
+                            AllowDrop="True"
+                            Tag="0"
+                            >
+            <i:Interaction.Behaviors>
+                <behavior:DragAcceptBehavior 
+                        Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </i:Interaction.Behaviors>
+
+            <fg:FastGridControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Freeze column" Click="FreezeSrcColumn_Click" />
+                    <MenuItem Header="Unfreeze column" Click="UnfreezeDstColumn_Click" />
+                    <MenuItem Header="Set header" Click="SetSrcHeader_Click" />
+                    <MenuItem Header="Reset header" Click="ResetSrcHeader_Click" />
+                    <MenuItem Header="Diff" Click="DiffByHeaderSrc_Click" />
+                </ContextMenu>
+            </fg:FastGridControl.ContextMenu>
+
+        </fg:FastGridControl>
+
+        <RichTextBox x:Name="SrcValueTextBox" Grid.Column="2" Grid.Row="2" Height="40" Margin="1" VerticalAlignment="Top"
+                     GotFocus="SrcValueTextBox_GotFocus"
+                     LostFocus="SrcValueTextBox_LostFocus"
+                     Focusable="True"
+                     />
+
+        <GridSplitter Grid.Column="3" Grid.Row="2" Width="5" HorizontalAlignment="Center"/>
+
+        <!--Dst Grid-->
+        <fg:FastGridControl x:Name="DstDataGrid" Grid.Column="4" Grid.Row="2" Margin="1, 45, 1, 1" 
+                            IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
+                            UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
+                            IsReadOnly="True"
+                            SizeChanged="DstDataGrid_SizeChanged"
+                            SelectedCellsChanged="DstDataGrid_SelectedCellsChanged"
+                            AllowDrop="True"
+                            Tag="1"
+                            >
+            <i:Interaction.Behaviors>
+                <behavior:DragAcceptBehavior 
+                        Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </i:Interaction.Behaviors>
+
+            <fg:FastGridControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Freeze Column"  Click="FreezeDstColumn_Click"/>
+                    <MenuItem Header="Unfreeze Column"  Click="UnfreezeDstColumn_Click"/>
+                    <MenuItem Header="Set Header" Click="SetDstHeader_Click" />
+                    <MenuItem Header="Reset Header" Click="ResetDstHeader_Click" />
+                    <MenuItem Header="Diff" Click="DiffByHeaderDst_Click" />
+                </ContextMenu>
+            </fg:FastGridControl.ContextMenu>
+
+        </fg:FastGridControl>
+
+        <RichTextBox x:Name="DstValueTextBox" Grid.Column="4" Grid.Row="2" Height="40" Margin="1" VerticalAlignment="Top"
+                     GotFocus="DstValueTextBox_GotFocus"
+                     LostFocus="DstValueTextBox_LostFocus"
+                     Focusable="True"
+                     />
+
+    </Grid>
+</UserControl>

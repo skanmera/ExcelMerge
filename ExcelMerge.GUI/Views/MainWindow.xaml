@@ -1,0 +1,110 @@
+﻿<Window x:Class="ExcelMerge.GUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
+        xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
+        xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Title="ExcelMerge" Height="768" Width="1280" 
+        Icon="/ExcelMerge.GUI;component/app.ico"
+        >
+
+    <Window.Resources>
+        <vc:FileDialogParameterConverter x:Key="FileDialogConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="97*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="{x:Static props:Resources.Word_File}">
+                <MenuItem Header="{x:Static props:Resources.MenuItem_OpenSrcFile}"
+                          Command="{Binding OpenFileDialogCommand}"
+                          >
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource FileDialogConverter}">
+                            <Binding />
+                            <Binding Source="SrcPath"/>
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
+                </MenuItem>
+                <MenuItem Header="{x:Static props:Resources.MenuItem_OpenDstFile}"
+                          Command="{Binding OpenFileDialogCommand}"
+                          >
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource FileDialogConverter}">
+                            <Binding />
+                            <Binding Source="DstPath"/>
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
+                </MenuItem>
+                <MenuItem Header="{x:Static props:Resources.MenuItem_RecentFiles}" 
+                          ItemsSource="{Binding RecentFiles}" >
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate DataType="MenuItem">
+                            <Menu>
+                                <MenuItem Header="{Binding Path=Header, RelativeSource={RelativeSource AncestorType=MenuItem}}">
+                                    <MenuItem Header="{x:Static props:Resources.MenuItem_OpenAsSrcFile}"
+                                              Command="{Binding DataContext.OpenAsSrcFileCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              CommandParameter="{Binding Path=Header, RelativeSource={RelativeSource AncestorType=MenuItem}}"
+                                              />
+                                    <MenuItem Header="{x:Static props:Resources.MenuItem_OpenAsDstFile}"
+                                              Command="{Binding DataContext.OpenAsDstFileCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              CommandParameter="{Binding Path=Header, RelativeSource={RelativeSource AncestorType=MenuItem}}"
+                                              />
+                                </MenuItem>
+                            </Menu>
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
+                <MenuItem Header="{x:Static props:Resources.MenuItem_RecentFileSets}" 
+                          ItemsSource="{Binding RecentFileSets}" >
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding}"/>
+                            <Setter Property="Command" Value="{Binding DataContext.OpenFileSetCommand,
+                                RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static props:Resources.Word_Setting}">
+                <MenuItem Header="{x:Static props:Resources.MenuItem_GeneralSetting}"
+                          Command="{Binding OpenGeneralSettingsWindowCommand}"/>
+                <MenuItem Header="{x:Static props:Resources.MenuItem_ExternalCommands}"
+                          Command="{Binding OpenExternalCommandsWindowCommand}"/>
+                <MenuItem Header="{x:Static props:Resources.Word_Language}">
+                    <MenuItem Header="{x:Static props:Resources.Word_English}" 
+                              Command="{Binding ChangeLanguageCommand}"
+                              CommandParameter="en-US"/>
+                    <MenuItem Header="{x:Static props:Resources.Word_Japanese}"
+                              Command="{Binding ChangeLanguageCommand}"
+                              CommandParameter="ja-JP"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static props:Resources.Word_Tool}">
+                <MenuItem Header="{x:Static props:Resources.MenuItem_ExeExternalCmd}" 
+                          ItemsSource="{Binding ExternalCommands}" >
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding}"/>
+                            <Setter Property="Command" Value="{Binding DataContext.ExecuteExternalCommandCommand,
+                                RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl Content="{Binding Content}" Grid.Row="1"/>
+    </Grid>
+</Window>

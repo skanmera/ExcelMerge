@@ -1,0 +1,93 @@
+﻿<Window x:Class="FastWpfGridTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowState="Maximized"
+        xmlns:FastWpfGrid="clr-namespace:FastWpfGrid;assembly=FastWpfGrid"
+        xmlns:FastWpfGridTest="clr-namespace:FastWpfGridTest" Title="FastWpfGrid Test Application" Height="350" Width="525" >
+    <Grid>
+        <TabControl SelectionChanged="tabChanged" x:Name="tab">
+            <TabItem Header="Grid 1 - scrolling">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Use clear type" x:Name="chbClearType1" IsChecked="True" />
+                        <CheckBox Content="Is transposed" x:Name="chbIsTransposed1" />
+                        <CheckBox Content="Hide column 3" x:Name="chbHideColumn3" Click="columnsCfgChanged" />
+                        <CheckBox Content="Freeze column 5" x:Name="chbFreezeColumn5" Click="columnsCfgChanged" />
+                    </StackPanel>
+                    <FastWpfGrid:FastGridControl x:Name="grid1" Grid.Row="1" 
+                                                 IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
+                                                 UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
+                                                 SelectedCellsChanged="grid1_SelectedCellsChanged"
+                                                 >
+                        <FastWpfGrid:FastGridControl.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Test" />
+                            </ContextMenu>
+                        </FastWpfGrid:FastGridControl.ContextMenu>
+                    </FastWpfGrid:FastGridControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grid 2 - blocks">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Use clear type" x:Name="chbClearType2" IsChecked="True" />
+                        <CheckBox Content="Is transposed" x:Name="chbIsTransposed2" />
+                    </StackPanel>
+                    <FastWpfGrid:FastGridControl x:Name="grid2" Grid.Row="1" 
+                                                 IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed2}"
+                                                 UseClearType="{Binding IsChecked, ElementName=chbClearType2}"
+                                                 />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grid 3 - multiline">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Is transposed" x:Name="chbIsTransposed3" />
+                        <CheckBox Content="Flexible rows" x:Name="chbFlexibleRows" />
+                    </StackPanel>
+                    <FastWpfGrid:FastGridControl x:Name="grid3" Grid.Row="1" 
+                                                 IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed3}"
+                                                 AllowFlexibleRows="{Binding IsChecked, ElementName=chbFlexibleRows}"
+                                                 />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Text rendering">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="120" Text="Text block" />
+                        <TextBlock Text="ABC 123 Gfijdr" FontFamily="Arial"  x:Name="textbox" FontSize="12"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="120" Text="OnRender" />
+                        <FastWpfGridTest:TextRenderPanel Height="{Binding ActualHeight, ElementName=textbox}"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="120" Text="WrBmp-mono" />
+                        <Image x:Name="textImage1" SnapsToDevicePixels="True" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="120" Text="WrBmp-colored" />
+                        <Image x:Name="textImage2" SnapsToDevicePixels="True" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="120" Text="RenderTargetBmp" />
+                        <Image x:Name="textImage3" SnapsToDevicePixels="True" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

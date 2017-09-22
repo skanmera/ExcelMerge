@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FastWpfGrid</RootNamespace>
+    <AssemblyName>FastWpfGrid</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActiveSeries.cs" />
+    <Compile Include="DataTableGridModel.cs" />
+    <Compile Include="ExplicitColumnDefinition.cs" />
+    <Compile Include="FastGridCellAddress.cs" />
+    <Compile Include="FastGridControl.xaml.cs">
+      <DependentUpon>FastGridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FastGridControl_Arrange.cs" />
+    <Compile Include="FastGridControl_DependencyProps.cs" />
+    <Compile Include="FastGridControl_Input.cs" />
+    <Compile Include="FastGridControl_Invalidation.cs" />
+    <Compile Include="FastGridControl_Render.cs" />
+    <Compile Include="FastGridControl_Selection.cs" />
+    <Compile Include="FastGridControl_StyleProps.cs" />
+    <Compile Include="FastGridCellImpl.cs" />
+    <Compile Include="FastGridModelBase.cs" />
+    <Compile Include="IFastGridCell.cs" />
+    <Compile Include="IFastGridCellBlock.cs" />
+    <Compile Include="IFastGridModel.cs" />
+    <Compile Include="IFastGridView.cs" />
+    <Compile Include="ImageHolder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EventArgs.cs" />
+    <Compile Include="SelectionChangedEventArgs.cs" />
+    <Compile Include="SelectionQuickCommand.cs" />
+    <Compile Include="SeriesSizes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FastGridControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WriteableBitmapEx\WriteableBitmapEx.Wpf.csproj">
+      <Project>{b0aa6a94-6784-4221-81f0-244a68c374c0}</Project>
+      <Name>WriteableBitmapEx.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

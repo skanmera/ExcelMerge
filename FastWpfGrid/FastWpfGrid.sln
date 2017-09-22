@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWpfGrid", "FastWpfGrid\FastWpfGrid.csproj", "{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWpfGridTest", "FastWpfGridTest\FastWpfGridTest.csproj", "{A1D9E1CA-885D-40E7-A2C1-006E5D59EA2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteableBitmapEx.Wpf", "WriteableBitmapEx\WriteableBitmapEx.Wpf.csproj", "{B0AA6A94-6784-4221-81F0-244A68C374C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWpfGridUnitTest", "FastWpfGridUnitTest\FastWpfGridUnitTest.csproj", "{B94371DD-DDC9-4889-B49F-7D76E3E52B01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWpfGridSyncTest", "FastWpfGridSyncTest\FastWpfGridSyncTest.csproj", "{8B89AD25-573F-4E85-88BA-7A5DA46C4723}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D6F03C-BFB5-4D31-A15E-7F789B4BBCC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D9E1CA-885D-40E7-A2C1-006E5D59EA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D9E1CA-885D-40E7-A2C1-006E5D59EA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D9E1CA-885D-40E7-A2C1-006E5D59EA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D9E1CA-885D-40E7-A2C1-006E5D59EA2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0AA6A94-6784-4221-81F0-244A68C374C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0AA6A94-6784-4221-81F0-244A68C374C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0AA6A94-6784-4221-81F0-244A68C374C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0AA6A94-6784-4221-81F0-244A68C374C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94371DD-DDC9-4889-B49F-7D76E3E52B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94371DD-DDC9-4889-B49F-7D76E3E52B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94371DD-DDC9-4889-B49F-7D76E3E52B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94371DD-DDC9-4889-B49F-7D76E3E52B01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B89AD25-573F-4E85-88BA-7A5DA46C4723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B89AD25-573F-4E85-88BA-7A5DA46C4723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B89AD25-573F-4E85-88BA-7A5DA46C4723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B89AD25-573F-4E85-88BA-7A5DA46C4723}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
