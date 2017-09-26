@@ -1,4 +1,4 @@
-﻿<Window x:Class="ExcelMerge.GUI.Views.GeneralSettingWindow"
+﻿<Window x:Class="ExcelMerge.GUI.Views.DiffExtractionSettingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Icon="/ExcelMerge.GUI;component/app.ico"
-        Title="{x:Static props:Resources.Title_GeneralSettingWindow}" Height="640" Width="640">
+        Title="{x:Static props:Resources.Title_DiffSettingWindow}" Height="640" Width="640">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>

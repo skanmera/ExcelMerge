@@ -124,6 +124,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Diff Extraction Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_DiffExtractionSetting {
+            get {
+                return ResourceManager.GetString("MenuItem_DiffExtractionSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Execute external command に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuItem_ExeExternalCmd {
@@ -138,15 +147,6 @@ namespace ExcelMerge.GUI.Properties {
         public static string MenuItem_ExternalCommands {
             get {
                 return ResourceManager.GetString("MenuItem_ExternalCommands", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   General Setting に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string MenuItem_GeneralSetting {
-            get {
-                return ResourceManager.GetString("MenuItem_GeneralSetting", resourceCulture);
             }
         }
         
@@ -232,11 +232,11 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   General Settings に類似しているローカライズされた文字列を検索します。
+        ///   Diff Extraction Settings に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Title_GeneralSettingWindow {
+        public static string Title_DiffSettingWindow {
             get {
-                return ResourceManager.GetString("Title_GeneralSettingWindow", resourceCulture);
+                return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
             }
         }
         

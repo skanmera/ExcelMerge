@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ExcelMerge.GUI.Views
 {
     /// <summary>
-    /// GeneralSettingWindow.xaml の相互作用ロジック
+    /// DiffExtractionSettingWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class GeneralSettingWindow : Window
+    public partial class DiffExtractionSettingWindow : Window
     {
-        public GeneralSettingWindow()
+        public DiffExtractionSettingWindow()
         {
             InitializeComponent();
         }

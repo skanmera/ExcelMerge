@@ -64,7 +64,7 @@ namespace ExcelMerge.GUI.ViewModels
 
         public DelegateCommand<ExternalCommand> ExecuteExternalCommandCommand { get; private set; }
         public DelegateCommand OpenExternalCommandsWindowCommand { get; private set; }
-        public DelegateCommand OpenGeneralSettingsWindowCommand { get; private set; }
+        public DelegateCommand OpenDiffExtractionSettingsWindowCommand { get; private set; }
         public DelegateCommand<FileDialogParameter> OpenFileDialogCommand { get; private set; }
         public DelegateCommand<string> OpenAsSrcFileCommand { get; private set; }
         public DelegateCommand<string> OpenAsDstFileCommand { get; private set; }
@@ -79,7 +79,7 @@ namespace ExcelMerge.GUI.ViewModels
 
             ExecuteExternalCommandCommand = new DelegateCommand<ExternalCommand>((cmd) => cmd.Execute(false));
             OpenExternalCommandsWindowCommand = new DelegateCommand(OpenExternalCommandsWindow);
-            OpenGeneralSettingsWindowCommand = new DelegateCommand(OpenGeneralSettingWindow);
+            OpenDiffExtractionSettingsWindowCommand = new DelegateCommand(OpenDiffExtractionSettingWindow);
             OpenFileDialogCommand = new DelegateCommand<FileDialogParameter>(OpenFileDialog);
             OpenAsSrcFileCommand = new DelegateCommand<string>(OpenAsSrcFile);
             OpenAsDstFileCommand = new DelegateCommand<string>(OpenAsDstFile);
@@ -112,11 +112,11 @@ namespace ExcelMerge.GUI.ViewModels
             commandsWindow.ShowDialog();
         }
 
-        private void OpenGeneralSettingWindow()
+        private void OpenDiffExtractionSettingWindow()
         {
-            var window = new GeneralSettingWindow()
+            var window = new DiffExtractionSettingWindow()
             {
-                DataContext = new GeneralSettingWindowViewModel(),
+                DataContext = new DiffExtractionSettingWindowViewModel(),
             };
 
             window.ShowDialog();

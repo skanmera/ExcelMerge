@@ -129,8 +129,8 @@
   <data name="MenuItem_ExternalCommands" xml:space="preserve">
     <value>外部コマンド</value>
   </data>
-  <data name="MenuItem_GeneralSetting" xml:space="preserve">
-    <value>一般設定</value>
+  <data name="MenuItem_DiffExtractionSetting" xml:space="preserve">
+    <value>差分抽出設定</value>
   </data>
   <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
     <value>右側として開く</value>
@@ -159,8 +159,8 @@
   <data name="Title_CommandsWindow" xml:space="preserve">
     <value>外部コマンド</value>
   </data>
-  <data name="Title_GeneralSettingWindow" xml:space="preserve">
-    <value>一般設定</value>
+  <data name="Title_DiffSettingWindow" xml:space="preserve">
+    <value>差分抽出設定</value>
   </data>
   <data name="ToolTip_DstFilePath" xml:space="preserve">
     <value>右側のファイルパス</value>

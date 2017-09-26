@@ -8,7 +8,7 @@ using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class GeneralSettingWindowViewModel : BindableBase
+    public class DiffExtractionSettingWindowViewModel : BindableBase
     {
         private ApplicationSetting originalSetting;
 
@@ -30,7 +30,7 @@ namespace ExcelMerge.GUI.ViewModels
         public DelegateCommand ResetCommand { get; private set; }
         public DelegateCommand ApplyCommand { get; private set; }
 
-        public GeneralSettingWindowViewModel()
+        public DiffExtractionSettingWindowViewModel()
         {
             originalSetting = App.Instance.Setting;
             Setting = originalSetting.Clone();
