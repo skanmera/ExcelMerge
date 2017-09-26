@@ -15,6 +15,7 @@
 
     <Window.Resources>
         <vc:FileDialogParameterConverter x:Key="FileDialogConverter"/>
+        <vc:CultureNameConverter x:Key="CultureNameConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -84,10 +85,12 @@
                 <MenuItem Header="{x:Static props:Resources.Word_Language}">
                     <MenuItem Header="{x:Static props:Resources.Word_English}" 
                               Command="{Binding ChangeLanguageCommand}"
-                              CommandParameter="en-US"/>
+                              CommandParameter="en-US"
+                              IsEnabled="{Binding CultureName,Converter={StaticResource CultureNameConverter}, ConverterParameter='en-US'}"/>
                     <MenuItem Header="{x:Static props:Resources.Word_Japanese}"
                               Command="{Binding ChangeLanguageCommand}"
-                              CommandParameter="ja-JP"/>
+                              CommandParameter="ja-JP"
+                              IsEnabled="{Binding CultureName,Converter={StaticResource CultureNameConverter}, ConverterParameter='ja-JP'}"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="{x:Static props:Resources.Word_Tool}">

@@ -55,6 +55,13 @@ namespace ExcelMerge.GUI.ViewModels
             set { SetProperty(ref dstPath, value); }
         }
 
+        private string cultureName;
+        public string CultureName
+        {
+            get { return cultureName; }
+            private set { SetProperty(ref cultureName, value); }
+        }
+
         public DelegateCommand<ExternalCommand> ExecuteExternalCommandCommand { get; private set; }
         public DelegateCommand OpenExternalCommandsWindowCommand { get; private set; }
         public DelegateCommand OpenGeneralSettingsWindowCommand { get; private set; }
@@ -92,6 +99,7 @@ namespace ExcelMerge.GUI.ViewModels
             RecentFiles = App.Instance.GetRecentFiles().ToList();
             ExternalCommands = App.Instance.Setting.ExternalCommands.ToList();
             RecentFileSets = App.Instance.GetRecentFileSets().Select(i => $"{i.Item1} | {i.Item2}").ToList();
+            CultureName = App.Instance.Setting.Culture;
         }
 
         private void OpenExternalCommandsWindow()

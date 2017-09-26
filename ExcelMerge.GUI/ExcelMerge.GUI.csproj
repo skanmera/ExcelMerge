@@ -104,6 +104,7 @@
     <Compile Include="Settings\ExternalCommand.cs" />
     <Compile Include="Styles\EMColor.cs" />
     <Compile Include="Utilities\FrameworkElementUtility.cs" />
+    <Compile Include="ValueConverters\CultureNameConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameterConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameter.cs" />
     <Compile Include="ValueConverters\MultiEmptyStringConverter.cs" />
