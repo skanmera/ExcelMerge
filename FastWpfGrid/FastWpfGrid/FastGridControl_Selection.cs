@@ -76,14 +76,14 @@ namespace FastWpfGrid
             CheckChangedLimitedSelection();
         }
 
-        private void AddSelectedCell(FastGridCellAddress cell)
+        public bool AddSelectedCell(FastGridCellAddress cell)
         {
-            if (!cell.IsCell) return;
+            if (!cell.IsCell) return false;
 
-            if (SelectedRealRowCountLimit.HasValue && _selectedRows.Count >= SelectedRealRowCountLimit.Value && !_selectedRows.ContainsKey(cell.Row.Value)) return;
-            if (SelectedRealColumnCountLimit.HasValue && _selectedColumns.Count >= SelectedRealColumnCountLimit.Value && !_selectedColumns.ContainsKey(cell.Column.Value)) return;
+            if (SelectedRealRowCountLimit.HasValue && _selectedRows.Count >= SelectedRealRowCountLimit.Value && !_selectedRows.ContainsKey(cell.Row.Value)) return false;
+            if (SelectedRealColumnCountLimit.HasValue && _selectedColumns.Count >= SelectedRealColumnCountLimit.Value && !_selectedColumns.ContainsKey(cell.Column.Value)) return false;
 
-            if (_selectedCells.Contains(cell)) return;
+            if (_selectedCells.Contains(cell)) return false;
 
             _selectedCells.Add(cell);
 
@@ -94,6 +94,8 @@ namespace FastWpfGrid
             _selectedColumns[cell.Column.Value]++;
 
             CheckChangedLimitedSelection();
+
+            return true;
         }
 
         private void RemoveSelectedCell(FastGridCellAddress cell)
