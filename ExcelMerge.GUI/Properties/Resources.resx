@@ -222,4 +222,19 @@
   <data name="Word_Tool" xml:space="preserve">
     <value>Tool</value>
   </data>
+  <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
+    <value>Extract diff with this row as header.</value>
+  </data>
+  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
+    <value>Freeze column</value>
+  </data>
+  <data name="ContextMenu_ResetHeader" xml:space="preserve">
+    <value>Reset header</value>
+  </data>
+  <data name="ContextMenu_SetHeader" xml:space="preserve">
+    <value>Set header</value>
+  </data>
+  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
+    <value>Unfreeze column</value>
+  </data>
 </root>

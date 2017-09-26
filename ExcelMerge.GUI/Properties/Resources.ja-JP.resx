@@ -222,4 +222,19 @@
   <data name="Word_Tool" xml:space="preserve">
     <value>ツール</value>
   </data>
+  <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
+    <value>この行をヘッダとして差分を抽出する</value>
+  </data>
+  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
+    <value>列を固定</value>
+  </data>
+  <data name="ContextMenu_ResetHeader" xml:space="preserve">
+    <value>ヘッダを解除</value>
+  </data>
+  <data name="ContextMenu_SetHeader" xml:space="preserve">
+    <value>ヘッダにセット</value>
+  </data>
+  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
+    <value>列の固定を解除</value>
+  </data>
 </root>

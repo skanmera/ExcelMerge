@@ -156,11 +156,11 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Freeze column" Click="FreezeSrcColumn_Click" />
-                    <MenuItem Header="Unfreeze column" Click="UnfreezeDstColumn_Click" />
-                    <MenuItem Header="Set header" Click="SetSrcHeader_Click" />
-                    <MenuItem Header="Reset header" Click="ResetSrcHeader_Click" />
-                    <MenuItem Header="Diff" Click="DiffByHeaderSrc_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeSrcColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeDstColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetSrcHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetSrcHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderSrc_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
 

@@ -70,6 +70,51 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Extract diff with this row as header. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_DiffAsHeader {
+            get {
+                return ResourceManager.GetString("ContextMenu_DiffAsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Freeze column に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_FreezeColumn {
+            get {
+                return ResourceManager.GetString("ContextMenu_FreezeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Reset header に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_ResetHeader {
+            get {
+                return ResourceManager.GetString("ContextMenu_ResetHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Set header に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_SetHeader {
+            get {
+                return ResourceManager.GetString("ContextMenu_SetHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Unfreeze column に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_UnfreezeColumn {
+            get {
+                return ResourceManager.GetString("ContextMenu_UnfreezeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Skip first blank rows に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_SkipFirstBlankRows {
