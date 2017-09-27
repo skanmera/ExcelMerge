@@ -9,7 +9,7 @@
 ## Language
 
 - [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
-- [“ú–{Œê](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+- [æ—¥æœ¬èªž](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
 
 ## Description
 
