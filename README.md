@@ -95,6 +95,16 @@ Can also be executed from within the tool.
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/ext_cmd.png)
 
+## Known problems
+
+- <h4>If there are column deletions or additions, they may not be displayed at the expected position.</h4>
+If the currently displayed header is not what you expect, you may resolve it by specifying the appropriate header and extract diff.
+Follow these steps.
+1. Select appropriate header cell.
+2. Right click to display the context menu.
+3. Select "Extract diff with this row as header"
+
+
 ## LICENSE
 
 #### MIT Licence
