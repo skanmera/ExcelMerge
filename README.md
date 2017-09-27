@@ -6,6 +6,11 @@
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
 
+## Language
+
+- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
+- [“ú–{Œê](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+
 ## Description
 
 ExcelMerge is a graphical display tool for Excel or CSV Diff.

@@ -6,6 +6,11 @@
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
 
+## 言語
+
+- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
+- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+
 ## 説明
 
 ExcelMerge はエクセルやCSVファイルの差分をグラフィカルに表示するためのツールです。
