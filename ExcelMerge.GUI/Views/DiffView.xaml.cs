@@ -463,10 +463,11 @@ namespace ExcelMerge.GUI.Views
                 return;
             }
 
-            var updated = false;
-            changed.GetSelectedModelCells().ToList().ForEach(c => updated |= other.AddSelectedCell(c));
-            if (updated)
+            if (changed.GetSelectedModelCells().Aggregate(false, (r, c) => r |= other.AddSelectedCell(c)))
+            {
+                SrcDataGrid.InvalidateAll();
                 DstDataGrid.InvalidateAll();
+            }
 
             var srcValue = (SrcDataGrid.Model as DiffGridModel).GetCellText(SrcDataGrid.CurrentCell.Row.Value, SrcDataGrid.CurrentCell.Column.Value);
             var dstValue = (DstDataGrid.Model as DiffGridModel).GetCellText(DstDataGrid.CurrentCell.Row.Value, DstDataGrid.CurrentCell.Column.Value);
