@@ -13,6 +13,7 @@ namespace ExcelMerge.GUI.Models
         private Color? backgroundColor = null;
         private Color? decorationColor = null;
         private CellDecoration decoration = CellDecoration.None;
+        private string toolTipText = string.Empty;
 
         public override int ColumnCount
         {
@@ -37,6 +38,16 @@ namespace ExcelMerge.GUI.Models
         public override CellDecoration Decoration
         {
             get { return decoration; }
+        }
+
+        public override string ToolTipText
+        {
+            get { return toolTipText; }
+        }
+
+        public override TooltipVisibilityMode ToolTipVisibility
+        {
+            get { return TooltipVisibilityMode.OnlyWhenTrimmed; }
         }
 
         public int HeaderIndex { get; private set; }
@@ -120,6 +131,8 @@ namespace ExcelMerge.GUI.Models
 
         public override IFastGridCell GetCell(IFastGridView view, int row, int column)
         {
+            toolTipText = GetCellText(row, column);
+
             var cell = base.GetCell(view, row, column) as DiffGridModel;
             if (cell == null)
                 return cell;
