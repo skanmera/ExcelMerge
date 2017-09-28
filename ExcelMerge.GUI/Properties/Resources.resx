@@ -237,4 +237,10 @@
   <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
     <value>Unfreeze column</value>
   </data>
+  <data name="Label_CellHeight" xml:space="preserve">
+    <value>Cell Height</value>
+  </data>
+  <data name="Label_CellWidth" xml:space="preserve">
+    <value>Cell Width</value>
+  </data>
 </root>

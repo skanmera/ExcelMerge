@@ -237,4 +237,10 @@
   <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
     <value>列の固定を解除</value>
   </data>
+  <data name="Label_CellHeight" xml:space="preserve">
+    <value>セルの高さ</value>
+  </data>
+  <data name="Label_CellWidth" xml:space="preserve">
+    <value>セルの幅</value>
+  </data>
 </root>

@@ -34,13 +34,6 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
             DstDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
 
-            SrcDataGrid.SetMaxRowSize(100);
-            DstDataGrid.SetMaxRowSize(100);
-            SrcDataGrid.SetMaxColumnSize(100);
-            DstDataGrid.SetMaxColumnSize(100);
-            SrcDataGrid.SetMinColumnSize(100);
-            DstDataGrid.SetMinColumnSize(100);
-
             valueTextBoxHeight = SrcValueTextBox.Height;
             updateViewRectangleEnabled = true;
         }
@@ -714,6 +707,11 @@ namespace ExcelMerge.GUI.Views
 
             SrcDataGrid.InitializeComponent();
             DstDataGrid.InitializeComponent();
+
+            SrcDataGrid.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+            DstDataGrid.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+            SrcDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
+            DstDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
 
             var config = CreateReadConfig();
             var wb1 = ExcelWorkbook.Create(SrcPathTextBox.Text, config);

@@ -115,6 +115,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Cell Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_CellHeight {
+            get {
+                return ResourceManager.GetString("Label_CellHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cell Width に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_CellWidth {
+            get {
+                return ResourceManager.GetString("Label_CellWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Skip first blank rows に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_SkipFirstBlankRows {

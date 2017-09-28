@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
         xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Icon="/ExcelMerge.GUI;component/app.ico"
@@ -35,8 +36,13 @@
             <CheckBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="3" 
                       IsChecked="{Binding Setting.SkipFirstBlankRows}"/>
 
-            <!--<Label Content="Sync scroll" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
-            <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="3"/>-->
+            <Label Content="{x:Static props:Resources.Label_CellWidth}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+            <xctk:IntegerUpDown Value="{Binding Setting.CellWidth, UpdateSourceTrigger=PropertyChanged}" 
+                                Minimum="50" Grid.Column="1" Grid.Row="1" Margin="3" Width="100"  HorizontalAlignment="Left"/>
+
+            <!--<Label Content="{x:Static props:Resources.Label_CellHeight}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+            <xctk:IntegerUpDown Value="{Binding Setting.CellHeight, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="1" Grid.Column="1" Grid.Row="2" Margin="3" Width="100" HorizontalAlignment="Left"/>-->
 
         </Grid>
         <Grid Grid.Row="1">

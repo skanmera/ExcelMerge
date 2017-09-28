@@ -41,6 +41,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref culture, value); }
         }
 
+        private int cellWidth = 100;
+        public int CellWidth 
+        {
+            get { return cellWidth; }
+            set { SetProperty(ref cellWidth, value); }
+        }
+
         public static ApplicationSetting Load()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(Location));
@@ -87,6 +94,7 @@ namespace ExcelMerge.GUI.Settings
             clone.SkipFirstBlankRows = SkipFirstBlankRows;
             clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
             clone.RecentFileSets = RecentFileSets.ToList();
+            clone.CellWidth = CellWidth;
 
             return clone;
         }
@@ -96,7 +104,8 @@ namespace ExcelMerge.GUI.Settings
             return
                 SkipFirstBlankRows == other.skipFirstBlankRows &&
                 ExternalCommands.SequenceEqual(other.ExternalCommands) &&
-                RecentFileSets.SequenceEqual(other.RecentFileSets);
+                RecentFileSets.SequenceEqual(other.RecentFileSets) &&
+                CellWidth == other.cellWidth;
         }
     }
 }
