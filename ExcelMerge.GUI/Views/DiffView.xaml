@@ -70,7 +70,7 @@
         </Grid>
 
         <Button x:Name="SwapButton" Grid.Row="0" Grid.Column="3" Content="↔" Click="SwapButton_Click"
-                ToolTip="Swap left and right"/>
+                ToolTip="{x:Static props:Resources.ToolTip_Swap}"/>
 
         <Grid Grid.Column="4" Grid.Row="0">
 

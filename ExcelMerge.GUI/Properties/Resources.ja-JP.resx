@@ -243,4 +243,7 @@
   <data name="Label_CellWidth" xml:space="preserve">
     <value>セルの幅</value>
   </data>
+  <data name="ToolTip_Swap" xml:space="preserve">
+    <value>左と右を入れ替えて差分を抽出</value>
+  </data>
 </root>

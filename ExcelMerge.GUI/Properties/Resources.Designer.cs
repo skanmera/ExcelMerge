@@ -295,6 +295,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Swap src and dst に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ToolTip_Swap {
+            get {
+                return ResourceManager.GetString("ToolTip_Swap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Apply に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Apply {

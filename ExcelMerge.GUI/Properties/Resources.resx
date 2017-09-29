@@ -243,4 +243,7 @@
   <data name="Label_CellWidth" xml:space="preserve">
     <value>Cell Width</value>
   </data>
+  <data name="ToolTip_Swap" xml:space="preserve">
+    <value>Swap src and dst</value>
+  </data>
 </root>
