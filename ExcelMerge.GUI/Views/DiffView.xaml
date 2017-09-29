@@ -31,10 +31,6 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-
-            <Button x:Name="DiffButton" Content="{x:Static props:Resources.Button_ExtractDiff}" Grid.Column="0" Grid.ColumnSpan="2" Click="DiffButton_Click" Margin="1"
-                    IsEnabled="{Binding Executable}"/>
-
         </Grid>
 
         <Grid Grid.Column="2" Grid.Row="0">
@@ -104,10 +100,24 @@
 
         </Grid>
 
-        <GridSplitter Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Height="5" VerticalAlignment="Center"/>
+        <Expander
+            Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"
+            Margin="3"
+            >
+            <Expander.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <Button x:Name="DiffButton" Content="{x:Static props:Resources.Button_ExtractDiff}" 
+                                Margin="10,0,0,0"
+                                Click="DiffButton_Click"
+                                IsEnabled="{Binding Executable}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Expander.HeaderTemplate>
+        </Expander>
 
         <!--Src Location Grid-->
-        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="0" Grid.Row="2" Margin="5, 5, 5, 20">
+        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="5, 5, 5, 20">
             <Grid x:Name="SrcLocationGrid" ShowGridLines="False"
                   MouseDown="SrcLocationGrid_MouseDown" MouseMove="SrcLocationGrid_MouseMove" MouseWheel="SrcLocationGrid_MouseWheel"
                   Background="#00000000"
@@ -125,7 +135,7 @@
                 SizeChanged="LocationSizeChanged"/>
 
         <!--Dst Location Grid-->
-        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="2" Margin="5, 5, 5, 20">
+        <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="5, 5, 5, 20">
             <Grid x:Name="DstLocationGrid" ShowGridLines="False"
                   MouseDown="DstLocationGrid_MouseDown" MouseMove="DstLocationGrid_MouseMove" MouseWheel="DstLocationGrid_MouseWheel"
                   Background="#00000000"
