@@ -44,8 +44,16 @@
                     <GroupBox Header="{x:Static props:Resources.GroupBox_DisplayFormat}"
                                   Margin="10,0,0,0">
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton x:Name="ShowAllRadioButton" Content="{x:Static props:Resources.RadioButton_ShowAll}"/>
-                            <RadioButton x:Name="ShowOnlyDiffRadioButton" Content="{x:Static props:Resources.RadioButton_ShowOnlyDiff}"/>
+                            <RadioButton x:Name="ShowAllRadioButton" Content="{x:Static props:Resources.RadioButton_ShowAll}"
+                                         Margin="3"
+                                         IsChecked="True"
+                                         Checked="ShowAllRadioButton_Checked"
+                                         />
+                            <RadioButton x:Name="ShowOnlyDiffRadioButton" Content="{x:Static props:Resources.RadioButton_ShowOnlyDiff}"
+                                         Margin="3"
+                                         IsChecked="False"
+                                         Checked="ShowOnlyDiffRadioButton_Checked"
+                                         />
                         </StackPanel>
                     </GroupBox>
 

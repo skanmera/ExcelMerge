@@ -14,6 +14,7 @@ namespace ExcelMerge.GUI.Models
         private Color? decorationColor = null;
         private CellDecoration decoration = CellDecoration.None;
         private string toolTipText = string.Empty;
+        private Dictionary<int, int> rowIndexMap = new Dictionary<int, int>();
 
         public override int ColumnCount
         {
@@ -70,7 +71,11 @@ namespace ExcelMerge.GUI.Models
 
         public override string GetColumnHeaderText(int column)
         {
-            return GetCellText(HeaderIndex, column);
+            ExcelCellDiff cellDiff;
+            if (TryGetCellDiff(HeaderIndex, column, out cellDiff, true))
+                return GetCellText(cellDiff);
+
+            return string.Empty;
         }
 
         public override string GetCellText(int row, int column)
@@ -82,9 +87,12 @@ namespace ExcelMerge.GUI.Models
             return string.Empty;
         }
 
-        private bool TryGetCellDiff(int row, int column, out ExcelCellDiff cellDiff)
+        private bool TryGetCellDiff(int row, int column, out ExcelCellDiff cellDiff, bool isHeader = false)
         {
             cellDiff = null;
+
+            if (!isHeader)
+                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
 
             ExcelRowDiff rowDiff;
             if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
@@ -175,6 +183,33 @@ namespace ExcelMerge.GUI.Models
         {
             if (row.HasValue)
                 HeaderIndex = row.Value;
+        }
+
+        public void HideEqualRows()
+        {
+            rowIndexMap.Clear();
+            var equalRows = new HashSet<int>();
+            var originalIndex = 0;
+            var index = 0;
+
+            foreach (var r in SheetDiff.Rows)
+            {
+                if (!r.Value.Cells.All(c => c.Value.Status == ExcelCellStatus.None))
+                    rowIndexMap.Add(index++, originalIndex);
+                else
+                    equalRows.Add(r.Key);
+
+                originalIndex++;
+            }
+
+            SetRowArrange(equalRows, new HashSet<int>());
+        }
+
+        public void ShowEqualRows()
+        {
+            SetRowArrange(new HashSet<int>(), new HashSet<int>());
+
+            rowIndexMap.Clear();
         }
     }
 }

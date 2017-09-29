@@ -20,6 +20,7 @@ namespace ExcelMerge.GUI.Views
     public partial class DiffView : UserControl
     {
         private const double minimumLocationGridSize = 5d;
+        //private const double maximumLocationGridSize = 20d;
         private double valueTextBoxHeight;
         private bool updateViewRectangleEnabled;
         private ExcelSheetDiffConfig diffConfig;
@@ -77,8 +78,13 @@ namespace ExcelMerge.GUI.Views
             if (dataGrid == null || dataGrid.Model == null)
                 return false;
 
+            var rowCount = dataGrid.Model.RowCount - dataGrid.Model.GetHiddenRows(dataGrid).Count;
+
             var width = dataGrid.Model.ColumnCount > 0 ? size.Width / dataGrid.Model.ColumnCount : 0;
-            var height = dataGrid.Model.RowCount > 0 ? size.Height / dataGrid.Model.RowCount : 0;
+            var height = dataGrid.Model.RowCount > 0 ? size.Height / rowCount : 0;
+
+            //var width = Math.Min(dataGrid.Model.ColumnCount > 0 ? size.Width / dataGrid.Model.ColumnCount : 0, maximumLocationGridSize);
+            //var height = Math.Min(dataGrid.Model.RowCount > 0 ? size.Height / rowCount : 0, maximumLocationGridSize);
 
             locationGrid.ColumnDefinitions.Clear();
             for (int i = 0; i < dataGrid.Model.ColumnCount; i++)
@@ -92,7 +98,7 @@ namespace ExcelMerge.GUI.Views
             }
 
             locationGrid.RowDefinitions.Clear();
-            for (int i = 0; i < dataGrid.Model.RowCount; i++)
+            for (int i = 0; i < rowCount; i++)
             {
                 var rowDef = new RowDefinition()
                 {
@@ -318,8 +324,16 @@ namespace ExcelMerge.GUI.Views
             RemoveRectangles(locationGrid);
 
             var columns = Enumerable.Range(0, locationGrid.ColumnDefinitions.Count).ToList();
-            for (int i = 0; i < locationGrid.RowDefinitions.Count; i++)
+            var skipCount = 0;
+            var hiddenRows = dataGrid.Model.GetHiddenRows(dataGrid).ToList();
+            for (int i = 0; i < dataGrid.Model.RowCount; i++)
             {
+                if (hiddenRows.Remove(i))
+                {
+                    skipCount++;
+                    continue;
+                }
+
                 var splitedCells = columns.Select(c => dataGrid.Model.GetCell(dataGrid, i, c).BackgroundColor)
                     .SplitByComparison((c, n) => EqualColor(c, n));
 
@@ -336,9 +350,9 @@ namespace ExcelMerge.GUI.Views
                     var rectangle = new Rectangle();
                     rectangle.Fill = new SolidColorBrush(color.Value);
 
-                    Grid.SetRow(rectangle, i);
+                    Grid.SetRow(rectangle, i - skipCount);
                     Grid.SetRowSpan(rectangle, 1);
-                    for (int k = 1; locationGrid.RowDefinitions[i].Height.Value * k < minimumLocationGridSize; k++)
+                    for (int k = 1; locationGrid.RowDefinitions[i - skipCount].Height.Value * k < minimumLocationGridSize; k++)
                         Grid.SetRowSpan(rectangle, k);
 
                     Grid.SetColumn(rectangle, startPosition);
@@ -742,6 +756,12 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.Model = srcModel;
             DstDataGrid.Model = dstModel;
 
+            if (ShowOnlyDiffRadioButton.IsChecked.Value)
+            {
+                (SrcDataGrid.Model as DiffGridModel).HideEqualRows();
+                (DstDataGrid.Model as DiffGridModel).HideEqualRows();
+            }
+
             UpdateLocationGridDefinitions(SrcLocationGrid, SrcDataGrid, SrcLocationGrid.RenderSize);
             UpdateLocationGridDefinitions(DstLocationGrid, DstDataGrid, DstLocationGrid.RenderSize);
 
@@ -895,6 +915,36 @@ namespace ExcelMerge.GUI.Views
             diffConfig.HeaderIndex = headerIndex;
 
             ExecuteDiff();
+        }
+
+        private void ShowAllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
+            {
+                (SrcDataGrid.Model as DiffGridModel).ShowEqualRows();
+                (DstDataGrid.Model as DiffGridModel).ShowEqualRows();
+
+                UpdateLocationGridDefinitions(SrcLocationGrid, SrcDataGrid, SrcLocationGrid.RenderSize);
+                UpdateLocationGridDefinitions(DstLocationGrid, DstDataGrid, DstLocationGrid.RenderSize);
+
+                UpdateLocationGridColors(SrcLocationGrid, SrcDataGrid);
+                UpdateLocationGridColors(DstLocationGrid, DstDataGrid);
+            }
+        }
+
+        private void ShowOnlyDiffRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
+            {
+                (SrcDataGrid.Model as DiffGridModel).HideEqualRows();
+                (DstDataGrid.Model as DiffGridModel).HideEqualRows();
+
+                UpdateLocationGridDefinitions(SrcLocationGrid, SrcDataGrid, SrcLocationGrid.RenderSize);
+                UpdateLocationGridDefinitions(DstLocationGrid, DstDataGrid, DstLocationGrid.RenderSize);
+
+                UpdateLocationGridColors(SrcLocationGrid, SrcDataGrid);
+                UpdateLocationGridColors(DstLocationGrid, DstDataGrid);
+            }
         }
     }
 }
