@@ -115,6 +115,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Display Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_DisplayFormat {
+            get {
+                return ResourceManager.GetString("GroupBox_DisplayFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cell Height に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_CellHeight {
@@ -228,6 +237,24 @@ namespace ExcelMerge.GUI.Properties {
         public static string Message_Reboot {
             get {
                 return ResourceManager.GetString("Message_Reboot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   All に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string RadioButton_ShowAll {
+            get {
+                return ResourceManager.GetString("RadioButton_ShowAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Only Difference に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string RadioButton_ShowOnlyDiff {
+            get {
+                return ResourceManager.GetString("RadioButton_ShowOnlyDiff", resourceCulture);
             }
         }
         
@@ -412,6 +439,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Path に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Path {
+            get {
+                return ResourceManager.GetString("Word_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Remove に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Remove {
@@ -435,6 +471,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Setting {
             get {
                 return ResourceManager.GetString("Word_Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sheet に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Sheet {
+            get {
+                return ResourceManager.GetString("Word_Sheet", resourceCulture);
             }
         }
         

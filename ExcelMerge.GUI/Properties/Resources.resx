@@ -237,13 +237,28 @@
   <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
     <value>Unfreeze column</value>
   </data>
+  <data name="GroupBox_DisplayFormat" xml:space="preserve">
+    <value>Display Format</value>
+  </data>
   <data name="Label_CellHeight" xml:space="preserve">
     <value>Cell Height</value>
   </data>
   <data name="Label_CellWidth" xml:space="preserve">
     <value>Cell Width</value>
   </data>
+  <data name="RadioButton_ShowAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
+    <value>Only Difference</value>
+  </data>
   <data name="ToolTip_Swap" xml:space="preserve">
     <value>Swap src and dst</value>
+  </data>
+  <data name="Word_Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Word_Sheet" xml:space="preserve">
+    <value>Sheet</value>
   </data>
 </root>

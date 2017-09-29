@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Title="ExcelMerge" Height="768" Width="1280" 
+        Title="ExcelMerge" Height="868" Width="1380"
         Icon="/ExcelMerge.GUI;component/app.ico"
         >
 
@@ -20,8 +20,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="97*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">

@@ -237,13 +237,28 @@
   <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
     <value>列の固定を解除</value>
   </data>
+  <data name="GroupBox_DisplayFormat" xml:space="preserve">
+    <value>表示形式</value>
+  </data>
   <data name="Label_CellHeight" xml:space="preserve">
     <value>セルの高さ</value>
   </data>
   <data name="Label_CellWidth" xml:space="preserve">
     <value>セルの幅</value>
   </data>
+  <data name="RadioButton_ShowAll" xml:space="preserve">
+    <value>全て</value>
+  </data>
+  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
+    <value>差分のみ</value>
+  </data>
   <data name="ToolTip_Swap" xml:space="preserve">
-    <value>左と右を入れ替えて差分を抽出</value>
+    <value>左右を入れ替え</value>
+  </data>
+  <data name="Word_Path" xml:space="preserve">
+    <value>パス</value>
+  </data>
+  <data name="Word_Sheet" xml:space="preserve">
+    <value>シート</value>
   </data>
 </root>
