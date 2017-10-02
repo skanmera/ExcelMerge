@@ -58,7 +58,7 @@
                     </GroupBox>
 
                     <!--Src-->
-                    <GroupBox Header="右側のファイル" Margin="10,0,0,0">
+                    <GroupBox Header="{x:Static props:Resources.Word_SrcFile}" Margin="10,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static props:Resources.Word_Path}"/>
                             <TextBox x:Name="SrcPathTextBox" AcceptsReturn="False" Margin="1" Width="300"
@@ -78,7 +78,7 @@
                     </GroupBox>
 
                     <!--Dst-->
-                    <GroupBox Header="左側のファイル" Margin="10,0,0,0">
+                    <GroupBox Header="{x:Static props:Resources.Word_DstFile}" Margin="10,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static props:Resources.Word_Path}"/>
                             <TextBox x:Name="DstPathTextBox" AcceptsReturn="False" Margin="1" Width="300"

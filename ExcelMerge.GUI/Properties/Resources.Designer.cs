@@ -376,6 +376,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Dst File に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DstFile {
+            get {
+                return ResourceManager.GetString("Word_DstFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Edit に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Edit {
@@ -480,6 +489,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Sheet {
             get {
                 return ResourceManager.GetString("Word_Sheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Src File に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_SrcFile {
+            get {
+                return ResourceManager.GetString("Word_SrcFile", resourceCulture);
             }
         }
         

@@ -261,4 +261,10 @@
   <data name="Word_Sheet" xml:space="preserve">
     <value>シート</value>
   </data>
+  <data name="Word_DstFile" xml:space="preserve">
+    <value>右側のファイル</value>
+  </data>
+  <data name="Word_SrcFile" xml:space="preserve">
+    <value>左側のファイル</value>
+  </data>
 </root>
