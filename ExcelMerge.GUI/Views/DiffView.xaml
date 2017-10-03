@@ -104,7 +104,7 @@
         <!--Src Location Grid-->
         <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="0" Grid.Row="1" Margin="5, 5, 5, 20">
             <Grid x:Name="SrcLocationGrid" ShowGridLines="False"
-                  MouseDown="SrcLocationGrid_MouseDown" MouseMove="SrcLocationGrid_MouseMove" MouseWheel="SrcLocationGrid_MouseWheel"
+                  MouseDown="LocationGrid_MouseDown" MouseMove="LocationGrid_MouseMove" MouseWheel="LocationGrid_MouseWheel"
                   Background="#00000000"
                   >
                 <Rectangle x:Name="SrcViewRectangle" HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -117,12 +117,12 @@
         </Border>
 
         <Border Grid.Column="0" Grid.Row="2" Margin="5, 5, 5, 20"
-                SizeChanged="LocationSizeChanged"/>
+                SizeChanged="LocationGrid_SizeChanged"/>
 
         <!--Dst Location Grid-->
         <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="1" Margin="5, 5, 5, 20">
             <Grid x:Name="DstLocationGrid" ShowGridLines="False"
-                  MouseDown="DstLocationGrid_MouseDown" MouseMove="DstLocationGrid_MouseMove" MouseWheel="DstLocationGrid_MouseWheel"
+                  MouseDown="LocationGrid_MouseDown" MouseMove="LocationGrid_MouseMove" MouseWheel="LocationGrid_MouseWheel"
                   Background="#00000000"
                   >
                 <Rectangle x:Name="DstViewRectangle" HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -139,8 +139,8 @@
                             IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
                             UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
                             IsReadOnly="True"
-                            SizeChanged="SrcDataGrid_SizeChanged"
-                            SelectedCellsChanged="SrcDataGrid_SelectedCellsChanged"
+                            SizeChanged="DataGrid_SizeChanged"
+                            SelectedCellsChanged="DataGrid_SelectedCellsChanged"
                             AllowDrop="True"
                             Tag="0"
                             >
@@ -151,10 +151,10 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeSrcColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeDstColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetSrcHeader_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetSrcHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderSrc_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
@@ -162,8 +162,8 @@
         </fg:FastGridControl>
 
         <RichTextBox x:Name="SrcValueTextBox" Grid.Column="2" Grid.Row="1" Height="30" Margin="1" VerticalAlignment="Top"
-                     GotFocus="SrcValueTextBox_GotFocus"
-                     LostFocus="SrcValueTextBox_LostFocus"
+                     GotFocus="ValueTextBox_GotFocus"
+                     LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
                      />
 
@@ -174,8 +174,8 @@
                             IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
                             UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
                             IsReadOnly="True"
-                            SizeChanged="DstDataGrid_SizeChanged"
-                            SelectedCellsChanged="DstDataGrid_SelectedCellsChanged"
+                            SizeChanged="DataGrid_SizeChanged"
+                            SelectedCellsChanged="DataGrid_SelectedCellsChanged"
                             AllowDrop="True"
                             Tag="1"
                             >
@@ -186,19 +186,19 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Freeze Column"  Click="FreezeDstColumn_Click"/>
-                    <MenuItem Header="Unfreeze Column"  Click="UnfreezeDstColumn_Click"/>
-                    <MenuItem Header="Set Header" Click="SetDstHeader_Click" />
-                    <MenuItem Header="Reset Header" Click="ResetDstHeader_Click" />
-                    <MenuItem Header="Diff" Click="DiffByHeaderDst_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderDst_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
 
         </fg:FastGridControl>
 
         <RichTextBox x:Name="DstValueTextBox" Grid.Column="4" Grid.Row="1" Height="30" Margin="1" VerticalAlignment="Top"
-                     GotFocus="DstValueTextBox_GotFocus"
-                     LostFocus="DstValueTextBox_LostFocus"
+                     GotFocus="ValueTextBox_GotFocus"
+                     LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
                      />
 
