@@ -129,7 +129,7 @@ namespace ExcelMerge.GUI.Views
                     if (!color.HasValue)
                         continue;
 
-                    var colSpan = (int)Math.Max(section.Last().Key - section.First().Key, 5d / columnWidth);
+                    var colSpan = (int)Math.Max(section.Last().Key - section.First().Key + 1, 5d / columnWidth);
                     var rowSpan = (int)Math.Max(1, 5d / rowHeight);
 
                     var rectangle = new Rectangle();
@@ -215,6 +215,7 @@ namespace ExcelMerge.GUI.Views
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
             var row = Math.Max((currentRow - e.Delta / (target.RowDefinitions.Count / 10)), 0);
+            row = Math.Min(row, target.RowDefinitions.Count - Grid.GetRowSpan(viewport));
             Grid.SetRow(viewport, row);
 
             if (currentRow != row)
