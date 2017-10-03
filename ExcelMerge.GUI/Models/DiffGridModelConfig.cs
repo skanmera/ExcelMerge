@@ -16,8 +16,8 @@ namespace ExcelMerge.GUI.Models
                     { "Modified", EMColor.Orange},
                     { "Added", EMColor.Orange},
                     { "Removed", EMColor.LightGray},
-                    { "ColumnHeader", EMColor.LightPink},
-                    { "RowHeader", EMColor.LightPink},
+                    { "ColumnHeader", EMColor.LightBlue},
+                    { "RowHeader", EMColor.LightBlue},
                 };
             }
         }

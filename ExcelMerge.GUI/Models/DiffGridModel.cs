@@ -159,7 +159,7 @@ namespace ExcelMerge.GUI.Models
             cell.backgroundColor = null;
 
             if (cell.IsFrozenColulmn(column))
-                cell.backgroundColor = EMColor.LightPink;
+                cell.backgroundColor = EMColor.LightBlue;
 
             cell.backgroundColor = GetColor(status.ToString()) ?? cell.backgroundColor;
 
