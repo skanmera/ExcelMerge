@@ -46,6 +46,18 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Diff4Net.1.1.0\lib\net452\NetDiff.dll</HintPath>
       <Private>True</Private>
@@ -117,9 +129,14 @@
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\DiffCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Views\EventDispathcer.cs" />
+    <Compile Include="Views\EventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />
     <Compile Include="Extensions\EnumerableExtension.cs" />
+    <Compile Include="Extensions\GridExtension.cs" />
+    <Compile Include="Extensions\PanelExtension.cs" />
     <Compile Include="ICloneable.cs" />
+    <Compile Include="Views\EventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
     <Compile Include="Models\DiffGridModelConfig.cs" />
     <Compile Include="Models\DiffType.cs" />

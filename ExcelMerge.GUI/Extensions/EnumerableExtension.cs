@@ -35,5 +35,11 @@ namespace ExcelMerge.GUI.Extensions
                 items = new List<T>();
             }
         }
+
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (var elem in source)
+                action(elem);
+        }
     }
 }
