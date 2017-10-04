@@ -72,7 +72,7 @@ namespace ExcelMerge.GUI.Models
         public override string GetColumnHeaderText(int column)
         {
             ExcelCellDiff cellDiff;
-            if (TryGetCellDiff(HeaderIndex, column, out cellDiff, true))
+            if (TryGetCellDiff(HeaderIndex, column, out cellDiff))
                 return GetCellText(cellDiff);
 
             return string.Empty;
@@ -80,18 +80,23 @@ namespace ExcelMerge.GUI.Models
 
         public override string GetCellText(int row, int column)
         {
+            return GetCellText(row, column, false);
+        }
+
+        public string GetCellText(int row, int column, bool direct)
+        {
             ExcelCellDiff cellDiff;
-            if (TryGetCellDiff(row, column, out cellDiff))
+            if (TryGetCellDiff(row, column, out cellDiff, direct))
                 return GetCellText(cellDiff);
 
             return string.Empty;
         }
 
-        private bool TryGetCellDiff(int row, int column, out ExcelCellDiff cellDiff, bool isHeader = false)
+        private bool TryGetCellDiff(int row, int column, out ExcelCellDiff cellDiff, bool direct = false)
         {
             cellDiff = null;
 
-            if (!isHeader)
+            if (direct)
                 row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
 
             ExcelRowDiff rowDiff;
@@ -137,9 +142,9 @@ namespace ExcelMerge.GUI.Models
             return header;
         }
 
-        public override IFastGridCell GetCell(IFastGridView view, int row, int column)
+        public IFastGridCell GetCell(IFastGridView view, int row, int column, bool direct)
         {
-            toolTipText = GetCellText(row, column);
+            toolTipText = GetCellText(row, column, direct);
 
             var cell = base.GetCell(view, row, column) as DiffGridModel;
             if (cell == null)
@@ -147,7 +152,7 @@ namespace ExcelMerge.GUI.Models
 
             ExcelCellDiff cellDiff;
             var status = ExcelCellStatus.None;
-            if (TryGetCellDiff(row, column, out cellDiff))
+            if (TryGetCellDiff(row, column, out cellDiff, direct))
             {
                 status = cellDiff.Status;
                 if (status == ExcelCellStatus.Added && DiffType == DiffType.Source)
@@ -164,6 +169,11 @@ namespace ExcelMerge.GUI.Models
             cell.backgroundColor = GetColor(status.ToString()) ?? cell.backgroundColor;
 
             return cell;
+        }
+
+        public override IFastGridCell GetCell(IFastGridView view, int row, int column)
+        {
+            return GetCell(view, row, column, false);
         }
 
         public void FreezeColumn(int? column)
