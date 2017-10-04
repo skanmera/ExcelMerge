@@ -2,14 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
         xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Icon="/ExcelMerge.GUI;component/app.ico"
         Title="{x:Static props:Resources.Title_DiffSettingWindow}" Height="640" Width="640">
+
+    <Window.Resources>
+        <vc:MultiValueConverter x:Key="multiValueConverter"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
@@ -22,9 +29,16 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -36,9 +50,51 @@
             <CheckBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="3" 
                       IsChecked="{Binding Setting.SkipFirstBlankRows}"/>
 
-            <Label Content="{x:Static props:Resources.Label_CellWidth}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
+
+            <Label Content="{x:Static props:Resources.Label_CellWidth}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
             <xctk:IntegerUpDown Value="{Binding Setting.CellWidth, UpdateSourceTrigger=PropertyChanged}" 
-                                Minimum="50" Grid.Column="1" Grid.Row="1" Margin="3" Width="100"  HorizontalAlignment="Left"/>
+                                Minimum="50" Grid.Column="1" Grid.Row="2" Margin="3" Width="100"  HorizontalAlignment="Left"/>
+
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
+
+            <Label Content="行の色" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" />
+            <ScrollViewer Margin="3" Grid.Column="1" Grid.Row="4" Grid.RowSpan="4">
+                <ItemsControl ItemsSource="{Binding Setting.AlternatingColorStrings}" AlternationCount="1000">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" Background="#EEEEEE"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding Mode=OneWay}" IsReadOnly="True" Width="100" Height="25" Margin="3" />
+                                <!--<Rectangle Fill="{Binding}" Width="200" Height="20" Margin="3"/>-->
+                                <xctk:ColorPicker SelectedColor="{Binding Mode=OneWay}" Width="250" Height="25" Margin="3">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Closed">
+                                            <i:InvokeCommandAction Command="{Binding DataContext.EditAlternationColorCommand, RelativeSource={RelativeSource AncestorType=Window}}">
+                                                <i:InvokeCommandAction.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource multiValueConverter}">
+                                                        <Binding Path="(ItemsControl.AlternationIndex)" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay"/>
+                                                        <Binding Path="SelectedColor" RelativeSource="{RelativeSource AncestorType=xctk:ColorPicker}" Mode="OneWay"/>
+                                                    </MultiBinding>
+                                                </i:InvokeCommandAction.CommandParameter>
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </xctk:ColorPicker>
+                                <Button Content="削除" Width="50" Margin="3"
+                                        Command="{Binding DataContext.EditAlternationColorCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" BorderThickness="0.2" BorderBrush="DarkGray"/>
 
             <!--<Label Content="{x:Static props:Resources.Label_CellHeight}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
             <xctk:IntegerUpDown Value="{Binding Setting.CellHeight, UpdateSourceTrigger=PropertyChanged}"

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
+using System.Windows.Media;
 using Prism.Mvvm;
 using YamlDotNet.Serialization;
 
@@ -18,6 +20,22 @@ namespace ExcelMerge.GUI.Settings
         {
             get { return skipFirstBlankRows; }
             set { SetProperty(ref skipFirstBlankRows, value); }
+        }
+
+        private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
+        {
+            "#FFFFFF", "#FAFAFA",
+        };
+        public ObservableCollection<string> AlternatingColorStrings
+        {
+            get { return alternatingColorStrings; }
+            set { SetProperty(ref alternatingColorStrings, value); }
+        }
+
+        [YamlIgnore]
+        public Color[] AlternatingColors
+        {
+            get { return AlternatingColorStrings.Select(c => (Color)ColorConverter.ConvertFromString(c)).ToArray(); }
         }
 
         private List<string> recentFileSets = new List<string>();
@@ -95,6 +113,7 @@ namespace ExcelMerge.GUI.Settings
             clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
             clone.RecentFileSets = RecentFileSets.ToList();
             clone.CellWidth = CellWidth;
+            clone.AlternatingColorStrings = new ObservableCollection<string>(AlternatingColorStrings);
 
             return clone;
         }
@@ -105,7 +124,8 @@ namespace ExcelMerge.GUI.Settings
                 SkipFirstBlankRows == other.skipFirstBlankRows &&
                 ExternalCommands.SequenceEqual(other.ExternalCommands) &&
                 RecentFileSets.SequenceEqual(other.RecentFileSets) &&
-                CellWidth == other.cellWidth;
+                CellWidth == other.cellWidth &&
+                AlternatingColorStrings.SequenceEqual(other.AlternatingColorStrings);
         }
     }
 }

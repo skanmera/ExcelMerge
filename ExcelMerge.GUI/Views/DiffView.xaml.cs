@@ -51,9 +51,6 @@ namespace ExcelMerge.GUI.Views
             ViewportEventDispatcher.Listeners.Add(dstEventHandler);
             ValueTextBoxEventDispatcher.Listeners.Add(srcEventHandler);
             ValueTextBoxEventDispatcher.Listeners.Add(dstEventHandler);
-
-            SrcDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
-            DstDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -348,6 +345,9 @@ namespace ExcelMerge.GUI.Views
 
             if (!App.Instance.KeepFileHistory)
                 App.Instance.UpdateRecentFiles(SrcPathTextBox.Text, DstPathTextBox.Text);
+
+            SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
         }
 
         private void FreezeColumn_Click(object sender, RoutedEventArgs e)

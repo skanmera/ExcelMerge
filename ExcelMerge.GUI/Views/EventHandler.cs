@@ -243,6 +243,12 @@ namespace ExcelMerge.GUI.Views
             var targetCell = new FastGridCellAddress(target.CurrentCell.Row, target.CurrentCell.Column);
             if (!targetCell.Equals(dataGrid.CurrentCell))
             {
+                if (dataGrid.Model == null)
+                    return;
+
+                if (dataGrid.Model.RowCount < targetCell.Row || dataGrid.Model.ColumnCount < targetCell.Column)
+                    return;
+
                 dataGrid.CurrentCell = targetCell;
 
                 if (target.GetSelectedModelCells().Aggregate(false, (r, c) => r |= dataGrid.AddSelectedCell(c)))
