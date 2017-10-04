@@ -215,8 +215,11 @@ namespace ExcelMerge.GUI.Views
 
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
-            var row = Math.Max((currentRow - (Math.Sign(e.Delta) * rowSpan / 2)), 0);
-            row = Math.Min(row, target.RowDefinitions.Count - Grid.GetRowSpan(viewport));
+            var row = currentRow - (Math.Sign(e.Delta) * rowSpan / 2);
+            var last = Math.Max((target.RowDefinitions.Count) - Grid.GetRowSpan(viewport), 0);
+            row = Math.Max(row, 0);
+            row = Math.Min(row, last);
+
             Grid.SetRow(viewport, row);
 
             if (currentRow != row)
