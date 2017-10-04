@@ -37,7 +37,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diff4Net.1.1.0\lib\net452\NetDiff.dll</HintPath>
+      <HintPath>..\packages\Diff4Net.1.1.1\lib\net452\NetDiff.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
