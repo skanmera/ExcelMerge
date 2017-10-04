@@ -71,7 +71,7 @@ namespace ExcelMerge.GUI.Views
             if (locationGrid == null)
                 return;
 
-            var rowCount = target.Model.RowCount;
+            var rowCount = target.Model.RowCount - target.Model.GetHiddenRows(target).Count;
             var colCount = target.Model.ColumnCount;
             UpdateLocationGridDefinisions(locationGrid, locationGrid.RenderSize, rowCount, colCount);
 
@@ -109,7 +109,7 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        private void UpdateLocationGridColors(Grid locationGrid, Dictionary<int, Dictionary<int, Color?>> colorMap)
+        private void UpdateLocationGridColors(Grid locationGrid, List<Dictionary<int, Color?>> colorMaps)
         {
             locationGrid.ClearChildren<Rectangle>();
 
@@ -119,10 +119,9 @@ namespace ExcelMerge.GUI.Views
             var rowHeight = locationGrid.RowDefinitions[0].Height.Value;
             var columnWidth = locationGrid.ColumnDefinitions[0].Width.Value;
 
-            foreach (var rowColors in colorMap)
+            var rowIndex = 0;
+            foreach (var columnColorMap in colorMaps)
             {
-                var rowIndex = rowColors.Key; var columnColorMap = rowColors.Value;
-
                 var sections = columnColorMap.SplitByComparison((c, n) => EqualColor(c.Value, n.Value));
                 foreach (var section in sections)
                 {
@@ -144,12 +143,14 @@ namespace ExcelMerge.GUI.Views
 
                     locationGrid.Children.Add(rectangle);
                 }
+
+                rowIndex++;
             }
         }
 
-        private static Dictionary<int, Dictionary<int, Color?>> CreateColorMap(FastGridControl dataGrid)
+        private static List<Dictionary<int, Color?>> CreateColorMap(FastGridControl dataGrid)
         {
-            var ret = new Dictionary<int, Dictionary<int, Color?>>();
+            var ret = new List<Dictionary<int, Color?>>();
 
             if (dataGrid.Model == null)
                 return ret;
@@ -167,7 +168,7 @@ namespace ExcelMerge.GUI.Views
                     columnColorMap.Add(j, dataGrid.Model.GetCell(dataGrid, i, j)?.BackgroundColor);
                 }
 
-                ret.Add(i, columnColorMap);
+                ret.Add(columnColorMap);
             }
 
             return ret;
