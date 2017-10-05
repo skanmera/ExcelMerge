@@ -150,7 +150,9 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void ChangeLanguage(string calture)
         {
-            App.Instance.UpdateResourceCulture(calture);
+            App.Instance.Setting.Culture = calture;
+            App.Instance.Setting.Save();
+            App.Instance.UpdateResourceCulture();
         }
     }
 }

@@ -55,18 +55,18 @@ namespace ExcelMerge.GUI.Models
         public DiffType DiffType { get; private set; }
         public ExcelSheetDiff SheetDiff { get; private set; }
         public DiffGridModelConfig Config { get; private set; }
-        public Dictionary<string, Color?> ColorTable { get; private set; }
 
         public DiffGridModel(DiffType type, ExcelSheetDiff sheetDiff, DiffGridModelConfig config) : base()
         {
             SheetDiff = sheetDiff;
             Config = config;
             HeaderIndex = Config.HeaderIndex;
-            ColorTable = new Dictionary<string, Color?>(config.ColorTable);
             DiffType = type;
 
             columnCount = SheetDiff.Rows.Max(r => r.Value.Cells.Count);
             rowCount = SheetDiff.Rows.Count();
+
+            App.Instance.OnSettingUpdated += () => { NotifyRefresh(); };
         }
 
         public override string GetColumnHeaderText(int column)
@@ -123,12 +123,28 @@ namespace ExcelMerge.GUI.Models
             return string.Empty;
         }
 
-        private Color? GetColor(string key)
+        private Color? GetColor(ExcelCellStatus status)
         {
-            Color? color;
-            ColorTable.TryGetValue(key, out color);
+            switch (status)
+            {
+                case ExcelCellStatus.Modified:
+                    return App.Instance.Setting.ModifiedColor;
+                case ExcelCellStatus.Added:
+                    return App.Instance.Setting.AddedColor;
+                case ExcelCellStatus.Removed:
+                    return App.Instance.Setting.RemovedColor;
+            }
 
-            return color;
+            return null;
+        }
+
+        private bool IsModifiedRow(int row)
+        {
+            ExcelRowDiff rowDiff;
+            if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
+                return rowDiff.Modified();
+
+            return false;
         }
 
         public override IFastGridCell GetRowHeader(IFastGridView view, int row)
@@ -137,7 +153,18 @@ namespace ExcelMerge.GUI.Models
             if (header == null)
                 return header;
 
-            header.backgroundColor = GetColor("RowHeader");
+            header.backgroundColor = App.Instance.Setting.FrozenColumnColor;
+
+            return header;
+        }
+
+        public override IFastGridCell GetColumnHeader(IFastGridView view, int column)
+        {
+            var header = base.GetColumnHeader(view, column) as DiffGridModel;
+            if (header == null)
+                return header;
+
+            header.backgroundColor = App.Instance.Setting.HeaderColor;
 
             return header;
         }
@@ -163,10 +190,13 @@ namespace ExcelMerge.GUI.Models
 
             cell.backgroundColor = null;
 
-            if (cell.IsFrozenColulmn(column))
-                cell.backgroundColor = EMColor.LightBlue;
+            if (App.Instance.Setting.ColorModifiedRow && IsModifiedRow(row))
+                cell.backgroundColor = App.Instance.Setting.ModifiedRowColor;
 
-            cell.backgroundColor = GetColor(status.ToString()) ?? cell.backgroundColor;
+            if (cell.IsFrozenColulmn(column))
+                cell.backgroundColor = App.Instance.Setting.FrozenColumnColor;
+
+            cell.backgroundColor = GetColor(status) ?? cell.backgroundColor;
 
             return cell;
         }

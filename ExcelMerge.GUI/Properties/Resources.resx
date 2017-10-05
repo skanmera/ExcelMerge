@@ -267,4 +267,28 @@
   <data name="Word_SrcFile" xml:space="preserve">
     <value>Src File</value>
   </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>Added Color</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>Color Modified Row</value>
+  </data>
+  <data name="Label_FrozenColumnColor" xml:space="preserve">
+    <value>Frozen Column Color</value>
+  </data>
+  <data name="Label_HeaderColor" xml:space="preserve">
+    <value>Header Color</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>Modified Color</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>Modified Row Color</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>Removed Color</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>Row Colors</value>
+  </data>
 </root>

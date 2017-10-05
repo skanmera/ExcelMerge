@@ -267,4 +267,28 @@
   <data name="Word_SrcFile" xml:space="preserve">
     <value>左側のファイル</value>
   </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>追加の色</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>変更がある行を色付けする</value>
+  </data>
+  <data name="Label_FrozenColumnColor" xml:space="preserve">
+    <value>固定列の色</value>
+  </data>
+  <data name="Label_HeaderColor" xml:space="preserve">
+    <value>ヘッダーの色</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>変更の色</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>変更がある行の色</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>削除の色</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>行の色</value>
+  </data>
 </root>

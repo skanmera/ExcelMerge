@@ -28,15 +28,26 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref isDirty, value); }
         }
 
+        private bool canRemoveAlternationColor;
+        public bool CanRemoveAlternationColor
+        {
+            get { return canRemoveAlternationColor; }
+            private set { SetProperty(ref canRemoveAlternationColor, value); }
+        }
+
         public DelegateCommand<Window> DoneCommand { get; private set; }
         public DelegateCommand ResetCommand { get; private set; }
         public DelegateCommand ApplyCommand { get; private set; }
         public DelegateCommand<object> EditAlternationColorCommand { get; private set; }
+        public DelegateCommand<int?> RemoveAlternationColorCommand { get; private set; }
+        public DelegateCommand<Color?> AddAlternationColorCommand { get; private set; }
 
         public DiffExtractionSettingWindowViewModel()
         {
             originalSetting = App.Instance.Setting;
             Setting = originalSetting.Clone();
+
+            CanRemoveAlternationColor = Setting.AlternatingColorStrings.Count > 1;
 
             Setting.PropertyChanged += Setting_PropertyChanged;
 
@@ -45,23 +56,33 @@ namespace ExcelMerge.GUI.ViewModels
             ApplyCommand = new DelegateCommand(Apply);
 
             EditAlternationColorCommand = new DelegateCommand<object>(EditAlternationColor);
+            RemoveAlternationColorCommand = new DelegateCommand<int?>(RemoveAlternationColor);
+            AddAlternationColorCommand = new DelegateCommand<Color?>(AddAlternationColor);
         }
 
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            UpdateDirtyFlag();
+        }
+
+        private void UpdateDirtyFlag()
         {
             IsDirty = !Setting.Equals(originalSetting);
         }
 
         private void Done(Window window)
         {
-            Apply();
+            if (IsDirty)
+                Apply();
 
             window.Close();
         }
 
         private void Reset()
         {
+            Setting.PropertyChanged -= Setting_PropertyChanged;
             Setting = originalSetting.Clone();
+            Setting.PropertyChanged += Setting_PropertyChanged;
 
             IsDirty = false;
         }
@@ -87,6 +108,28 @@ namespace ExcelMerge.GUI.ViewModels
             var color = parameters[1].ToString();
 
             Setting.AlternatingColorStrings[index] = color;
+        }
+
+        private void RemoveAlternationColor(int? index)
+        {
+            if (!index.HasValue)
+                return;
+
+            Setting.AlternatingColorStrings.RemoveAt(index.Value);
+            CanRemoveAlternationColor = Setting.AlternatingColorStrings.Count > 1;
+
+            UpdateDirtyFlag();
+        }
+
+        private void AddAlternationColor(Color? color)
+        {
+            if (!color.HasValue)
+                return;
+
+            Setting.AlternatingColorStrings.Add(color.ToString());
+            CanRemoveAlternationColor = Setting.AlternatingColorStrings.Count > 1;
+
+            UpdateDirtyFlag();
         }
     }
 }

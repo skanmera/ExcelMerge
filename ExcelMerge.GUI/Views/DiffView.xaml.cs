@@ -51,6 +51,14 @@ namespace ExcelMerge.GUI.Views
             ViewportEventDispatcher.Listeners.Add(dstEventHandler);
             ValueTextBoxEventDispatcher.Listeners.Add(srcEventHandler);
             ValueTextBoxEventDispatcher.Listeners.Add(dstEventHandler);
+
+            App.Instance.OnSettingUpdated += () =>
+            {
+                SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
+                DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
+            };
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

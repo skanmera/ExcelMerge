@@ -124,6 +124,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Added Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_AddedColor {
+            get {
+                return ResourceManager.GetString("Label_AddedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cell Height に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_CellHeight {
@@ -138,6 +147,69 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_CellWidth {
             get {
                 return ResourceManager.GetString("Label_CellWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Color Modified Row に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ColorModifiedRow {
+            get {
+                return ResourceManager.GetString("Label_ColorModifiedRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Frozen Column Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_FrozenColumnColor {
+            get {
+                return ResourceManager.GetString("Label_FrozenColumnColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Header Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_HeaderColor {
+            get {
+                return ResourceManager.GetString("Label_HeaderColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Modified Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ModifiedColor {
+            get {
+                return ResourceManager.GetString("Label_ModifiedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Modified Row Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ModifiedRowColor {
+            get {
+                return ResourceManager.GetString("Label_ModifiedRowColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Removed Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RemovedColor {
+            get {
+                return ResourceManager.GetString("Label_RemovedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Row Colors に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowColor {
+            get {
+                return ResourceManager.GetString("Label_RowColor", resourceCulture);
             }
         }
         

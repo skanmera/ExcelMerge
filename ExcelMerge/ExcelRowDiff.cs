@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace ExcelMerge
 {
@@ -19,6 +20,11 @@ namespace ExcelMerge
             Cells.Add(cell.ColumnIndex, cell);
 
             return cell;
+        }
+
+        public bool Modified()
+        {
+            return Cells.Any(c => c.Value.Status != ExcelCellStatus.None && c.Value.Status != ExcelCellStatus.Removed);
         }
     }
 }
