@@ -59,7 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diff4Net.1.1.1\lib\net452\NetDiff.dll</HintPath>
+      <HintPath>..\packages\Diff4Net.1.1.2\lib\net452\NetDiff.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
