@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NPOI.SS.UserModel;
 
 namespace ExcelMerge
 {
     internal class ExcelReader
     {
-        internal static IEnumerable<ExcelRow> Read(ISheet sheet, ExcelSheetReadConfig config)
+        internal static IEnumerable<ExcelRow> Read(ISheet sheet)
         {
-            bool skip = config.SkipFirstBlankRows;
             var actualRowIndex = 0;
             for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
             {
@@ -25,11 +23,7 @@ namespace ExcelMerge
                     cells.Add(new ExcelCell(stringValue, columnIndex, rowIndex));
                 }
 
-                if (skip && !cells.Any(c => !string.IsNullOrEmpty(c.Value)))
-                    continue;
-
                 yield return new ExcelRow(actualRowIndex++, cells);
-                skip = false;
             }
         }
     }

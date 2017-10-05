@@ -96,5 +96,10 @@ namespace ExcelMerge.GUI.Views
         {
             Listeners.ForEach(l => l.OnLostFocus(target, container));
         }
+
+        public static void DispatchScrolledEvent(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e)
+        {
+            Listeners.ForEach(l => l.OnScrolled(target, container, e));
+        }
     }
 }

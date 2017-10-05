@@ -291,4 +291,13 @@
   <data name="Label_RowColor" xml:space="preserve">
     <value>行の色</value>
   </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>先頭の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>末尾の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>末尾の空行を無視する</value>
+  </data>
 </root>

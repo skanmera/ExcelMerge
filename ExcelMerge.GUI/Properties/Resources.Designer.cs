@@ -214,11 +214,38 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Skip first blank columns に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_SkipFirstBlankColumns {
+            get {
+                return ResourceManager.GetString("Label_SkipFirstBlankColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Skip first blank rows に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_SkipFirstBlankRows {
             get {
                 return ResourceManager.GetString("Label_SkipFirstBlankRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Trim last blank columns に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_TrimLastBlankColumns {
+            get {
+                return ResourceManager.GetString("Label_TrimLastBlankColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Trim last blank rows に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_TrimLastBlankRows {
+            get {
+                return ResourceManager.GetString("Label_TrimLastBlankRows", resourceCulture);
             }
         }
         

@@ -273,14 +273,14 @@ namespace ExcelMerge.GUI.Views
             var margin = 10;
             var textHeightList = container.ResolveAll<RichTextBox>().Select(rtb => CalculateTextBoxHeight(rtb) + margin);
 
-            var height = textHeightList.Max();
+            var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 2);
 
             container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = height);
         }
 
         public void OnLostFocus(RichTextBox textBox, IUnityContainer container)
         {
-            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = double.NaN);
+            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = 30d);
         }
 
         public void OnHeaderChanged(FastGridControl target, IUnityContainer container)
@@ -313,6 +313,15 @@ namespace ExcelMerge.GUI.Views
             (dataGrid.Model as DiffGridModel).UnfreezeColumn();
 
             dataGrid.NotifyColumnArrangeChanged();
+        }
+
+        public void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e)
+        {
+            container.ResolveAll<RichTextBox>().ForEach(rtb =>
+            {
+                rtb.ScrollToVerticalOffset(e.VerticalOffset);
+                rtb.ScrollToHorizontalOffset(e.HorizontalOffset);
+            });
         }
     }
 }

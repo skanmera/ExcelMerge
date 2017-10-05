@@ -291,4 +291,13 @@
   <data name="Label_RowColor" xml:space="preserve">
     <value>Row Colors</value>
   </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>Skip first blank columns</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>Trim last blank columns</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>Trim last blank rows</value>
+  </data>
 </root>

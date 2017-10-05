@@ -165,6 +165,7 @@
                      GotFocus="ValueTextBox_GotFocus"
                      LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
+                     ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                      />
 
         <GridSplitter Grid.Column="3" Grid.Row="2" Width="5" HorizontalAlignment="Center"/>
@@ -200,6 +201,7 @@
                      GotFocus="ValueTextBox_GotFocus"
                      LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
+                     ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                      />
 
     </Grid>

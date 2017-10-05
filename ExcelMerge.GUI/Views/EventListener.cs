@@ -33,7 +33,8 @@ namespace ExcelMerge.GUI.Views
 
     interface IValueTextBoxEventListener
     {
-        void OnGotFocus(RichTextBox textBox, IUnityContainer container);
-        void OnLostFocus(RichTextBox textBox, IUnityContainer container);
+        void OnGotFocus(RichTextBox target, IUnityContainer container);
+        void OnLostFocus(RichTextBox target, IUnityContainer container);
+        void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e);
     }
 }

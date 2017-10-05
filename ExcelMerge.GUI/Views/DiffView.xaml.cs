@@ -289,7 +289,10 @@ namespace ExcelMerge.GUI.Views
 
             return new ExcelSheetReadConfig()
             {
-                SkipFirstBlankRows = setting.SkipFirstBlankRows,
+                TrimFirstBlankRows = setting.SkipFirstBlankRows,
+                TrimFirstBlankColumns = setting.SkipFirstBlankColumns,
+                TrimLastBlankRows = setting.TrimLastBlankRows,
+                TrimLastBlankColumns = setting.TrimLastBlankColumns,
             };
         }
 
@@ -488,6 +491,11 @@ namespace ExcelMerge.GUI.Views
                 (DstDataGrid.Model as DiffGridModel).HideEqualRows();
                 DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
             }
+        }
+
+        private void ValuteTextBox_ScrollChanged(object sender, RoutedEventArgs e)
+        {
+            ValueTextBoxEventDispatcher.DispatchScrolledEvent(sender as RichTextBox, container, (ScrollChangedEventArgs)e);
         }
     }
 }

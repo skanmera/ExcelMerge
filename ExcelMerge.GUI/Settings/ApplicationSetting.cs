@@ -23,6 +23,27 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref skipFirstBlankRows, value); }
         }
 
+        private bool skipFirstBlankColumns;
+        public bool SkipFirstBlankColumns
+        {
+            get { return skipFirstBlankColumns; }
+            set { SetProperty(ref skipFirstBlankColumns, value); }
+        }
+
+        private bool trimLastBlankRows;
+        public bool TrimLastBlankRows
+        {
+            get { return trimLastBlankRows; }
+            set { SetProperty(ref trimLastBlankRows, value); }
+        }
+
+        private bool trimLastBlankColumns;
+        public bool TrimLastBlankColumns
+        {
+            get { return trimLastBlankColumns; }
+            set { SetProperty(ref trimLastBlankColumns, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",
@@ -243,6 +264,9 @@ namespace ExcelMerge.GUI.Settings
         {
             var clone = new ApplicationSetting();
             clone.SkipFirstBlankRows = SkipFirstBlankRows;
+            clone.SkipFirstBlankColumns = SkipFirstBlankColumns;
+            clone.TrimLastBlankRows = TrimLastBlankRows;
+            clone.TrimLastBlankColumns = TrimLastBlankColumns;
             clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
             clone.RecentFileSets = RecentFileSets.ToList();
             clone.CellWidth = CellWidth;
@@ -262,6 +286,9 @@ namespace ExcelMerge.GUI.Settings
         {
             return
                 SkipFirstBlankRows == other.skipFirstBlankRows &&
+                SkipFirstBlankColumns == other.SkipFirstBlankColumns &&
+                TrimLastBlankRows == other.TrimLastBlankRows &&
+                TrimLastBlankColumns == other.TrimLastBlankColumns &&
                 ExternalCommands.SequenceEqual(other.ExternalCommands) &&
                 RecentFileSets.SequenceEqual(other.RecentFileSets) &&
                 CellWidth == other.cellWidth &&
