@@ -26,12 +26,18 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref args, value); Update(); }
         }
 
-        private bool canExecute;
         [YamlDotNet.Serialization.YamlIgnore]
         public bool CanExecute
         {
-            get { return canExecute; }
-            private set { SetProperty(ref canExecute, value); }
+            get { return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Convert(Command)); }
+        }
+
+        private bool isValid;
+        [YamlDotNet.Serialization.YamlIgnore]
+        public bool IsValid 
+        {
+            get { return isValid; }
+            private set { SetProperty(ref isValid, value); }
         }
 
         public ExternalCommand() { }
@@ -81,20 +87,20 @@ namespace ExcelMerge.GUI.Settings
 
         private void Update()
         {
-            CanExecute = !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Command);
+            IsValid = !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Command);
         }
 
         public void Execute(bool wait)
         {
-            var process = System.Diagnostics.Process.Start(Command, ConvertArgs(Args));
+            var process = System.Diagnostics.Process.Start(Convert(Command), Convert(Args));
 
             if (wait)
                 process.WaitForExit();
         }
 
-        private static string ConvertArgs(string args)
+        private static string Convert(string str)
         {
-            return args.Replace("${SRC}", EMEnvironmentValue.Get("SRC")).Replace("${DST}", EMEnvironmentValue.Get("DST"));
+            return str.Replace("${SRC}", EMEnvironmentValue.Get("SRC")).Replace("${DST}", EMEnvironmentValue.Get("DST"));
         }
 
         public ExternalCommand Clone()

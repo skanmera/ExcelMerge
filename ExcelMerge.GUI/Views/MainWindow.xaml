@@ -95,13 +95,16 @@
             </MenuItem>
             <MenuItem Header="{x:Static props:Resources.Word_Tool}">
                 <MenuItem Header="{x:Static props:Resources.MenuItem_ExeExternalCmd}" 
-                          ItemsSource="{Binding ExternalCommands}" >
+                          ItemsSource="{Binding ExternalCommands}" 
+                          >
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Header" Value="{Binding}"/>
                             <Setter Property="Command" Value="{Binding DataContext.ExecuteExternalCommandCommand,
                                 RelativeSource={RelativeSource AncestorType=Window}}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
+                            <EventSetter Event="Loaded" Handler="MenuItem_Loaded"/>
+                            <Setter Property="IsEnabled" Value="{Binding CanExecute, UpdateSourceTrigger=Explicit}"/>
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>

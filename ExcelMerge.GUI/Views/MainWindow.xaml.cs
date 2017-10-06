@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace ExcelMerge.GUI.Views
 {
@@ -10,6 +11,19 @@ namespace ExcelMerge.GUI.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem == null)
+                return;
+
+            var binding = menuItem.GetBindingExpression(MenuItem.IsEnabledProperty);
+            if (binding == null)
+                return;
+
+            binding.UpdateTarget();
         }
     }
 }

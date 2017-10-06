@@ -121,6 +121,9 @@ namespace ExcelMerge.GUI.Views
             if (!SrcDataGrid.CurrentCell.Column.HasValue || !DstDataGrid.CurrentCell.Column.HasValue)
                 return;
 
+            if (SrcDataGrid.Model == null || DstDataGrid.Model == null)
+                return;
+
             var srcValue =
                 (SrcDataGrid.Model as DiffGridModel).GetCellText(SrcDataGrid.CurrentCell.Row.Value, SrcDataGrid.CurrentCell.Column.Value, true);
             var dstValue =
