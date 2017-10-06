@@ -43,6 +43,8 @@
     <Compile Include="Collection\Equal.cs" />
     <Compile Include="Collection\SplitBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\Serialization\SerializationUtility.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

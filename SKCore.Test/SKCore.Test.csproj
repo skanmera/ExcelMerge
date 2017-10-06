@@ -51,6 +51,7 @@
     <Compile Include="Collection\SplitByTest.cs" />
     <Compile Include="Collection\EqualTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\Serialization\SerializationUtilityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
