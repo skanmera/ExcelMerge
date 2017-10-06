@@ -9,35 +9,35 @@ namespace SKCore.Collection
         public static IEnumerable<IEnumerable<T>> SplitBySize<T>(
             this IEnumerable<T> source, int size)
         {
-            return source.SplitByRegularity((p, c, gi, li) => li < size);
+            return source.SplitByRegularity((items, current) => items.Count < size);
         }
 
         public static IEnumerable<IEnumerable<T>> SplitByEquality<T>(
             this IEnumerable<T> source)
         {
-            return source.SplitByRegularity((p, c, gi, li) => c.Equals(p));
+            return source.SplitByRegularity((items, current) => items.Last().Equals(current));
         }
 
         public static IEnumerable<IEnumerable<T>> SplitByEquality<T>(
             this IEnumerable<T> source, int maxSize)
         {
-            return source.SplitByRegularity((p, c, gi, li) => c.Equals(p) && li < maxSize);
+            return source.SplitByRegularity((items, current) => items.Last().Equals(current) && items.Count < maxSize);
         }
 
         public static IEnumerable<IEnumerable<T>> SplitByEquality<T>(
             this IEnumerable<T> source, IEqualityComparer<T> comparer)
         {
-            return source.SplitByRegularity((p, c, gi, li) => comparer.Equals(c, p));
+            return source.SplitByRegularity((items, current) => comparer.Equals(items.Last(), current));
         }
 
         public static IEnumerable<IEnumerable<T>> SplitByEquality<T>(
             this IEnumerable<T> source, IEqualityComparer<T> comparer, int maxSize)
         {
-            return source.SplitByRegularity((p, c, gi, li) => comparer.Equals(c, p) && li <= maxSize);
+            return source.SplitByRegularity((items, current) => comparer.Equals(items.Last(), current) && items.Count <= maxSize);
         }
 
         public static IEnumerable<IEnumerable<T>> SplitByRegularity<T>(
-            this IEnumerable<T> source, Func<T, T, int, int, bool> predicate)
+            this IEnumerable<T> source, Func<List<T>, T, bool> predicate)
         {
             using (var enumerator = source.GetEnumerator())
             {
@@ -45,16 +45,9 @@ namespace SKCore.Collection
                     yield break;
 
                 var items = new List<T> { enumerator.Current };
-                var localIndex = 0;
-                var globalIndex = 0;
-                var previous = default(T);
-                while (true)
+                while (enumerator.MoveNext())
                 {
-                    previous = enumerator.Current;
-                    if (!enumerator.MoveNext())
-                        break;
-
-                    if (predicate(previous, enumerator.Current, ++globalIndex, ++localIndex))
+                    if (predicate(items, enumerator.Current))
                     {
                         items.Add(enumerator.Current);
                         continue;
@@ -62,7 +55,6 @@ namespace SKCore.Collection
 
                     yield return items;
 
-                    localIndex = 0;
                     items = new List<T> { enumerator.Current };
                 }
 
