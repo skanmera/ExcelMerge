@@ -86,7 +86,7 @@ namespace ExcelMerge
         public void TrimLastBlankColumns()
         {
             var columns = CreateColumns();
-            var indices = columns.Select((v, i) => new { v, i }).SkipWhile(c => c.v.IsBlank()).SkipWhile(c => !c.v.IsBlank()).Select(c => c.i);
+            var indices = columns.Select((v, i) => new { v, i }).Reverse().TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
 
             foreach (var i in indices)
                 RemoveColumn(i);
