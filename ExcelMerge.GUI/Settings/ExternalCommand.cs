@@ -3,7 +3,7 @@ using Prism.Mvvm;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class ExternalCommand : BindableBase, IEquatable<ExternalCommand>, ICloneable<ExternalCommand>
+    public class ExternalCommand : BindableBase, IEquatable<ExternalCommand>
     {
         private string name = string.Empty;
         public string Name

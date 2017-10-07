@@ -140,7 +140,6 @@
     <Compile Include="Extensions\EnumerableExtension.cs" />
     <Compile Include="Extensions\GridExtension.cs" />
     <Compile Include="Extensions\PanelExtension.cs" />
-    <Compile Include="ICloneable.cs" />
     <Compile Include="Views\EventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
     <Compile Include="Models\DiffGridModelConfig.cs" />
