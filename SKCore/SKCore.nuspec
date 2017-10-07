@@ -6,7 +6,6 @@
     <title>SKCore</title>
     <authors>skanmera</authors>
     <owners>skanmera</owners>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>General class library</description>
     <copyright>Copyright 2017</copyright>
