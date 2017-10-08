@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>SKCore</id>
-    <version>1.0.1</version>
+    <id>SKCore.Wpf</id>
+    <version>1.0.2</version>
     <title>SKCore</title>
     <authors>skanmera</authors>
     <owners>skanmera</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>General class library</description>
+    <description>General class library for wpf</description>
     <copyright>Copyright 2017</copyright>
   </metadata>
 </package>
