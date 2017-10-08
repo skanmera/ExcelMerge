@@ -71,7 +71,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SKCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SKCore.1.0.0\lib\net452\SKCore.dll</HintPath>
+      <HintPath>..\packages\SKCore.1.0.1\lib\net452\SKCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SKCore.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SKCore.Wpf.1.0.0\lib\net452\SKCore.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -137,9 +141,6 @@
     <Compile Include="Views\EventDispathcer.cs" />
     <Compile Include="Views\EventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />
-    <Compile Include="Extensions\EnumerableExtension.cs" />
-    <Compile Include="Extensions\GridExtension.cs" />
-    <Compile Include="Extensions\PanelExtension.cs" />
     <Compile Include="Views\EventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
     <Compile Include="Models\DiffGridModelConfig.cs" />
@@ -148,7 +149,6 @@
     <Compile Include="Settings\EMEnvironmentValue.cs" />
     <Compile Include="Settings\ExternalCommand.cs" />
     <Compile Include="Styles\EMColor.cs" />
-    <Compile Include="Utilities\FrameworkElementUtility.cs" />
     <Compile Include="ValueConverters\CultureNameConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameterConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameter.cs" />

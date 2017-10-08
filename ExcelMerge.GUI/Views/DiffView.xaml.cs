@@ -11,7 +11,7 @@ using System.Windows.Media;
 using Microsoft.Practices.Unity;
 using FastWpfGrid;
 using NetDiff;
-using ExcelMerge.GUI.Extensions;
+using SKCore.Collection;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Styles;
 
@@ -179,7 +179,7 @@ namespace ExcelMerge.GUI.Views
 
         private void DiffModifiedLine(IEnumerable<DiffResult<char>> results, List<Tuple<string, Color?>> ranges, bool isSrc)
         {
-            var splited = results.SplitByComparison((c, n) => c.Status.Equals(n.Status)).ToList();
+            var splited = results.SplitByRegularity((items, current) => items.Last().Status.Equals(current.Status)).ToList();
 
             foreach (var sr in splited)
             {

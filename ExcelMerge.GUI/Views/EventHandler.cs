@@ -9,7 +9,8 @@ using System.Windows.Media;
 using System.Windows.Input;
 using FastWpfGrid;
 using Microsoft.Practices.Unity;
-using ExcelMerge.GUI.Extensions;
+using SKCore.Collection;
+using SKCore.Wpf.Controls.Utilities;
 using ExcelMerge.GUI.Models;
 
 namespace ExcelMerge.GUI.Views
@@ -122,7 +123,7 @@ namespace ExcelMerge.GUI.Views
             var rowIndex = 0;
             foreach (var columnColorMap in colorMaps)
             {
-                var sections = columnColorMap.SplitByComparison((c, n) => EqualColor(c.Value, n.Value));
+                var sections = columnColorMap.SplitByRegularity((items, current) => EqualColor(items.Last().Value, current.Value));
                 foreach (var section in sections)
                 {
                     var color = section.First().Value;
@@ -188,17 +189,27 @@ namespace ExcelMerge.GUI.Views
 
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
-            var row = target.GetRow(e);
+
+            var row = target.GetRow(e.GetPosition(target));
+            if (!row.HasValue)
+                return;
+
             while (row + rowSpan / 2 > target.RowDefinitions.Count)
                 row--;
-            Grid.SetRow(viewport, Math.Max(row - rowSpan / 2, 0));
+
+            Grid.SetRow(viewport, Math.Max(row.Value - rowSpan / 2, 0));
 
             var colSpan = Grid.GetColumnSpan(viewport);
             var currentCol = Grid.GetColumn(viewport);
-            var col = target.GetColumn(e);
+
+            var col = target.GetColumn(e.GetPosition(target));
+            if (!col.HasValue)
+                return;
+
             while (col + colSpan / 2 > target.ColumnDefinitions.Count)
                 col--;
-            Grid.SetColumn(viewport, Math.Max(col - colSpan / 2, 0));
+
+            Grid.SetColumn(viewport, Math.Max(col.Value - colSpan / 2, 0));
 
             if (currentRow != row || currentCol != col)
                 ViewportEventDispatcher.DispatchMoveEvent(viewport, container);
@@ -275,12 +286,14 @@ namespace ExcelMerge.GUI.Views
 
             var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 2);
 
-            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = height);
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
+                rtb.Height = height;
         }
 
         public void OnLostFocus(RichTextBox textBox, IUnityContainer container)
         {
-            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = 30d);
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
+                rtb.Height = 30d;
         }
 
         public void OnHeaderChanged(FastGridControl target, IUnityContainer container)
@@ -317,11 +330,11 @@ namespace ExcelMerge.GUI.Views
 
         public void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e)
         {
-            container.ResolveAll<RichTextBox>().ForEach(rtb =>
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
             {
                 rtb.ScrollToVerticalOffset(e.VerticalOffset);
                 rtb.ScrollToHorizontalOffset(e.HorizontalOffset);
-            });
+            }
         }
     }
 }
