@@ -75,7 +75,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SKCore.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SKCore.Wpf.1.0.0\lib\net452\SKCore.Wpf.dll</HintPath>
+      <HintPath>..\packages\SKCore.Wpf.1.0.2\lib\net452\SKCore.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

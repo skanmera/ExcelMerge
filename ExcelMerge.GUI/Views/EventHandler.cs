@@ -76,10 +76,11 @@ namespace ExcelMerge.GUI.Views
             var colCount = target.Model.ColumnCount;
             UpdateLocationGridDefinisions(locationGrid, locationGrid.RenderSize, rowCount, colCount);
 
-            RecalculateViewport(container.Resolve<Rectangle>(Key), target);
+            var viewport = container.Resolve<Rectangle>(Key);
+            RecalculateViewport(viewport, target);
 
             var colorMap = CreateColorMap(target);
-            UpdateLocationGridColors(locationGrid, colorMap);
+            UpdateLocationGridColors(locationGrid, colorMap, viewport);
         }
 
         private void UpdateLocationGridDefinisions(Grid grid, Size newGridSize, int rowCount, int columnCount)
@@ -110,9 +111,9 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        private void UpdateLocationGridColors(Grid locationGrid, List<Dictionary<int, Color?>> colorMaps)
+        private void UpdateLocationGridColors(Grid locationGrid, List<Dictionary<int, Color?>> colorMaps, Rectangle viewport)
         {
-            locationGrid.ClearChildren<Rectangle>();
+            locationGrid.ClearChildren<Rectangle>(new List<UIElement> { viewport });
 
             if (!locationGrid.RowDefinitions.Any() || !locationGrid.ColumnDefinitions.Any())
                 return;
