@@ -24,7 +24,7 @@ namespace ExcelMerge
 
         public bool Modified()
         {
-            return Cells.Any(c => c.Value.Status != ExcelCellStatus.None && c.Value.Status != ExcelCellStatus.Removed);
+            return Cells.Any(c => c.Value.Status != ExcelCellStatus.None);
         }
     }
 }
