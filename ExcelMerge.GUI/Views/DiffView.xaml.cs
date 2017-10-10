@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -12,6 +13,7 @@ using Microsoft.Practices.Unity;
 using FastWpfGrid;
 using NetDiff;
 using SKCore.Collection;
+using ExcelMerge.GUI.ViewModels;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Styles;
 
@@ -59,6 +61,8 @@ namespace ExcelMerge.GUI.Views
                 DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
                 DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
             };
+
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -345,6 +349,8 @@ namespace ExcelMerge.GUI.Views
             var srcModel = new DiffGridModel(DiffType.Source, diff, modelConfig);
             var dstModel = new DiffGridModel(DiffType.Dest, diff, modelConfig);
 
+            (DataContext as ViewModels.DiffViewModel).UpdateDiffSummary(diff.CreateSummary());
+
             SrcDataGrid.Model = srcModel;
             DstDataGrid.Model = dstModel;
 
@@ -496,9 +502,178 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
+        private bool ValidateDataGrids()
+        {
+            return SrcDataGrid.Model != null && DstDataGrid.Model != null;
+        }
+
         private void ValuteTextBox_ScrollChanged(object sender, RoutedEventArgs e)
         {
             ValueTextBoxEventDispatcher.DispatchScrolledEvent(sender as RichTextBox, container, (ScrollChangedEventArgs)e);
+        }
+
+        private void NextModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextModifiedCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousModifiedCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextModifiedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousModifiedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextAddedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousAddedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextRemovedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextRemovedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevRemovedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousRemovedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var text = SearchTextCombobox.Text;
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var history = App.Instance.Setting.SearchHistory.ToList();
+            if (history.Contains(text))
+                history.Remove(text);
+
+            history.Insert(0, text);
+            history = history.Take(10).ToList();
+
+            App.Instance.Setting.SearchHistory = new ObservableCollection<string>(history);
+            App.Instance.Setting.Save();
+
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousMatchCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var text = SearchTextCombobox.Text;
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var history = App.Instance.Setting.SearchHistory.ToList();
+            if (history.Contains(text))
+                history.Remove(text);
+
+            history.Insert(0, text);
+            history = history.Take(10).ToList();
+
+            App.Instance.Setting.SearchHistory = new ObservableCollection<string>(history);
+            App.Instance.Setting.Save();
+
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextMatchCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
         }
     }
 }

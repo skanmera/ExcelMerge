@@ -166,6 +166,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref cellWidth, value); }
         }
 
+        private ObservableCollection<string> searchHistory = new ObservableCollection<string>();
+        public ObservableCollection<string> SearchHistory
+        {
+            get { return searchHistory; }
+            set { SetProperty(ref searchHistory, value); }
+        }
+
         public static ApplicationSetting Load()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(Location));
@@ -278,6 +285,7 @@ namespace ExcelMerge.GUI.Settings
             clone.modifiedColorString = ModifiedColorString;
             clone.ModifiedRowColorString = ModifiedRowColorString;
             clone.ColorModifiedRow = ColorModifiedRow;
+            clone.SearchHistory = new ObservableCollection<string>(SearchHistory);
 
             return clone;
         }
@@ -299,7 +307,8 @@ namespace ExcelMerge.GUI.Settings
                 RemovedColorString.Equals(other.RemovedColorString) &&
                 ModifiedColorString.Equals(other.ModifiedColorString) &&
                 ModifiedRowColorString.Equals(other.ModifiedRowColorString) &&
-                ColorModifiedRow.Equals(other.ColorModifiedRow);
+                ColorModifiedRow.Equals(other.ColorModifiedRow) &&
+                SearchHistory.Equals(other.SearchHistory);
         }
     }
 }

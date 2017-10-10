@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Media;
 using FastWpfGrid;
-using ExcelMerge.GUI.Styles;
 
 namespace ExcelMerge.GUI.Models
 {
@@ -96,14 +97,19 @@ namespace ExcelMerge.GUI.Models
         {
             cellDiff = null;
 
-            if (direct)
-                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
-
             ExcelRowDiff rowDiff;
-            if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
+            if (TryGetRowDiff(row, out rowDiff, direct))
                 return rowDiff.Cells.TryGetValue(column, out cellDiff);
 
             return false;
+        }
+
+        private bool TryGetRowDiff(int row, out ExcelRowDiff rowDiff, bool direct = false)
+        {
+            if (direct)
+                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
+
+            return SheetDiff.Rows.TryGetValue(row, out rowDiff);
         }
 
         private string GetCellText(ExcelCellDiff cellDiff)
@@ -204,6 +210,191 @@ namespace ExcelMerge.GUI.Models
         public override IFastGridCell GetCell(IFastGridView view, int row, int column)
         {
             return GetCell(view, row, column, false);
+        }
+
+        public FastGridCellAddress GetNextModifiedCell(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            {
+                var next = row == current.Row
+                ? cells.Skip(current.Column.Value + 1).FirstOrDefault(c => c.Value.Status != ExcelCellStatus.None)
+                : cells.FirstOrDefault(c => c.Value.Status != ExcelCellStatus.None);
+
+                if (next.Value != null)
+                    return new FastGridCellAddress(row, next.Key);
+
+                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetPreviousModifiedCell(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            {
+                var next = row == current.Row
+                    ? cells.Take(current.Column.Value).LastOrDefault(c => c.Value.Status != ExcelCellStatus.None)
+                    : cells.LastOrDefault(c => c.Value.Status != ExcelCellStatus.None);
+
+                if (next.Value != null)
+                    return new FastGridCellAddress(row, next.Key);
+
+                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetNextModifiedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.Any(c => c.Value.Status != ExcelCellStatus.None))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetPreviousModifiedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.Any(c => c.Value.Status != ExcelCellStatus.None))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetNextAddedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.All(c => c.Value.Status == ExcelCellStatus.Added))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetPreviousAddedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.All(c => c.Value.Status == ExcelCellStatus.Added))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetNextRemovedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.All(c => c.Value.Status == ExcelCellStatus.Removed))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetPreviousRemovedRow(FastGridCellAddress current)
+        {
+            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            {
+                if (row == current.Row)
+                    return FastGridCellAddress.Empty;
+
+                if (cells.All(c => c.Value.Status == ExcelCellStatus.Removed))
+                    return new FastGridCellAddress(row, current.Column);
+
+                return FastGridCellAddress.Empty;
+            });
+        }
+
+        private bool IsMatch(ExcelCellDiff cell, string text, bool exactMatch, bool caseSensitive, bool useRegex)
+        {
+            var srcValue = caseSensitive ? cell.SrcCell.Value : cell.SrcCell.Value.ToUpper();
+            var dstValue = caseSensitive ? cell.DstCell.Value : cell.DstCell.Value.ToUpper();
+            var target = caseSensitive ? text : text.ToUpper();
+
+            if (useRegex)
+            {
+                var regex = new Regex(target);
+                return regex.IsMatch(srcValue) || regex.IsMatch(srcValue);
+            }
+
+            if (exactMatch)
+                return target == srcValue || target == dstValue;
+
+            return srcValue.Contains(target) || dstValue.Contains(target);
+        }
+
+        public FastGridCellAddress GetNextMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex)
+        {
+            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            {
+                var next = row == current.Row
+                ? cells.Skip(current.Column.Value + 1).FirstOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
+                : cells.FirstOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex));
+
+                if (next.Value != null)
+                    return new FastGridCellAddress(row, next.Key);
+
+                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetPreviousMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex)
+        {
+            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            {
+                var next = row == current.Row
+                ? cells.Take(current.Column.Value).LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
+                : cells.LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex));
+
+                if (next.Value != null)
+                    return new FastGridCellAddress(row, next.Key);
+
+                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+            });
+        }
+
+        public FastGridCellAddress GetNextCell(
+                FastGridCellAddress current, Func<int, int> rowSelector, Func<int, SortedDictionary<int, ExcelCellDiff>, FastGridCellAddress> selector)
+        {
+            if (current.IsEmpty)
+                return current;
+
+            var rowIndex = current.Row.Value;
+            while (true)
+            {
+                ExcelRowDiff rowDiff;
+                if (!TryGetRowDiff(rowIndex, out rowDiff, false))
+                    break;
+
+                var next = selector(rowIndex, rowDiff.Cells);
+                if (!next.IsEmpty)
+                    return next;
+
+                rowIndex = rowSelector(rowIndex);
+            }
+
+            return FastGridCellAddress.Empty;
         }
 
         public void FreezeColumn(int? column)

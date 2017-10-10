@@ -138,6 +138,7 @@
     <Compile Include="Commands\DiffCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
+    <Compile Include="ValueConverters\PercentageConverter.cs" />
     <Compile Include="Views\EventDispathcer.cs" />
     <Compile Include="Views\EventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Windows;
 using Prism.Mvvm;
+using FastWpfGrid;
+using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Behaviors;
 
 namespace ExcelMerge.GUI.ViewModels
@@ -47,6 +51,34 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref executable, value); }
         }
 
+        private int modifiedCellCount;
+        public int ModifiedCellCount
+        {
+            get { return modifiedCellCount; }
+            private set { SetProperty(ref modifiedCellCount, value); }
+        }
+
+        private int modifiedRowCount;
+        public int ModifiedRowCount
+        {
+            get { return modifiedRowCount; }
+            private set { SetProperty(ref modifiedRowCount, value); }
+        }
+
+        private int addedRowCount;
+        public int AddedRowCount
+        {
+            get { return addedRowCount; }
+            private set { SetProperty(ref addedRowCount, value); }
+        }
+
+        private int removedRowCount;
+        public int RemovedRowCount
+        {
+            get { return removedRowCount; }
+            private set { SetProperty(ref removedRowCount, value); }
+        }
+
         private DragAcceptDescription description;
         public DragAcceptDescription Description
         {
@@ -70,6 +102,14 @@ namespace ExcelMerge.GUI.ViewModels
             DstPath = dst;
 
             mwv.PropertyChanged += Mwv_PropertyChanged;
+        }
+
+        public void UpdateDiffSummary(ExcelSheetDiffSummary summary)
+        {
+            ModifiedCellCount = summary.ModifiedCellCount;
+            ModifiedRowCount = summary.ModifiedRowCount;
+            AddedRowCount = summary.AddedRowCount;
+            RemovedRowCount = summary.RemovedRowCount;
         }
 
         private void Mwv_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

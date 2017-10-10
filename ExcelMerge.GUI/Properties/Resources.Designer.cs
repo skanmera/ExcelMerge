@@ -133,6 +133,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   AddedRows({0}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_AddedRows {
+            get {
+                return ResourceManager.GetString("Label_AddedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cell Height に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_CellHeight {
@@ -178,6 +187,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Modified Cells({0}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ModifiedCells {
+            get {
+                return ResourceManager.GetString("Label_ModifiedCells", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Modified Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ModifiedColor {
@@ -196,11 +214,29 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Modified Rows({0}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ModifiedRows {
+            get {
+                return ResourceManager.GetString("Label_ModifiedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Removed Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_RemovedColor {
             get {
                 return ResourceManager.GetString("Label_RemovedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   RemovedRows({0}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RemovedRows {
+            get {
+                return ResourceManager.GetString("Label_RemovedRows", resourceCulture);
             }
         }
         

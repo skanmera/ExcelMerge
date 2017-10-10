@@ -300,4 +300,16 @@
   <data name="Label_TrimLastBlankRows" xml:space="preserve">
     <value>Trim last blank rows</value>
   </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>AddedRows({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>Modified Cells({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>Modified Rows({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>RemovedRows({0})</value>
+  </data>
 </root>

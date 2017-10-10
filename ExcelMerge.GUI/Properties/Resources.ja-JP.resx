@@ -199,7 +199,7 @@
     <value>実行ファイル</value>
   </data>
   <data name="Word_File" xml:space="preserve">
-    <value>フィル</value>
+    <value>ファイル</value>
   </data>
   <data name="Word_Japanese" xml:space="preserve">
     <value>日本語</value>
@@ -299,5 +299,17 @@
   </data>
   <data name="Label_TrimLastBlankRows" xml:space="preserve">
     <value>末尾の空行を無視する</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>追加された行({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>変更されたセル({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>変更された行({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>削除された行({0})</value>
   </data>
 </root>

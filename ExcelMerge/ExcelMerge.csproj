@@ -79,6 +79,7 @@
     <Compile Include="ExcelSheet.cs" />
     <Compile Include="ExcelSheetDiff.cs" />
     <Compile Include="ExcelSheetDiffConfig.cs" />
+    <Compile Include="ExcelSheetDiffSummary.cs" />
     <Compile Include="ExcelSheetReadConfig.cs" />
     <Compile Include="ExcelUtility.cs" />
     <Compile Include="ExcelWorkbook.cs" />
