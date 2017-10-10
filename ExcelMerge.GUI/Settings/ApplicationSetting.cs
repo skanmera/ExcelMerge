@@ -177,7 +177,7 @@ namespace ExcelMerge.GUI.Settings
             {
                 using (var input = new StringReader(sr.ReadToEnd()))
                 {
-                    var deserializer = new DeserializerBuilder().Build();
+                    var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
                     setting = deserializer.Deserialize<ApplicationSetting>(input);
                 }
             }
