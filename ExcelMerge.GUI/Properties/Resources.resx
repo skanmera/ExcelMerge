@@ -312,4 +312,16 @@
   <data name="Label_RemovedRows" xml:space="preserve">
     <value>RemovedRows({0})</value>
   </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>CaseSensitive</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>ExactMatch</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>Regex</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

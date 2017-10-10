@@ -107,12 +107,12 @@
                             Click="SwapButton_Click" Margin="10,0,0,0" 
                             IsEnabled="{Binding Executable}"/>
 
-                <GroupBox Header="検索" Margin="10,0,0,0">
+                <GroupBox Header="{x:Static props:Resources.Word_Search}" Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <ComboBox x:Name="SearchTextCombobox" Width="200" IsEditable="True" Margin="3"/>
-                        <CheckBox x:Name="ExactMatchCheckBox" Content="完全一致" Margin="3" IsChecked="False"/>
-                        <CheckBox x:Name="CaseSensitiveCheckBox" Content="大文字小文字を区別する" Margin="3" IsChecked="False"/>
-                        <CheckBox x:Name="RegexCheckBox" Content="正規表現" Margin="3" IsChecked="False"/>
+                        <CheckBox x:Name="ExactMatchCheckBox" Content="{x:Static props:Resources.Word_ExactMatch}" Margin="3" IsChecked="False"/>
+                        <CheckBox x:Name="CaseSensitiveCheckBox" Content="{x:Static props:Resources.Word_CaseSensitive}" Margin="3" IsChecked="False"/>
+                        <CheckBox x:Name="RegexCheckBox" Content="{x:Static props:Resources.Word_Regex}" Margin="3" IsChecked="False"/>
                         <Button x:Name="PrevMatchCellButton"  Content="←" Width="30" Grid.Column="0" Margin="3"
                                     Click="PrevMatchCellButton_Click"/>
                         <Button x:Name="NextMatchCellButton"  Content="→" Width="30" Grid.Column="1" Margin="3"

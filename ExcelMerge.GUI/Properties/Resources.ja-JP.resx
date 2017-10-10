@@ -312,4 +312,16 @@
   <data name="Label_RemovedRows" xml:space="preserve">
     <value>削除された行({0})</value>
   </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>大文字小文字を区別する</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>完全一致</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>正規表現</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
 </root>

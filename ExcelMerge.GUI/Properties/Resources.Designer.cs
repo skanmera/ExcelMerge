@@ -493,6 +493,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   CaseSensitive に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_CaseSensitive {
+            get {
+                return ResourceManager.GetString("Word_CaseSensitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Default に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Default {
@@ -534,6 +543,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_English {
             get {
                 return ResourceManager.GetString("Word_English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ExactMatch に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ExactMatch {
+            get {
+                return ResourceManager.GetString("Word_ExactMatch", resourceCulture);
             }
         }
         
@@ -592,6 +610,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Regex に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Regex {
+            get {
+                return ResourceManager.GetString("Word_Regex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Remove に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Remove {
@@ -606,6 +633,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Reset {
             get {
                 return ResourceManager.GetString("Word_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Search に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Search {
+            get {
+                return ResourceManager.GetString("Word_Search", resourceCulture);
             }
         }
         
