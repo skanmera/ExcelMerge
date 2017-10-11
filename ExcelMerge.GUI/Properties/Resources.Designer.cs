@@ -313,6 +313,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   File Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_FileSettings {
+            get {
+                return ResourceManager.GetString("MenuItem_FileSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Open as Dst File に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuItem_OpenAsDstFile {
@@ -417,6 +426,24 @@ namespace ExcelMerge.GUI.Properties {
         public static string Title_DiffSettingWindow {
             get {
                 return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Edit File Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Title_FileSettingEditorWindow {
+            get {
+                return ResourceManager.GetString("Title_FileSettingEditorWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   File Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Title_FileSettingsWindow {
+            get {
+                return ResourceManager.GetString("Title_FileSettingsWindow", resourceCulture);
             }
         }
         
@@ -574,6 +601,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Frozen Column Count に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_FrozenColumnCount {
+            get {
+                return ResourceManager.GetString("Word_FrozenColumnCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Header Index に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_HeaderIndex {
+            get {
+                return ResourceManager.GetString("Word_HeaderIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Japanese に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Japanese {
@@ -588,6 +633,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Language {
             get {
                 return ResourceManager.GetString("Word_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Match Type に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_MatchType {
+            get {
+                return ResourceManager.GetString("Word_MatchType", resourceCulture);
             }
         }
         

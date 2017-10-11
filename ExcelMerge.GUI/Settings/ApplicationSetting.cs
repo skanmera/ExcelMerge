@@ -152,6 +152,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref externalCommands, value); }
         }
 
+        private List<FileSetting> fileSettings = new List<FileSetting>();
+        public List<FileSetting> FileSettings
+        {
+            get { return fileSettings; }
+            set { SetProperty(ref fileSettings, value); }
+        }
+
         private string culture;
         public string Culture
         {
@@ -275,6 +282,7 @@ namespace ExcelMerge.GUI.Settings
             clone.TrimLastBlankRows = TrimLastBlankRows;
             clone.TrimLastBlankColumns = TrimLastBlankColumns;
             clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
+            clone.FileSettings = FileSettings.Select(f => f.Clone()).ToList();
             clone.RecentFileSets = RecentFileSets.ToList();
             clone.CellWidth = CellWidth;
             clone.AlternatingColorStrings = new ObservableCollection<string>(AlternatingColorStrings);
@@ -298,6 +306,7 @@ namespace ExcelMerge.GUI.Settings
                 TrimLastBlankRows == other.TrimLastBlankRows &&
                 TrimLastBlankColumns == other.TrimLastBlankColumns &&
                 ExternalCommands.SequenceEqual(other.ExternalCommands) &&
+                FileSettings.SequenceEqual(other.FileSettings) &&
                 RecentFileSets.SequenceEqual(other.RecentFileSets) &&
                 CellWidth == other.cellWidth &&
                 AlternatingColorStrings.SequenceEqual(other.AlternatingColorStrings) &&

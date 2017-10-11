@@ -319,6 +319,8 @@ namespace ExcelMerge.GUI.Views
             (dataGrid.Model as DiffGridModel).FreezeColumn(target.CurrentCell.Column);
 
             dataGrid.NotifyColumnArrangeChanged();
+
+            DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
         }
 
         public void OnFrozenColumnReset(FastGridControl target, IUnityContainer container)
@@ -327,6 +329,8 @@ namespace ExcelMerge.GUI.Views
             (dataGrid.Model as DiffGridModel).UnfreezeColumn();
 
             dataGrid.NotifyColumnArrangeChanged();
+
+            DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
         }
 
         public void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e)

@@ -137,8 +137,12 @@
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\DiffCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Settings\FileMatchType.cs" />
+    <Compile Include="Settings\FileSetting.cs" />
     <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
+    <Compile Include="ViewModels\FileSettingEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\FileSettingsWindowViewModel.cs" />
     <Compile Include="Views\EventDispathcer.cs" />
     <Compile Include="Views\EventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />
@@ -181,6 +185,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FileSettingEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FileSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,6 +203,12 @@
     </Compile>
     <Compile Include="Views\DiffExtractionSettingWindow.xaml.cs">
       <DependentUpon>DiffExtractionSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileSettingEditorWindow.xaml.cs">
+      <DependentUpon>FileSettingEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileSettingsWindow.xaml.cs">
+      <DependentUpon>FileSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

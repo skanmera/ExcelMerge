@@ -356,8 +356,17 @@ namespace ExcelMerge.GUI.Views
 
             if (ShowOnlyDiffRadioButton.IsChecked.Value)
             {
-                (SrcDataGrid.Model as DiffGridModel).HideEqualRows();
-                (DstDataGrid.Model as DiffGridModel).HideEqualRows();
+                srcModel.HideEqualRows();
+                srcModel.HideEqualRows();
+            }
+
+            var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
+            if (setting != null)
+            {
+                srcModel.SetHeader(setting.HeaderIndex);
+                dstModel.SetHeader(setting.HeaderIndex);
+                srcModel.FreezeColumn(setting.FrozenColumnCount - 1);
+                dstModel.FreezeColumn(setting.FrozenColumnCount - 1);
             }
 
             DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
@@ -368,6 +377,34 @@ namespace ExcelMerge.GUI.Views
 
             SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
             DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+        }
+
+        private Settings.FileSetting FindFilseSetting(string fileName)
+        {
+            foreach (var setting in App.Instance.Setting.FileSettings)
+            {
+                if (setting.UseRegex)
+                {
+                    var regex = new System.Text.RegularExpressions.Regex(setting.Name);
+                    if (regex.IsMatch(fileName))
+                        return setting;
+                }
+                else
+                {
+                    if (setting.ExactMatch)
+                    {
+                        if (setting.Name == fileName)
+                            return setting;
+                    }
+                    else
+                    {
+                        if (fileName.Contains(setting.Name))
+                            return setting;
+                    }
+                }
+            }
+
+            return null;
         }
 
         private void FreezeColumn_Click(object sender, RoutedEventArgs e)

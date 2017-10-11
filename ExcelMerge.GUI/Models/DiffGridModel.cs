@@ -401,7 +401,7 @@ namespace ExcelMerge.GUI.Models
         {
             UnfreezeColumn();
 
-            if (column.HasValue)
+            if (column.HasValue && column.Value >= 0)
                 SetColumnArrange(new HashSet<int>(), new HashSet<int>(Enumerable.Range(0, column.Value + 1)));
         }
 

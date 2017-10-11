@@ -324,4 +324,22 @@
   <data name="Word_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>Edit File Setting</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="Word_FrozenColumnCount" xml:space="preserve">
+    <value>Frozen Column Count</value>
+  </data>
+  <data name="Word_HeaderIndex" xml:space="preserve">
+    <value>Header Index</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>Match Type</value>
+  </data>
 </root>
