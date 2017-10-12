@@ -223,45 +223,71 @@ namespace ExcelMerge.GUI.Models
             return GetCell(view, row, column, false);
         }
 
+        private FastGridCellAddress GetVisualCellAddress(FastGridCellAddress realCellAddress)
+        {
+            if (realCellAddress.IsEmpty)
+                return FastGridCellAddress.Empty;
+
+            var swapped = rowIndexMap.ToDictionary(i => i.Value, i => i.Key);
+            int visualRow;
+            if (swapped.TryGetValue(realCellAddress.Row.Value, out visualRow))
+                return new FastGridCellAddress(visualRow, realCellAddress.Column.Value, realCellAddress.IsGridHeader);
+
+            return rowIndexMap.Any() ? FastGridCellAddress.Empty : realCellAddress;
+        }
+
+        private FastGridCellAddress GetRealCellAddress(FastGridCellAddress visualCellAddress)
+        {
+            if (visualCellAddress.IsEmpty)
+                return FastGridCellAddress.Empty;
+
+            int realRow;
+            if (rowIndexMap.TryGetValue(visualCellAddress.Row.Value, out realRow))
+                return new FastGridCellAddress(realRow, visualCellAddress.Column.Value, visualCellAddress.IsGridHeader);
+
+            return rowIndexMap.Any() ? FastGridCellAddress.Empty : visualCellAddress;
+        }
+
         public FastGridCellAddress GetNextModifiedCell(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row + 1, (row, cells) =>
             {
-                var next = row == current.Row
-                ? cells.Skip(current.Column.Value + 1).FirstOrDefault(c => c.Value.Status != ExcelCellStatus.None)
+                var next = row == realAddress.Row
+                ? cells.Skip(realAddress.Column.Value + 1).FirstOrDefault(c => c.Value.Status != ExcelCellStatus.None)
                 : cells.FirstOrDefault(c => c.Value.Status != ExcelCellStatus.None);
 
-                if (next.Value != null)
-                    return new FastGridCellAddress(row, next.Key);
+                var address = next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
 
-                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+                return GetVisualCellAddress(address);
             });
         }
 
         public FastGridCellAddress GetPreviousModifiedCell(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row - 1, (row, cells) =>
             {
-                var next = row == current.Row
-                    ? cells.Take(current.Column.Value).LastOrDefault(c => c.Value.Status != ExcelCellStatus.None)
+                var next = row == realAddress.Row
+                    ? cells.Take(realAddress.Column.Value).LastOrDefault(c => c.Value.Status != ExcelCellStatus.None)
                     : cells.LastOrDefault(c => c.Value.Status != ExcelCellStatus.None);
 
-                if (next.Value != null)
-                    return new FastGridCellAddress(row, next.Key);
+                var address = next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
 
-                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+                return GetVisualCellAddress(address);
             });
         }
 
         public FastGridCellAddress GetNextModifiedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row + 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.Any(c => c.Value.Status != ExcelCellStatus.None))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -269,13 +295,14 @@ namespace ExcelMerge.GUI.Models
 
         public FastGridCellAddress GetPreviousModifiedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row - 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.Any(c => c.Value.Status != ExcelCellStatus.None))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -283,13 +310,14 @@ namespace ExcelMerge.GUI.Models
 
         public FastGridCellAddress GetNextAddedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row + 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.All(c => c.Value.Status == ExcelCellStatus.Added))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -297,13 +325,14 @@ namespace ExcelMerge.GUI.Models
 
         public FastGridCellAddress GetPreviousAddedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row - 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.All(c => c.Value.Status == ExcelCellStatus.Added))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -311,13 +340,14 @@ namespace ExcelMerge.GUI.Models
 
         public FastGridCellAddress GetNextRemovedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row + 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.All(c => c.Value.Status == ExcelCellStatus.Removed))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -325,13 +355,14 @@ namespace ExcelMerge.GUI.Models
 
         public FastGridCellAddress GetPreviousRemovedRow(FastGridCellAddress current)
         {
-            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row - 1, (row, cells) =>
             {
-                if (row == current.Row)
+                if (row == realAddress.Row)
                     return FastGridCellAddress.Empty;
 
                 if (cells.All(c => c.Value.Status == ExcelCellStatus.Removed))
-                    return new FastGridCellAddress(row, current.Column);
+                    return GetVisualCellAddress(new FastGridCellAddress(row, realAddress.Column));
 
                 return FastGridCellAddress.Empty;
             });
@@ -355,33 +386,39 @@ namespace ExcelMerge.GUI.Models
             return srcValue.Contains(target) || dstValue.Contains(target);
         }
 
-        public FastGridCellAddress GetNextMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex)
+        public FastGridCellAddress GetNextMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex, bool onlyDiff)
         {
-            return GetNextCell(current, (row) => row + 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row + 1, (row, cells) =>
             {
-                var next = row == current.Row
-                ? cells.Skip(current.Column.Value + 1).FirstOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
+                if (onlyDiff && GetVisualCellAddress(realAddress).IsEmpty)
+                    return FastGridCellAddress.Empty;
+
+                var next = row == realAddress.Row
+                ? cells.Skip(realAddress.Column.Value + 1).FirstOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
                 : cells.FirstOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex));
 
-                if (next.Value != null)
-                    return new FastGridCellAddress(row, next.Key);
+                var address = next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
 
-                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+                return GetVisualCellAddress(address);
             });
         }
 
-        public FastGridCellAddress GetPreviousMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex)
+        public FastGridCellAddress GetPreviousMatchCell(FastGridCellAddress current, string text, bool exactMatch, bool caseSensitive, bool useRegex, bool onlyDiff)
         {
-            return GetNextCell(current, (row) => row - 1, (row, cells) =>
+            var realAddress = GetRealCellAddress(current);
+            return GetNextCell(realAddress, (row) => row - 1, (row, cells) =>
             {
-                var next = row == current.Row
-                ? cells.Take(current.Column.Value).LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
-                : cells.LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex));
+                if (onlyDiff && GetVisualCellAddress(realAddress).IsEmpty)
+                    return FastGridCellAddress.Empty;
 
-                if (next.Value != null)
-                    return new FastGridCellAddress(row, next.Key);
+                var next = row == realAddress.Row
+                    ? cells.Take(realAddress.Column.Value).LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex))
+                    : cells.LastOrDefault(c => IsMatch(c.Value, text, exactMatch, caseSensitive, useRegex));
 
-                return next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+                var address = next.Value != null ? new FastGridCellAddress(row, next.Key) : FastGridCellAddress.Empty;
+
+                return GetVisualCellAddress(address);
             });
         }
 

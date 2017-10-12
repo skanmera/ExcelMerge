@@ -682,7 +682,7 @@ namespace ExcelMerge.GUI.Views
 
             var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousMatchCell(
                 SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
-                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value);
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value, ShowOnlyDiffRadioButton.IsChecked.Value);
             if (nextCell.IsEmpty)
                 return;
 
@@ -712,7 +712,7 @@ namespace ExcelMerge.GUI.Views
 
             var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextMatchCell(
                 SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
-                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value);
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value, ShowOnlyDiffRadioButton.IsChecked.Value);
             if (nextCell.IsEmpty)
                 return;
 
