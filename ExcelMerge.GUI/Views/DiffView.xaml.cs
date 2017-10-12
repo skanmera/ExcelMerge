@@ -57,8 +57,10 @@ namespace ExcelMerge.GUI.Views
             App.Instance.OnSettingUpdated += () =>
             {
                 SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
                 DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
                 DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                DstDataGrid.CellFontName = App.Instance.Setting.FontName;
                 DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
             };
 
@@ -379,6 +381,8 @@ namespace ExcelMerge.GUI.Views
 
             SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
             DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
+            DstDataGrid.CellFontName = App.Instance.Setting.FontName;
         }
 
         private Settings.FileSetting FindFilseSetting(string fileName)

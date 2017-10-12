@@ -180,6 +180,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref searchHistory, value); }
         }
 
+        private string fontName;
+        public string FontName
+        {
+            get { return fontName; }
+            set { SetProperty(ref fontName, value); }
+        }
+
         public static ApplicationSetting Load()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(Location));
@@ -271,6 +278,12 @@ namespace ExcelMerge.GUI.Settings
                 changed |= fs.Ensure();
             }
 
+            if (string.IsNullOrEmpty(FontName))
+            {
+                FontName = "Arial";
+                changed |= true;
+            }
+
             return changed;
         }
 
@@ -304,6 +317,7 @@ namespace ExcelMerge.GUI.Settings
             clone.ModifiedRowColorString = ModifiedRowColorString;
             clone.ColorModifiedRow = ColorModifiedRow;
             clone.SearchHistory = new ObservableCollection<string>(SearchHistory);
+            clone.FontName = FontName;
 
             return clone;
         }
@@ -327,7 +341,8 @@ namespace ExcelMerge.GUI.Settings
                 ModifiedColorString.Equals(other.ModifiedColorString) &&
                 ModifiedRowColorString.Equals(other.ModifiedRowColorString) &&
                 ColorModifiedRow.Equals(other.ColorModifiedRow) &&
-                SearchHistory.Equals(other.SearchHistory);
+                SearchHistory.Equals(other.SearchHistory) &&
+                FontName.Equals(other.FontName);
         }
     }
 }

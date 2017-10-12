@@ -342,6 +342,9 @@
   <data name="Word_MatchType" xml:space="preserve">
     <value>Match Type</value>
   </data>
+  <data name="Word_Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
   <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
     <value>Max Row Header Width</value>
   </data>

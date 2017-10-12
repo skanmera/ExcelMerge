@@ -204,6 +204,11 @@
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="26" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
 
+                    <Label Content="{x:Static props:Resources.Word_Font}" Grid.Column="0" Grid.Row="26" VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" Grid.Row="26" ItemsSource="{Binding FontNames}" SelectedItem="{Binding Setting.FontName}"/>
+
+                    <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="27" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
+
                 </Grid>
             </Grid>
         </ScrollViewer>

@@ -35,6 +35,11 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref canRemoveAlternationColor, value); }
         }
 
+        public List<string> FontNames
+        {
+            get { return System.Drawing.FontFamily.Families.Select(f => f.Name).ToList(); }
+        }
+
         public DelegateCommand<Window> DoneCommand { get; private set; }
         public DelegateCommand ResetCommand { get; private set; }
         public DelegateCommand ApplyCommand { get; private set; }

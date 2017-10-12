@@ -610,6 +610,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Font に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Font {
+            get {
+                return ResourceManager.GetString("Word_Font", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Japanese に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Japanese {
