@@ -107,5 +107,10 @@ namespace ExcelMerge.GUI.Settings
         {
             return new ExternalCommand(Name, Command, Args);
         }
+
+        public bool Ensure()
+        {
+            return false;
+        }
     }
 }

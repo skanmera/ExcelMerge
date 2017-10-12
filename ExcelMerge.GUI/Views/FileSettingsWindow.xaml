@@ -26,11 +26,48 @@
                   ItemsSource="{Binding FileSettings}"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_Name}" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_ColumnHeaderIndex}" Binding="{Binding ColumnHeaderIndex}"  Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_RowHeaderIndex}" Binding="{Binding RowHeaderIndex}"  Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_ExactMatch}" Binding="{Binding ExactMatch}"  Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_Regex}" Binding="{Binding UseRegex}"  Width="*"/>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_Name}" Binding="{Binding Name}" Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_ColumnHeaderIndex}" Binding="{Binding ColumnHeaderIndex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_RowHeaderIndex}" Binding="{Binding RowHeaderIndex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_MaxRowHeaderWidth}" Binding="{Binding MaxRowHeaderWidth}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_ExactMatch}" Binding="{Binding ExactMatch}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_Regex}" Binding="{Binding UseRegex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

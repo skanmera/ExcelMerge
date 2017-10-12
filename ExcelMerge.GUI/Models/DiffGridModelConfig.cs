@@ -7,6 +7,6 @@ namespace ExcelMerge.GUI.Models
     public class DiffGridModelConfig
     {
         public int ColumnHeaderIndex { get; set; }
-        public int RowHeaderIndex { get; set; }
+        public int RowHeaderIndex { get; set; } = -1;
     }
 }

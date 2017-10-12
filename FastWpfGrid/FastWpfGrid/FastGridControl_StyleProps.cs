@@ -26,6 +26,7 @@ namespace FastWpfGrid
         private int _blockPadding = 2;
         private int _columnResizeTheresold = 2;
         private int? _minColumnWidthOverride;
+        private int? _maxRowHeaderWidth = null;
 
         private Color[] _alternatingColors = new Color[]
             {
@@ -66,6 +67,20 @@ namespace FastWpfGrid
                 _minColumnWidthOverride = value;
                 RecalculateDefaultCellSize();
                 InvalidateAll();                
+            }
+        }
+
+        public int? MaxRowHeaderWidth
+        {
+            get { return _maxRowHeaderWidth; }
+            set
+            {
+                if (_maxRowHeaderWidth != value)
+                {
+                    _maxRowHeaderWidth = value;
+                    RecalculateDefaultCellSize();
+                    InvalidateAll();
+                }
             }
         }
 

@@ -637,6 +637,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Max Row Header Width に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_MaxRowHeaderWidth {
+            get {
+                return ResourceManager.GetString("Word_MaxRowHeaderWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Name に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Name {

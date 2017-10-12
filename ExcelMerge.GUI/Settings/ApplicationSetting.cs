@@ -261,12 +261,22 @@ namespace ExcelMerge.GUI.Settings
                 changed |= true;
             }
 
+            foreach (var ec in ExternalCommands)
+            {
+                changed |= ec.Ensure();
+            }
+
+            foreach (var fs in FileSettings)
+            {
+                changed |= fs.Ensure();
+            }
+
             return changed;
         }
 
         private void Serialize()
         {
-            var serializer = new Serializer();
+            var serializer = new SerializerBuilder().EmitDefaults().Build();
             var yml = serializer.Serialize(this);
             using (var sr = new StreamWriter(Location))
             {

@@ -32,6 +32,7 @@
             <RowDefinition Height="16*"/>
             <RowDefinition Height="16*"/>
             <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static props:Resources.Word_Name}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
@@ -47,16 +48,22 @@
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static props:Resources.Word_RowHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
                             Value="{Binding FileSetting.RowHeaderIndex, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0"
+                            Minimum="-1"
                             />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static props:Resources.Word_ExactMatch}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding FileSetting.ExactMatch}" Margin="3" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static props:Resources.Word_MaxRowHeaderWidth}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
+                            Value="{Binding FileSetting.MaxRowHeaderWidth, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="30"
+                            />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static props:Resources.Word_Regex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding FileSetting.UseRegex}" Margin="3" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static props:Resources.Word_ExactMatch}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding FileSetting.ExactMatch}" Margin="3" VerticalAlignment="Center"/>
 
-        <Grid Grid.Column="1" Grid.Row="5">
+        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static props:Resources.Word_Regex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding FileSetting.UseRegex}" Margin="3" VerticalAlignment="Center"/>
+
+        <Grid Grid.Column="1" Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="33*"/>
                 <ColumnDefinition Width="33*"/>

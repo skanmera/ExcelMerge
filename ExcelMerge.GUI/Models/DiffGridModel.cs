@@ -83,6 +83,9 @@ namespace ExcelMerge.GUI.Models
 
         public override string GetRowHeaderText(int row)
         {
+            if (RowHeaderIndex < 0)
+                return base.GetRowHeaderText(row);
+
             ExcelCellDiff cellDiff;
             if (TryGetCellDiff(row, RowHeaderIndex, out cellDiff))
                 return GetCellText(cellDiff);

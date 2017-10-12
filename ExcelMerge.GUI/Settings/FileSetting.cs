@@ -19,7 +19,7 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref columnHeaderIndex, value); Update(); }
         }
 
-        private int rowHeaderIndex;
+        private int rowHeaderIndex = -1;
         public int RowHeaderIndex
         {
             get { return rowHeaderIndex; }
@@ -40,6 +40,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref useRegex, value); Update(); }
         }
 
+        private int maxRowHeaderWidth = 30;
+        public int MaxRowHeaderWidth
+        {
+            get { return maxRowHeaderWidth; }
+            set { SetProperty(ref maxRowHeaderWidth, value); Update(); }
+        }
+
         private bool isValid;
         [YamlDotNet.Serialization.YamlIgnore]
         public bool IsValid
@@ -55,7 +62,20 @@ namespace ExcelMerge.GUI.Settings
                 ColumnHeaderIndex.Equals(other.ColumnHeaderIndex) &&
                 RowHeaderIndex.Equals(other.RowHeaderIndex) &&
                 ExactMatch.Equals(other.ExactMatch) &&
-                UseRegex.Equals(other.UseRegex);
+                UseRegex.Equals(other.UseRegex) &&
+                MaxRowHeaderWidth.Equals(other.MaxRowHeaderWidth);
+        }
+
+        public bool Ensure()
+        {
+            var changed = false;
+            if (MaxRowHeaderWidth < 30)
+            {
+                MaxRowHeaderWidth = 30;
+                changed |= true;
+            }
+
+            return changed;
         }
 
         public FileSetting Clone()
@@ -67,6 +87,7 @@ namespace ExcelMerge.GUI.Settings
                 RowHeaderIndex = RowHeaderIndex,
                 ExactMatch = ExactMatch,
                 UseRegex = UseRegex,
+                MaxRowHeaderWidth = MaxRowHeaderWidth,
             };
         }
 

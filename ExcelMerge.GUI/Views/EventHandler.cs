@@ -327,7 +327,7 @@ namespace ExcelMerge.GUI.Views
         public void OnRowHeaderReset(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetRowHeader(0);
+            (dataGrid.Model as DiffGridModel).SetRowHeader(-1);
 
             dataGrid.NotifyColumnArrangeChanged();
             DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);

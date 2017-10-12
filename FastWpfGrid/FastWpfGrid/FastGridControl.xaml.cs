@@ -177,6 +177,9 @@ namespace FastWpfGrid
                 }
 
                 if (width + 2 * CellPaddingHorizontal > HeaderWidth) HeaderWidth = width + 2 * CellPaddingHorizontal;
+
+                if (MaxRowHeaderWidth.HasValue && HeaderWidth > MaxRowHeaderWidth)
+                    HeaderWidth = MaxRowHeaderWidth.Value;
             }
         }
 

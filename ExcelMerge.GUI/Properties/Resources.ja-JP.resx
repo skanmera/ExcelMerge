@@ -342,4 +342,7 @@
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
     <value>行ヘッダにセット</value>
   </data>
+  <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
+    <value>列ヘッダの最大幅</value>
+  </data>
 </root>
