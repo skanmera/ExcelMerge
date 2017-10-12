@@ -108,6 +108,8 @@ namespace ExcelMerge.GUI.ViewModels
             var color = parameters[1].ToString();
 
             Setting.AlternatingColorStrings[index] = color;
+
+            UpdateDirtyFlag();
         }
 
         private void RemoveAlternationColor(int? index)
