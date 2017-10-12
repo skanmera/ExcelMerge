@@ -9,7 +9,7 @@ namespace SKCore.Test.Collection
     public class TimesTest
     {
         [TestMethod]
-        public void TimesTestWithPositiveCount()
+        public void TimesTestGivenPositiveCount()
         {
             var result = new List<int>();
 
@@ -19,7 +19,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void TimesTestWithPositiveStartNum()
+        public void TimesTestGivenPositiveStartNum()
         {
             var result = new List<int>();
 
@@ -29,7 +29,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void TimesTestWithNegativeStartNum()
+        public void TimesTestGivenNegativeStartNum()
         {
             var result = new List<int>();
 
@@ -39,7 +39,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void TimesTestWithNegativeCount()
+        public void TimesTestGivenNegativeCount()
         {
             var result = new List<int>();
 
@@ -49,7 +49,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void TimesTestWithZero()
+        public void TimesTestGivenZero()
         {
             var result = new List<int>();
 

@@ -26,7 +26,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void MakePairsTestWithEmpty()
+        public void MakePairsTestGivenEmpty()
         {
             var source = new List<int>();
             var result = source.MakePairs().ToList();

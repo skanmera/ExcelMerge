@@ -9,7 +9,7 @@ namespace SKCore.Test.Collection
     public class SplitByTest
     {
         [TestMethod]
-        public void SplitBySizeWith3()
+        public void SplitBySizeGiven3()
         {
             var source = new List<int> { 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 6, 6 };
             var result = source.SplitBySize(3);
@@ -25,7 +25,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void SplitBySizeWithEmpty()
+        public void SplitBySizeGivenEmpty()
         {
             var source = new List<int>();
             var result = source.SplitBySize(3);
@@ -51,7 +51,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void SplitByEqualityWithMaxSize()
+        public void SplitByEqualityGivenMaxSize()
         {
             var source = new List<int> { 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 6, 6 };
             var result = source.SplitByEquality(3);
@@ -69,7 +69,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void SplitByEqualityWithEmpty()
+        public void SplitByEqualityGivenEmpty()
         {
             var source = new List<int>();
             var result = source.SplitByEquality();

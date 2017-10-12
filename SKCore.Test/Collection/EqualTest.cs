@@ -26,7 +26,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void NestedSequenceEqualTestWithEmpty()
+        public void NestedSequenceEqualTestGivenEmpty()
         {
             var seq1 = new List<List<int>>();
             var seq2 = new List<List<int>>();
@@ -35,7 +35,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void NestedSequenceEqualTestWithNotEqual()
+        public void NestedSequenceEqualTestGivenNotEqual()
         {
             var seq1 = new List<List<int>>();
             seq1.Add(new List<int> { 0, 1, 2 });
@@ -51,7 +51,7 @@ namespace SKCore.Test.Collection
         }
 
         [TestMethod]
-        public void NestedSequenceEqualTestWithReference()
+        public void NestedSequenceEqualTestGivenReference()
         {
             var seq1 = new List<List<object>>();
             var obj = new object();
