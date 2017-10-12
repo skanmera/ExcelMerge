@@ -353,6 +353,11 @@ namespace ExcelMerge.GUI.Views
 
             (DataContext as ViewModels.DiffViewModel).UpdateDiffSummary(diff.CreateSummary());
 
+            SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
+            DstDataGrid.CellFontName = App.Instance.Setting.FontName;
+
             SrcDataGrid.Model = srcModel;
             DstDataGrid.Model = dstModel;
 
@@ -378,11 +383,6 @@ namespace ExcelMerge.GUI.Views
 
             if (!App.Instance.KeepFileHistory)
                 App.Instance.UpdateRecentFiles(SrcPathTextBox.Text, DstPathTextBox.Text);
-
-            SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
-            DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
-            SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
-            DstDataGrid.CellFontName = App.Instance.Setting.FontName;
         }
 
         private Settings.FileSetting FindFilseSetting(string fileName)
