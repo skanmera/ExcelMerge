@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collection\Equal.cs" />
+    <Compile Include="Collection\MakePairs.cs" />
     <Compile Include="Collection\Times.cs" />
     <Compile Include="Collection\SplitBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
