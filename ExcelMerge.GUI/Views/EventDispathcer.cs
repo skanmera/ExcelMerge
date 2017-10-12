@@ -32,24 +32,24 @@ namespace ExcelMerge.GUI.Views
             Listeners.ForEach(l => l.OnSelectedCellChanged(target, container));
         }
 
-        public static void DispatchHeaderChangeEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchColumnHeaderChangeEvent(FastGridControl target, IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnHeaderChanged(target, container));
+            Listeners.ForEach(l => l.OnColumnHeaderChanged(target, container));
         }
 
-        public static void DispatchHeaderResetEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchColumnHeaderResetEvent(FastGridControl target, IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnHeaderReset(target, container));
+            Listeners.ForEach(l => l.OnColumnHeaderReset(target, container));
         }
 
-        public static void DispatchFrozenColumnChangeEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchRowHeaderChagneEvent(FastGridControl target, IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnFrozenColumnChanged(target, container));
+            Listeners.ForEach(l => l.OnRowHeaderChanged(target, container));
         }
 
-        public static void DispatchFrozenColumnResetEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchRowHeaderResetEvent(FastGridControl target, IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnFrozenColumnReset(target, container));
+            Listeners.ForEach(l => l.OnRowHeaderReset(target, container));
         }
     }
 

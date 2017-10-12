@@ -223,19 +223,7 @@
     <value>ツール</value>
   </data>
   <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
-    <value>この行をヘッダとして差分を抽出する</value>
-  </data>
-  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
-    <value>列を固定</value>
-  </data>
-  <data name="ContextMenu_ResetHeader" xml:space="preserve">
-    <value>ヘッダを解除</value>
-  </data>
-  <data name="ContextMenu_SetHeader" xml:space="preserve">
-    <value>ヘッダにセット</value>
-  </data>
-  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
-    <value>列の固定を解除</value>
+    <value>この行を列ヘッダとして差分を抽出する</value>
   </data>
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>表示形式</value>
@@ -273,11 +261,11 @@
   <data name="Label_ColorModifiedRow" xml:space="preserve">
     <value>変更がある行を色付けする</value>
   </data>
-  <data name="Label_FrozenColumnColor" xml:space="preserve">
-    <value>固定列の色</value>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>行ヘッダの色</value>
   </data>
-  <data name="Label_HeaderColor" xml:space="preserve">
-    <value>ヘッダーの色</value>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>列ヘッダの色</value>
   </data>
   <data name="Label_ModifiedColor" xml:space="preserve">
     <value>変更の色</value>
@@ -333,13 +321,25 @@
   <data name="Title_FileSettingsWindow" xml:space="preserve">
     <value>ファイル設定</value>
   </data>
-  <data name="Word_FrozenColumnCount" xml:space="preserve">
-    <value>固定列数</value>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>行ヘッダインデックス</value>
   </data>
-  <data name="Word_HeaderIndex" xml:space="preserve">
-    <value>ヘッダインデックス</value>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>列ヘッダインデックス</value>
   </data>
   <data name="Word_MatchType" xml:space="preserve">
     <value>マッチタイプ</value>
+  </data>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>列ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>行ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>列ヘッダにセット</value>
+  </data>
+  <data name="ContextMenu_SetRowHeader" xml:space="preserve">
+    <value>行ヘッダにセット</value>
   </data>
 </root>

@@ -59,28 +59,28 @@ namespace ExcelMerge.GUI.Settings
             get { return AlternatingColorStrings.Select(c => (Color)ColorConverter.ConvertFromString(c)).ToArray(); }
         }
 
-        private string headerColorString;
-        public string HeaderColorString
+        private string columnHeaderColorString;
+        public string ColumnHeaderColorString
         {
-            get { return headerColorString; }
-            set { SetProperty(ref headerColorString, value); }
+            get { return columnHeaderColorString; }
+            set { SetProperty(ref columnHeaderColorString, value); }
         }
         [YamlIgnore]
-        public Color HeaderColor
+        public Color ColumnHeaderColor
         {
-            get { return (Color)ColorConverter.ConvertFromString(HeaderColorString); }
+            get { return (Color)ColorConverter.ConvertFromString(ColumnHeaderColorString); }
         }
 
-        private string frozenColumnColorString;
-        public string FrozenColumnColorString
+        private string rowHeaderColorString;
+        public string RowHeaderColorString
         {
-            get { return frozenColumnColorString; }
-            set { SetProperty(ref frozenColumnColorString, value); }
+            get { return rowHeaderColorString; }
+            set { SetProperty(ref rowHeaderColorString, value); }
         }
         [YamlIgnore]
-        public Color FrozenColumnColor
+        public Color RowHeaderColor
         {
-            get { return (Color)ColorConverter.ConvertFromString(FrozenColumnColorString); }
+            get { return (Color)ColorConverter.ConvertFromString(RowHeaderColorString); }
         }
 
         private string addedColorString;
@@ -225,15 +225,15 @@ namespace ExcelMerge.GUI.Settings
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(HeaderColorString))
+            if (string.IsNullOrEmpty(ColumnHeaderColorString))
             {
-                HeaderColorString = EMColor.LightBlue.ToString();
+                ColumnHeaderColorString = EMColor.LightBlue.ToString();
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(FrozenColumnColorString))
+            if (string.IsNullOrEmpty(RowHeaderColorString))
             {
-                FrozenColumnColorString = EMColor.LightBlue.ToString();
+                RowHeaderColorString = EMColor.LightBlue.ToString();
                 changed |= true;
             }
 
@@ -286,8 +286,8 @@ namespace ExcelMerge.GUI.Settings
             clone.RecentFileSets = RecentFileSets.ToList();
             clone.CellWidth = CellWidth;
             clone.AlternatingColorStrings = new ObservableCollection<string>(AlternatingColorStrings);
-            clone.HeaderColorString = HeaderColorString;
-            clone.FrozenColumnColorString = FrozenColumnColorString;
+            clone.ColumnHeaderColorString = ColumnHeaderColorString;
+            clone.RowHeaderColorString = RowHeaderColorString;
             clone.AddedColorString = AddedColorString;
             clone.RemovedColorString = RemovedColorString;
             clone.modifiedColorString = ModifiedColorString;
@@ -310,8 +310,8 @@ namespace ExcelMerge.GUI.Settings
                 RecentFileSets.SequenceEqual(other.RecentFileSets) &&
                 CellWidth == other.cellWidth &&
                 AlternatingColorStrings.SequenceEqual(other.AlternatingColorStrings) &&
-                HeaderColorString.Equals(other.HeaderColorString) &&
-                FrozenColumnColorString.Equals(other.FrozenColumnColorString) &&
+                ColumnHeaderColorString.Equals(other.ColumnHeaderColorString) &&
+                RowHeaderColorString.Equals(other.RowHeaderColorString) &&
                 AddedColorString.Equals(other.AddedColorString) &&
                 RemovedColorString.Equals(other.RemovedColorString) &&
                 ModifiedColorString.Equals(other.ModifiedColorString) &&

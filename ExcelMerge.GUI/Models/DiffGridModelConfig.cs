@@ -6,7 +6,7 @@ namespace ExcelMerge.GUI.Models
 {
     public class DiffGridModelConfig
     {
-        public int HeaderIndex { get; set; }
-        public int FrozenColumnIndex { get; set; }
+        public int ColumnHeaderIndex { get; set; }
+        public int RowHeaderIndex { get; set; }
     }
 }

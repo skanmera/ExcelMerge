@@ -12,18 +12,18 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref name, value); Update(); }
         }
 
-        private int headerIndex;
-        public int HeaderIndex
+        private int columnHeaderIndex;
+        public int ColumnHeaderIndex
         {
-            get { return headerIndex; }
-            set { SetProperty(ref headerIndex, value); Update(); }
+            get { return columnHeaderIndex; }
+            set { SetProperty(ref columnHeaderIndex, value); Update(); }
         }
 
-        private int frozenColumnCount;
-        public int FrozenColumnCount
+        private int rowHeaderIndex;
+        public int RowHeaderIndex
         {
-            get { return frozenColumnCount; }
-            set { SetProperty(ref frozenColumnCount, value); Update(); }
+            get { return rowHeaderIndex; }
+            set { SetProperty(ref rowHeaderIndex, value); Update(); }
         }
 
         private bool exactMatch;
@@ -52,8 +52,8 @@ namespace ExcelMerge.GUI.Settings
         {
             return
                 Name.Equals(other.name) &&
-                HeaderIndex.Equals(other.HeaderIndex) &&
-                FrozenColumnCount.Equals(other.FrozenColumnCount) &&
+                ColumnHeaderIndex.Equals(other.ColumnHeaderIndex) &&
+                RowHeaderIndex.Equals(other.RowHeaderIndex) &&
                 ExactMatch.Equals(other.ExactMatch) &&
                 UseRegex.Equals(other.UseRegex);
         }
@@ -63,8 +63,8 @@ namespace ExcelMerge.GUI.Settings
             return new FileSetting()
             {
                 Name = Name,
-                HeaderIndex = HeaderIndex,
-                FrozenColumnCount = FrozenColumnCount,
+                ColumnHeaderIndex = ColumnHeaderIndex,
+                RowHeaderIndex = RowHeaderIndex,
                 ExactMatch = ExactMatch,
                 UseRegex = UseRegex,
             };

@@ -138,22 +138,22 @@
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
 
-                    <Label Content="{x:Static props:Resources.Label_HeaderColor}" Grid.Column="0" Grid.Row="13" VerticalAlignment="Center" />
+                    <Label Content="{x:Static props:Resources.Label_ColumnHeaderColor}" Grid.Column="0" Grid.Row="13" VerticalAlignment="Center" />
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="13">
-                        <TextBox Text="{Binding Path=SelectedColor, ElementName=HeaderColorPicker, Mode=OneWay}" 
+                        <TextBox Text="{Binding Path=SelectedColor, ElementName=ColumnHeaderColorPicker, Mode=OneWay}" 
                              IsReadOnly="True" Width="100" Height="25" Margin="3" />
-                        <xctk:ColorPicker x:Name="HeaderColorPicker" Width="250" Height="25" Margin="3"
-                                      SelectedColor="{Binding Setting.HeaderColorString}"/>
+                        <xctk:ColorPicker x:Name="ColumnHeaderColorPicker" Width="250" Height="25" Margin="3"
+                                      SelectedColor="{Binding Setting.ColumnHeaderColorString}"/>
                     </StackPanel>
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>
 
-                    <Label Content="{x:Static props:Resources.Label_FrozenColumnColor}" Grid.Column="0" Grid.Row="15" VerticalAlignment="Center" />
+                    <Label Content="{x:Static props:Resources.Label_RowHeaderColor}" Grid.Column="0" Grid.Row="15" VerticalAlignment="Center" />
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="15">
-                        <TextBox Text="{Binding Path=SelectedColor, ElementName=FrozenColumnColorPicker, Mode=OneWay}" 
+                        <TextBox Text="{Binding Path=SelectedColor, ElementName=RowHeaderColorPicker, Mode=OneWay}" 
                              IsReadOnly="True" Width="100" Height="25" Margin="3" />
-                        <xctk:ColorPicker x:Name="FrozenColumnColorPicker" Width="250" Height="25" Margin="3"
-                                      SelectedColor="{Binding Setting.FrozenColumnColorString}"/>
+                        <xctk:ColorPicker x:Name="RowHeaderColorPicker" Width="250" Height="25" Margin="3"
+                                      SelectedColor="{Binding Setting.RowHeaderColorString}"/>
                     </StackPanel>
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="16" BorderThickness="0.2" BorderBrush="DarkGray" Margin="3"/>

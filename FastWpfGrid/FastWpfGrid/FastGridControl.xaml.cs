@@ -169,7 +169,13 @@ namespace FastWpfGrid
             if (IsTransposed) CountTransposedHeaderWidth();
             if (Model != null)
             {
-                int width = GetCellContentWidth(Model.GetGridHeader(this));
+                int width = HeaderWidth;
+                for (int i = 0, count = Model.RowCount; i < count; i++)
+                {
+                    var w = GetCellContentWidth(Model.GetRowHeader(this, i));
+                    width = Math.Max(width, w);
+                }
+
                 if (width + 2 * CellPaddingHorizontal > HeaderWidth) HeaderWidth = width + 2 * CellPaddingHorizontal;
             }
         }

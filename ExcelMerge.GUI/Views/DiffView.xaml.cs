@@ -363,10 +363,10 @@ namespace ExcelMerge.GUI.Views
             var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
             if (setting != null)
             {
-                srcModel.SetHeader(setting.HeaderIndex);
-                dstModel.SetHeader(setting.HeaderIndex);
-                srcModel.FreezeColumn(setting.FrozenColumnCount - 1);
-                dstModel.FreezeColumn(setting.FrozenColumnCount - 1);
+                srcModel.SetColumnHeader(setting.ColumnHeaderIndex);
+                dstModel.SetColumnHeader(setting.ColumnHeaderIndex);
+                srcModel.SetRowHeader(setting.RowHeaderIndex);
+                dstModel.SetRowHeader(setting.RowHeaderIndex);
             }
 
             DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
@@ -407,47 +407,47 @@ namespace ExcelMerge.GUI.Views
             return null;
         }
 
-        private void FreezeColumn_Click(object sender, RoutedEventArgs e)
+        private void SetRowHeader_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchFrozenColumnChangeEvent(dataGrid, container);
+                    DataGridEventDispatcher.DispatchRowHeaderChagneEvent(dataGrid, container);
             }
         }
 
-        private void UnfreezeColumn_Click(object sender, RoutedEventArgs e)
+        private void ResetRowHeader_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchFrozenColumnResetEvent(sender as FastGridControl, container);
+                    DataGridEventDispatcher.DispatchRowHeaderResetEvent(sender as FastGridControl, container);
             }
         }
 
-        private void SetHeader_Click(object sender, RoutedEventArgs e)
+        private void SetColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchHeaderChangeEvent(dataGrid, container);
+                    DataGridEventDispatcher.DispatchColumnHeaderChangeEvent(dataGrid, container);
             }
         }
 
-        private void ResetHeader_Click(object sender, RoutedEventArgs e)
+        private void ResetColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchHeaderResetEvent(sender as FastGridControl, container);
+                    DataGridEventDispatcher.DispatchColumnHeaderResetEvent(sender as FastGridControl, container);
             }
         }
 

@@ -38,7 +38,7 @@ namespace ExcelMerge.GUI.Views
         private void SyncScroll(FastGridControl src, FastGridControl dst)
         {
             dst.Scroll(src.FirstVisibleRowScrollIndex, src.FirstVisibleColumnScrollIndex, src.VerticalScrollBarOffset, src.HorizontalScrollBarOffset);
-            dst.NotifyRefresh();
+            //dst.NotifyRefresh();
         }
 
         private void RecalculateViewport(Rectangle viewport, FastGridControl dataGrid)
@@ -81,6 +81,8 @@ namespace ExcelMerge.GUI.Views
 
             var colorMap = CreateColorMap(target);
             UpdateLocationGridColors(locationGrid, colorMap, viewport);
+
+            target.NotifyRefresh();
         }
 
         private void UpdateLocationGridDefinisions(Grid grid, Size newGridSize, int rowCount, int columnCount)
@@ -297,39 +299,37 @@ namespace ExcelMerge.GUI.Views
                 rtb.Height = 30d;
         }
 
-        public void OnHeaderChanged(FastGridControl target, IUnityContainer container)
+        public void OnColumnHeaderChanged(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetHeader(target.CurrentCell.Row);
+            (dataGrid.Model as DiffGridModel).SetColumnHeader(target.CurrentCell.Row);
 
             dataGrid.NotifyRowArrangeChanged();
         }
 
-        public void OnHeaderReset(FastGridControl target, IUnityContainer container)
+        public void OnColumnHeaderReset(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetHeader(0);
+            (dataGrid.Model as DiffGridModel).SetColumnHeader(0);
 
             dataGrid.NotifyRowArrangeChanged();
         }
 
-        public void OnFrozenColumnChanged(FastGridControl target, IUnityContainer container)
+        public void OnRowHeaderChanged(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).FreezeColumn(target.CurrentCell.Column);
+            (dataGrid.Model as DiffGridModel).SetRowHeader(target.CurrentCell.Column);
 
             dataGrid.NotifyColumnArrangeChanged();
-
             DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
         }
 
-        public void OnFrozenColumnReset(FastGridControl target, IUnityContainer container)
+        public void OnRowHeaderReset(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).UnfreezeColumn();
+            (dataGrid.Model as DiffGridModel).SetRowHeader(0);
 
             dataGrid.NotifyColumnArrangeChanged();
-
             DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
         }
 

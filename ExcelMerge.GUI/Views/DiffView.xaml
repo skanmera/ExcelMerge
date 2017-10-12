@@ -279,10 +279,10 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetRowHeader}" Click="SetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetRowHeader}" Click="ResetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetColumnHeader}" Click="SetColumnHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderSrc_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
@@ -315,10 +315,10 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetRowHeader}" Click="SetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetRowHeader}" Click="ResetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetColumnHeader}" Click="SetColumnHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderDst_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>

@@ -27,8 +27,8 @@
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static props:Resources.Word_Name}" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_HeaderIndex}" Binding="{Binding HeaderIndex}"  Width="*"/>
-                <DataGridTextColumn Header="{x:Static props:Resources.Word_FrozenColumnCount}" Binding="{Binding FrozenColumnCount}"  Width="*"/>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_ColumnHeaderIndex}" Binding="{Binding ColumnHeaderIndex}"  Width="*"/>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_RowHeaderIndex}" Binding="{Binding RowHeaderIndex}"  Width="*"/>
                 <DataGridTextColumn Header="{x:Static props:Resources.Word_ExactMatch}" Binding="{Binding ExactMatch}"  Width="*"/>
                 <DataGridTextColumn Header="{x:Static props:Resources.Word_Regex}" Binding="{Binding UseRegex}"  Width="*"/>
                 <DataGridTemplateColumn Header="">

@@ -38,15 +38,15 @@
         <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="300"
                  Text="{Binding FileSetting.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static props:Resources.Word_HeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static props:Resources.Word_ColumnHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
-                            Value="{Binding FileSetting.HeaderIndex, UpdateSourceTrigger=PropertyChanged}"
+                            Value="{Binding FileSetting.ColumnHeaderIndex, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="0"
                             />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static props:Resources.Word_FrozenColumnCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static props:Resources.Word_RowHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
-                            Value="{Binding FileSetting.FrozenColumnCount, UpdateSourceTrigger=PropertyChanged}"
+                            Value="{Binding FileSetting.RowHeaderIndex, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="0"
                             />
 

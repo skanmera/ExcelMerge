@@ -70,7 +70,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Extract diff with this row as header. に類似しているローカライズされた文字列を検索します。
+        ///   Extract diff with this row as column header. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_DiffAsHeader {
             get {
@@ -79,38 +79,38 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Freeze column に類似しているローカライズされた文字列を検索します。
+        ///   Reset Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string ContextMenu_FreezeColumn {
+        public static string ContextMenu_ResetColumnHeader {
             get {
-                return ResourceManager.GetString("ContextMenu_FreezeColumn", resourceCulture);
+                return ResourceManager.GetString("ContextMenu_ResetColumnHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Reset header に類似しているローカライズされた文字列を検索します。
+        ///   Reset Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string ContextMenu_ResetHeader {
+        public static string ContextMenu_ResetRowHeader {
             get {
-                return ResourceManager.GetString("ContextMenu_ResetHeader", resourceCulture);
+                return ResourceManager.GetString("ContextMenu_ResetRowHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Set header に類似しているローカライズされた文字列を検索します。
+        ///   Set Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string ContextMenu_SetHeader {
+        public static string ContextMenu_SetColumnHeader {
             get {
-                return ResourceManager.GetString("ContextMenu_SetHeader", resourceCulture);
+                return ResourceManager.GetString("ContextMenu_SetColumnHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Unfreeze column に類似しているローカライズされた文字列を検索します。
+        ///   Set Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string ContextMenu_UnfreezeColumn {
+        public static string ContextMenu_SetRowHeader {
             get {
-                return ResourceManager.GetString("ContextMenu_UnfreezeColumn", resourceCulture);
+                return ResourceManager.GetString("ContextMenu_SetRowHeader", resourceCulture);
             }
         }
         
@@ -169,20 +169,11 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Frozen Column Color に類似しているローカライズされた文字列を検索します。
+        ///   Column Header Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Label_FrozenColumnColor {
+        public static string Label_ColumnHeaderColor {
             get {
-                return ResourceManager.GetString("Label_FrozenColumnColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Header Color に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Label_HeaderColor {
-            get {
-                return ResourceManager.GetString("Label_HeaderColor", resourceCulture);
+                return ResourceManager.GetString("Label_ColumnHeaderColor", resourceCulture);
             }
         }
         
@@ -246,6 +237,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_RowColor {
             get {
                 return ResourceManager.GetString("Label_RowColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Row Header Color に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowHeaderColor {
+            get {
+                return ResourceManager.GetString("Label_RowHeaderColor", resourceCulture);
             }
         }
         
@@ -529,6 +529,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Column Header Index に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ColumnHeaderIndex {
+            get {
+                return ResourceManager.GetString("Word_ColumnHeaderIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Default に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Default {
@@ -601,24 +610,6 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Frozen Column Count に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Word_FrozenColumnCount {
-            get {
-                return ResourceManager.GetString("Word_FrozenColumnCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Header Index に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Word_HeaderIndex {
-            get {
-                return ResourceManager.GetString("Word_HeaderIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Japanese に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Japanese {
@@ -687,6 +678,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Reset {
             get {
                 return ResourceManager.GetString("Word_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Row Header Index に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_RowHeaderIndex {
+            get {
+                return ResourceManager.GetString("Word_RowHeaderIndex", resourceCulture);
             }
         }
         

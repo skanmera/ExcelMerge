@@ -52,7 +52,8 @@ namespace ExcelMerge.GUI.Models
             get { return TooltipVisibilityMode.OnlyWhenTrimmed; }
         }
 
-        public int HeaderIndex { get; private set; }
+        public int ColumnHeaderIndex { get; private set; }
+        public int RowHeaderIndex { get; private set; }
         public DiffType DiffType { get; private set; }
         public ExcelSheetDiff SheetDiff { get; private set; }
         public DiffGridModelConfig Config { get; private set; }
@@ -61,7 +62,8 @@ namespace ExcelMerge.GUI.Models
         {
             SheetDiff = sheetDiff;
             Config = config;
-            HeaderIndex = Config.HeaderIndex;
+            ColumnHeaderIndex = Config.ColumnHeaderIndex;
+            RowHeaderIndex = Config.RowHeaderIndex;
             DiffType = type;
 
             columnCount = SheetDiff.Rows.Max(r => r.Value.Cells.Count);
@@ -73,7 +75,16 @@ namespace ExcelMerge.GUI.Models
         public override string GetColumnHeaderText(int column)
         {
             ExcelCellDiff cellDiff;
-            if (TryGetCellDiff(HeaderIndex, column, out cellDiff))
+            if (TryGetCellDiff(ColumnHeaderIndex, column, out cellDiff))
+                return GetCellText(cellDiff);
+
+            return string.Empty;
+        }
+
+        public override string GetRowHeaderText(int row)
+        {
+            ExcelCellDiff cellDiff;
+            if (TryGetCellDiff(row, RowHeaderIndex, out cellDiff))
                 return GetCellText(cellDiff);
 
             return string.Empty;
@@ -159,7 +170,7 @@ namespace ExcelMerge.GUI.Models
             if (header == null)
                 return header;
 
-            header.backgroundColor = App.Instance.Setting.FrozenColumnColor;
+            header.backgroundColor = App.Instance.Setting.RowHeaderColor;
 
             return header;
         }
@@ -170,7 +181,7 @@ namespace ExcelMerge.GUI.Models
             if (header == null)
                 return header;
 
-            header.backgroundColor = App.Instance.Setting.HeaderColor;
+            header.backgroundColor = App.Instance.Setting.ColumnHeaderColor;
 
             return header;
         }
@@ -198,9 +209,6 @@ namespace ExcelMerge.GUI.Models
 
             if (App.Instance.Setting.ColorModifiedRow && IsModifiedRow(row))
                 cell.backgroundColor = App.Instance.Setting.ModifiedRowColor;
-
-            if (cell.IsFrozenColulmn(column))
-                cell.backgroundColor = App.Instance.Setting.FrozenColumnColor;
 
             cell.backgroundColor = GetColor(status) ?? cell.backgroundColor;
 
@@ -397,23 +405,16 @@ namespace ExcelMerge.GUI.Models
             return FastGridCellAddress.Empty;
         }
 
-        public void FreezeColumn(int? column)
+        public void SetRowHeader(int? column)
         {
-            UnfreezeColumn();
-
-            if (column.HasValue && column.Value >= 0)
-                SetColumnArrange(new HashSet<int>(), new HashSet<int>(Enumerable.Range(0, column.Value + 1)));
+            if (column.HasValue)
+                RowHeaderIndex = column.Value;
         }
 
-        public void UnfreezeColumn()
-        {
-            SetColumnArrange(new HashSet<int>(), new HashSet<int>());
-        }
-
-        public void SetHeader(int? row)
+        public void SetColumnHeader(int? row)
         {
             if (row.HasValue)
-                HeaderIndex = row.Value;
+                ColumnHeaderIndex = row.Value;
         }
 
         public void HideEqualRows()
