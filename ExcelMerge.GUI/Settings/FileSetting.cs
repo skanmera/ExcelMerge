@@ -40,7 +40,7 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref useRegex, value); Update(); }
         }
 
-        private int maxRowHeaderWidth = 30;
+        private int maxRowHeaderWidth = 200;
         public int MaxRowHeaderWidth
         {
             get { return maxRowHeaderWidth; }
@@ -69,9 +69,9 @@ namespace ExcelMerge.GUI.Settings
         public bool Ensure()
         {
             var changed = false;
-            if (MaxRowHeaderWidth < 30)
+            if (MaxRowHeaderWidth < 200)
             {
-                MaxRowHeaderWidth = 30;
+                MaxRowHeaderWidth = 200;
                 changed |= true;
             }
 
