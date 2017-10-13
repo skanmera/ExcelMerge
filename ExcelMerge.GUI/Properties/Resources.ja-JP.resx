@@ -199,7 +199,7 @@
     <value>実行ファイル</value>
   </data>
   <data name="Word_File" xml:space="preserve">
-    <value>フィル</value>
+    <value>ファイル</value>
   </data>
   <data name="Word_Japanese" xml:space="preserve">
     <value>日本語</value>
@@ -223,19 +223,7 @@
     <value>ツール</value>
   </data>
   <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
-    <value>この行をヘッダとして差分を抽出する</value>
-  </data>
-  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
-    <value>列を固定</value>
-  </data>
-  <data name="ContextMenu_ResetHeader" xml:space="preserve">
-    <value>ヘッダを解除</value>
-  </data>
-  <data name="ContextMenu_SetHeader" xml:space="preserve">
-    <value>ヘッダにセット</value>
-  </data>
-  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
-    <value>列の固定を解除</value>
+    <value>この行を列ヘッダとして差分を抽出する</value>
   </data>
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>表示形式</value>
@@ -266,5 +254,98 @@
   </data>
   <data name="Word_SrcFile" xml:space="preserve">
     <value>左側のファイル</value>
+  </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>追加の色</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>変更がある行を色付けする</value>
+  </data>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>行ヘッダの色</value>
+  </data>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>列ヘッダの色</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>変更の色</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>変更がある行の色</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>削除の色</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>行の色</value>
+  </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>先頭の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>末尾の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>末尾の空行を無視する</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>追加された行({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>変更されたセル({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>変更された行({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>削除された行({0})</value>
+  </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>大文字小文字を区別する</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>完全一致</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>正規表現</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>ファイル設定</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>ファイル設定編集</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>ファイル設定</value>
+  </data>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>行ヘッダインデックス</value>
+  </data>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>列ヘッダインデックス</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>マッチタイプ</value>
+  </data>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>列ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>行ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>列ヘッダにセット</value>
+  </data>
+  <data name="ContextMenu_SetRowHeader" xml:space="preserve">
+    <value>行ヘッダにセット</value>
+  </data>
+  <data name="Word_Font" xml:space="preserve">
+    <value>フォント</value>
+  </data>
+  <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
+    <value>列ヘッダの最大幅</value>
   </data>
 </root>

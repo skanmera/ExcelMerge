@@ -8,6 +8,8 @@
              xmlns:behavior="clr-namespace:ExcelMerge.GUI.Behaviors"
              xmlns:fg="clr-namespace:FastWpfGrid;assembly=FastWpfGrid"
              xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+             xmlns:gui="clr-namespace:ExcelMerge.GUI"
+             xmlns:vc="clr-namespace:ExcelMerge.GUI.Converters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -33,13 +35,9 @@
                 <WrapPanel Orientation="Horizontal" Margin="3">
 
                     <Button x:Name="DiffButton" Content="{x:Static props:Resources.Button_ExtractDiff}" 
-                                Margin="10,0,0,0"
+                                Margin="10,0,0,0" Height="40" Padding="5,5"
                                 Click="DiffButton_Click"
                                 IsEnabled="{Binding Executable}"/>
-
-                    <Button x:Name="SwapButton" Content="{x:Static props:Resources.ToolTip_Swap}"
-                            Click="SwapButton_Click" Margin="10,0,0,0" 
-                            IsEnabled="{Binding Executable}"/>
 
                     <GroupBox Header="{x:Static props:Resources.GroupBox_DisplayFormat}"
                                   Margin="10,0,0,0">
@@ -61,11 +59,12 @@
                     <GroupBox Header="{x:Static props:Resources.Word_SrcFile}" Margin="10,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static props:Resources.Word_Path}"/>
-                            <TextBox x:Name="SrcPathTextBox" AcceptsReturn="False" Margin="1" Width="300"
-                                         AllowDrop="True"
-                                         Text="{Binding SrcPath}"
-                                         Tag="0"
-                                         TextChanged="SrcPathTextBox_TextChanged">
+                            <TextBox x:Name="SrcPathTextBox" AcceptsReturn="False" Margin="1"
+                                     Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
+                                     AllowDrop="True"
+                                     Text="{Binding SrcPath}"
+                                     Tag="0"
+                                     TextChanged="SrcPathTextBox_TextChanged">
                                 <i:Interaction.Behaviors>
                                     <behavior:DragAcceptBehavior 
                                             Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -81,11 +80,12 @@
                     <GroupBox Header="{x:Static props:Resources.Word_DstFile}" Margin="10,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static props:Resources.Word_Path}"/>
-                            <TextBox x:Name="DstPathTextBox" AcceptsReturn="False" Margin="1" Width="300"
-                                         AllowDrop="True"
-                                         Text="{Binding DstPath}"
-                                         Tag="1"
-                                         TextChanged="DstPathTextBox_TextChanged">
+                            <TextBox x:Name="DstPathTextBox" AcceptsReturn="False" Margin="1"
+                                     Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
+                                     AllowDrop="True"
+                                     Text="{Binding DstPath}"
+                                     Tag="1"
+                                     TextChanged="DstPathTextBox_TextChanged">
                                 <i:Interaction.Behaviors>
                                     <behavior:DragAcceptBehavior 
                                             Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -97,8 +97,136 @@
                         </StackPanel>
                     </GroupBox>
 
+                    <Grid Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4"/>
+
+                        <Label Content="{Binding ModifiedCellCount}" ContentStringFormat="{x:Static props:Resources.Label_ModifiedCells}"
+                               Grid.Row="0" Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               />
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="0" Grid.Column="0"/>
+
+                        <Label Content="{Binding ModifiedRowCount}" ContentStringFormat="{x:Static props:Resources.Label_ModifiedRows}"
+                               Grid.Row="0" Grid.Column="1"
+                               HorizontalAlignment="Center" 
+                               />
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="{Binding AddedRowCount}" ContentStringFormat="{x:Static props:Resources.Label_AddedRows}"
+                               Grid.Row="0" Grid.Column="2"
+                               HorizontalAlignment="Center" 
+                               />
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="0" Grid.Column="2"/>
+
+                        <Label Content="{Binding RemovedRowCount}" ContentStringFormat="{x:Static props:Resources.Label_RemovedRows}"
+                               Grid.Row="0" Grid.Column="3"
+                               HorizontalAlignment="Center" 
+                               />
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="0" Grid.Column="3"/>
+
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PrevModifiedCellButton" Content="←" Width="30" Grid.Column="0" Margin="3"
+                                    Click="PrevModifiedCellButton_Click"/>
+                            <Button x:Name="NextModifiedCellButton" Content="→" Width="30" Grid.Column="1" Margin="3"
+                                    Click="NextModifiedCellButton_Click"/>
+                        </Grid>
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="1" Grid.Column="0"/>
+
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PrevModifiedRowButton" Content="←" Width="30" Grid.Column="0" Margin="3"
+                                    Click="PrevModifiedRowButton_Click"/>
+                            <Button x:Name="NextModifiedRowButton" Content="→" Width="30" Grid.Column="1" Margin="3"
+                                    Click="NextModifiedRowButton_Click"/>
+                        </Grid>
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="1" Grid.Column="1"/>
+
+                        <Grid Grid.Row="1" Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PrevAddedRowButton" Content="←" Width="30"  Grid.Column="0" Margin="3"
+                                    Click="PrevAddedRowButton_Click"/>
+                            <Button x:Name="NextAddedRowButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
+                                    Click="NextAddedRowButton_Click"/>
+                        </Grid>
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="1" Grid.Column="2"/>
+
+                        <Grid Grid.Row="1" Grid.Column="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PrevRemovedRowButton"  Content="←" Width="30" Grid.Column="0" Margin="3"
+                                    Click="PrevRemovedRowButton_Click"/>
+                            <Button x:Name="NextRemovedRowButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
+                                    Click="NextRemovedRowButton_Click"/>
+                        </Grid>
+
+                        <Border BorderThickness="0.2" BorderBrush="Gray"
+                                Grid.Row="1" Grid.Column="3"/>
+                    </Grid>
+
+
                 </WrapPanel>
             </Expander.Header>
+
+            <WrapPanel Orientation="Horizontal" Margin="3">
+
+                <Button x:Name="SwapButton" Content="{x:Static props:Resources.ToolTip_Swap}"
+                            Height="40"
+                            Click="SwapButton_Click" Margin="33,0,0,0" Padding="5,5"
+                            IsEnabled="{Binding Executable}"/>
+
+                <GroupBox Header="{x:Static props:Resources.Word_Search}" Margin="10,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="SearchTextCombobox" Width="200" IsEditable="True" Margin="3"/>
+                        <CheckBox x:Name="ExactMatchCheckBox" Content="{x:Static props:Resources.Word_ExactMatch}" Margin="3" IsChecked="False"/>
+                        <CheckBox x:Name="CaseSensitiveCheckBox" Content="{x:Static props:Resources.Word_CaseSensitive}" Margin="3" IsChecked="False"/>
+                        <CheckBox x:Name="RegexCheckBox" Content="{x:Static props:Resources.Word_Regex}" Margin="3" IsChecked="False"/>
+                        <Button x:Name="PrevMatchCellButton"  Content="←" Width="30" Grid.Column="0" Margin="3"
+                                    Click="PrevMatchCellButton_Click"/>
+                        <Button x:Name="NextMatchCellButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
+                                    Click="NextMatchCellButton_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+            </WrapPanel>
+
         </Expander>
 
         <!--Src Location Grid-->
@@ -151,10 +279,10 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetRowHeader}" Click="SetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetRowHeader}" Click="ResetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetColumnHeader}" Click="SetColumnHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderSrc_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
@@ -165,6 +293,7 @@
                      GotFocus="ValueTextBox_GotFocus"
                      LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
+                     ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                      />
 
         <GridSplitter Grid.Column="3" Grid.Row="2" Width="5" HorizontalAlignment="Center"/>
@@ -186,10 +315,10 @@
 
             <fg:FastGridControl.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_FreezeColumn}" Click="FreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_UnfreezeColumn}" Click="UnfreezeColumn_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetHeader}" Click="SetHeader_Click" />
-                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetHeader}" Click="ResetHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetRowHeader}" Click="SetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetRowHeader}" Click="ResetRowHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_SetColumnHeader}" Click="SetColumnHeader_Click" />
+                    <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderDst_Click" />
                 </ContextMenu>
             </fg:FastGridControl.ContextMenu>
@@ -200,6 +329,7 @@
                      GotFocus="ValueTextBox_GotFocus"
                      LostFocus="ValueTextBox_LostFocus"
                      Focusable="True"
+                     ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                      />
 
     </Grid>

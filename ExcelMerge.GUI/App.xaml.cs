@@ -13,16 +13,17 @@ namespace ExcelMerge.GUI
         public ApplicationSetting Setting { get; private set; }
         public CommandLineOption CommandLineOption { get; private set; }
 
+        public event Action OnSettingUpdated;
+
         [STAThread()]
         public static void Main()
         {
             App app = new App();
             app.InitializeComponent();
             app.Setting = ApplicationSetting.Load();
-            var cultureName = !string.IsNullOrEmpty(app.Setting.Culture)
-                ? app.Setting.Culture
-                : Thread.CurrentThread.CurrentCulture.Name;
-            app.UpdateResourceCulture(cultureName);
+            if (app.Setting.Ensure())
+                app.Setting.Save();
+            app.UpdateResourceCulture();
 
             app.Run();
         }
@@ -103,6 +104,11 @@ namespace ExcelMerge.GUI
         public void UpdateSetting(ApplicationSetting setting)
         {
             Setting = setting.Clone();
+
+            if (OnSettingUpdated == null)
+                OnSettingUpdated += () => { };
+
+            OnSettingUpdated();
         }
 
         public void UpdateRecentFiles(string srcPath, string dstPath)
@@ -129,23 +135,20 @@ namespace ExcelMerge.GUI
             Setting.Save();
         }
 
-        public void UpdateResourceCulture(string name)
+        public void UpdateResourceCulture()
         {
-            var message = string.Empty;
+            if (string.IsNullOrEmpty(Setting.Culture))
+                return;
+
             if (GUI.Properties.Resources.Culture != null)
             {
-                if (GUI.Properties.Resources.Culture.Name == name)
+                if (GUI.Properties.Resources.Culture.Name == Setting.Culture)
                     return;
 
-                message = GUI.Properties.Resources.Message_Reboot;
+                MessageBox.Show(GUI.Properties.Resources.Message_Reboot);
             }
 
-            GUI.Properties.Resources.Culture = new System.Globalization.CultureInfo(name);
-            Setting.Culture = name;
-            Setting.Save();
-
-            if (message.Any())
-                MessageBox.Show(message);
+            GUI.Properties.Resources.Culture = new System.Globalization.CultureInfo(Setting.Culture);
         }
 
         public IEnumerable<string> GetRecentFiles()

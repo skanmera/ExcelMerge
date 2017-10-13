@@ -223,19 +223,19 @@
     <value>Tool</value>
   </data>
   <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
-    <value>Extract diff with this row as header.</value>
+    <value>Extract diff with this row as column header.</value>
   </data>
-  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
-    <value>Freeze column</value>
+  <data name="ContextMenu_SetRowHeader" xml:space="preserve">
+    <value>Set Row Header</value>
   </data>
-  <data name="ContextMenu_ResetHeader" xml:space="preserve">
-    <value>Reset header</value>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>Reset Row Header</value>
   </data>
-  <data name="ContextMenu_SetHeader" xml:space="preserve">
-    <value>Set header</value>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>Set Column Header</value>
   </data>
-  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
-    <value>Unfreeze column</value>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>Reset Column Header</value>
   </data>
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>Display Format</value>
@@ -266,5 +266,86 @@
   </data>
   <data name="Word_SrcFile" xml:space="preserve">
     <value>Src File</value>
+  </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>Added Color</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>Color Modified Row</value>
+  </data>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>Row Header Color</value>
+  </data>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>Column Header Color</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>Modified Color</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>Modified Row Color</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>Removed Color</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>Row Colors</value>
+  </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>Skip first blank columns</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>Trim last blank columns</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>Trim last blank rows</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>Added Rows({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>Modified Cells({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>Modified Rows({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>Removed Rows({0})</value>
+  </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>CaseSensitive</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>ExactMatch</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>Regex</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>Edit File Setting</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>Row Header Index</value>
+  </data>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>Column Header Index</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>Match Type</value>
+  </data>
+  <data name="Word_Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
+    <value>Max Row Header Width</value>
   </data>
 </root>

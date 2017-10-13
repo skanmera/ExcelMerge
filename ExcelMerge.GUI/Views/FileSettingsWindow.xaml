@@ -1,0 +1,116 @@
+﻿<Window x:Class="ExcelMerge.GUI.Views.FileSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+        xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="{x:Static props:Resources.Title_FileSettingsWindow}" Height="640" Width="960"
+        Icon="/ExcelMerge.GUI;component/app.ico"
+        Name="Window"
+        >
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" Margin="10" GridLinesVisibility="Horizontal" 
+                  SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" SelectionUnit="Cell"
+                  CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False"
+                  HorizontalAlignment="Stretch"
+                  Background="White"
+                  ItemsSource="{Binding FileSettings}"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_Name}" Binding="{Binding Name}" Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_ColumnHeaderIndex}" Binding="{Binding ColumnHeaderIndex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_RowHeaderIndex}" Binding="{Binding RowHeaderIndex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_MaxRowHeaderWidth}" Binding="{Binding MaxRowHeaderWidth}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_ExactMatch}" Binding="{Binding ExactMatch}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_Regex}" Binding="{Binding UseRegex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{x:Static props:Resources.Word_Edit}" Width="100" Margin="3"
+                                    Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}"
+                                    />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{x:Static props:Resources.Word_Remove}" Width="100" Margin="3"
+                                    Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}"
+                                    />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="+" Grid.Column="0" Margin="3"
+                    Command="{Binding EditCommand}"/>
+            <Button Content="{x:Static props:Resources.Word_Done}" Grid.Column="2" Margin="3"
+                    Command="{Binding DoneCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    />
+            <Button Content="{x:Static props:Resources.Word_Reset}" Grid.Column="3" Margin="3"
+                    Command="{Binding ResetCommand}"/>
+            <Button Content="{x:Static props:Resources.Word_Apply}" Grid.Column="4" Margin="3"
+                    IsEnabled="{Binding IsDirty}"
+                    Command="{Binding ApplyCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

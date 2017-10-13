@@ -13,10 +13,10 @@ namespace ExcelMerge.GUI.Views
         void OnSizeChanged(FastGridControl target, IUnityContainer container, SizeChangedEventArgs e);
         void OnModelUpdated(FastGridControl target, IUnityContainer container);
         void OnSelectedCellChanged(FastGridControl target, IUnityContainer container);
-        void OnHeaderChanged(FastGridControl target, IUnityContainer container);
-        void OnHeaderReset(FastGridControl target, IUnityContainer container);
-        void OnFrozenColumnChanged(FastGridControl target, IUnityContainer container);
-        void OnFrozenColumnReset(FastGridControl target, IUnityContainer container);
+        void OnColumnHeaderChanged(FastGridControl target, IUnityContainer container);
+        void OnColumnHeaderReset(FastGridControl target, IUnityContainer container);
+        void OnRowHeaderChanged(FastGridControl target, IUnityContainer container);
+        void OnRowHeaderReset(FastGridControl target, IUnityContainer container);
     }
 
     interface ILocationGridEventHandler
@@ -33,7 +33,8 @@ namespace ExcelMerge.GUI.Views
 
     interface IValueTextBoxEventListener
     {
-        void OnGotFocus(RichTextBox textBox, IUnityContainer container);
-        void OnLostFocus(RichTextBox textBox, IUnityContainer container);
+        void OnGotFocus(RichTextBox target, IUnityContainer container);
+        void OnLostFocus(RichTextBox target, IUnityContainer container);
+        void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e);
     }
 }

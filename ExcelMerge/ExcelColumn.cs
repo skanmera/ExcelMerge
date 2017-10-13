@@ -44,6 +44,11 @@ namespace ExcelMerge
 
             return GetHashCode() == other.GetHashCode();
         }
+
+        public bool IsBlank()
+        {
+            return Cells.All(c => string.IsNullOrEmpty(c.Value));
+        }
     }
 
     internal class HeaderComparer : IEqualityComparer<ExcelColumn>

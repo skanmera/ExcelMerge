@@ -17,12 +17,88 @@ namespace ExcelMerge
 
         public static ExcelSheet Create(ISheet srcSheet, ExcelSheetReadConfig config)
         {
-            return CreateSheet(ExcelReader.Read(srcSheet, config));
+            var rows = ExcelReader.Read(srcSheet);
+
+            return CreateSheet(rows, config);
         }
 
         public static ExcelSheet CreateFromCsv(string path, ExcelSheetReadConfig config)
         {
-            return CreateSheet(CsvReader.Read(path, config));
+            var rows = CsvReader.Read(path);
+
+            return CreateSheet(rows, config);
+        }
+
+        private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows, ExcelSheetReadConfig config)
+        {
+            var sheet = CreateSheet(rows);
+
+            if (config.TrimFirstBlankRows)
+                sheet.TrimFirstBlankRows();
+
+            if (config.TrimFirstBlankColumns)
+                sheet.TrimFirstBlankColumns();
+
+            if (config.TrimLastBlankRows)
+                sheet.TrimLastBlankRows();
+
+            if (config.TrimLastBlankColumns)
+                sheet.TrimLastBlankColumns();
+
+            return sheet;
+        }
+
+        public void TrimFirstBlankRows()
+        {
+            var rows = new SortedDictionary<int, ExcelRow>();
+            var index = 0;
+            foreach (var row in Rows.SkipWhile(r => r.Value.IsBlank()))
+            {
+                rows.Add(index, new ExcelRow(index, row.Value.Cells));
+                index++;
+            }
+
+            Rows = rows;
+        }
+
+        public void TrimFirstBlankColumns()
+        {
+            var columns = CreateColumns();
+            var indices = columns.Select((v, i) => new { v, i }).TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+
+            foreach (var i in indices)
+                RemoveColumn(i);
+        }
+
+        public void TrimLastBlankRows()
+        {
+            var rows = new SortedDictionary<int, ExcelRow>();
+            var index = 0;
+            foreach (var row in Rows.Reverse().SkipWhile(r => r.Value.IsBlank()).Reverse())
+            {
+                rows.Add(index, new ExcelRow(index, row.Value.Cells));
+                index++;
+            }
+
+            Rows = rows;
+        }
+
+        public void TrimLastBlankColumns()
+        {
+            var columns = CreateColumns();
+            var indices = columns.Select((v, i) => new { v, i }).Reverse().TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+
+            foreach (var i in indices)
+                RemoveColumn(i);
+        }
+
+        public void RemoveColumn(int column)
+        {
+            foreach (var row in Rows)
+            {
+                if (row.Value.Cells.Count > column)
+                    row.Value.Cells.RemoveAt(column);
+            }
         }
 
         private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows)
@@ -184,22 +260,6 @@ namespace ExcelMerge
 
                 if (srcQueue.Any()) src = srcQueue.Dequeue();
                 if (dstQueue.Any()) dst = dstQueue.Dequeue();
-
-                //if (status.Value == ExcelColumnStatus.None)
-                //{
-                //    if (srcQueue.Any()) src = srcQueue.Dequeue();
-                //    if (dstQueue.Any()) dst = dstQueue.Dequeue();
-                //}
-                //else if (status.Value == ExcelColumnStatus.Deleted)
-                //{
-                //    if (srcQueue.Any())
-                //        src = srcQueue.Dequeue();
-                //}
-                //else if (status.Value == ExcelColumnStatus.Inserted)
-                //{
-                //    if (dstQueue.Any())
-                //        dst = dstQueue.Dequeue();
-                //}
 
                 yield return Tuple.Create(src, dst);
             }

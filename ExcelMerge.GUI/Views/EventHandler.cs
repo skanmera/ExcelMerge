@@ -9,7 +9,8 @@ using System.Windows.Media;
 using System.Windows.Input;
 using FastWpfGrid;
 using Microsoft.Practices.Unity;
-using ExcelMerge.GUI.Extensions;
+using SKCore.Collection;
+using SKCore.Wpf.Controls.Utilities;
 using ExcelMerge.GUI.Models;
 
 namespace ExcelMerge.GUI.Views
@@ -37,7 +38,7 @@ namespace ExcelMerge.GUI.Views
         private void SyncScroll(FastGridControl src, FastGridControl dst)
         {
             dst.Scroll(src.FirstVisibleRowScrollIndex, src.FirstVisibleColumnScrollIndex, src.VerticalScrollBarOffset, src.HorizontalScrollBarOffset);
-            dst.NotifyRefresh();
+            //dst.NotifyRefresh();
         }
 
         private void RecalculateViewport(Rectangle viewport, FastGridControl dataGrid)
@@ -75,10 +76,13 @@ namespace ExcelMerge.GUI.Views
             var colCount = target.Model.ColumnCount;
             UpdateLocationGridDefinisions(locationGrid, locationGrid.RenderSize, rowCount, colCount);
 
-            RecalculateViewport(container.Resolve<Rectangle>(Key), target);
+            var viewport = container.Resolve<Rectangle>(Key);
+            RecalculateViewport(viewport, target);
 
             var colorMap = CreateColorMap(target);
-            UpdateLocationGridColors(locationGrid, colorMap);
+            UpdateLocationGridColors(locationGrid, colorMap, viewport);
+
+            target.NotifyRefresh();
         }
 
         private void UpdateLocationGridDefinisions(Grid grid, Size newGridSize, int rowCount, int columnCount)
@@ -109,9 +113,9 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        private void UpdateLocationGridColors(Grid locationGrid, List<Dictionary<int, Color?>> colorMaps)
+        private void UpdateLocationGridColors(Grid locationGrid, List<Dictionary<int, Color?>> colorMaps, Rectangle viewport)
         {
-            locationGrid.ClearChildren<Rectangle>();
+            locationGrid.ClearChildren<Rectangle>(new List<UIElement> { viewport });
 
             if (!locationGrid.RowDefinitions.Any() || !locationGrid.ColumnDefinitions.Any())
                 return;
@@ -122,7 +126,7 @@ namespace ExcelMerge.GUI.Views
             var rowIndex = 0;
             foreach (var columnColorMap in colorMaps)
             {
-                var sections = columnColorMap.SplitByComparison((c, n) => EqualColor(c.Value, n.Value));
+                var sections = columnColorMap.SplitByRegularity((items, current) => EqualColor(items.Last().Value, current.Value));
                 foreach (var section in sections)
                 {
                     var color = section.First().Value;
@@ -155,17 +159,14 @@ namespace ExcelMerge.GUI.Views
             if (dataGrid.Model == null)
                 return ret;
 
-            var hiddenRows = dataGrid.Model.GetHiddenRows(dataGrid).ToList();
-
-            for (int i = 0, rcount = dataGrid.Model.RowCount; i < rcount; i++)
+            var model = dataGrid.Model as DiffGridModel;
+            var rowCount = model.RowCount - model.GetHiddenRows(dataGrid).Count;
+            for (int i = 0; i < rowCount; i++)
             {
-                if (hiddenRows.Remove(i))
-                    continue;
-
                 var columnColorMap = new Dictionary<int, Color?>();
                 for (int j = 0, ccount = dataGrid.Model.ColumnCount; j < ccount; j++)
                 {
-                    columnColorMap.Add(j, dataGrid.Model.GetCell(dataGrid, i, j)?.BackgroundColor);
+                    columnColorMap.Add(j, model.GetCell(dataGrid, i, j, true)?.BackgroundColor);
                 }
 
                 ret.Add(columnColorMap);
@@ -191,17 +192,27 @@ namespace ExcelMerge.GUI.Views
 
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
-            var row = target.GetRow(e);
+
+            var row = target.GetRow(e.GetPosition(target));
+            if (!row.HasValue)
+                return;
+
             while (row + rowSpan / 2 > target.RowDefinitions.Count)
                 row--;
-            Grid.SetRow(viewport, Math.Max(row - rowSpan / 2, 0));
+
+            Grid.SetRow(viewport, Math.Max(row.Value - rowSpan / 2, 0));
 
             var colSpan = Grid.GetColumnSpan(viewport);
             var currentCol = Grid.GetColumn(viewport);
-            var col = target.GetColumn(e);
+
+            var col = target.GetColumn(e.GetPosition(target));
+            if (!col.HasValue)
+                return;
+
             while (col + colSpan / 2 > target.ColumnDefinitions.Count)
                 col--;
-            Grid.SetColumn(viewport, Math.Max(col - colSpan / 2, 0));
+
+            Grid.SetColumn(viewport, Math.Max(col.Value - colSpan / 2, 0));
 
             if (currentRow != row || currentCol != col)
                 ViewportEventDispatcher.DispatchMoveEvent(viewport, container);
@@ -246,6 +257,12 @@ namespace ExcelMerge.GUI.Views
             var targetCell = new FastGridCellAddress(target.CurrentCell.Row, target.CurrentCell.Column);
             if (!targetCell.Equals(dataGrid.CurrentCell))
             {
+                if (dataGrid.Model == null)
+                    return;
+
+                if (dataGrid.Model.RowCount < targetCell.Row || dataGrid.Model.ColumnCount < targetCell.Column)
+                    return;
+
                 dataGrid.CurrentCell = targetCell;
 
                 if (target.GetSelectedModelCells().Aggregate(false, (r, c) => r |= dataGrid.AddSelectedCell(c)))
@@ -270,46 +287,59 @@ namespace ExcelMerge.GUI.Views
             var margin = 10;
             var textHeightList = container.ResolveAll<RichTextBox>().Select(rtb => CalculateTextBoxHeight(rtb) + margin);
 
-            var height = textHeightList.Max();
+            var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 2);
 
-            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = height);
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
+                rtb.Height = height;
         }
 
         public void OnLostFocus(RichTextBox textBox, IUnityContainer container)
         {
-            container.ResolveAll<RichTextBox>().ForEach(rtb => rtb.Height = double.NaN);
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
+                rtb.Height = 30d;
         }
 
-        public void OnHeaderChanged(FastGridControl target, IUnityContainer container)
+        public void OnColumnHeaderChanged(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetHeader(target.CurrentCell.Row);
+            (dataGrid.Model as DiffGridModel).SetColumnHeader(target.CurrentCell.Row);
 
             dataGrid.NotifyRowArrangeChanged();
         }
 
-        public void OnHeaderReset(FastGridControl target, IUnityContainer container)
+        public void OnColumnHeaderReset(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetHeader(0);
+            (dataGrid.Model as DiffGridModel).SetColumnHeader(0);
 
             dataGrid.NotifyRowArrangeChanged();
         }
 
-        public void OnFrozenColumnChanged(FastGridControl target, IUnityContainer container)
+        public void OnRowHeaderChanged(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).FreezeColumn(target.CurrentCell.Column);
+            (dataGrid.Model as DiffGridModel).SetRowHeader(target.CurrentCell.Column);
 
             dataGrid.NotifyColumnArrangeChanged();
+            DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
         }
 
-        public void OnFrozenColumnReset(FastGridControl target, IUnityContainer container)
+        public void OnRowHeaderReset(FastGridControl target, IUnityContainer container)
         {
             var dataGrid = container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).UnfreezeColumn();
+            (dataGrid.Model as DiffGridModel).SetRowHeader(-1);
 
             dataGrid.NotifyColumnArrangeChanged();
+            DataGridEventDispatcher.DispatchModelUpdateEvent(dataGrid, container);
+        }
+
+        public void OnScrolled(RichTextBox target, IUnityContainer container, ScrollChangedEventArgs e)
+        {
+            foreach (var rtb in container.ResolveAll<RichTextBox>())
+            {
+                rtb.ScrollToVerticalOffset(e.VerticalOffset);
+                rtb.ScrollToHorizontalOffset(e.HorizontalOffset);
+            }
         }
     }
 }

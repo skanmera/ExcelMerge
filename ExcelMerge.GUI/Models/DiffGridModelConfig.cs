@@ -6,24 +6,7 @@ namespace ExcelMerge.GUI.Models
 {
     public class DiffGridModelConfig
     {
-        public static Dictionary<string, Color?> DefaultColorTable
-        {
-            get
-            {
-                return new Dictionary<string, Color?>
-                {
-                    { "None", null},
-                    { "Modified", EMColor.Orange},
-                    { "Added", EMColor.Orange},
-                    { "Removed", EMColor.LightGray},
-                    { "ColumnHeader", EMColor.LightBlue},
-                    { "RowHeader", EMColor.LightBlue},
-                };
-            }
-        }
-
-        public int HeaderIndex { get; set; }
-        public int FrozenColumnIndex { get; set; }
-        public Dictionary<string, Color?> ColorTable { get; private set; } = DefaultColorTable;
+        public int ColumnHeaderIndex { get; set; }
+        public int RowHeaderIndex { get; set; } = -1;
     }
 }
