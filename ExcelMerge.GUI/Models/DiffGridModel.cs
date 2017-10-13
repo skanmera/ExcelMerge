@@ -158,8 +158,11 @@ namespace ExcelMerge.GUI.Models
             return null;
         }
 
-        private bool IsModifiedRow(int row)
+        private bool IsModifiedRow(int row, bool direct)
         {
+            if (direct)
+                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
+
             ExcelRowDiff rowDiff;
             if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
                 return rowDiff.Modified();
@@ -210,7 +213,7 @@ namespace ExcelMerge.GUI.Models
 
             cell.backgroundColor = null;
 
-            if (App.Instance.Setting.ColorModifiedRow && IsModifiedRow(row))
+            if (App.Instance.Setting.ColorModifiedRow && IsModifiedRow(row, true))
                 cell.backgroundColor = App.Instance.Setting.ModifiedRowColor;
 
             cell.backgroundColor = GetColor(status) ?? cell.backgroundColor;
