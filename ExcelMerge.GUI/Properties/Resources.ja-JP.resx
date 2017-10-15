@@ -348,4 +348,13 @@
   <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
     <value>列ヘッダの最大幅</value>
   </data>
+  <data name="Msg_ExtractingDiff" xml:space="preserve">
+    <value>差分を抽出しています</value>
+  </data>
+  <data name="Msg_ReadingFiles" xml:space="preserve">
+    <value>ファイルを読み込んでいます</value>
+  </data>
+  <data name="Msg_WarnSize" xml:space="preserve">
+    <value>行数が多すぎます。差異が存在する行の周辺だけを表示します。</value>
+  </data>
 </root>

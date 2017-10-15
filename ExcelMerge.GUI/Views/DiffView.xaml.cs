@@ -326,9 +326,18 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
             DstDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
 
-            var config = CreateReadConfig();
-            var wb1 = ExcelWorkbook.Create(SrcPathTextBox.Text, config);
-            var wb2 = ExcelWorkbook.Create(DstPathTextBox.Text, config);
+            var srcPath = SrcPathTextBox.Text;
+            var dstPath = DstPathTextBox.Text;
+            ExcelWorkbook wb1 = null;
+            ExcelWorkbook wb2 = null;
+            ProgressWindow.DoWorkWithModal(progress =>
+            {
+                progress.Report(Properties.Resources.Msg_ReadingFiles);
+
+                var config = CreateReadConfig();
+                wb1 = ExcelWorkbook.Create(srcPath, config);
+                wb2 = ExcelWorkbook.Create(dstPath, config);
+            });
 
             var tmpSrcSheetIndex = diffConfig.SrcSheetIndex;
             var tmpDstSheetIndex = diffConfig.DstSheetIndex;
@@ -345,7 +354,15 @@ namespace ExcelMerge.GUI.Views
             var sheet1 = wb1.Sheets[SrcSheetCombobox.SelectedItem.ToString()];
             var sheet2 = wb2.Sheets[DstSheetCombobox.SelectedItem.ToString()];
 
-            var diff = ExcelSheet.Diff(sheet1, sheet2, diffConfig);
+            if (sheet1.Rows.Count > 100000 || sheet2.Rows.Count > 100000)
+                MessageBox.Show(Properties.Resources.Msg_WarnSize);
+
+            ExcelSheetDiff diff = null;
+            ProgressWindow.DoWorkWithModal(progress =>
+            {
+                progress.Report(Properties.Resources.Msg_ExtractingDiff);
+                diff = ExcelSheet.Diff(sheet1, sheet2, diffConfig);
+            });
 
             var modelConfig = new DiffGridModelConfig();
             var srcModel = new DiffGridModel(DiffType.Source, diff, modelConfig);

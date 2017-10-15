@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NPOI.SS.UserModel;
 using NetDiff;
+using SKCore.Collection;
 
 namespace ExcelMerge
 {
@@ -120,6 +121,7 @@ namespace ExcelMerge
 
             var option = DiffOption<ExcelRow>.Default;
             option.Order = DiffOrder.LazyDeleteFirst;
+            option.Limit = 0;
             option.EqualityComparer =
                 new RowComparer(new HashSet<int>(columnStatusMap.Where(i => i.Value != ExcelColumnStatus.None).Select(i => i.Key)));
 
@@ -128,7 +130,7 @@ namespace ExcelMerge
                 var shifted = new List<ExcelCell>();
                 var index = 0;
                 var queue = new Queue<ExcelCell>(row.Cells);
-                while(queue.Any())
+                while (queue.Any())
                 {
                     if (columnStatusMap[index] == ExcelColumnStatus.Inserted)
                         shifted.Add(new ExcelCell(string.Empty, 0, 0));
@@ -160,10 +162,24 @@ namespace ExcelMerge
             }
 
             var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option).ToList();
-            var results = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option));
-            var sheetDiff = new ExcelSheetDiff();
+            var resultArray = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option)).ToArray();
+            if (resultArray.Length > 100000)
+            {
+                var count = 0;
+                var indices = Enumerable.Range(0, 100).ToList();
+                foreach (var result in resultArray)
+                {
+                    if (result.Status != DiffStatus.Equal)
+                        indices.AddRange(Enumerable.Range(Math.Max(0, count - 100), 200));
 
-            DiffCells(results, sheetDiff, columnStatusMap);
+                    count++;
+                }
+                indices = indices.Distinct().ToList();
+                resultArray = indices.Select(i => resultArray[i]).ToArray();
+            }
+
+            var sheetDiff = new ExcelSheetDiff();
+            DiffCells(resultArray, sheetDiff, columnStatusMap);
 
             return sheetDiff;
         }

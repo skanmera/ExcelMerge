@@ -348,4 +348,13 @@
   <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
     <value>Max Row Header Width</value>
   </data>
+  <data name="Msg_ExtractingDiff" xml:space="preserve">
+    <value>Extracting Diff ...</value>
+  </data>
+  <data name="Msg_ReadingFiles" xml:space="preserve">
+    <value>Reading Files ...</value>
+  </data>
+  <data name="Msg_WarnSize" xml:space="preserve">
+    <value>There are too many records. Display only around diff.</value>
+  </data>
 </root>

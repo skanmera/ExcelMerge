@@ -385,6 +385,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Extracting Diff ... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_ExtractingDiff {
+            get {
+                return ResourceManager.GetString("Msg_ExtractingDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Reading Files ... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_ReadingFiles {
+            get {
+                return ResourceManager.GetString("Msg_ReadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There are too many records. Display only around diff. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_WarnSize {
+            get {
+                return ResourceManager.GetString("Msg_WarnSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   All に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string RadioButton_ShowAll {
