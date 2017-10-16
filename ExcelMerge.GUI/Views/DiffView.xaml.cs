@@ -354,7 +354,7 @@ namespace ExcelMerge.GUI.Views
             var sheet1 = wb1.Sheets[SrcSheetCombobox.SelectedItem.ToString()];
             var sheet2 = wb2.Sheets[DstSheetCombobox.SelectedItem.ToString()];
 
-            if (sheet1.Rows.Count > 100000 || sheet2.Rows.Count > 100000)
+            if (sheet1.Rows.Count > 10000 || sheet2.Rows.Count > 10000)
                 MessageBox.Show(Properties.Resources.Msg_WarnSize);
 
             ExcelSheetDiff diff = null;

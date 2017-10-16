@@ -163,7 +163,7 @@ namespace ExcelMerge
 
             var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option).ToList();
             var resultArray = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option)).ToArray();
-            if (resultArray.Length > 100000)
+            if (resultArray.Length > 10000)
             {
                 var count = 0;
                 var indices = Enumerable.Range(0, 100).ToList();
