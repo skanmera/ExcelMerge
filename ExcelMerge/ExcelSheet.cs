@@ -175,7 +175,7 @@ namespace ExcelMerge
                     count++;
                 }
                 indices = indices.Distinct().ToList();
-                resultArray = indices.Select(i => resultArray[i]).ToArray();
+                resultArray = indices.Where(i => i < resultArray.Length).Select(i => resultArray[i]).ToArray();
             }
 
             var sheetDiff = new ExcelSheetDiff();
