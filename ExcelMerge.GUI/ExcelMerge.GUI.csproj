@@ -58,10 +58,6 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diff4Net.1.1.2\lib\net452\NetDiff.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
       <Private>True</Private>
@@ -271,6 +267,10 @@
     <ProjectReference Include="..\FastWpfGrid\WriteableBitmapEx\WriteableBitmapEx.Wpf.csproj">
       <Project>{b0aa6a94-6784-4221-81f0-244a68c374c0}</Project>
       <Name>WriteableBitmapEx.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetDiff\NetDiff\NetDiff.csproj">
+      <Project>{00a6267d-dde3-42cc-9c99-9166c334053e}</Project>
+      <Name>NetDiff</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

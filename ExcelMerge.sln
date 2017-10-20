@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelMerge", "ExcelMerge\ExcelMerge.csproj", "{BFF4C33C-7395-4428-8587-AA22062E4A24}"
 EndProject
@@ -21,10 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelMerge.ShellExtension",
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ExcelMerge.Installer", "ExcelMerge.Installer\ExcelMerge.Installer.vdproj", "{2C5E6AC7-11CF-4515-A606-B678D90B5676}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E412DCD7-81D9-47AF-A879-C887E8B2166F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetDiff", "NetDiff\NetDiff\NetDiff.csproj", "{00A6267D-DDE3-42CC-9C99-9166C334053E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetDiff.Test", "NetDiff\NetDiff.Test\NetDiff.Test.csproj", "{AAFA1775-1F46-4AA5-97D3-DE88D591828D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +68,18 @@ Global
 		{2C5E6AC7-11CF-4515-A606-B678D90B5676}.Release x86|Any CPU.Build.0 = Release
 		{2C5E6AC7-11CF-4515-A606-B678D90B5676}.Release|Any CPU.ActiveCfg = Release
 		{2C5E6AC7-11CF-4515-A606-B678D90B5676}.Release|Any CPU.Build.0 = Release
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Release x86|Any CPU.ActiveCfg = Release|Any CPU
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Release x86|Any CPU.Build.0 = Release|Any CPU
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A6267D-DDE3-42CC-9C99-9166C334053E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release x86|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release x86|Any CPU.Build.0 = Release|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
