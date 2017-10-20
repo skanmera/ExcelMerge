@@ -357,4 +357,7 @@
   <data name="Msg_WarnSize" xml:space="preserve">
     <value>行数が多すぎます。差異が存在する行の周辺だけを表示します。</value>
   </data>
+  <data name="Word_RowHeaderName" xml:space="preserve">
+    <value>行ヘッダ名</value>
+  </data>
 </root>

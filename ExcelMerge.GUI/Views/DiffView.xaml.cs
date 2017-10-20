@@ -389,8 +389,16 @@ namespace ExcelMerge.GUI.Views
             {
                 srcModel.SetColumnHeader(setting.ColumnHeaderIndex);
                 dstModel.SetColumnHeader(setting.ColumnHeaderIndex);
-                srcModel.SetRowHeader(setting.RowHeaderIndex);
-                dstModel.SetRowHeader(setting.RowHeaderIndex);
+                if (string.IsNullOrEmpty(setting.RowHeaderName))
+                {
+                    srcModel.SetRowHeader(setting.RowHeaderIndex);
+                    dstModel.SetRowHeader(setting.RowHeaderIndex);
+                }
+                else
+                {
+                    srcModel.SetRowHeader(setting.RowHeaderName);
+                    dstModel.SetRowHeader(setting.RowHeaderName);
+                }
                 SrcDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
                 DstDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
             }

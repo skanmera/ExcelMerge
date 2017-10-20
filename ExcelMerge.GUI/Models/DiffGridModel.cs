@@ -454,6 +454,18 @@ namespace ExcelMerge.GUI.Models
                 RowHeaderIndex = column.Value;
         }
 
+        public void SetRowHeader(string columnHeaderName)
+        {
+            for (int i = 0; i < columnCount; i++)
+            {
+                if (columnHeaderName == GetColumnHeaderText(i))
+                {
+                    SetRowHeader(i);
+                    return;
+                }
+            }
+        }
+
         public void SetColumnHeader(int? row)
         {
             if (row.HasValue)

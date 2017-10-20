@@ -357,4 +357,7 @@
   <data name="Msg_WarnSize" xml:space="preserve">
     <value>There are too many records. Display only around diff.</value>
   </data>
+  <data name="Word_RowHeaderName" xml:space="preserve">
+    <value>Row Header Name</value>
+  </data>
 </root>

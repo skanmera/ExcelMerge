@@ -736,6 +736,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Row Header Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_RowHeaderName {
+            get {
+                return ResourceManager.GetString("Word_RowHeaderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Search に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Search {

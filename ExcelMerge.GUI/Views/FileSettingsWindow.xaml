@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="{x:Static props:Resources.Title_FileSettingsWindow}" Height="640" Width="960"
+        Title="{x:Static props:Resources.Title_FileSettingsWindow}" Height="640" Width="1200"
         Icon="/ExcelMerge.GUI;component/app.ico"
         Name="Window"
         >
@@ -44,6 +44,13 @@
                     <DataGridTextColumn.CellStyle>
                         <Style>
                             <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_RowHeaderName}" Binding="{Binding RowHeaderName}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>

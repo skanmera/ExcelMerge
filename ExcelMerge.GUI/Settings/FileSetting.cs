@@ -26,6 +26,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref rowHeaderIndex, value); Update(); }
         }
 
+        private string rowHeaderName = string.Empty;
+        public string RowHeaderName
+        {
+            get { return rowHeaderName; }
+            set { SetProperty(ref rowHeaderName, value); Update(); }
+        }
+
         private bool exactMatch;
         public bool ExactMatch
         {
@@ -61,6 +68,7 @@ namespace ExcelMerge.GUI.Settings
                 Name.Equals(other.name) &&
                 ColumnHeaderIndex.Equals(other.ColumnHeaderIndex) &&
                 RowHeaderIndex.Equals(other.RowHeaderIndex) &&
+                RowHeaderName.Equals(other.RowHeaderName) &&
                 ExactMatch.Equals(other.ExactMatch) &&
                 UseRegex.Equals(other.UseRegex) &&
                 MaxRowHeaderWidth.Equals(other.MaxRowHeaderWidth);
@@ -85,6 +93,7 @@ namespace ExcelMerge.GUI.Settings
                 Name = Name,
                 ColumnHeaderIndex = ColumnHeaderIndex,
                 RowHeaderIndex = RowHeaderIndex,
+                RowHeaderName = RowHeaderName,
                 ExactMatch = ExactMatch,
                 UseRegex = UseRegex,
                 MaxRowHeaderWidth = MaxRowHeaderWidth,
