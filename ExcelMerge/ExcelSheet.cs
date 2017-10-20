@@ -119,9 +119,7 @@ namespace ExcelMerge
             var dstColumns = dst.CreateColumns();
             var columnStatusMap = CreateColumnStatusMap(srcColumns, dstColumns, config);
 
-            var option = DiffOption<ExcelRow>.Default;
-            option.Order = DiffOrder.LazyDeleteFirst;
-            option.Limit = 0;
+            var option = new DiffOption<ExcelRow>();
             option.EqualityComparer =
                 new RowComparer(new HashSet<int>(columnStatusMap.Where(i => i.Value != ExcelColumnStatus.None).Select(i => i.Key)));
 
@@ -161,8 +159,9 @@ namespace ExcelMerge
                 row.UpdateCells(shifted);
             }
 
-            var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option).ToList();
-            var resultArray = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option)).ToArray();
+            var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option);
+            r = DiffUtil.Order(r, DiffOrderType.LazyDeleteFirst);
+            var resultArray = DiffUtil.OptimizeCaseDeletedFirst(r).ToArray();
             if (resultArray.Length > 10000)
             {
                 var count = 0;
@@ -187,8 +186,7 @@ namespace ExcelMerge
         private static Dictionary<int, ExcelColumnStatus> CreateColumnStatusMap(
             IEnumerable<ExcelColumn> srcColumns, IEnumerable<ExcelColumn> dstColumns, ExcelSheetDiffConfig config)
         {
-            var option = DiffOption<ExcelColumn>.Default;
-            option.Order = DiffOrder.LazyDeleteFirst;
+            var option = new DiffOption<ExcelColumn>();
 
             if (config.HeaderIndex >= 0)
             {
@@ -200,7 +198,9 @@ namespace ExcelMerge
                     dc.HeaderIndex = config.HeaderIndex;
             }
 
-            var results = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(srcColumns, dstColumns, option));
+            var results = DiffUtil.Diff(srcColumns, dstColumns, option);
+            results = DiffUtil.Order(results, DiffOrderType.LazyDeleteFirst);
+            results = DiffUtil.OptimizeCaseDeletedFirst(results);
             var ret = new Dictionary<int, ExcelColumnStatus>();
             var columnIndex = 0;
             foreach (var result in results)
