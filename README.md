@@ -100,6 +100,19 @@ Can also be executed from within the tool.
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/ext_cmd.png)
 
+## File Settings
+
+For each file you can specify a line header or a column header.
+
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/file_settings.png)
+
+## Color Settins
+
+You can customize background colors.
+
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+
+
 ## Known problems
 
 - <h4>If there are column deletions or additions, they may not be displayed at the expected position.</h4>
