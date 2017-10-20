@@ -99,6 +99,18 @@ vdiff = excelmerge
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/ext_cmd.png)
 
+## ファイル毎の設定
+
+ファイル毎に行ヘッダ、列ヘッダなどを設定できます。
+
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/file_settings.png)
+
+## 色の設定
+
+背景色をカスタマイズできます。
+
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+
 ## 既知の問題点
 
 - <h4>列の追加や削除がある場合に、その位置が期待している位置に表示されないことがある.</h4>
