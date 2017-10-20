@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Title="ExcelMerge" Height="768" Width="1280" 
+        Title="ExcelMerge" Height="868" Width="1380"
         Icon="/ExcelMerge.GUI;component/app.ico"
         >
 
@@ -20,8 +20,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="97*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
@@ -82,6 +82,8 @@
                           Command="{Binding OpenDiffExtractionSettingsWindowCommand}"/>
                 <MenuItem Header="{x:Static props:Resources.MenuItem_ExternalCommands}"
                           Command="{Binding OpenExternalCommandsWindowCommand}"/>
+                <MenuItem Header="{x:Static props:Resources.MenuItem_FileSettings}"
+                          Command="{Binding OpenFileSettingsWindowCommand}"/>
                 <MenuItem Header="{x:Static props:Resources.Word_Language}">
                     <MenuItem Header="{x:Static props:Resources.Word_English}" 
                               Command="{Binding ChangeLanguageCommand}"
@@ -95,13 +97,16 @@
             </MenuItem>
             <MenuItem Header="{x:Static props:Resources.Word_Tool}">
                 <MenuItem Header="{x:Static props:Resources.MenuItem_ExeExternalCmd}" 
-                          ItemsSource="{Binding ExternalCommands}" >
+                          ItemsSource="{Binding ExternalCommands}" 
+                          >
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Header" Value="{Binding}"/>
                             <Setter Property="Command" Value="{Binding DataContext.ExecuteExternalCommandCommand,
                                 RelativeSource={RelativeSource AncestorType=Window}}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
+                            <EventSetter Event="Loaded" Handler="MenuItem_Loaded"/>
+                            <Setter Property="IsEnabled" Value="{Binding CanExecute, UpdateSourceTrigger=Explicit}"/>
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>

@@ -46,8 +46,16 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diff4Net.1.1.0\lib\net452\NetDiff.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
@@ -58,8 +66,17 @@
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SKCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SKCore.1.0.1\lib\net452\SKCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SKCore.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SKCore.Wpf.1.0.2\lib\net452\SKCore.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -76,12 +93,39 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="YamlDotNet, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.4.2.1\lib\net35\YamlDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\ProgressWindow.xaml.cs">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,9 +137,16 @@
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\DiffCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Settings\FileMatchType.cs" />
+    <Compile Include="Settings\FileSetting.cs" />
+    <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
+    <Compile Include="ValueConverters\PercentageConverter.cs" />
+    <Compile Include="ViewModels\FileSettingEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\FileSettingsWindowViewModel.cs" />
+    <Compile Include="Views\EventDispathcer.cs" />
+    <Compile Include="Views\EventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />
-    <Compile Include="Extensions\EnumerableExtension.cs" />
-    <Compile Include="ICloneable.cs" />
+    <Compile Include="Views\EventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
     <Compile Include="Models\DiffGridModelConfig.cs" />
     <Compile Include="Models\DiffType.cs" />
@@ -103,7 +154,6 @@
     <Compile Include="Settings\EMEnvironmentValue.cs" />
     <Compile Include="Settings\ExternalCommand.cs" />
     <Compile Include="Styles\EMColor.cs" />
-    <Compile Include="Utilities\FrameworkElementUtility.cs" />
     <Compile Include="ValueConverters\CultureNameConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameterConverter.cs" />
     <Compile Include="ValueConverters\FileDialogParameter.cs" />
@@ -112,7 +162,7 @@
     <Compile Include="ViewModels\CommandEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\CommandsWindowViewModel.cs" />
     <Compile Include="ViewModels\DiffViewModel.cs" />
-    <Compile Include="ViewModels\GeneralSettingWindowViewModel.cs" />
+    <Compile Include="ViewModels\DiffExtractionSettingWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CommandEditorWindow.xaml.cs">
       <DependentUpon>CommandEditorWindow.xaml</DependentUpon>
@@ -135,6 +185,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FileSettingEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FileSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,11 +204,21 @@
     <Compile Include="Views\DiffExtractionSettingWindow.xaml.cs">
       <DependentUpon>DiffExtractionSettingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FileSettingEditorWindow.xaml.cs">
+      <DependentUpon>FileSettingEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileSettingsWindow.xaml.cs">
+      <DependentUpon>FileSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\DiffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProgressWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +267,10 @@
     <ProjectReference Include="..\FastWpfGrid\WriteableBitmapEx\WriteableBitmapEx.Wpf.csproj">
       <Project>{b0aa6a94-6784-4221-81f0-244a68c374c0}</Project>
       <Name>WriteableBitmapEx.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetDiff\NetDiff\NetDiff.csproj">
+      <Project>{00a6267d-dde3-42cc-9c99-9166c334053e}</Project>
+      <Name>NetDiff</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

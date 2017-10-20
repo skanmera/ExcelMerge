@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ExcelMerge.GUI"
+             xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
              >
     <Application.Resources>
+
+        <vc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 
     </Application.Resources>
 </Application>

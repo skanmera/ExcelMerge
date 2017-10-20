@@ -10,6 +10,7 @@ namespace FastWpfGrid
     {
         public static readonly FastGridCellAddress Empty = new FastGridCellAddress();
         public static readonly FastGridCellAddress GridHeader = new FastGridCellAddress(null, null, true);
+        public static readonly FastGridCellAddress Zero = new FastGridCellAddress(0, 0, false);
 
         public bool Equals(FastGridCellAddress other)
         {

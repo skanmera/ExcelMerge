@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NPOI.SS.UserModel;
 using NetDiff;
+using SKCore.Collection;
 
 namespace ExcelMerge
 {
@@ -17,12 +18,88 @@ namespace ExcelMerge
 
         public static ExcelSheet Create(ISheet srcSheet, ExcelSheetReadConfig config)
         {
-            return CreateSheet(ExcelReader.Read(srcSheet, config));
+            var rows = ExcelReader.Read(srcSheet);
+
+            return CreateSheet(rows, config);
         }
 
         public static ExcelSheet CreateFromCsv(string path, ExcelSheetReadConfig config)
         {
-            return CreateSheet(CsvReader.Read(path, config));
+            var rows = CsvReader.Read(path);
+
+            return CreateSheet(rows, config);
+        }
+
+        private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows, ExcelSheetReadConfig config)
+        {
+            var sheet = CreateSheet(rows);
+
+            if (config.TrimFirstBlankRows)
+                sheet.TrimFirstBlankRows();
+
+            if (config.TrimFirstBlankColumns)
+                sheet.TrimFirstBlankColumns();
+
+            if (config.TrimLastBlankRows)
+                sheet.TrimLastBlankRows();
+
+            if (config.TrimLastBlankColumns)
+                sheet.TrimLastBlankColumns();
+
+            return sheet;
+        }
+
+        public void TrimFirstBlankRows()
+        {
+            var rows = new SortedDictionary<int, ExcelRow>();
+            var index = 0;
+            foreach (var row in Rows.SkipWhile(r => r.Value.IsBlank()))
+            {
+                rows.Add(index, new ExcelRow(index, row.Value.Cells));
+                index++;
+            }
+
+            Rows = rows;
+        }
+
+        public void TrimFirstBlankColumns()
+        {
+            var columns = CreateColumns();
+            var indices = columns.Select((v, i) => new { v, i }).TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+
+            foreach (var i in indices)
+                RemoveColumn(i);
+        }
+
+        public void TrimLastBlankRows()
+        {
+            var rows = new SortedDictionary<int, ExcelRow>();
+            var index = 0;
+            foreach (var row in Rows.Reverse().SkipWhile(r => r.Value.IsBlank()).Reverse())
+            {
+                rows.Add(index, new ExcelRow(index, row.Value.Cells));
+                index++;
+            }
+
+            Rows = rows;
+        }
+
+        public void TrimLastBlankColumns()
+        {
+            var columns = CreateColumns();
+            var indices = columns.Select((v, i) => new { v, i }).Reverse().TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+
+            foreach (var i in indices)
+                RemoveColumn(i);
+        }
+
+        public void RemoveColumn(int column)
+        {
+            foreach (var row in Rows)
+            {
+                if (row.Value.Cells.Count > column)
+                    row.Value.Cells.RemoveAt(column);
+            }
         }
 
         private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows)
@@ -42,8 +119,7 @@ namespace ExcelMerge
             var dstColumns = dst.CreateColumns();
             var columnStatusMap = CreateColumnStatusMap(srcColumns, dstColumns, config);
 
-            var option = DiffOption<ExcelRow>.Default;
-            option.Order = DiffOrder.LazyDeleteFirst;
+            var option = new DiffOption<ExcelRow>();
             option.EqualityComparer =
                 new RowComparer(new HashSet<int>(columnStatusMap.Where(i => i.Value != ExcelColumnStatus.None).Select(i => i.Key)));
 
@@ -52,7 +128,7 @@ namespace ExcelMerge
                 var shifted = new List<ExcelCell>();
                 var index = 0;
                 var queue = new Queue<ExcelCell>(row.Cells);
-                while(queue.Any())
+                while (queue.Any())
                 {
                     if (columnStatusMap[index] == ExcelColumnStatus.Inserted)
                         shifted.Add(new ExcelCell(string.Empty, 0, 0));
@@ -83,11 +159,26 @@ namespace ExcelMerge
                 row.UpdateCells(shifted);
             }
 
-            var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option).ToList();
-            var results = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option));
-            var sheetDiff = new ExcelSheetDiff();
+            var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option);
+            r = DiffUtil.Order(r, DiffOrderType.LazyDeleteFirst);
+            var resultArray = DiffUtil.OptimizeCaseDeletedFirst(r).ToArray();
+            if (resultArray.Length > 10000)
+            {
+                var count = 0;
+                var indices = Enumerable.Range(0, 100).ToList();
+                foreach (var result in resultArray)
+                {
+                    if (result.Status != DiffStatus.Equal)
+                        indices.AddRange(Enumerable.Range(Math.Max(0, count - 100), 200));
 
-            DiffCells(results, sheetDiff, columnStatusMap);
+                    count++;
+                }
+                indices = indices.Distinct().ToList();
+                resultArray = indices.Where(i => i < resultArray.Length).Select(i => resultArray[i]).ToArray();
+            }
+
+            var sheetDiff = new ExcelSheetDiff();
+            DiffCells(resultArray, sheetDiff, columnStatusMap);
 
             return sheetDiff;
         }
@@ -95,8 +186,7 @@ namespace ExcelMerge
         private static Dictionary<int, ExcelColumnStatus> CreateColumnStatusMap(
             IEnumerable<ExcelColumn> srcColumns, IEnumerable<ExcelColumn> dstColumns, ExcelSheetDiffConfig config)
         {
-            var option = DiffOption<ExcelColumn>.Default;
-            option.Order = DiffOrder.LazyDeleteFirst;
+            var option = new DiffOption<ExcelColumn>();
 
             if (config.HeaderIndex >= 0)
             {
@@ -108,7 +198,9 @@ namespace ExcelMerge
                     dc.HeaderIndex = config.HeaderIndex;
             }
 
-            var results = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(srcColumns, dstColumns, option));
+            var results = DiffUtil.Diff(srcColumns, dstColumns, option);
+            results = DiffUtil.Order(results, DiffOrderType.LazyDeleteFirst);
+            results = DiffUtil.OptimizeCaseDeletedFirst(results);
             var ret = new Dictionary<int, ExcelColumnStatus>();
             var columnIndex = 0;
             foreach (var result in results)
@@ -184,22 +276,6 @@ namespace ExcelMerge
 
                 if (srcQueue.Any()) src = srcQueue.Dequeue();
                 if (dstQueue.Any()) dst = dstQueue.Dequeue();
-
-                //if (status.Value == ExcelColumnStatus.None)
-                //{
-                //    if (srcQueue.Any()) src = srcQueue.Dequeue();
-                //    if (dstQueue.Any()) dst = dstQueue.Dequeue();
-                //}
-                //else if (status.Value == ExcelColumnStatus.Deleted)
-                //{
-                //    if (srcQueue.Any())
-                //        src = srcQueue.Dequeue();
-                //}
-                //else if (status.Value == ExcelColumnStatus.Inserted)
-                //{
-                //    if (dstQueue.Any())
-                //        dst = dstQueue.Dequeue();
-                //}
 
                 yield return Tuple.Create(src, dst);
             }

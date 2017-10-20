@@ -199,7 +199,7 @@
     <value>実行ファイル</value>
   </data>
   <data name="Word_File" xml:space="preserve">
-    <value>フィル</value>
+    <value>ファイル</value>
   </data>
   <data name="Word_Japanese" xml:space="preserve">
     <value>日本語</value>
@@ -223,18 +223,141 @@
     <value>ツール</value>
   </data>
   <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
-    <value>この行をヘッダとして差分を抽出する</value>
+    <value>この行を列ヘッダとして差分を抽出する</value>
   </data>
-  <data name="ContextMenu_FreezeColumn" xml:space="preserve">
-    <value>列を固定</value>
+  <data name="GroupBox_DisplayFormat" xml:space="preserve">
+    <value>表示形式</value>
   </data>
-  <data name="ContextMenu_ResetHeader" xml:space="preserve">
-    <value>ヘッダを解除</value>
+  <data name="Label_CellHeight" xml:space="preserve">
+    <value>セルの高さ</value>
   </data>
-  <data name="ContextMenu_SetHeader" xml:space="preserve">
-    <value>ヘッダにセット</value>
+  <data name="Label_CellWidth" xml:space="preserve">
+    <value>セルの幅</value>
   </data>
-  <data name="ContextMenu_UnfreezeColumn" xml:space="preserve">
-    <value>列の固定を解除</value>
+  <data name="RadioButton_ShowAll" xml:space="preserve">
+    <value>全て</value>
+  </data>
+  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
+    <value>差分のみ</value>
+  </data>
+  <data name="ToolTip_Swap" xml:space="preserve">
+    <value>左右を入れ替え</value>
+  </data>
+  <data name="Word_Path" xml:space="preserve">
+    <value>パス</value>
+  </data>
+  <data name="Word_Sheet" xml:space="preserve">
+    <value>シート</value>
+  </data>
+  <data name="Word_DstFile" xml:space="preserve">
+    <value>右側のファイル</value>
+  </data>
+  <data name="Word_SrcFile" xml:space="preserve">
+    <value>左側のファイル</value>
+  </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>追加の色</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>変更がある行を色付けする</value>
+  </data>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>行ヘッダの色</value>
+  </data>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>列ヘッダの色</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>変更の色</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>変更がある行の色</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>削除の色</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>行の色</value>
+  </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>先頭の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>末尾の空列を無視する</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>末尾の空行を無視する</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>追加された行({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>変更されたセル({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>変更された行({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>削除された行({0})</value>
+  </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>大文字小文字を区別する</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>完全一致</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>正規表現</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>ファイル設定</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>ファイル設定編集</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>ファイル設定</value>
+  </data>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>行ヘッダインデックス</value>
+  </data>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>列ヘッダインデックス</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>マッチタイプ</value>
+  </data>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>列ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>行ヘッダをリセット</value>
+  </data>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>列ヘッダにセット</value>
+  </data>
+  <data name="ContextMenu_SetRowHeader" xml:space="preserve">
+    <value>行ヘッダにセット</value>
+  </data>
+  <data name="Word_Font" xml:space="preserve">
+    <value>フォント</value>
+  </data>
+  <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
+    <value>列ヘッダの最大幅</value>
+  </data>
+  <data name="Msg_ExtractingDiff" xml:space="preserve">
+    <value>差分を抽出しています</value>
+  </data>
+  <data name="Msg_ReadingFiles" xml:space="preserve">
+    <value>ファイルを読み込んでいます</value>
+  </data>
+  <data name="Msg_WarnSize" xml:space="preserve">
+    <value>行数が多すぎます。差異が存在する行の周辺だけを表示します。</value>
+  </data>
+  <data name="Word_RowHeaderName" xml:space="preserve">
+    <value>行ヘッダ名</value>
   </data>
 </root>
