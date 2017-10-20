@@ -2533,7 +2533,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NetDiff, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:NetDiff, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_505C36760E25D615FDB521318AB738BB"
@@ -4115,15 +4115,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExcelMerge"
-        "ProductCode" = "8:{3FE3CBA9-F47C-452F-A3EE-57F80C29A59E}"
-        "PackageCode" = "8:{D7360C51-AD42-4E91-8B69-E3F5C5157FBC}"
+        "ProductCode" = "8:{03F53A48-0E4D-4488-B4E6-A538466DF22F}"
+        "PackageCode" = "8:{BA7E052B-A3C3-4542-AEDC-D75F87B4BB8A}"
         "UpgradeCode" = "8:{BCE73A99-B5CE-4C2E-A955-2E0922068237}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:skanmera"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
