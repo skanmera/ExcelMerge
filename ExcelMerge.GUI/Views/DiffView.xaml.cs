@@ -14,6 +14,7 @@ using FastWpfGrid;
 using NetDiff;
 using SKCore.Collection;
 using ExcelMerge.GUI.ViewModels;
+using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Styles;
 
@@ -69,8 +70,6 @@ namespace ExcelMerge.GUI.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            diffConfig = FindConfig();
-
             ExecuteDiff();
 
             SrcDataGrid.ScrolledModelRows += DataGrid_Scrolled;
@@ -79,9 +78,14 @@ namespace ExcelMerge.GUI.Views
             DstDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
         }
 
-        private ExcelSheetDiffConfig FindConfig()
+        private ExcelSheetDiffConfig CreateDiffConfig(FileSetting fileSetting)
         {
             var config = new ExcelSheetDiffConfig();
+
+            if (fileSetting != null)
+            {
+                config.HeaderIndex = fileSetting.ColumnHeaderIndex;
+            }
 
             return config;
         }
@@ -325,6 +329,9 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
             DstDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
 
+            var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
+            diffConfig = CreateDiffConfig(setting);
+
             var srcPath = SrcPathTextBox.Text;
             var dstPath = DstPathTextBox.Text;
             ExcelWorkbook wb1 = null;
@@ -383,7 +390,6 @@ namespace ExcelMerge.GUI.Views
                 srcModel.HideEqualRows();
             }
 
-            var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
             if (setting != null)
             {
                 srcModel.SetColumnHeader(setting.ColumnHeaderIndex);
