@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -8,10 +9,11 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
+using Microsoft.Practices.Unity;
 using FastWpfGrid;
 using NetDiff;
-using ExcelMerge.GUI.Extensions;
+using SKCore.Collection;
+using ExcelMerge.GUI.ViewModels;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Styles;
 
@@ -19,208 +21,62 @@ namespace ExcelMerge.GUI.Views
 {
     public partial class DiffView : UserControl
     {
-        private const double minimumLocationGridSize = 5d;
-        private double valueTextBoxHeight;
-        private bool updateViewRectangleEnabled;
         private ExcelSheetDiffConfig diffConfig;
+        private IUnityContainer container;
+
+        private const string srcKey = "src";
+        private const string dstKey = "dst";
 
         public DiffView()
         {
             InitializeComponent();
 
-            FastGridControl.RegisterSyncScrollGrid("DataGrid", SrcDataGrid);
-            FastGridControl.RegisterSyncScrollGrid("DataGrid", DstDataGrid);
+            container = new UnityContainer();
+            container
+                .RegisterInstance(srcKey, SrcDataGrid)
+                .RegisterInstance(dstKey, DstDataGrid)
+                .RegisterInstance(srcKey, SrcLocationGrid)
+                .RegisterInstance(dstKey, DstLocationGrid)
+                .RegisterInstance(srcKey, SrcViewRectangle)
+                .RegisterInstance(dstKey, DstViewRectangle)
+                .RegisterInstance(srcKey, SrcValueTextBox)
+                .RegisterInstance(dstKey, DstValueTextBox);
 
-            SrcDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
-            DstDataGrid.AlternatingColors = new Color[] { Colors.White, Color.FromRgb(250, 250, 250) };
+            var srcEventHandler = new EventHandler(srcKey);
+            var dstEventHandler = new EventHandler(dstKey);
 
-            SrcDataGrid.SetMaxRowSize(100);
-            DstDataGrid.SetMaxRowSize(100);
-            SrcDataGrid.SetMaxColumnSize(100);
-            DstDataGrid.SetMaxColumnSize(100);
-            SrcDataGrid.SetMinColumnSize(100);
-            DstDataGrid.SetMinColumnSize(100);
+            DataGridEventDispatcher.Listeners.Add(srcEventHandler);
+            DataGridEventDispatcher.Listeners.Add(dstEventHandler);
+            LocationGridEventDispatcher.Listeners.Add(srcEventHandler);
+            LocationGridEventDispatcher.Listeners.Add(dstEventHandler);
+            ViewportEventDispatcher.Listeners.Add(srcEventHandler);
+            ViewportEventDispatcher.Listeners.Add(dstEventHandler);
+            ValueTextBoxEventDispatcher.Listeners.Add(srcEventHandler);
+            ValueTextBoxEventDispatcher.Listeners.Add(dstEventHandler);
 
-            valueTextBoxHeight = SrcValueTextBox.Height;
-            updateViewRectangleEnabled = true;
-        }
-
-        private void DstDataGrid_Scrolled(object sender, EventArgs e)
-        {
-            SyncScroll(DstDataGrid, SrcDataGrid);
-
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
-
-            SrcDataGrid.NotifyRefresh();
-            DstDataGrid.NotifyRefresh();
-        }
-
-        private void SrcDataGrid_Scrolled(object sender, EventArgs e)
-        {
-            SyncScroll(SrcDataGrid, DstDataGrid);
-
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
-
-            SrcDataGrid.NotifyRefresh();
-            DstDataGrid.NotifyRefresh();
-        }
-
-        private void SyncScroll(FastGridControl scrolled, FastGridControl other)
-        {
-            if (scrolled.VerticalScrollBarOffset == other.VerticalScrollBarOffset &&
-                scrolled.HorizontalScrollBarOffset == other.HorizontalScrollBarOffset)
-                return;
-
-            var row = (int)Math.Round(scrolled.VerticalScrollBarOffset);
-            var col = (int)Math.Round(scrolled.HorizontalScrollBarOffset);
-
-            other.Scroll(row, col, scrolled.VerticalScrollBarOffset, scrolled.HorizontalScrollBarOffset);
-        }
-
-        private bool UpdateLocationGridDefinitions(Grid locationGrid, FastGridControl dataGrid, Size size)
-        {
-            if (dataGrid == null || dataGrid.Model == null)
-                return false;
-
-            var width = dataGrid.Model.ColumnCount > 0 ? size.Width / dataGrid.Model.ColumnCount : 0;
-            var height = dataGrid.Model.RowCount > 0 ? size.Height / dataGrid.Model.RowCount : 0;
-
-            locationGrid.ColumnDefinitions.Clear();
-            for (int i = 0; i < dataGrid.Model.ColumnCount; i++)
+            App.Instance.OnSettingUpdated += () =>
             {
-                var colDef = new ColumnDefinition()
-                {
-                    Width = new GridLength(width, GridUnitType.Pixel),
-                };
+                SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
+                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
+                DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                DstDataGrid.CellFontName = App.Instance.Setting.FontName;
+                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
+            };
 
-                locationGrid.ColumnDefinitions.Add(colDef);
-            }
-
-            locationGrid.RowDefinitions.Clear();
-            for (int i = 0; i < dataGrid.Model.RowCount; i++)
-            {
-                var rowDef = new RowDefinition()
-                {
-                    Height = new GridLength(height, GridUnitType.Pixel),
-                };
-
-                locationGrid.RowDefinitions.Add(rowDef);
-            }
-
-            return true;
-        }
-
-        private void UpdateViewRectangle(Rectangle viewRectangle, FastGridControl dataGrid)
-        {
-            if (!updateViewRectangleEnabled)
-                return;
-
-            if (dataGrid.VisibleColumnCount <= 0 || dataGrid.VisibleRowCount <= 0)
-                return;
-
-            Grid.SetColumn(viewRectangle, dataGrid.FirstVisibleColumnScrollIndex);
-            Grid.SetColumnSpan(viewRectangle, dataGrid.VisibleColumnCount);
-            Grid.SetRow(viewRectangle, dataGrid.FirstVisibleRowScrollIndex);
-            Grid.SetRowSpan(viewRectangle, dataGrid.VisibleRowCount);
-        }
-
-        private Tuple<int, int> UpdateViewRectangle(Grid grid, Rectangle viewRect, MouseEventArgs e)
-        {
-            var rowSpan = Grid.GetRowSpan(viewRect);
-            var row = GetGridRow(e, grid);
-            while (row + rowSpan / 2 > grid.RowDefinitions.Count)
-            {
-                row--;
-            }
-
-            var colSpan = Grid.GetColumnSpan(viewRect);
-            var col = GetGridColumn(e, grid);
-            while (col + colSpan / 2 > grid.ColumnDefinitions.Count)
-            {
-                col--;
-            }
-
-            Grid.SetRow(viewRect, Math.Max(row - rowSpan / 2, 0));
-            Grid.SetColumn(viewRect, Math.Max(col - colSpan / 2, 0));
-
-            return Tuple.Create(row, col);
-        }
-
-        private Tuple<int, int> UpdateViewRectangle(Grid grid, Rectangle viewRect, int row, int column)
-        {
-            var rowSpan = Grid.GetRowSpan(viewRect);
-            var columnSpan = Grid.GetColumnSpan(viewRect);
-
-            Grid.SetRow(viewRect, Math.Max(row - rowSpan / 2, 0));
-            Grid.SetColumn(viewRect, Math.Max(column - columnSpan / 2, 0));
-
-            return Tuple.Create(row, column);
-        }
-
-        private int GetGridRow(MouseEventArgs e, Grid grid)
-        {
-            double y = e.GetPosition(grid).Y;
-            double start = 0.0;
-            int row = 0;
-            foreach (RowDefinition rd in grid.RowDefinitions)
-            {
-                start += rd.ActualHeight;
-                if (y < start)
-                    break;
-
-                row++;
-            }
-
-            return row;
-        }
-
-        private int GetGridColumn(MouseEventArgs e, Grid grid)
-        {
-            double x = e.GetPosition(grid).X;
-            double start = 0.0;
-            int column = 0;
-            foreach (ColumnDefinition rd in grid.ColumnDefinitions)
-            {
-                start += rd.ActualWidth;
-                if (x < start)
-                    break;
-
-                column++;
-            }
-
-            return column;
-        }
-
-        private int GetFirstRow()
-        {
-            return Grid.GetRow(SrcViewRectangle);
-        }
-
-        private int GetFirstColumn()
-        {
-            return Grid.GetColumn(SrcViewRectangle);
-        }
-
-        private void ApplyViewRectToGrids()
-        {
-            var row = GetFirstRow();
-            var col = GetFirstColumn();
-
-            SrcDataGrid.Scroll(row, col, row, col);
-            DstDataGrid.Scroll(row, col, row, col);
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             diffConfig = FindConfig();
+
             ExecuteDiff();
 
-            SrcDataGrid.ScrolledModelRows += SrcDataGrid_Scrolled;
-            SrcDataGrid.ScrolledModelColumns += SrcDataGrid_Scrolled;
-            DstDataGrid.ScrolledModelRows += DstDataGrid_Scrolled;
-            DstDataGrid.ScrolledModelColumns += DstDataGrid_Scrolled;
+            SrcDataGrid.ScrolledModelRows += DataGrid_Scrolled;
+            SrcDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
+            DstDataGrid.ScrolledModelRows += DataGrid_Scrolled;
+            DstDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
         }
 
         private ExcelSheetDiffConfig FindConfig()
@@ -230,250 +86,66 @@ namespace ExcelMerge.GUI.Views
             return config;
         }
 
-        private void SrcLocationGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DataGrid_Scrolled(object sender, EventArgs e)
         {
-            var indices = UpdateViewRectangle(SrcLocationGrid, SrcViewRectangle, e);
-            UpdateViewRectangle(DstLocationGrid, DstViewRectangle, indices.Item1, indices.Item2);
-
-            ApplyViewRectToGrids();
+            DataGridEventDispatcher.DispatchScrollEvnet(sender as FastGridControl, container);
         }
 
-        private void SrcLocationGrid_MouseMove(object sender, MouseEventArgs e)
+        private void LocationGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            LocationGridEventDispatcher.DispatchMouseDownEvent(sender as Grid, container, e);
+        }
+
+        private void LocationGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var indices = UpdateViewRectangle(SrcLocationGrid, SrcViewRectangle, e);
-                UpdateViewRectangle(DstLocationGrid, DstViewRectangle, indices.Item1, indices.Item2);
-
-                updateViewRectangleEnabled = false;
-                ApplyViewRectToGrids();
-                updateViewRectangleEnabled = true;
-            }
+                LocationGridEventDispatcher.DispatchMouseDownEvent(sender as Grid, container, e);
         }
 
-        private void DstLocationGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void LocationGrid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var indices = UpdateViewRectangle(DstLocationGrid, DstViewRectangle, e);
-            UpdateViewRectangle(SrcLocationGrid, SrcViewRectangle, indices.Item1, indices.Item2);
-
-            ApplyViewRectToGrids();
+            LocationGridEventDispatcher.DispatchMouseWheelEvent(sender as Grid, container, e);
         }
 
-        private void DstLocationGrid_MouseMove(object sender, MouseEventArgs e)
+        private void DataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var indices = UpdateViewRectangle(DstLocationGrid, DstViewRectangle, e);
-                UpdateViewRectangle(SrcLocationGrid, SrcViewRectangle, indices.Item1, indices.Item2);
-
-                updateViewRectangleEnabled = false;
-                ApplyViewRectToGrids();
-                updateViewRectangleEnabled = true;
-            }
+            DataGridEventDispatcher.DispatchSizeChangeEvent(sender as FastGridControl, container, e);
         }
 
-        private void SrcDataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void LocationGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
+            LocationGridEventDispatcher.DispatchSizeChangeEvent(SrcLocationGrid, container, e);
         }
 
-        private void DstDataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void DataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
         {
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
-        }
+            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(sender as FastGridControl, container);
 
-        private void LocationSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!UpdateLocationGridDefinitions(SrcLocationGrid, SrcDataGrid, e.NewSize))
+            if (!SrcDataGrid.CurrentCell.Row.HasValue || !DstDataGrid.CurrentCell.Row.HasValue)
                 return;
 
-            if (!UpdateLocationGridDefinitions(DstLocationGrid, DstDataGrid, e.NewSize))
+            if (!SrcDataGrid.CurrentCell.Column.HasValue || !DstDataGrid.CurrentCell.Column.HasValue)
                 return;
 
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
-
-            UpdateLocationGridColors(SrcLocationGrid, SrcDataGrid);
-            UpdateLocationGridColors(DstLocationGrid, DstDataGrid);
-        }
-
-        private void RemoveRectangles(Grid grid)
-        {
-            int intTotalChildren = grid.Children.Count - 1;
-            for (int intCounter = intTotalChildren; intCounter > 0; intCounter--)
-            {
-                if (grid.Children[intCounter].GetType() == typeof(Rectangle))
-                {
-                    var ucCurrentChild = (Rectangle)grid.Children[intCounter];
-                    grid.Children.Remove(ucCurrentChild);
-                }
-            }
-        }
-
-        private static bool EqualColor(Color? lhs, Color? rhs)
-        {
-            if (!lhs.HasValue && !rhs.HasValue)
-                return true;
-
-            return lhs.Equals(rhs);
-        }
-
-        private void UpdateLocationGridColors(Grid locationGrid, FastGridControl dataGrid)
-        {
-            RemoveRectangles(locationGrid);
-
-            var columns = Enumerable.Range(0, locationGrid.ColumnDefinitions.Count).ToList();
-            for (int i = 0; i < locationGrid.RowDefinitions.Count; i++)
-            {
-                var splitedCells = columns.Select(c => dataGrid.Model.GetCell(dataGrid, i, c).BackgroundColor)
-                    .SplitByComparison((c, n) => EqualColor(c, n));
-
-                var startPosition = 0;
-                foreach (var sc in splitedCells)
-                {
-                    var color = sc.First();
-                    if (!color.HasValue)
-                    {
-                        startPosition += sc.Count();
-                        continue;
-                    }
-
-                    var rectangle = new Rectangle();
-                    rectangle.Fill = new SolidColorBrush(color.Value);
-
-                    Grid.SetRow(rectangle, i);
-                    Grid.SetRowSpan(rectangle, 1);
-                    for (int k = 1; locationGrid.RowDefinitions[i].Height.Value * k < minimumLocationGridSize; k++)
-                        Grid.SetRowSpan(rectangle, k);
-
-                    Grid.SetColumn(rectangle, startPosition);
-                    Grid.SetColumnSpan(rectangle, sc.Count());
-                    startPosition += sc.Count();
-                    for (int k = sc.Count(); locationGrid.ColumnDefinitions[0].Width.Value * k < minimumLocationGridSize; k++)
-                    {
-                        Grid.SetColumnSpan(rectangle, k);
-                    }
-
-                    Grid.SetZIndex(rectangle, 0);
-
-                    locationGrid.Children.Add(rectangle);
-                }
-            }
-        }
-
-        private void SrcLocationGrid_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            LocationGrid_MouseWheel(e);
-        }
-
-        private void DstLocationGrid_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            LocationGrid_MouseWheel(e);
-        }
-
-        private void LocationGrid_MouseWheel(MouseWheelEventArgs e)
-        {
             if (SrcDataGrid.Model == null || DstDataGrid.Model == null)
                 return;
 
-            var srcRowSpan = Grid.GetRowSpan(SrcViewRectangle);
-            var dstRowSpan = Grid.GetRowSpan(DstViewRectangle);
-
-            var srcRow = Math.Max((Grid.GetRow(SrcViewRectangle) - e.Delta / 10), 0);
-            srcRow = Math.Min(srcRow, Math.Max(SrcLocationGrid.RowDefinitions.Count - srcRowSpan, 0));
-            Grid.SetRow(SrcViewRectangle, srcRow);
-
-            var dstRow = Math.Max((Grid.GetRow(SrcViewRectangle) - e.Delta / 10), 0);
-            dstRow = Math.Min(dstRow, Math.Max(DstLocationGrid.RowDefinitions.Count - dstRowSpan, 0));
-            Grid.SetRow(DstViewRectangle, dstRow);
-
-            ApplyViewRectToGrids();
-        }
-
-        private void SrcValueTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ValueTextBox_GotFocus();
-        }
-
-        private void DstValueTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ValueTextBox_GotFocus();
-        }
-
-        private void ValueTextBox_GotFocus()
-        {
-            var margin = 10;
-            var srcTextHeight = CalculateTextBoxHeight(SrcValueTextBox) + margin;
-            var dstTextHeight = CalculateTextBoxHeight(DstValueTextBox) + margin;
-
-            var height = Math.Max(srcTextHeight, dstTextHeight);
-            height = Math.Max(height, SrcValueTextBox.Height);
-            height = Math.Min(height, SrcDataGrid.ActualHeight);
-
-            SrcValueTextBox.Height = height;
-            DstValueTextBox.Height = height;
-        }
-
-        private void SrcValueTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ValueTextBox_LostFocus();
-        }
-
-        private void DstValueTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ValueTextBox_LostFocus();
-        }
-
-        private void ValueTextBox_LostFocus()
-        {
-            SrcValueTextBox.Height = valueTextBoxHeight;
-            DstValueTextBox.Height = valueTextBoxHeight;
-        }
-
-        private double CalculateTextBoxHeight(RichTextBox rtb)
-        {
-            var text = string.Join("", rtb.Document.Blocks.First().ContentStart.Paragraph.Inlines.Select(i => new TextRange(i.ContentStart, i.ContentEnd).Text));
-            var height = Math.Ceiling(SrcValueTextBox.FontSize * SrcValueTextBox.FontFamily.LineSpacing);
-
-            return text.Split('\n').Count() * height;
-        }
-
-        private void SrcDataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
-        {
-            DataGrid_SelectedCellsChanged(SrcDataGrid, DstDataGrid);
-        }
-
-        private void DstDataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
-        {
-            DataGrid_SelectedCellsChanged(DstDataGrid, SrcDataGrid);
-        }
-
-        private void DataGrid_SelectedCellsChanged(FastGridControl changed, FastGridControl other)
-        {
-            var model = changed?.Model as DiffGridModel;
-            if (model == null)
-                return;
-
-            var otherModel = other?.Model as DiffGridModel;
-            if (otherModel == null)
-                return;
-
-            var currentCell = changed.CurrentCell;
-            if (currentCell.Row == null || currentCell.Column == null || !currentCell.Row.HasValue || !currentCell.Column.HasValue)
-                return;
-
-            if (other.CurrentCell != currentCell)
-            {
-                other.CurrentCell = new FastGridCellAddress(currentCell.Row, currentCell.Column);
-                return;
-            }
-
-            var srcValue = (SrcDataGrid.Model as DiffGridModel).GetCellText(SrcDataGrid.CurrentCell.Row.Value, SrcDataGrid.CurrentCell.Column.Value);
-            var dstValue = (DstDataGrid.Model as DiffGridModel).GetCellText(DstDataGrid.CurrentCell.Row.Value, DstDataGrid.CurrentCell.Column.Value);
+            var srcValue =
+                (SrcDataGrid.Model as DiffGridModel).GetCellText(SrcDataGrid.CurrentCell.Row.Value, SrcDataGrid.CurrentCell.Column.Value, true);
+            var dstValue =
+                (DstDataGrid.Model as DiffGridModel).GetCellText(DstDataGrid.CurrentCell.Row.Value, DstDataGrid.CurrentCell.Column.Value, true);
 
             UpdateValueDiff(srcValue, dstValue);
+        }
+
+        private void ValueTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ValueTextBoxEventDispatcher.DispatchGotFocusEvent(sender as RichTextBox, container);
+        }
+
+        private void ValueTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ValueTextBoxEventDispatcher.DispatchLostFocusEvent(sender as RichTextBox, container);
         }
 
         private string GetRichTextString(RichTextBox textBox)
@@ -485,10 +157,9 @@ namespace ExcelMerge.GUI.Views
 
         private IEnumerable<DiffResult<string>> DiffCellValue(IEnumerable<string> src, IEnumerable<string> dst)
         {
-            var option = DiffOption<string>.Default;
-            option.Order = DiffOrder.LazyDeleteFirst;
-
-            return DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(src, dst, option));
+            var r = DiffUtil.Diff(src, dst);
+            r = DiffUtil.Order(r, DiffOrderType.LazyDeleteFirst);
+            return DiffUtil.OptimizeCaseDeletedFirst(r);
         }
 
         private string ConvertWhiteSpaces(string str)
@@ -513,7 +184,7 @@ namespace ExcelMerge.GUI.Views
 
         private void DiffModifiedLine(IEnumerable<DiffResult<char>> results, List<Tuple<string, Color?>> ranges, bool isSrc)
         {
-            var splited = results.SplitByComparison((c, n) => c.Status.Equals(n.Status)).ToList();
+            var splited = results.SplitByRegularity((items, current) => items.Last().Status.Equals(current.Status)).ToList();
 
             foreach (var sr in splited)
             {
@@ -583,9 +254,9 @@ namespace ExcelMerge.GUI.Views
                 }
                 else if (lineDiffResult.Status == DiffStatus.Modified)
                 {
-                    var opt = DiffOption<char>.Default;
-                    opt.Order = DiffOrder.LazyDeleteFirst;
-                    var charDiffResults = DiffUtil.OptimizeCaseDeletedFirst(DiffUtil.Diff(lineDiffResult.Obj1, lineDiffResult.Obj2, opt)).ToList();
+                    var charDiffResults = DiffUtil.Diff(lineDiffResult.Obj1, lineDiffResult.Obj2);
+                    charDiffResults = DiffUtil.Order(charDiffResults, DiffOrderType.LazyDeleteFirst);
+                    charDiffResults = DiffUtil.OptimizeCaseDeletedFirst(charDiffResults);
 
                     DiffModifiedLine(charDiffResults.Where(r => r.Status != DiffStatus.Inserted), srcRange, true);
                     DiffModifiedLine(charDiffResults.Where(r => r.Status != DiffStatus.Deleted), dstRange, false);
@@ -615,70 +286,6 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        private static void UpdateTextColor(RichTextBox rtb, int offset, int length, Color color)
-        {
-            var textRange = GetTextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd, offset, length);
-            if (textRange == null)
-                return;
-
-            textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(color));
-        }
-
-        private static TextRange GetTextRange(TextPointer position, TextPointer endPosition, int offset, int length)
-        {
-            TextPointer contentsStart = position;
-            TextPointer start = null;
-            while (position != null)
-            {
-                if (position.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text || position.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.None)
-                {
-                    if (start == null)
-                    {
-                        for (int i = 0, count = position.GetTextRunLength(LogicalDirection.Forward); i <= count; ++i)
-                        {
-                            if (start == null)
-                            {
-                                start = position.GetPositionAtOffset(i);
-                                TextRange range = new TextRange(contentsStart, start);
-                                if (range.Text.Length >= offset)
-                                {
-                                    position = start;
-                                }
-                                else
-                                {
-                                    start = null;
-                                }
-                            }
-                            else
-                            {
-                                var end = position.GetPositionAtOffset(i);
-                                if (end != null)
-                                {
-                                    TextRange range = new TextRange(start, end);
-                                    if (range.Text.Length >= length)
-                                        return range;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0, count = position.GetTextRunLength(LogicalDirection.Forward); i <= count; ++i)
-                        {
-                            var end = position.GetPositionAtOffset(i);
-                            TextRange range = new TextRange(start, end);
-                            if (range.Text.Length >= length)
-                                return range;
-                        }
-                    }
-                }
-
-                position = position.GetNextInsertionPosition(LogicalDirection.Forward);
-            }
-
-            return null;
-        }
-
         private void DiffButton_Click(object sender, RoutedEventArgs e)
         {
             ExecuteDiff();
@@ -690,7 +297,10 @@ namespace ExcelMerge.GUI.Views
 
             return new ExcelSheetReadConfig()
             {
-                SkipFirstBlankRows = setting.SkipFirstBlankRows,
+                TrimFirstBlankRows = setting.SkipFirstBlankRows,
+                TrimFirstBlankColumns = setting.SkipFirstBlankColumns,
+                TrimLastBlankRows = setting.TrimLastBlankRows,
+                TrimLastBlankColumns = setting.TrimLastBlankColumns,
             };
         }
 
@@ -710,9 +320,23 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.InitializeComponent();
             DstDataGrid.InitializeComponent();
 
-            var config = CreateReadConfig();
-            var wb1 = ExcelWorkbook.Create(SrcPathTextBox.Text, config);
-            var wb2 = ExcelWorkbook.Create(DstPathTextBox.Text, config);
+            SrcDataGrid.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+            DstDataGrid.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+            SrcDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
+            DstDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
+
+            var srcPath = SrcPathTextBox.Text;
+            var dstPath = DstPathTextBox.Text;
+            ExcelWorkbook wb1 = null;
+            ExcelWorkbook wb2 = null;
+            ProgressWindow.DoWorkWithModal(progress =>
+            {
+                progress.Report(Properties.Resources.Msg_ReadingFiles);
+
+                var config = CreateReadConfig();
+                wb1 = ExcelWorkbook.Create(srcPath, config);
+                wb2 = ExcelWorkbook.Create(dstPath, config);
+            });
 
             var tmpSrcSheetIndex = diffConfig.SrcSheetIndex;
             var tmpDstSheetIndex = diffConfig.DstSheetIndex;
@@ -729,104 +353,132 @@ namespace ExcelMerge.GUI.Views
             var sheet1 = wb1.Sheets[SrcSheetCombobox.SelectedItem.ToString()];
             var sheet2 = wb2.Sheets[DstSheetCombobox.SelectedItem.ToString()];
 
-            var diff = ExcelSheet.Diff(sheet1, sheet2, diffConfig);
+            if (sheet1.Rows.Count > 10000 || sheet2.Rows.Count > 10000)
+                MessageBox.Show(Properties.Resources.Msg_WarnSize);
+
+            ExcelSheetDiff diff = null;
+            ProgressWindow.DoWorkWithModal(progress =>
+            {
+                progress.Report(Properties.Resources.Msg_ExtractingDiff);
+                diff = ExcelSheet.Diff(sheet1, sheet2, diffConfig);
+            });
 
             var modelConfig = new DiffGridModelConfig();
             var srcModel = new DiffGridModel(DiffType.Source, diff, modelConfig);
             var dstModel = new DiffGridModel(DiffType.Dest, diff, modelConfig);
 
+            (DataContext as ViewModels.DiffViewModel).UpdateDiffSummary(diff.CreateSummary());
+
+            SrcDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            DstDataGrid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            SrcDataGrid.CellFontName = App.Instance.Setting.FontName;
+            DstDataGrid.CellFontName = App.Instance.Setting.FontName;
+
             SrcDataGrid.Model = srcModel;
             DstDataGrid.Model = dstModel;
 
-            UpdateLocationGridDefinitions(SrcLocationGrid, SrcDataGrid, SrcLocationGrid.RenderSize);
-            UpdateLocationGridDefinitions(DstLocationGrid, DstDataGrid, DstLocationGrid.RenderSize);
+            if (ShowOnlyDiffRadioButton.IsChecked.Value)
+            {
+                srcModel.HideEqualRows();
+                srcModel.HideEqualRows();
+            }
 
-            UpdateViewRectangle(SrcViewRectangle, SrcDataGrid);
-            UpdateViewRectangle(DstViewRectangle, DstDataGrid);
+            var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
+            if (setting != null)
+            {
+                srcModel.SetColumnHeader(setting.ColumnHeaderIndex);
+                dstModel.SetColumnHeader(setting.ColumnHeaderIndex);
+                if (string.IsNullOrEmpty(setting.RowHeaderName))
+                {
+                    srcModel.SetRowHeader(setting.RowHeaderIndex);
+                    dstModel.SetRowHeader(setting.RowHeaderIndex);
+                }
+                else
+                {
+                    srcModel.SetRowHeader(setting.RowHeaderName);
+                    dstModel.SetRowHeader(setting.RowHeaderName);
+                }
+                SrcDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
+                DstDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
+            }
 
-            UpdateLocationGridColors(SrcLocationGrid, SrcDataGrid);
-            UpdateLocationGridColors(DstLocationGrid, DstDataGrid);
+            DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
+            DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
 
             if (!App.Instance.KeepFileHistory)
                 App.Instance.UpdateRecentFiles(SrcPathTextBox.Text, DstPathTextBox.Text);
         }
 
-        private void FreezeSrcColumn_Click(object sender, RoutedEventArgs e)
+        private Settings.FileSetting FindFilseSetting(string fileName)
         {
-            if (SrcDataGrid.CurrentCell != null)
+            foreach (var setting in App.Instance.Setting.FileSettings)
             {
-                (SrcDataGrid.Model as DiffGridModel).FreezeColumn(SrcDataGrid.CurrentCell.Column);
-                SrcDataGrid.NotifyColumnArrangeChanged();
+                if (setting.UseRegex)
+                {
+                    var regex = new System.Text.RegularExpressions.Regex(setting.Name);
+                    if (regex.IsMatch(fileName))
+                        return setting;
+                }
+                else
+                {
+                    if (setting.ExactMatch)
+                    {
+                        if (setting.Name == fileName)
+                            return setting;
+                    }
+                    else
+                    {
+                        if (fileName.Contains(setting.Name))
+                            return setting;
+                    }
+                }
+            }
 
-                (DstDataGrid.Model as DiffGridModel).FreezeColumn(SrcDataGrid.CurrentCell.Column);
-                DstDataGrid.NotifyColumnArrangeChanged();
+            return null;
+        }
+
+        private void SetRowHeader_Click(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
+                if (dataGrid != null)
+                    DataGridEventDispatcher.DispatchRowHeaderChagneEvent(dataGrid, container);
             }
         }
 
-        private void FreezeDstColumn_Click(object sender, RoutedEventArgs e)
+        private void ResetRowHeader_Click(object sender, RoutedEventArgs e)
         {
-            if (DstDataGrid.CurrentCell != null)
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
             {
-                (SrcDataGrid.Model as DiffGridModel).FreezeColumn(DstDataGrid.CurrentCell.Column);
-                SrcDataGrid.NotifyColumnArrangeChanged();
-
-                (DstDataGrid.Model as DiffGridModel).FreezeColumn(DstDataGrid.CurrentCell.Column);
-                DstDataGrid.NotifyColumnArrangeChanged();
+                var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
+                if (dataGrid != null)
+                    DataGridEventDispatcher.DispatchRowHeaderResetEvent(sender as FastGridControl, container);
             }
         }
 
-        private void UnfreezeSrcColumn_Click(object sender, RoutedEventArgs e)
+        private void SetColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            (SrcDataGrid.Model as DiffGridModel).UnfreezeColumn();
-            SrcDataGrid.NotifyColumnArrangeChanged();
-
-            (DstDataGrid.Model as DiffGridModel).UnfreezeColumn();
-            DstDataGrid.NotifyColumnArrangeChanged();
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
+                if (dataGrid != null)
+                    DataGridEventDispatcher.DispatchColumnHeaderChangeEvent(dataGrid, container);
+            }
         }
 
-        private void UnfreezeDstColumn_Click(object sender, RoutedEventArgs e)
+        private void ResetColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            (SrcDataGrid.Model as DiffGridModel).UnfreezeColumn();
-            SrcDataGrid.NotifyColumnArrangeChanged();
-
-            (DstDataGrid.Model as DiffGridModel).UnfreezeColumn();
-            DstDataGrid.NotifyColumnArrangeChanged();
-        }
-
-        private void SetSrcHeader_Click(object sender, RoutedEventArgs e)
-        {
-            (SrcDataGrid.Model as DiffGridModel).SetHeader(SrcDataGrid.CurrentCell.Row);
-            SrcDataGrid.NotifyRefresh();
-
-            (DstDataGrid.Model as DiffGridModel).SetHeader(SrcDataGrid.CurrentCell.Row);
-            DstDataGrid.NotifyRefresh();
-        }
-
-        private void SetDstHeader_Click(object sender, RoutedEventArgs e)
-        {
-            (DstDataGrid.Model as DiffGridModel).SetHeader(DstDataGrid.CurrentCell.Row);
-            DstDataGrid.NotifyRefresh();
-
-            (SrcDataGrid.Model as DiffGridModel).SetHeader(SrcDataGrid.CurrentCell.Row);
-            SrcDataGrid.NotifyRefresh();
-        }
-
-        private void ResetSrcHeader_Click(object sender, RoutedEventArgs e)
-        {
-            (DstDataGrid.Model as DiffGridModel).SetHeader(0);
-            DstDataGrid.NotifyRefresh();
-
-            (SrcDataGrid.Model as DiffGridModel).SetHeader(0);
-            SrcDataGrid.NotifyRefresh();
-        }
-
-        private void ResetDstHeader_Click(object sender, RoutedEventArgs e)
-        {
-            (DstDataGrid.Model as DiffGridModel).SetHeader(0);
-            DstDataGrid.NotifyRefresh();
-
-            (SrcDataGrid.Model as DiffGridModel).SetHeader(0);
-            SrcDataGrid.NotifyRefresh();
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
+                if (dataGrid != null)
+                    DataGridEventDispatcher.DispatchColumnHeaderResetEvent(sender as FastGridControl, container);
+            }
         }
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)
@@ -891,6 +543,204 @@ namespace ExcelMerge.GUI.Views
             diffConfig.HeaderIndex = headerIndex;
 
             ExecuteDiff();
+        }
+
+        private void ShowAllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
+            {
+                (SrcDataGrid.Model as DiffGridModel).ShowEqualRows();
+                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
+
+                (DstDataGrid.Model as DiffGridModel).ShowEqualRows();
+                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
+            }
+        }
+
+        private void ShowOnlyDiffRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
+            {
+                (SrcDataGrid.Model as DiffGridModel).HideEqualRows();
+                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
+
+                (DstDataGrid.Model as DiffGridModel).HideEqualRows();
+                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
+            }
+        }
+
+        private bool ValidateDataGrids()
+        {
+            return SrcDataGrid.Model != null && DstDataGrid.Model != null;
+        }
+
+        private void ValuteTextBox_ScrollChanged(object sender, RoutedEventArgs e)
+        {
+            ValueTextBoxEventDispatcher.DispatchScrolledEvent(sender as RichTextBox, container, (ScrollChangedEventArgs)e);
+        }
+
+        private void NextModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextModifiedCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousModifiedCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextModifiedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousModifiedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextAddedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousAddedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextRemovedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextRemovedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevRemovedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousRemovedRow(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void PrevMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var text = SearchTextCombobox.Text;
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var history = App.Instance.Setting.SearchHistory.ToList();
+            if (history.Contains(text))
+                history.Remove(text);
+
+            history.Insert(0, text);
+            history = history.Take(10).ToList();
+
+            App.Instance.Setting.SearchHistory = new ObservableCollection<string>(history);
+            App.Instance.Setting.Save();
+
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetPreviousMatchCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value, ShowOnlyDiffRadioButton.IsChecked.Value);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void NextMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateDataGrids())
+                return;
+
+            var text = SearchTextCombobox.Text;
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var history = App.Instance.Setting.SearchHistory.ToList();
+            if (history.Contains(text))
+                history.Remove(text);
+
+            history.Insert(0, text);
+            history = history.Take(10).ToList();
+
+            App.Instance.Setting.SearchHistory = new ObservableCollection<string>(history);
+            App.Instance.Setting.Save();
+
+            SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            var nextCell = (SrcDataGrid.Model as DiffGridModel).GetNextMatchCell(
+                SrcDataGrid.CurrentCell.IsEmpty ? FastGridCellAddress.Zero : SrcDataGrid.CurrentCell, text,
+                ExactMatchCheckBox.IsChecked.Value, CaseSensitiveCheckBox.IsChecked.Value, RegexCheckBox.IsChecked.Value, ShowOnlyDiffRadioButton.IsChecked.Value);
+            if (nextCell.IsEmpty)
+                return;
+
+            SrcDataGrid.CurrentCell = nextCell;
         }
     }
 }

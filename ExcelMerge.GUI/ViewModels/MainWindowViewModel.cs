@@ -27,6 +27,13 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref externalCommands, value); }
         }
 
+        private List<FileSetting> fileSettings;
+        public List<FileSetting> FileSettings
+        {
+            get { return fileSettings; }
+            private set { SetProperty(ref fileSettings, value); }
+        }
+
         private List<string> recentFiles;
         public List<string> RecentFiles
         {
@@ -55,9 +62,17 @@ namespace ExcelMerge.GUI.ViewModels
             set { SetProperty(ref dstPath, value); }
         }
 
+        private string cultureName;
+        public string CultureName
+        {
+            get { return cultureName; }
+            private set { SetProperty(ref cultureName, value); }
+        }
+
         public DelegateCommand<ExternalCommand> ExecuteExternalCommandCommand { get; private set; }
         public DelegateCommand OpenExternalCommandsWindowCommand { get; private set; }
-        public DelegateCommand OpenGeneralSettingsWindowCommand { get; private set; }
+        public DelegateCommand OpenFileSettingsWindowCommand { get; private set; }
+        public DelegateCommand OpenDiffExtractionSettingsWindowCommand { get; private set; }
         public DelegateCommand<FileDialogParameter> OpenFileDialogCommand { get; private set; }
         public DelegateCommand<string> OpenAsSrcFileCommand { get; private set; }
         public DelegateCommand<string> OpenAsDstFileCommand { get; private set; }
@@ -72,7 +87,8 @@ namespace ExcelMerge.GUI.ViewModels
 
             ExecuteExternalCommandCommand = new DelegateCommand<ExternalCommand>((cmd) => cmd.Execute(false));
             OpenExternalCommandsWindowCommand = new DelegateCommand(OpenExternalCommandsWindow);
-            OpenGeneralSettingsWindowCommand = new DelegateCommand(OpenGeneralSettingWindow);
+            OpenFileSettingsWindowCommand = new DelegateCommand(OpenFileSettingsWindow);
+            OpenDiffExtractionSettingsWindowCommand = new DelegateCommand(OpenDiffExtractionSettingWindow);
             OpenFileDialogCommand = new DelegateCommand<FileDialogParameter>(OpenFileDialog);
             OpenAsSrcFileCommand = new DelegateCommand<string>(OpenAsSrcFile);
             OpenAsDstFileCommand = new DelegateCommand<string>(OpenAsDstFile);
@@ -91,7 +107,9 @@ namespace ExcelMerge.GUI.ViewModels
         {
             RecentFiles = App.Instance.GetRecentFiles().ToList();
             ExternalCommands = App.Instance.Setting.ExternalCommands.ToList();
+            FileSettings = App.Instance.Setting.FileSettings.ToList();
             RecentFileSets = App.Instance.GetRecentFileSets().Select(i => $"{i.Item1} | {i.Item2}").ToList();
+            CultureName = App.Instance.Setting.Culture;
         }
 
         private void OpenExternalCommandsWindow()
@@ -104,11 +122,21 @@ namespace ExcelMerge.GUI.ViewModels
             commandsWindow.ShowDialog();
         }
 
-        private void OpenGeneralSettingWindow()
+        private void OpenFileSettingsWindow()
         {
-            var window = new GeneralSettingWindow()
+            var fileSettingsWindow = new FileSettingsWindow()
             {
-                DataContext = new GeneralSettingWindowViewModel(),
+                DataContext = new FileSettingsWindowViewModel()
+            };
+
+            fileSettingsWindow.ShowDialog();
+        }
+
+        private void OpenDiffExtractionSettingWindow()
+        {
+            var window = new DiffExtractionSettingWindow()
+            {
+                DataContext = new DiffExtractionSettingWindowViewModel(),
             };
 
             window.ShowDialog();
@@ -142,7 +170,9 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void ChangeLanguage(string calture)
         {
-            App.Instance.UpdateResourceCulture(calture);
+            App.Instance.Setting.Culture = calture;
+            App.Instance.Setting.Save();
+            App.Instance.UpdateResourceCulture();
         }
     }
 }

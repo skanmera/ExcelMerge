@@ -47,8 +47,8 @@ namespace ExcelMerge.ShellExtension
             var srcPath = SelectedItemPaths.ElementAtOrDefault(0);
             var dstPath = SelectedItemPaths.ElementAtOrDefault(1);
 
-            var arg = !string.IsNullOrEmpty(srcPath) ? $"--src=\"{srcPath}\" " : string.Empty;
-            arg += !string.IsNullOrEmpty(dstPath) ? $"--dst=\"{dstPath}\" " : string.Empty;
+            var arg = !string.IsNullOrEmpty(srcPath) ? $"-s \"{srcPath}\" " : string.Empty;
+            arg += !string.IsNullOrEmpty(dstPath) ? $"-d \"{dstPath}\" " : string.Empty;
 
             string exePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ExcelMerge.GUI.exe");
 

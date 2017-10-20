@@ -1,0 +1,24 @@
+﻿<Window x:Class="ExcelMerge.GUI.Views.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
+        mc:Ignorable="d"
+        Title="ExcelMerge" 
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Icon="/ExcelMerge.GUI;component/app.ico"
+        Height="120" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="Message" Grid.Row="0" Margin="5"
+               VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <ProgressBar Grid.Row="1" Margin="10" IsIndeterminate="True" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="20"/>
+    </Grid>
+</Window>

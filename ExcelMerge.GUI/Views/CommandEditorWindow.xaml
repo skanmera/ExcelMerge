@@ -57,7 +57,7 @@
             <Button Content="{x:Static props:Resources.Word_Done}" Grid.Column="1" Margin="40, 5, 40, 5"
                     Command="{Binding ApplyCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                    IsEnabled="{Binding Command.CanExecute}"
+                    IsEnabled="{Binding Command.IsValid}"
                     >
             </Button>
 

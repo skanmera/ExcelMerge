@@ -19,5 +19,33 @@ namespace ExcelMerge
 
             return row;
         }
+
+        public ExcelSheetDiffSummary CreateSummary()
+        {
+            var addedRowCount = 0;
+            var removedRowCount = 0;
+            var modifiedRowCount = 0;
+            var modifiedCellCount = 0;
+            foreach (var row in Rows)
+            {
+                if (row.Value.Added())
+                    addedRowCount++;
+                else if (row.Value.Removed())
+                    removedRowCount++;
+
+                if (row.Value.Modified())
+                    modifiedRowCount++;
+
+                modifiedCellCount += row.Value.ModifiedCellCount;
+            }
+
+            return new ExcelSheetDiffSummary
+            {
+                AddedRowCount = addedRowCount,
+                RemovedRowCount = removedRowCount,
+                ModifiedRowCount = modifiedRowCount,
+                ModifiedCellCount = modifiedCellCount,
+            };
+        }
     }
 }
