@@ -107,6 +107,14 @@ namespace ExcelMerge.GUI.Models
             return string.Empty;
         }
 
+        public string GetCellText(FastGridCellAddress address, bool direct)
+        {
+            if (address.IsEmpty)
+                return string.Empty;
+
+            return GetCellText(address.Row.Value, address.Column.Value, true);
+        }
+
         private bool TryGetCellDiff(int row, int column, out ExcelCellDiff cellDiff, bool direct = false)
         {
             cellDiff = null;

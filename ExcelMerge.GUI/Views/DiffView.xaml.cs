@@ -28,6 +28,8 @@ namespace ExcelMerge.GUI.Views
         private const string srcKey = "src";
         private const string dstKey = "dst";
 
+        private FastGridControl copyTargetGrid;
+
         public DiffView()
         {
             InitializeComponent();
@@ -127,7 +129,13 @@ namespace ExcelMerge.GUI.Views
 
         private void DataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(sender as FastGridControl, container);
+            var grid = copyTargetGrid = sender as FastGridControl;
+            if (grid == null)
+                return;
+
+            copyTargetGrid = grid;
+
+            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(grid, container);
 
             if (!SrcDataGrid.CurrentCell.Row.HasValue || !DstDataGrid.CurrentCell.Row.HasValue)
                 return;
@@ -803,6 +811,24 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.CurrentCell = nextCell;
         }
 
+        private void CopyToClipboardSelectedCells(string separator)
+        {
+            if (copyTargetGrid == null)
+                return;
+
+            var model = copyTargetGrid.Model as DiffGridModel;
+            if (model == null)
+                return;
+
+            var tsv = string.Join("\n",
+               copyTargetGrid.SelectedCells
+              .GroupBy(c => c.Row.Value)
+              .OrderBy(g => g.Key)
+              .Select(g => string.Join(separator, g.Select(c => model.GetCellText(c, true)))));
+
+            Clipboard.SetDataObject(tsv);
+        }
+
         private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -897,6 +923,14 @@ namespace ExcelMerge.GUI.Views
                         {
                             ToolExpander.IsExpanded = true;
                             SearchTextCombobox.Focus();
+                        }
+                    }
+                    break;
+                case Key.C:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            CopyToClipboardSelectedCells(Keyboard.IsKeyDown(Key.LeftShift) ? "," : "\t");
                         }
                     }
                     break;
