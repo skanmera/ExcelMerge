@@ -360,4 +360,34 @@
   <data name="Word_RowHeaderName" xml:space="preserve">
     <value>行ヘッダ名</value>
   </data>
+  <data name="Shortcut_Ctrl_Down" xml:space="preserve">
+    <value>Ctrl +↓</value>
+  </data>
+  <data name="Shortcut_Ctrl_I" xml:space="preserve">
+    <value>Ctrl + I</value>
+  </data>
+  <data name="Shortcut_Ctrl_K" xml:space="preserve">
+    <value>Ctrl + K</value>
+  </data>
+  <data name="Shortcut_Ctrl_L" xml:space="preserve">
+    <value>Ctrl + L</value>
+  </data>
+  <data name="Shortcut_Ctrl_Left" xml:space="preserve">
+    <value>Ctrl +←</value>
+  </data>
+  <data name="Shortcut_Ctrl_O" xml:space="preserve">
+    <value>Ctrl + O</value>
+  </data>
+  <data name="Shortcut_Ctrl_Right" xml:space="preserve">
+    <value>Ctrl + →</value>
+  </data>
+  <data name="Shortcut_Ctrl_Up" xml:space="preserve">
+    <value>Ctrl +↑</value>
+  </data>
+  <data name="Shortcut_F8" xml:space="preserve">
+    <value>F8</value>
+  </data>
+  <data name="Shortcut_F9" xml:space="preserve">
+    <value>F9</value>
+  </data>
 </root>

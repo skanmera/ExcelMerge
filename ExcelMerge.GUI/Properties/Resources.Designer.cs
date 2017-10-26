@@ -430,6 +430,96 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Ctrl + Down に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Down {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + I に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_I {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_I", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + K に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_K {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_K", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + L に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_L {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Left に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Left {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + O に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_O {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Right に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Right {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Up に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Up {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   F8 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_F8 {
+            get {
+                return ResourceManager.GetString("Shortcut_F8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   F9 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_F9 {
+            get {
+                return ResourceManager.GetString("Shortcut_F9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Edit External Command に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Title_CommandEditorWindow {

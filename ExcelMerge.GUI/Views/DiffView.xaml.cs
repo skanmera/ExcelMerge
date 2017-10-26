@@ -66,6 +66,8 @@ namespace ExcelMerge.GUI.Views
             };
 
             SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            ToolExpander.IsExpanded = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -76,6 +78,8 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
             DstDataGrid.ScrolledModelRows += DataGrid_Scrolled;
             DstDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
+
+            ToolExpander.IsExpanded = false;
         }
 
         private ExcelSheetDiffConfig CreateDiffConfig(FileSetting fileSetting)
@@ -587,6 +591,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextModifiedCellButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextModifiedCell();
+        }
+
+        private void MoveNextModifiedCell()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -599,6 +608,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevModifiedCell();
+        }
+
+        private void MovePrevModifiedCell()
         {
             if (!ValidateDataGrids())
                 return;
@@ -613,6 +627,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextModifiedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextModifiedRow();
+        }
+
+        private void MoveNextModifiedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -625,6 +644,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevModifiedCell();
+        }
+
+        private void MovePrevModifiedRow()
         {
             if (!ValidateDataGrids())
                 return;
@@ -639,6 +663,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextAddedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextAddedRow();
+        }
+
+        private void MoveNextAddedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -651,6 +680,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevAddedRow();
+        }
+
+        private void MovePrevAddedRow()
         {
             if (!ValidateDataGrids())
                 return;
@@ -665,6 +699,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextRemovedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextRemovedRow();
+        }
+
+        private void MoveNextRemovedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -678,6 +717,11 @@ namespace ExcelMerge.GUI.Views
 
         private void PrevRemovedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MovePrevModifiedRow();
+        }
+
+        private void MovePrevRemovedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -690,6 +734,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevMatchCell();
+        }
+
+        private void MovePrevMatchCell()
         {
             if (!ValidateDataGrids())
                 return;
@@ -721,6 +770,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextMatchCellButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextMatchCell();
+        }
+
+        private void MoveNextMatchCell()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -747,6 +801,106 @@ namespace ExcelMerge.GUI.Views
                 return;
 
             SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Right:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextModifiedCell();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Left:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevModifiedCell();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Down:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextModifiedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Up:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevModifiedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.L:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextRemovedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.O:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevRemovedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.K:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextAddedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.I:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevAddedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.F8:
+                    {
+                        MovePrevMatchCell();
+                        e.Handled = true;
+                    }
+                    break;
+                case Key.F9:
+                    {
+                        MoveNextMatchCell();
+                        e.Handled = true;
+                    }
+                    break;
+                case Key.F:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ToolExpander.IsExpanded = true;
+                            SearchTextCombobox.Focus();
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

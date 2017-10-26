@@ -12,8 +12,11 @@
              xmlns:vc="clr-namespace:ExcelMerge.GUI.Converters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="300"
+             PreviewKeyDown="UserControl_PreviewKeyDown"
+             >
+
+        <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -28,7 +31,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Expander
+        <Expander x:Name="ToolExpander"
             Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
             Margin="3">
             <Expander.Header>
@@ -150,9 +153,13 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="PrevModifiedCellButton" Content="←" Width="30" Grid.Column="0" Margin="3"
-                                    Click="PrevModifiedCellButton_Click"/>
+                                    Click="PrevModifiedCellButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_Left}"
+                                    />
                             <Button x:Name="NextModifiedCellButton" Content="→" Width="30" Grid.Column="1" Margin="3"
-                                    Click="NextModifiedCellButton_Click"/>
+                                    Click="NextModifiedCellButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_Right}"
+                                    />
                         </Grid>
 
                         <Border BorderThickness="0.2" BorderBrush="Gray"
@@ -164,9 +171,13 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="PrevModifiedRowButton" Content="←" Width="30" Grid.Column="0" Margin="3"
-                                    Click="PrevModifiedRowButton_Click"/>
+                                    Click="PrevModifiedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_Up}"
+                                    />
                             <Button x:Name="NextModifiedRowButton" Content="→" Width="30" Grid.Column="1" Margin="3"
-                                    Click="NextModifiedRowButton_Click"/>
+                                    Click="NextModifiedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_Down}"
+                                    />
                         </Grid>
 
                         <Border BorderThickness="0.2" BorderBrush="Gray"
@@ -178,9 +189,13 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="PrevAddedRowButton" Content="←" Width="30"  Grid.Column="0" Margin="3"
-                                    Click="PrevAddedRowButton_Click"/>
+                                    Click="PrevAddedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_I}"
+                                    />
                             <Button x:Name="NextAddedRowButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
-                                    Click="NextAddedRowButton_Click"/>
+                                    Click="NextAddedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_K}"
+                                    />
                         </Grid>
 
                         <Border BorderThickness="0.2" BorderBrush="Gray"
@@ -192,9 +207,13 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="PrevRemovedRowButton"  Content="←" Width="30" Grid.Column="0" Margin="3"
-                                    Click="PrevRemovedRowButton_Click"/>
+                                    Click="PrevRemovedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_O}"
+                                    />
                             <Button x:Name="NextRemovedRowButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
-                                    Click="NextRemovedRowButton_Click"/>
+                                    Click="NextRemovedRowButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_Ctrl_L}"
+                                    />
                         </Grid>
 
                         <Border BorderThickness="0.2" BorderBrush="Gray"
@@ -219,9 +238,13 @@
                         <CheckBox x:Name="CaseSensitiveCheckBox" Content="{x:Static props:Resources.Word_CaseSensitive}" Margin="3" IsChecked="False"/>
                         <CheckBox x:Name="RegexCheckBox" Content="{x:Static props:Resources.Word_Regex}" Margin="3" IsChecked="False"/>
                         <Button x:Name="PrevMatchCellButton"  Content="←" Width="30" Grid.Column="0" Margin="3"
-                                    Click="PrevMatchCellButton_Click"/>
+                                    Click="PrevMatchCellButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_F8}"
+                                />
                         <Button x:Name="NextMatchCellButton"  Content="→" Width="30" Grid.Column="1" Margin="3"
-                                    Click="NextMatchCellButton_Click"/>
+                                    Click="NextMatchCellButton_Click"
+                                    ToolTip="{x:Static props:Resources.Shortcut_F9}"
+                                />
                     </StackPanel>
                 </GroupBox>
 

@@ -542,6 +542,9 @@ namespace FastWpfGrid
 
         private void imageKeyDown(object sender, KeyEventArgs e)
         {
+            if (Model == null)
+                return;
+
             using (var ctx = CreateInvalidationContext())
             {
                 if (ShiftPressed)
