@@ -936,14 +936,28 @@ namespace ExcelMerge.GUI.Views
                         }
                     }
                     break;
+                case Key.B:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ShowLog();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
             }
+        }
+
+        private void ShowLog()
+        {
+            var log = BuildCellBaseLog();
+
+            (App.Current.MainWindow as MainWindow).WriteToConsole(log);
         }
 
         private void BuildCellBaseLog_Click(object sender, RoutedEventArgs e)
         {
-            var log = BuildCellBaseLog();
-
-            (App.Current.MainWindow as MainWindow).ConsoleOutput(log);
+            ShowLog();
         }
 
         private void BuildRowBaseLog_Click(object sender, RoutedEventArgs e)
@@ -967,20 +981,28 @@ namespace ExcelMerge.GUI.Views
                 return string.Empty;
 
             var builder = new StringBuilder();
-            builder.AppendLine("-------------------------------------------------------");
 
             var selectedCells = SrcDataGrid.SelectedCells;
             var format = App.Instance.Setting.CellBaseLogFormat;
 
             foreach (var cell in SrcDataGrid.SelectedCells)
             {
+                if (cell.Row.Value == srcModel.ColumnHeaderIndex)
+                    continue;
+
                 var srcText = srcModel.GetCellText(cell, true);
                 var dstText = dstModel.GetCellText(cell, true);
                 if (srcText == dstText)
                     continue;
 
                 var rowHeaderText = srcModel.GetRowHeaderText(cell.Row.Value);
-                var colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
+                var colHeaderText = srcModel.GetColumnHeaderText(cell.Column.Value);
+
+                if (string.IsNullOrEmpty(rowHeaderText))
+                    rowHeaderText = dstModel.GetRowHeaderText(cell.Row.Value);
+
+                if (string.IsNullOrEmpty(colHeaderText))
+                    colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
 
                 if (string.IsNullOrEmpty(srcText))
                     srcText = Properties.Resources.Word_Blank;
@@ -994,12 +1016,11 @@ namespace ExcelMerge.GUI.Views
                 if (string.IsNullOrEmpty(colHeaderText))
                     colHeaderText = Properties.Resources.Word_Blank;
 
-
                 var log = format
-                    .Replace("${ROW}", ConvertMultiLineLogToWarningMessage(rowHeaderText))
-                    .Replace("${COL}", ConvertMultiLineLogToWarningMessage(colHeaderText))
-                    .Replace("${LEFT}", ConvertMultiLineLogToWarningMessage(srcText))
-                    .Replace("${RIGHT}", ConvertMultiLineLogToWarningMessage(dstText));
+                    .Replace("${ROW}", RemoveMultiLine(rowHeaderText))
+                    .Replace("${COL}", RemoveMultiLine(colHeaderText))
+                    .Replace("${LEFT}", RemoveMultiLine(srcText))
+                    .Replace("${RIGHT}", RemoveMultiLine(dstText));
 
                 builder.AppendLine(log);
             }
@@ -1007,14 +1028,9 @@ namespace ExcelMerge.GUI.Views
             return builder.ToString();
         }
 
-        private string ConvertMultiLineLogToWarningMessage(string log)
+        private string RemoveMultiLine(string log)
         {
-            if (log.Contains("\r") || log.Contains("\n") || log.Contains("\r\n"))
-            {
-                return Properties.Resources.Msg_Undisplayable;
-            }
-
-            return log;
+            return log.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
         }
 
         private void BuildRowBaseLog()

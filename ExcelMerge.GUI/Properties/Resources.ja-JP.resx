@@ -361,7 +361,7 @@
     <value>行ヘッダ名</value>
   </data>
   <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
-    <value>セルベースのログを作成</value>
+    <value>ログを出力</value>
   </data>
   <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
     <value>列ベースのログを作成</value>
@@ -370,7 +370,7 @@
     <value>行ベースのログを作成</value>
   </data>
   <data name="DefaultCellBaseLogFormat" xml:space="preserve">
-    <value>${ROW} の ${COL} を ${LEFT} から ${RIGHT} に変更</value>
+    <value>"${ROW}" の "${COL}" を "${LEFT}" から "${RIGHT}" に変更</value>
   </data>
   <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
     <value>${LEFT} → ${RIGHT}</value>
@@ -379,7 +379,7 @@
     <value>${LEFT} → ${RIGHT}</value>
   </data>
   <data name="Label_CellBaseLogFormat" xml:space="preserve">
-    <value>セルベースのログのフォーマット</value>
+    <value>ログのフォーマット</value>
   </data>
   <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
     <value>列ベースのログのフォーマット</value>

@@ -70,7 +70,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Build Cell Base Log に類似しているローカライズされた文字列を検索します。
+        ///   Output Log に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_BuildCellBaseLog {
             get {
@@ -142,7 +142,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Changed ${ROW} of ${COL} to ${RIGHT} from ${LEFT} に類似しているローカライズされた文字列を検索します。
+        ///   Changed &quot;${ROW}&quot; of &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DefaultCellBaseLogFormat {
             get {
@@ -196,7 +196,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Cell Base Log Format に類似しているローカライズされた文字列を検索します。
+        ///   Log Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_CellBaseLogFormat {
             get {

@@ -147,6 +147,10 @@ namespace ExcelMerge.GUI.Controls
         public void Write(string message)
         {
             _currentSection.Write(message);
+
+            Invoke();
+
+            ScrollToEnd();
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)

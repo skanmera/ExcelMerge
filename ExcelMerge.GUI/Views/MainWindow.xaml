@@ -12,6 +12,7 @@
         WindowStartupLocation="CenterScreen"
         Title="ExcelMerge" Height="868" Width="1380"
         Icon="/ExcelMerge.GUI;component/app.ico"
+        KeyDown="Window_KeyDown"
         >
 
     <Window.Resources>

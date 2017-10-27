@@ -361,7 +361,7 @@
     <value>Row Header Name</value>
   </data>
   <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
-    <value>Build Cell Base Log</value>
+    <value>Output Log</value>
   </data>
   <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
     <value>Build Column Base Log</value>
@@ -370,7 +370,7 @@
     <value>Build Row Base Log</value>
   </data>
   <data name="DefaultCellBaseLogFormat" xml:space="preserve">
-    <value>Changed ${ROW} of ${COL} to ${RIGHT} from ${LEFT}</value>
+    <value>Changed "${ROW}" of "${COL}" to "${RIGHT}" from "${LEFT}"</value>
   </data>
   <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
     <value>${LEFT} → ${RIGHT}</value>
@@ -379,7 +379,7 @@
     <value>${LEFT} → ${RIGHT}</value>
   </data>
   <data name="Label_CellBaseLogFormat" xml:space="preserve">
-    <value>Cell Base Log Format</value>
+    <value>Log Format</value>
   </data>
   <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
     <value>Column Base Log Format</value>

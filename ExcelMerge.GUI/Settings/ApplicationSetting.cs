@@ -317,9 +317,9 @@ namespace ExcelMerge.GUI.Settings
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(CellBaseLogFormat))
+            if (string.IsNullOrEmpty(ColumnBaseLogFormat))
             {
-                CellBaseLogFormat = Properties.Resources.DefaultColumnBaseLogFormat;
+                ColumnBaseLogFormat = Properties.Resources.DefaultColumnBaseLogFormat;
                 changed |= true;
             }
 

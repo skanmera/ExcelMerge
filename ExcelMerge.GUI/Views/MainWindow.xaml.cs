@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ExcelMerge.GUI.Shell;
 
 namespace ExcelMerge.GUI.Views
@@ -65,12 +66,37 @@ namespace ExcelMerge.GUI.Views
             MainGrid.RowDefinitions[3].Height = new GridLength(0);
         }
 
-        public void ConsoleOutput(string message)
+        public void WriteToConsole(string message)
         {
             ConsoleVisibilityMenuItem.IsChecked = true;
             ShowConsole();
 
             Console.Write(message);
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.D:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            if (Console.Visibility == Visibility.Collapsed)
+                            {
+                                ShowConsole();
+                                Console.Focus();
+                            }
+                            else
+                            {
+                                HideConsole();
+                            }
+
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

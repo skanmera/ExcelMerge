@@ -4,7 +4,7 @@
 
 	<Style TargetType="{x:Type controls:PowerShellConsole}">
 		<Setter Property="Background"
-				Value="#401640" />
+				Value="#191919" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
 		<Setter Property="Foreground"
