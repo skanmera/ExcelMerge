@@ -923,6 +923,7 @@ namespace ExcelMerge.GUI.Views
                         {
                             ToolExpander.IsExpanded = true;
                             SearchTextCombobox.Focus();
+                            e.Handled = true;
                         }
                     }
                     break;
@@ -931,10 +932,105 @@ namespace ExcelMerge.GUI.Views
                         if (Keyboard.IsKeyDown(Key.LeftCtrl))
                         {
                             CopyToClipboardSelectedCells(Keyboard.IsKeyDown(Key.LeftShift) ? "," : "\t");
+                            e.Handled = true;
                         }
                     }
                     break;
             }
+        }
+
+        private void BuildCellBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            var log = BuildCellBaseLog();
+
+            (App.Current.MainWindow as MainWindow).ConsoleOutput(log);
+        }
+
+        private void BuildRowBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            BuildRowBaseLog();
+        }
+
+        private void BuildColumnBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            BuildColumnBaseLog();
+        }
+
+        private string BuildCellBaseLog()
+        {
+            var srcModel = SrcDataGrid.Model as DiffGridModel;
+            if (srcModel == null)
+                return string.Empty;
+
+            var dstModel = DstDataGrid.Model as DiffGridModel;
+            if (dstModel == null)
+                return string.Empty;
+
+            var builder = new StringBuilder();
+            builder.AppendLine("-------------------------------------------------------");
+
+            var selectedCells = SrcDataGrid.SelectedCells;
+            var format = App.Instance.Setting.CellBaseLogFormat;
+
+            foreach (var cell in SrcDataGrid.SelectedCells)
+            {
+                var srcText = srcModel.GetCellText(cell, true);
+                var dstText = dstModel.GetCellText(cell, true);
+                if (srcText == dstText)
+                    continue;
+
+                var rowHeaderText = srcModel.GetRowHeaderText(cell.Row.Value);
+                var colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
+
+                if (string.IsNullOrEmpty(srcText))
+                    srcText = Properties.Resources.Word_Blank;
+
+                if (string.IsNullOrEmpty(dstText))
+                    dstText = Properties.Resources.Word_Blank;
+
+                if (string.IsNullOrEmpty(rowHeaderText))
+                    rowHeaderText = Properties.Resources.Word_Blank;
+
+                if (string.IsNullOrEmpty(colHeaderText))
+                    colHeaderText = Properties.Resources.Word_Blank;
+
+
+                var log = format
+                    .Replace("${ROW}", ConvertMultiLineLogToWarningMessage(rowHeaderText))
+                    .Replace("${COL}", ConvertMultiLineLogToWarningMessage(colHeaderText))
+                    .Replace("${LEFT}", ConvertMultiLineLogToWarningMessage(srcText))
+                    .Replace("${RIGHT}", ConvertMultiLineLogToWarningMessage(dstText));
+
+                builder.AppendLine(log);
+            }
+
+            return builder.ToString();
+        }
+
+        private string ConvertMultiLineLogToWarningMessage(string log)
+        {
+            if (log.Contains("\r") || log.Contains("\n") || log.Contains("\r\n"))
+            {
+                return Properties.Resources.Msg_Undisplayable;
+            }
+
+            return log;
+        }
+
+        private void BuildRowBaseLog()
+        {
+        }
+
+        private void BuildColumnBaseLog()
+        {
+        }
+
+        private void BuildLog(string format)
+        {
+        }
+
+        private void ShowLog(string log)
+        {
         }
     }
 }

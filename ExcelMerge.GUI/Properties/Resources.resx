@@ -360,6 +360,42 @@
   <data name="Word_RowHeaderName" xml:space="preserve">
     <value>Row Header Name</value>
   </data>
+  <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
+    <value>Build Cell Base Log</value>
+  </data>
+  <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
+    <value>Build Column Base Log</value>
+  </data>
+  <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
+    <value>Build Row Base Log</value>
+  </data>
+  <data name="DefaultCellBaseLogFormat" xml:space="preserve">
+    <value>Changed ${ROW} of ${COL} to ${RIGHT} from ${LEFT}</value>
+  </data>
+  <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="DefaultRowBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="Label_CellBaseLogFormat" xml:space="preserve">
+    <value>Cell Base Log Format</value>
+  </data>
+  <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
+    <value>Column Base Log Format</value>
+  </data>
+  <data name="Label_RowBaseLogFormat" xml:space="preserve">
+    <value>Row Base Log Format</value>
+  </data>
+  <data name="MenuItem_Console" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="MenuItem_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Msg_Undisplayable" xml:space="preserve">
+    <value>Not be displayed</value>
+  </data>
   <data name="Shortcut_Ctrl_Down" xml:space="preserve">
     <value>Ctrl + Down</value>
   </data>
@@ -389,5 +425,8 @@
   </data>
   <data name="Shortcut_F9" xml:space="preserve">
     <value>F9</value>
+  </data>
+  <data name="Word_Blank" xml:space="preserve">
+    <value>Blank</value>
   </data>
 </root>

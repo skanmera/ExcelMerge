@@ -360,6 +360,42 @@
   <data name="Word_RowHeaderName" xml:space="preserve">
     <value>行ヘッダ名</value>
   </data>
+  <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
+    <value>セルベースのログを作成</value>
+  </data>
+  <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
+    <value>列ベースのログを作成</value>
+  </data>
+  <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
+    <value>行ベースのログを作成</value>
+  </data>
+  <data name="DefaultCellBaseLogFormat" xml:space="preserve">
+    <value>${ROW} の ${COL} を ${LEFT} から ${RIGHT} に変更</value>
+  </data>
+  <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="DefaultRowBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="Label_CellBaseLogFormat" xml:space="preserve">
+    <value>セルベースのログのフォーマット</value>
+  </data>
+  <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
+    <value>列ベースのログのフォーマット</value>
+  </data>
+  <data name="Label_RowBaseLogFormat" xml:space="preserve">
+    <value>行ベースのログのフォーマット</value>
+  </data>
+  <data name="MenuItem_Console" xml:space="preserve">
+    <value>コンソール</value>
+  </data>
+  <data name="MenuItem_View" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="Msg_Undisplayable" xml:space="preserve">
+    <value>※表示できません</value>
+  </data>
   <data name="Shortcut_Ctrl_Down" xml:space="preserve">
     <value>Ctrl +↓</value>
   </data>
@@ -389,5 +425,8 @@
   </data>
   <data name="Shortcut_F9" xml:space="preserve">
     <value>F9</value>
+  </data>
+  <data name="Word_Blank" xml:space="preserve">
+    <value>空白</value>
   </data>
 </root>

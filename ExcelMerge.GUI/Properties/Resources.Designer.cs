@@ -70,6 +70,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Build Cell Base Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildCellBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildCellBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Build Column Base Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildColumnBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildColumnBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Build Row Base Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildRowBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildRowBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Extract diff with this row as column header. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_DiffAsHeader {
@@ -115,6 +142,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Changed ${ROW} of ${COL} to ${RIGHT} from ${LEFT} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultCellBaseLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultCellBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ${LEFT} → ${RIGHT} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultColumnBaseLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultColumnBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ${LEFT} → ${RIGHT} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultRowBaseLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultRowBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Display Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GroupBox_DisplayFormat {
@@ -142,6 +196,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Cell Base Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_CellBaseLogFormat {
+            get {
+                return ResourceManager.GetString("Label_CellBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cell Height に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_CellHeight {
@@ -165,6 +228,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_ColorModifiedRow {
             get {
                 return ResourceManager.GetString("Label_ColorModifiedRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Column Base Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ColumnBaseLogFormat {
+            get {
+                return ResourceManager.GetString("Label_ColumnBaseLogFormat", resourceCulture);
             }
         }
         
@@ -232,6 +304,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Row Base Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowBaseLogFormat {
+            get {
+                return ResourceManager.GetString("Label_RowBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Row Colors に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_RowColor {
@@ -282,6 +363,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_TrimLastBlankRows {
             get {
                 return ResourceManager.GetString("Label_TrimLastBlankRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Console に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_Console {
+            get {
+                return ResourceManager.GetString("MenuItem_Console", resourceCulture);
             }
         }
         
@@ -376,6 +466,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   View に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_View {
+            get {
+                return ResourceManager.GetString("MenuItem_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please restart to apply the changes. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Message_Reboot {
@@ -399,6 +498,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Msg_ReadingFiles {
             get {
                 return ResourceManager.GetString("Msg_ReadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Not be displayed に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_Undisplayable {
+            get {
+                return ResourceManager.GetString("Msg_Undisplayable", resourceCulture);
             }
         }
         
@@ -624,6 +732,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Args {
             get {
                 return ResourceManager.GetString("Word_Args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Blank に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Blank {
+            get {
+                return ResourceManager.GetString("Word_Blank", resourceCulture);
             }
         }
         

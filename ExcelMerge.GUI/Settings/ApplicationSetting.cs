@@ -167,7 +167,7 @@ namespace ExcelMerge.GUI.Settings
         }
 
         private int cellWidth = 100;
-        public int CellWidth 
+        public int CellWidth
         {
             get { return cellWidth; }
             set { SetProperty(ref cellWidth, value); }
@@ -185,6 +185,27 @@ namespace ExcelMerge.GUI.Settings
         {
             get { return fontName; }
             set { SetProperty(ref fontName, value); }
+        }
+
+        private string cellBaseLogFormat = string.Empty;
+        public string CellBaseLogFormat
+        {
+            get { return cellBaseLogFormat; }
+            set { SetProperty(ref cellBaseLogFormat, value); }
+        }
+
+        private string rowBaseLogFormat = string.Empty;
+        public string RowBaseLogFormat
+        {
+            get { return rowBaseLogFormat; }
+            set { SetProperty(ref rowBaseLogFormat, value); }
+        }
+
+        private string columnBaseLogFormat = string.Empty;
+        public string ColumnBaseLogFormat
+        {
+            get { return columnBaseLogFormat; }
+            set { SetProperty(ref columnBaseLogFormat, value); }
         }
 
         public static ApplicationSetting Load()
@@ -284,6 +305,24 @@ namespace ExcelMerge.GUI.Settings
                 changed |= true;
             }
 
+            if (string.IsNullOrEmpty(CellBaseLogFormat))
+            {
+                CellBaseLogFormat = Properties.Resources.DefaultCellBaseLogFormat;
+                changed |= true;
+            }
+
+            if (string.IsNullOrEmpty(RowBaseLogFormat))
+            {
+                RowBaseLogFormat = Properties.Resources.DefaultRowBaseLogFormat;
+                changed |= true;
+            }
+
+            if (string.IsNullOrEmpty(CellBaseLogFormat))
+            {
+                CellBaseLogFormat = Properties.Resources.DefaultColumnBaseLogFormat;
+                changed |= true;
+            }
+
             return changed;
         }
 
@@ -318,6 +357,9 @@ namespace ExcelMerge.GUI.Settings
             clone.ColorModifiedRow = ColorModifiedRow;
             clone.SearchHistory = new ObservableCollection<string>(SearchHistory);
             clone.FontName = FontName;
+            clone.CellBaseLogFormat = CellBaseLogFormat;
+            clone.RowBaseLogFormat = RowBaseLogFormat;
+            clone.ColumnBaseLogFormat = ColumnBaseLogFormat;
 
             return clone;
         }
@@ -342,7 +384,11 @@ namespace ExcelMerge.GUI.Settings
                 ModifiedRowColorString.Equals(other.ModifiedRowColorString) &&
                 ColorModifiedRow.Equals(other.ColorModifiedRow) &&
                 SearchHistory.Equals(other.SearchHistory) &&
-                FontName.Equals(other.FontName);
+                FontName.Equals(other.FontName) &&
+                CellBaseLogFormat.Equals(other.CellBaseLogFormat) &&
+                RowBaseLogFormat.Equals(other.RowBaseLogFormat) &&
+                ColumnBaseLogFormat.Equals(other.ColumnBaseLogFormat);
+
         }
     }
 }
