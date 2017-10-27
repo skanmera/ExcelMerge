@@ -820,7 +820,7 @@ namespace ExcelMerge.GUI.Views
             if (model == null)
                 return;
 
-            var tsv = string.Join("\n",
+            var tsv = string.Join(Environment.NewLine,
                copyTargetGrid.SelectedCells
               .GroupBy(c => c.Row.Value)
               .OrderBy(g => g.Key)
