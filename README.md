@@ -1,3 +1,7 @@
+- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
+- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+
+
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/logo.png)
 
 ### GUI Diff Tool for Excel
@@ -5,11 +9,6 @@
 ![Demo](https://github.com/skanmera/ExcelMerge/blob/media/media/demo.gif)
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
-
-## Language
-
-- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
-- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
 
 ## Description
 
@@ -21,7 +20,7 @@ It can also be used as a diff tool for Git or Mercurial.
 
 - Windows 7 or later
 
-## Supported files
+## Supported file types
 
 - .xls
 - .xlsx
@@ -111,6 +110,33 @@ For each file you can specify a line header or a column header.
 You can customize background colors.
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+
+
+## Shortcut Keys
+
+|Shortcut Key|Description|
+|---|-----------|
+|Ctrl + →|Next modified cell|
+|Ctrl + ←|Previous modified cell|
+|Ctrl + ↓|Next modified row|
+|Ctrl + ↑|Previous modified row|
+|Ctrl + K|Next added row|
+|Ctrl + I|Previous added row|
+|Ctrl + L|Next removed row|
+|Ctrl + O|Previous removed row|
+|Ctrl + F|Search cell|
+|F9|Next match cell|
+|F8|Previous match cell|
+|Ctrl + C|Copy selected cells as TSV|
+|Ctrl + Shift + C|Copy selected cells as CSV|
+|Ctrl + D|Show(Hide) console|
+|Ctrl + B|Output selected cells diff as log|
+
+
+## Output diff as log
+
+By selecting Ctrl + D or "Output log" from the context menu, you can output the change as a log.
+The format can be changed from "differential extraction setting".
 
 
 ## Known problems

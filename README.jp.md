@@ -1,3 +1,7 @@
+- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
+- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+
+
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/logo.png)
 
 ### エクセルのGUI差分ツール
@@ -5,11 +9,6 @@
 ![Demo](https://github.com/skanmera/ExcelMerge/blob/media/media/demo.gif)
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
-
-## 言語
-
-- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
-- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
 
 ## 説明
 
@@ -110,6 +109,32 @@ vdiff = excelmerge
 背景色をカスタマイズできます。
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+
+## ショートカットキー
+
+|Shortcut Key|Description|
+|---|-----------|
+|Ctrl + →|Next modified cell|
+|Ctrl + ←|Previous modified cell|
+|Ctrl + ↓|Next modified row|
+|Ctrl + ↑|Previous modified row|
+|Ctrl + K|Next added row|
+|Ctrl + I|Previous added row|
+|Ctrl + L|Next removed row|
+|Ctrl + O|Previous removed row|
+|Ctrl + F|Search cell|
+|F9|Next match cell|
+|F8|Previous match cell|
+|Ctrl + C|Copy selected cells as TSV|
+|Ctrl + Shift + C|Copy selected cells as CSV|
+|Ctrl + D|Show(Hide) console|
+|Ctrl + B|Output selected cells diff as log|
+
+## 変更をログとして出力する
+
+Ctrl+D　もしくはコンテキストメニューから「ログを出力」を選択することで、変更点をログとして出力します。
+フォーマットは「差分抽出設定」から変更可能です。
+
 
 ## 既知の問題点
 
