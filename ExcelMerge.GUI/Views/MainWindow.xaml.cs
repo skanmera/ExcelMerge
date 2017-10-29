@@ -53,7 +53,7 @@ namespace ExcelMerge.GUI.Views
             }
             else
             {
-                MainGrid.RowDefinitions[3].Height = new GridLength(Height / 2d);
+                MainGrid.RowDefinitions[3].Height = new GridLength(Height / 3d);
                 previousConsoleHeight = MainGrid.RowDefinitions[3].Height;
             }
         }
