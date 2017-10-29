@@ -151,7 +151,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Changed &quot;${ROW}&quot; of &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
+        ///   Changed &quot;${ROW}&quot;&apos;s &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DefaultLogFormat {
             get {
