@@ -725,7 +725,7 @@ namespace ExcelMerge.GUI.Views
 
         private void PrevRemovedRowButton_Click(object sender, RoutedEventArgs e)
         {
-            MovePrevModifiedRow();
+            MovePrevRemovedRow();
         }
 
         private void MovePrevRemovedRow()
