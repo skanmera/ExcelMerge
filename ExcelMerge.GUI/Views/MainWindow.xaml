@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
         xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
         xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+        xmlns:ctrl="clr-namespace:ExcelMerge.GUI.Controls"
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Title="ExcelMerge" Height="868" Width="1380"
         Icon="/ExcelMerge.GUI;component/app.ico"
+        KeyDown="Window_KeyDown"
         >
 
     <Window.Resources>
@@ -18,13 +20,20 @@
         <vc:CultureNameConverter x:Key="CultureNameConverter"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="MainGrid" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="90*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <MenuItem Header="{x:Static props:Resources.Word_File}">
                 <MenuItem Header="{x:Static props:Resources.MenuItem_OpenSrcFile}"
                           Command="{Binding OpenFileDialogCommand}"
@@ -111,8 +120,24 @@
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="{x:Static props:Resources.MenuItem_View}">
+                <MenuItem x:Name="ConsoleVisibilityMenuItem" Header="{x:Static props:Resources.MenuItem_Console}" IsCheckable="True"
+                          Click="ConsoleVisibilityChanged"
+                          InputGestureText="Ctrl+D"/>
+            </MenuItem>
         </Menu>
 
-        <ContentControl Content="{Binding Content}" Grid.Row="1"/>
+        <ContentControl Content="{Binding Content}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <GridSplitter x:Name="ConsoleGridSplitter" ResizeDirection="Rows" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Width="Auto" Height="5" 
+                      HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Margin="0"
+                      Visibility="Collapsed"/>
+
+        <ctrl:PowerShellConsole x:Name="Console" x:FieldModifier="private"
+                                Grid.Row="3" Grid.Column="1"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Visibility="Collapsed"
+                                />
+
     </Grid>
 </Window>

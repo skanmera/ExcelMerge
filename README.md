@@ -106,7 +106,7 @@ For each file you can specify a line header or a column header.
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/file_settings.png)
 
-## Color Settins
+## Color Settings
 
 You can customize background colors.
 

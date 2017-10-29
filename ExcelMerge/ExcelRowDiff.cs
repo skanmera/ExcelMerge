@@ -22,17 +22,17 @@ namespace ExcelMerge
             return cell;
         }
 
-        public bool Modified()
+        public bool IsModified()
         {
             return Cells.Any(c => c.Value.Status != ExcelCellStatus.None);
         }
 
-        public bool Added()
+        public bool IsAdded()
         {
             return Cells.All(c => c.Value.Status == ExcelCellStatus.Added);
         }
 
-        public bool Removed()
+        public bool IsRemoved()
         {
             return Cells.All(c => c.Value.Status == ExcelCellStatus.Removed);
         }
@@ -41,5 +41,8 @@ namespace ExcelMerge
         {
             get { return Cells.Count(c => c.Value.Status != ExcelCellStatus.None); }
         }
+
+
+        // TODO: Add row status field and implemnt UpdateStaus method.
     }
 }

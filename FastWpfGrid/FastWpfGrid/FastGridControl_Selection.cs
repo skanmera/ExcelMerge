@@ -16,6 +16,8 @@ namespace FastWpfGrid
         private Dictionary<int, int> _selectedRows = new Dictionary<int, int>();
         private Dictionary<int, int> _selectedColumns = new Dictionary<int, int>();
 
+        public IEnumerable<FastGridCellAddress> SelectedCells { get { return _selectedCells.AsEnumerable(); } }
+
         int? _selectedRealRowCountLimit;
         bool _selectedRealRowCountLimitLoaded;
         public int? SelectedRealRowCountLimit
