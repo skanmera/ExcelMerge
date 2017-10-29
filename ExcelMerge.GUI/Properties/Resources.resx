@@ -370,7 +370,7 @@
     <value>Build Row Base Log</value>
   </data>
   <data name="DefaultLogFormat" xml:space="preserve">
-    <value>Changed "${ROW}" of "${COL}" to "${RIGHT}" from "${LEFT}"</value>
+    <value>Changed "${ROW}"'s "${COL}" to "${RIGHT}" from "${LEFT}"</value>
   </data>
   <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
     <value>${LEFT} → ${RIGHT}</value>
