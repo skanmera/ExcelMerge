@@ -238,14 +238,20 @@ namespace ExcelMerge.GUI.Settings
             Serialize();
         }
 
-        public bool Ensure()
+        public bool EnsureCulture()
         {
-            bool changed = false;
             if (string.IsNullOrEmpty(Culture))
             {
                 Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-                changed |= true;
+                return true;
             }
+
+            return false;
+        }
+
+        public bool Ensure()
+        {
+            bool changed = EnsureCulture();
 
             if (AlternatingColorStrings == null || !AlternatingColorStrings.Any())
             {
