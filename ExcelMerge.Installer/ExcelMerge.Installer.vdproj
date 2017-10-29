@@ -190,7 +190,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2501FC2CED1E63C91A07C323AA6D2629"
-        "OwnerKey" = "8:_646065E0029F5E7D46B2CAFEA26ECBBD"
+        "OwnerKey" = "8:_A095D2F1F950A6CAAE266EE45F153839"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -256,7 +256,7 @@
         "Entry"
         {
         "MsmKey" = "8:_42BBF9945B7B46552C9A6FF361F4E5B3"
-        "OwnerKey" = "8:_49ADC1F6D51D651366C943B1E5A6419A"
+        "OwnerKey" = "8:_8909B343BA3F01F21DD40010144B9A06"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -327,14 +327,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_49ADC1F6D51D651366C943B1E5A6419A"
+        "MsmKey" = "8:_4E03B9593D202C31B6844F07F65DC7B6"
         "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4E03B9593D202C31B6844F07F65DC7B6"
+        "MsmKey" = "8:_505C36760E25D615FDB521318AB738BB"
+        "OwnerKey" = "8:_907EBFBE0D9B47CB9B17B9F92E71C61D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_505C36760E25D615FDB521318AB738BB"
         "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_505C36760E25D615FDB521318AB738BB"
+        "OwnerKey" = "8:_8909B343BA3F01F21DD40010144B9A06"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -357,24 +369,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_56501E7C9D4F50B2886701BD52D38628"
-        "OwnerKey" = "8:_907EBFBE0D9B47CB9B17B9F92E71C61D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_56501E7C9D4F50B2886701BD52D38628"
-        "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_56501E7C9D4F50B2886701BD52D38628"
-        "OwnerKey" = "8:_49ADC1F6D51D651366C943B1E5A6419A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D7DEA2A6F3A54C9DA5345E7470490E4"
         "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
         "MsmSig" = "8:_UNDEFINED"
@@ -407,12 +401,6 @@
         {
         "MsmKey" = "8:_61E9AB4D70199CD69392D7A20C6598E6"
         "OwnerKey" = "8:_2D1A10EEB1763AAAA22CFC26E6E0D67E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_646065E0029F5E7D46B2CAFEA26ECBBD"
-        "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -472,7 +460,7 @@
         "Entry"
         {
         "MsmKey" = "8:_76A6FAB1D6ED0ECA44C95666C7EEC1A7"
-        "OwnerKey" = "8:_49ADC1F6D51D651366C943B1E5A6419A"
+        "OwnerKey" = "8:_8909B343BA3F01F21DD40010144B9A06"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -579,6 +567,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8909B343BA3F01F21DD40010144B9A06"
+        "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8D4F1B913B8D69B3279ED632895DAA3F"
         "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
         "MsmSig" = "8:_UNDEFINED"
@@ -622,6 +616,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9F4980C04408FD9FAD375B38725C7F8C"
+        "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A095D2F1F950A6CAAE266EE45F153839"
         "OwnerKey" = "8:_9B52A74683D24608831CFF5F2DFEB145"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -904,19 +904,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_646065E0029F5E7D46B2CAFEA26ECBBD"
+        "OwnerKey" = "8:_A095D2F1F950A6CAAE266EE45F153839"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_49ADC1F6D51D651366C943B1E5A6419A"
+        "OwnerKey" = "8:_8909B343BA3F01F21DD40010144B9A06"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_56501E7C9D4F50B2886701BD52D38628"
+        "OwnerKey" = "8:_505C36760E25D615FDB521318AB738BB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2546,20 +2546,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_49ADC1F6D51D651366C943B1E5A6419A"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E03B9593D202C31B6844F07F65DC7B6"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ExcelMerge, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.ServiceModel.NetTcp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_49ADC1F6D51D651366C943B1E5A6419A"
+                    "_4E03B9593D202C31B6844F07F65DC7B6"
                     {
-                    "Name" = "8:ExcelMerge.dll"
+                    "Name" = "8:System.ServiceModel.NetTcp.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:ExcelMerge.dll"
+            "SourcePath" = "8:System.ServiceModel.NetTcp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
@@ -2577,20 +2577,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E03B9593D202C31B6844F07F65DC7B6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_505C36760E25D615FDB521318AB738BB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.ServiceModel.NetTcp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            "AssemblyAsmDisplayName" = "8:NetDiff, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4E03B9593D202C31B6844F07F65DC7B6"
+                    "_505C36760E25D615FDB521318AB738BB"
                     {
-                    "Name" = "8:System.ServiceModel.NetTcp.dll"
+                    "Name" = "8:NetDiff.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.ServiceModel.NetTcp.dll"
+            "SourcePath" = "8:NetDiff.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
@@ -2670,37 +2670,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_56501E7C9D4F50B2886701BD52D38628"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NetDiff, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_56501E7C9D4F50B2886701BD52D38628"
-                    {
-                    "Name" = "8:NetDiff.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NetDiff.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5D7DEA2A6F3A54C9DA5345E7470490E4"
             {
             "AssemblyRegister" = "3:1"
@@ -2746,37 +2715,6 @@
                     }
                 }
             "SourcePath" = "8:System.Reflection.Extensions.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_646065E0029F5E7D46B2CAFEA26ECBBD"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FastWpfGrid, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_646065E0029F5E7D46B2CAFEA26ECBBD"
-                    {
-                    "Name" = "8:FastWpfGrid.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FastWpfGrid.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
@@ -3290,6 +3228,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8909B343BA3F01F21DD40010144B9A06"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ExcelMerge, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8909B343BA3F01F21DD40010144B9A06"
+                    {
+                    "Name" = "8:ExcelMerge.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ExcelMerge.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8D4F1B913B8D69B3279ED632895DAA3F"
             {
             "AssemblyRegister" = "3:1"
@@ -3459,6 +3428,37 @@
                     }
                 }
             "SourcePath" = "8:System.Security.Principal.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A095D2F1F950A6CAAE266EE45F153839"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FastWpfGrid, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A095D2F1F950A6CAAE266EE45F153839"
+                    {
+                    "Name" = "8:FastWpfGrid.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FastWpfGrid.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D648CFD0AFD3475D8CEEE8E7B3BCCE6F"
@@ -4256,15 +4256,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExcelMerge"
-        "ProductCode" = "8:{E5A93AFF-430D-4A35-883E-1FA910CAEEA6}"
-        "PackageCode" = "8:{AFF0BDBA-7711-459F-9178-090FFB112BAA}"
+        "ProductCode" = "8:{9D6E0C39-20C4-4FBC-8C27-A11CF4E8CD8D}"
+        "PackageCode" = "8:{2621E9CA-6C5A-4A91-97A9-DC966DAD7B34}"
         "UpgradeCode" = "8:{BCE73A99-B5CE-4C2E-A955-2E0922068237}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:skanmera"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
