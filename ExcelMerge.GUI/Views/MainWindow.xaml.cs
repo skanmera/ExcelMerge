@@ -64,6 +64,8 @@ namespace ExcelMerge.GUI.Views
             ConsoleGridSplitter.Visibility = Visibility.Collapsed;
             previousConsoleHeight = new GridLength(MainGrid.RowDefinitions[3].ActualHeight);
             MainGrid.RowDefinitions[3].Height = new GridLength(0);
+
+            UpdateLayout();
         }
 
         public void WriteToConsole(string message)

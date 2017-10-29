@@ -187,25 +187,25 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref fontName, value); }
         }
 
-        private string cellBaseLogFormat = string.Empty;
-        public string CellBaseLogFormat
+        private string logForamt = string.Empty;
+        public string LogFormat
         {
-            get { return cellBaseLogFormat; }
-            set { SetProperty(ref cellBaseLogFormat, value); }
+            get { return logForamt; }
+            set { SetProperty(ref logForamt, value); }
         }
 
-        private string rowBaseLogFormat = string.Empty;
-        public string RowBaseLogFormat
+        private string addedRowLogFormat = string.Empty;
+        public string AddedRowLogFormat
         {
-            get { return rowBaseLogFormat; }
-            set { SetProperty(ref rowBaseLogFormat, value); }
+            get { return addedRowLogFormat; }
+            set { SetProperty(ref addedRowLogFormat, value); }
         }
 
-        private string columnBaseLogFormat = string.Empty;
-        public string ColumnBaseLogFormat
+        private string removedRowLogFormat = string.Empty;
+        public string RemovedRowLogFormat
         {
-            get { return columnBaseLogFormat; }
-            set { SetProperty(ref columnBaseLogFormat, value); }
+            get { return removedRowLogFormat; }
+            set { SetProperty(ref removedRowLogFormat, value); }
         }
 
         public static ApplicationSetting Load()
@@ -305,21 +305,21 @@ namespace ExcelMerge.GUI.Settings
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(CellBaseLogFormat))
+            if (string.IsNullOrEmpty(LogFormat))
             {
-                CellBaseLogFormat = Properties.Resources.DefaultCellBaseLogFormat;
+                LogFormat = Properties.Resources.DefaultLogFormat;
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(RowBaseLogFormat))
+            if (string.IsNullOrEmpty(AddedRowLogFormat))
             {
-                RowBaseLogFormat = Properties.Resources.DefaultRowBaseLogFormat;
+                AddedRowLogFormat = Properties.Resources.DefaultLogFormatAddedRow;
                 changed |= true;
             }
 
-            if (string.IsNullOrEmpty(ColumnBaseLogFormat))
+            if (string.IsNullOrEmpty(RemovedRowLogFormat))
             {
-                ColumnBaseLogFormat = Properties.Resources.DefaultColumnBaseLogFormat;
+                RemovedRowLogFormat = Properties.Resources.DefaultLogFormatRemovedRow;
                 changed |= true;
             }
 
@@ -357,9 +357,9 @@ namespace ExcelMerge.GUI.Settings
             clone.ColorModifiedRow = ColorModifiedRow;
             clone.SearchHistory = new ObservableCollection<string>(SearchHistory);
             clone.FontName = FontName;
-            clone.CellBaseLogFormat = CellBaseLogFormat;
-            clone.RowBaseLogFormat = RowBaseLogFormat;
-            clone.ColumnBaseLogFormat = ColumnBaseLogFormat;
+            clone.LogFormat = LogFormat;
+            clone.AddedRowLogFormat = AddedRowLogFormat;
+            clone.RemovedRowLogFormat = RemovedRowLogFormat;
 
             return clone;
         }
@@ -385,10 +385,9 @@ namespace ExcelMerge.GUI.Settings
                 ColorModifiedRow.Equals(other.ColorModifiedRow) &&
                 SearchHistory.Equals(other.SearchHistory) &&
                 FontName.Equals(other.FontName) &&
-                CellBaseLogFormat.Equals(other.CellBaseLogFormat) &&
-                RowBaseLogFormat.Equals(other.RowBaseLogFormat) &&
-                ColumnBaseLogFormat.Equals(other.ColumnBaseLogFormat);
-
+                LogFormat.Equals(other.LogFormat) &&
+                AddedRowLogFormat.Equals(other.AddedRowLogFormat) &&
+                RemovedRowLogFormat.Equals(other.RemovedRowLogFormat);
         }
     }
 }

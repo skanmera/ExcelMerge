@@ -142,20 +142,38 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Changed &quot;${ROW}&quot; of &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string DefaultCellBaseLogFormat {
-            get {
-                return ResourceManager.GetString("DefaultCellBaseLogFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   ${LEFT} → ${RIGHT} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DefaultColumnBaseLogFormat {
             get {
                 return ResourceManager.GetString("DefaultColumnBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Changed &quot;${ROW}&quot; of &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;${ROW}&quot; was added. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormatAddedRow {
+            get {
+                return ResourceManager.GetString("DefaultLogFormatAddedRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;${ROW}&quot; was removed. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormatRemovedRow {
+            get {
+                return ResourceManager.GetString("DefaultLogFormatRemovedRow", resourceCulture);
             }
         }
         
@@ -187,20 +205,20 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Added Row Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_AddedRowLogFormat {
+            get {
+                return ResourceManager.GetString("Label_AddedRowLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Added Rows({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_AddedRows {
             get {
                 return ResourceManager.GetString("Label_AddedRows", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Log Format に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Label_CellBaseLogFormat {
-            get {
-                return ResourceManager.GetString("Label_CellBaseLogFormat", resourceCulture);
             }
         }
         
@@ -250,6 +268,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Modified Cell Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_LogFormat {
+            get {
+                return ResourceManager.GetString("Label_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Modified Cells({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ModifiedCells {
@@ -291,6 +318,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_RemovedColor {
             get {
                 return ResourceManager.GetString("Label_RemovedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Removed Row Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RemovedRowLogFormat {
+            get {
+                return ResourceManager.GetString("Label_RemovedRowLogFormat", resourceCulture);
             }
         }
         

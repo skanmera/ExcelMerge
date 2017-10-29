@@ -122,7 +122,8 @@
             </MenuItem>
             <MenuItem Header="{x:Static props:Resources.MenuItem_View}">
                 <MenuItem x:Name="ConsoleVisibilityMenuItem" Header="{x:Static props:Resources.MenuItem_Console}" IsCheckable="True"
-                          Click="ConsoleVisibilityChanged"/>
+                          Click="ConsoleVisibilityChanged"
+                          InputGestureText="Ctrl+D"/>
             </MenuItem>
         </Menu>
 

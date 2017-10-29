@@ -166,14 +166,38 @@ namespace ExcelMerge.GUI.Models
             return null;
         }
 
-        private bool IsModifiedRow(int row, bool direct)
+        public bool IsModifiedRow(int row, bool direct)
         {
             if (direct)
                 row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
 
             ExcelRowDiff rowDiff;
             if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
-                return rowDiff.Modified();
+                return rowDiff.IsModified();
+
+            return false;
+        }
+
+        public bool IsRemovedRow(int row, bool direct)
+        {
+            if (direct)
+                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
+
+            ExcelRowDiff rowDiff;
+            if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
+                return rowDiff.IsRemoved();
+
+            return false;
+        }
+
+        public bool IsAddedRow(int row, bool direct)
+        {
+            if (direct)
+                row = rowIndexMap.ContainsKey(row) ? rowIndexMap[row] : row;
+
+            ExcelRowDiff rowDiff;
+            if (SheetDiff.Rows.TryGetValue(row, out rowDiff))
+                return rowDiff.IsAdded();
 
             return false;
         }

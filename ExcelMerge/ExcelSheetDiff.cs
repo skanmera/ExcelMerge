@@ -28,12 +28,12 @@ namespace ExcelMerge
             var modifiedCellCount = 0;
             foreach (var row in Rows)
             {
-                if (row.Value.Added())
+                if (row.Value.IsAdded())
                     addedRowCount++;
-                else if (row.Value.Removed())
+                else if (row.Value.IsRemoved())
                     removedRowCount++;
 
-                if (row.Value.Modified())
+                if (row.Value.IsModified())
                     modifiedRowCount++;
 
                 modifiedCellCount += row.Value.ModifiedCellCount;

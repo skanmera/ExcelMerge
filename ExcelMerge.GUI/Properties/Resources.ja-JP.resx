@@ -369,7 +369,7 @@
   <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
     <value>行ベースのログを作成</value>
   </data>
-  <data name="DefaultCellBaseLogFormat" xml:space="preserve">
+  <data name="DefaultLogFormat" xml:space="preserve">
     <value>"${ROW}" の "${COL}" を "${LEFT}" から "${RIGHT}" に変更</value>
   </data>
   <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
@@ -378,8 +378,8 @@
   <data name="DefaultRowBaseLogFormat" xml:space="preserve">
     <value>${LEFT} → ${RIGHT}</value>
   </data>
-  <data name="Label_CellBaseLogFormat" xml:space="preserve">
-    <value>ログのフォーマット</value>
+  <data name="Label_LogFormat" xml:space="preserve">
+    <value>変更されたセルのログのフォーマット</value>
   </data>
   <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
     <value>列ベースのログのフォーマット</value>
@@ -428,5 +428,17 @@
   </data>
   <data name="Word_Blank" xml:space="preserve">
     <value>空白</value>
+  </data>
+  <data name="DefaultLogFormatAddedRow" xml:space="preserve">
+    <value>"${ROW}" を追加</value>
+  </data>
+  <data name="DefaultLogFormatRemovedRow" xml:space="preserve">
+    <value>"${ROW}" を削除</value>
+  </data>
+  <data name="Label_AddedRowLogFormat" xml:space="preserve">
+    <value>追加された行のログのフォーマット</value>
+  </data>
+  <data name="Label_RemovedRowLogFormat" xml:space="preserve">
+    <value>削除された行のログのフォーマット</value>
   </data>
 </root>

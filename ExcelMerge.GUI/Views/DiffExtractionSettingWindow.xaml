@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Icon="/ExcelMerge.GUI;component/app.ico"
-        Title="{x:Static props:Resources.Title_DiffSettingWindow}" Height="640" Width="640">
+        Title="{x:Static props:Resources.Title_DiffSettingWindow}" Height="640" Width="800">
 
     <Window.Resources>
         <vc:MultiValueConverter x:Key="multiValueConverter"/>
@@ -32,8 +32,8 @@
                 </Grid.RowDefinitions>
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="90*"/>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -220,20 +220,20 @@
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="28" BorderThickness="0.4" BorderBrush="DarkGray" Margin="3"/>
 
-                    <Label Content="{x:Static props:Resources.Label_CellBaseLogFormat}" Grid.Column="0" Grid.Row="29" VerticalAlignment="Center" />
-                    <TextBox Grid.Column="1" Grid.Row="29" Text="{Binding Setting.CellBaseLogFormat}"/>
+                    <Label Content="{x:Static props:Resources.Label_LogFormat}" Grid.Column="0" Grid.Row="29" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="29" Text="{Binding Setting.LogFormat}"/>
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="30" BorderThickness="0.4" BorderBrush="DarkGray" Margin="3"/>
 
-                    <!--<Label Content="{x:Static props:Resources.Label_RowBaseLogFormat}" Grid.Column="0" Grid.Row="31" VerticalAlignment="Center" />
-                    <TextBox Grid.Column="1" Grid.Row="31" Text="{Binding Setting.RowBaseLogFormat}"/>
+                    <Label Content="{x:Static props:Resources.Label_AddedRowLogFormat}" Grid.Column="0" Grid.Row="31" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="31" Text="{Binding Setting.AddedRowLogFormat}"/>
 
                     <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="32" BorderThickness="0.4" BorderBrush="DarkGray" Margin="3"/>
 
-                    <Label Content="{x:Static props:Resources.Label_ColumnBaseLogFormat}" Grid.Column="0" Grid.Row="33" VerticalAlignment="Center" />
-                    <TextBox Grid.Column="1" Grid.Row="33" Text="{Binding Setting.ColumnBaseLogFormat}"/>
+                    <Label Content="{x:Static props:Resources.Label_RemovedRowLogFormat}" Grid.Column="0" Grid.Row="33" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="33" Text="{Binding Setting.RemovedRowLogFormat}"/>
 
-                    <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="34" BorderThickness="0.4" BorderBrush="DarkGray" Margin="3"/>-->
+                    <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="34" BorderThickness="0.4" BorderBrush="DarkGray" Margin="3"/>
 
                 </Grid>
             </Grid>

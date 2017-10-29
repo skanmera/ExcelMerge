@@ -983,46 +983,72 @@ namespace ExcelMerge.GUI.Views
             var builder = new StringBuilder();
 
             var selectedCells = SrcDataGrid.SelectedCells;
-            var format = App.Instance.Setting.CellBaseLogFormat;
 
-            foreach (var cell in SrcDataGrid.SelectedCells)
+            var modifiedLogFormat = App.Instance.Setting.LogFormat;
+            var addedLogFormat = App.Instance.Setting.AddedRowLogFormat;
+            var removedLogFormat = App.Instance.Setting.RemovedRowLogFormat;
+
+            foreach (var row in SrcDataGrid.SelectedCells.GroupBy(c => c.Row))
             {
-                if (cell.Row.Value == srcModel.ColumnHeaderIndex)
-                    continue;
-
-                var srcText = srcModel.GetCellText(cell, true);
-                var dstText = dstModel.GetCellText(cell, true);
-                if (srcText == dstText)
-                    continue;
-
-                var rowHeaderText = srcModel.GetRowHeaderText(cell.Row.Value);
-                var colHeaderText = srcModel.GetColumnHeaderText(cell.Column.Value);
-
+                var rowHeaderText = srcModel.GetRowHeaderText(row.Key.Value);
                 if (string.IsNullOrEmpty(rowHeaderText))
-                    rowHeaderText = dstModel.GetRowHeaderText(cell.Row.Value);
+                    rowHeaderText = dstModel.GetRowHeaderText(row.Key.Value);
 
-                if (string.IsNullOrEmpty(colHeaderText))
-                    colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
+                if (dstModel.IsAddedRow(row.Key.Value, true))
+                {
+                    var log = addedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText));
 
-                if (string.IsNullOrEmpty(srcText))
-                    srcText = Properties.Resources.Word_Blank;
+                    builder.AppendLine(log);
 
-                if (string.IsNullOrEmpty(dstText))
-                    dstText = Properties.Resources.Word_Blank;
+                    continue;
+                }
 
-                if (string.IsNullOrEmpty(rowHeaderText))
-                    rowHeaderText = Properties.Resources.Word_Blank;
+                if (dstModel.IsRemovedRow(row.Key.Value, true))
+                {
+                    var log = removedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText));
 
-                if (string.IsNullOrEmpty(colHeaderText))
-                    colHeaderText = Properties.Resources.Word_Blank;
+                    builder.AppendLine(log);
 
-                var log = format
-                    .Replace("${ROW}", RemoveMultiLine(rowHeaderText))
-                    .Replace("${COL}", RemoveMultiLine(colHeaderText))
-                    .Replace("${LEFT}", RemoveMultiLine(srcText))
-                    .Replace("${RIGHT}", RemoveMultiLine(dstText));
+                    continue;
+                }
 
-                builder.AppendLine(log);
+                foreach (var cell in row)
+                {
+                    if (cell.Row.Value == srcModel.ColumnHeaderIndex)
+                        continue;
+
+                    var srcText = srcModel.GetCellText(cell, true);
+                    var dstText = dstModel.GetCellText(cell, true);
+                    if (srcText == dstText)
+                        continue;
+
+                    var colHeaderText = srcModel.GetColumnHeaderText(cell.Column.Value);
+
+                    if (string.IsNullOrEmpty(colHeaderText))
+                        colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
+
+                    if (string.IsNullOrEmpty(srcText))
+                        srcText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(dstText))
+                        dstText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(rowHeaderText))
+                        rowHeaderText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(colHeaderText))
+                        colHeaderText = Properties.Resources.Word_Blank;
+
+                    var log = modifiedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText))
+                        .Replace("${COL}", RemoveMultiLine(colHeaderText))
+                        .Replace("${LEFT}", RemoveMultiLine(srcText))
+                        .Replace("${RIGHT}", RemoveMultiLine(dstText));
+
+                    builder.AppendLine(log);
+                }
             }
 
             return builder.ToString();
