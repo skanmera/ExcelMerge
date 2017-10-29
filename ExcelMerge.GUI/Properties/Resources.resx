@@ -360,4 +360,85 @@
   <data name="Word_RowHeaderName" xml:space="preserve">
     <value>Row Header Name</value>
   </data>
+  <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
+    <value>Output Log</value>
+  </data>
+  <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
+    <value>Build Column Base Log</value>
+  </data>
+  <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
+    <value>Build Row Base Log</value>
+  </data>
+  <data name="DefaultLogFormat" xml:space="preserve">
+    <value>Changed "${ROW}" of "${COL}" to "${RIGHT}" from "${LEFT}"</value>
+  </data>
+  <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="DefaultRowBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="Label_LogFormat" xml:space="preserve">
+    <value>Modified Cell Log Format</value>
+  </data>
+  <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
+    <value>Column Base Log Format</value>
+  </data>
+  <data name="Label_RowBaseLogFormat" xml:space="preserve">
+    <value>Row Base Log Format</value>
+  </data>
+  <data name="MenuItem_Console" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="MenuItem_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Msg_Undisplayable" xml:space="preserve">
+    <value>Not be displayed</value>
+  </data>
+  <data name="Shortcut_Ctrl_Down" xml:space="preserve">
+    <value>Ctrl + Down</value>
+  </data>
+  <data name="Shortcut_Ctrl_I" xml:space="preserve">
+    <value>Ctrl + I</value>
+  </data>
+  <data name="Shortcut_Ctrl_K" xml:space="preserve">
+    <value>Ctrl + K</value>
+  </data>
+  <data name="Shortcut_Ctrl_L" xml:space="preserve">
+    <value>Ctrl + L</value>
+  </data>
+  <data name="Shortcut_Ctrl_Left" xml:space="preserve">
+    <value>Ctrl + Left</value>
+  </data>
+  <data name="Shortcut_Ctrl_O" xml:space="preserve">
+    <value>Ctrl + O</value>
+  </data>
+  <data name="Shortcut_Ctrl_Right" xml:space="preserve">
+    <value>Ctrl + Right</value>
+  </data>
+  <data name="Shortcut_Ctrl_Up" xml:space="preserve">
+    <value>Ctrl + Up</value>
+  </data>
+  <data name="Shortcut_F8" xml:space="preserve">
+    <value>F8</value>
+  </data>
+  <data name="Shortcut_F9" xml:space="preserve">
+    <value>F9</value>
+  </data>
+  <data name="Word_Blank" xml:space="preserve">
+    <value>Blank</value>
+  </data>
+  <data name="DefaultLogFormatAddedRow" xml:space="preserve">
+    <value>"${ROW}" was added.</value>
+  </data>
+  <data name="DefaultLogFormatRemovedRow" xml:space="preserve">
+    <value>"${ROW}" was removed.</value>
+  </data>
+  <data name="Label_AddedRowLogFormat" xml:space="preserve">
+    <value>Added Row Log Format</value>
+  </data>
+  <data name="Label_RemovedRowLogFormat" xml:space="preserve">
+    <value>Removed Row Log Format</value>
+  </data>
 </root>

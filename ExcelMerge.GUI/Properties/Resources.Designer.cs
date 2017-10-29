@@ -70,6 +70,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Output Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildCellBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildCellBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Build Column Base Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildColumnBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildColumnBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Build Row Base Log に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_BuildRowBaseLog {
+            get {
+                return ResourceManager.GetString("ContextMenu_BuildRowBaseLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Extract diff with this row as column header. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_DiffAsHeader {
@@ -115,6 +142,51 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   ${LEFT} → ${RIGHT} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultColumnBaseLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultColumnBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Changed &quot;${ROW}&quot; of &quot;${COL}&quot; to &quot;${RIGHT}&quot; from &quot;${LEFT}&quot; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;${ROW}&quot; was added. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormatAddedRow {
+            get {
+                return ResourceManager.GetString("DefaultLogFormatAddedRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;${ROW}&quot; was removed. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultLogFormatRemovedRow {
+            get {
+                return ResourceManager.GetString("DefaultLogFormatRemovedRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ${LEFT} → ${RIGHT} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DefaultRowBaseLogFormat {
+            get {
+                return ResourceManager.GetString("DefaultRowBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Display Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GroupBox_DisplayFormat {
@@ -129,6 +201,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_AddedColor {
             get {
                 return ResourceManager.GetString("Label_AddedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Added Row Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_AddedRowLogFormat {
+            get {
+                return ResourceManager.GetString("Label_AddedRowLogFormat", resourceCulture);
             }
         }
         
@@ -169,11 +250,29 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Column Base Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ColumnBaseLogFormat {
+            get {
+                return ResourceManager.GetString("Label_ColumnBaseLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Column Header Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ColumnHeaderColor {
             get {
                 return ResourceManager.GetString("Label_ColumnHeaderColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Modified Cell Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_LogFormat {
+            get {
+                return ResourceManager.GetString("Label_LogFormat", resourceCulture);
             }
         }
         
@@ -223,11 +322,29 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Removed Row Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RemovedRowLogFormat {
+            get {
+                return ResourceManager.GetString("Label_RemovedRowLogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Removed Rows({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_RemovedRows {
             get {
                 return ResourceManager.GetString("Label_RemovedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Row Base Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowBaseLogFormat {
+            get {
+                return ResourceManager.GetString("Label_RowBaseLogFormat", resourceCulture);
             }
         }
         
@@ -282,6 +399,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_TrimLastBlankRows {
             get {
                 return ResourceManager.GetString("Label_TrimLastBlankRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Console に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_Console {
+            get {
+                return ResourceManager.GetString("MenuItem_Console", resourceCulture);
             }
         }
         
@@ -376,6 +502,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   View に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_View {
+            get {
+                return ResourceManager.GetString("MenuItem_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please restart to apply the changes. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Message_Reboot {
@@ -403,6 +538,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Not be displayed に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_Undisplayable {
+            get {
+                return ResourceManager.GetString("Msg_Undisplayable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   There are too many records. Display only around diff. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_WarnSize {
@@ -426,6 +570,96 @@ namespace ExcelMerge.GUI.Properties {
         public static string RadioButton_ShowOnlyDiff {
             get {
                 return ResourceManager.GetString("RadioButton_ShowOnlyDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Down に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Down {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + I に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_I {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_I", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + K に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_K {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_K", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + L に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_L {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Left に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Left {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + O に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_O {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_O", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Right に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Right {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ctrl + Up に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_Ctrl_Up {
+            get {
+                return ResourceManager.GetString("Shortcut_Ctrl_Up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   F8 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_F8 {
+            get {
+                return ResourceManager.GetString("Shortcut_F8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   F9 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Shortcut_F9 {
+            get {
+                return ResourceManager.GetString("Shortcut_F9", resourceCulture);
             }
         }
         
@@ -534,6 +768,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Word_Args {
             get {
                 return ResourceManager.GetString("Word_Args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Blank に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Blank {
+            get {
+                return ResourceManager.GetString("Word_Blank", resourceCulture);
             }
         }
         

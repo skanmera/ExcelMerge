@@ -360,4 +360,85 @@
   <data name="Word_RowHeaderName" xml:space="preserve">
     <value>行ヘッダ名</value>
   </data>
+  <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
+    <value>ログを出力</value>
+  </data>
+  <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
+    <value>列ベースのログを作成</value>
+  </data>
+  <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
+    <value>行ベースのログを作成</value>
+  </data>
+  <data name="DefaultLogFormat" xml:space="preserve">
+    <value>"${ROW}" の "${COL}" を "${LEFT}" から "${RIGHT}" に変更</value>
+  </data>
+  <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="DefaultRowBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="Label_LogFormat" xml:space="preserve">
+    <value>変更されたセルのログのフォーマット</value>
+  </data>
+  <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
+    <value>列ベースのログのフォーマット</value>
+  </data>
+  <data name="Label_RowBaseLogFormat" xml:space="preserve">
+    <value>行ベースのログのフォーマット</value>
+  </data>
+  <data name="MenuItem_Console" xml:space="preserve">
+    <value>コンソール</value>
+  </data>
+  <data name="MenuItem_View" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="Msg_Undisplayable" xml:space="preserve">
+    <value>※表示できません</value>
+  </data>
+  <data name="Shortcut_Ctrl_Down" xml:space="preserve">
+    <value>Ctrl +↓</value>
+  </data>
+  <data name="Shortcut_Ctrl_I" xml:space="preserve">
+    <value>Ctrl + I</value>
+  </data>
+  <data name="Shortcut_Ctrl_K" xml:space="preserve">
+    <value>Ctrl + K</value>
+  </data>
+  <data name="Shortcut_Ctrl_L" xml:space="preserve">
+    <value>Ctrl + L</value>
+  </data>
+  <data name="Shortcut_Ctrl_Left" xml:space="preserve">
+    <value>Ctrl +←</value>
+  </data>
+  <data name="Shortcut_Ctrl_O" xml:space="preserve">
+    <value>Ctrl + O</value>
+  </data>
+  <data name="Shortcut_Ctrl_Right" xml:space="preserve">
+    <value>Ctrl + →</value>
+  </data>
+  <data name="Shortcut_Ctrl_Up" xml:space="preserve">
+    <value>Ctrl +↑</value>
+  </data>
+  <data name="Shortcut_F8" xml:space="preserve">
+    <value>F8</value>
+  </data>
+  <data name="Shortcut_F9" xml:space="preserve">
+    <value>F9</value>
+  </data>
+  <data name="Word_Blank" xml:space="preserve">
+    <value>空白</value>
+  </data>
+  <data name="DefaultLogFormatAddedRow" xml:space="preserve">
+    <value>"${ROW}" を追加</value>
+  </data>
+  <data name="DefaultLogFormatRemovedRow" xml:space="preserve">
+    <value>"${ROW}" を削除</value>
+  </data>
+  <data name="Label_AddedRowLogFormat" xml:space="preserve">
+    <value>追加された行のログのフォーマット</value>
+  </data>
+  <data name="Label_RemovedRowLogFormat" xml:space="preserve">
+    <value>削除された行のログのフォーマット</value>
+  </data>
 </root>

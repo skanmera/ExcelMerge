@@ -28,6 +28,8 @@ namespace ExcelMerge.GUI.Views
         private const string srcKey = "src";
         private const string dstKey = "dst";
 
+        private FastGridControl copyTargetGrid;
+
         public DiffView()
         {
             InitializeComponent();
@@ -66,6 +68,8 @@ namespace ExcelMerge.GUI.Views
             };
 
             SearchTextCombobox.ItemsSource = App.Instance.Setting.SearchHistory.ToList();
+
+            ToolExpander.IsExpanded = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -76,6 +80,8 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
             DstDataGrid.ScrolledModelRows += DataGrid_Scrolled;
             DstDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
+
+            ToolExpander.IsExpanded = false;
         }
 
         private ExcelSheetDiffConfig CreateDiffConfig(FileSetting fileSetting)
@@ -123,7 +129,13 @@ namespace ExcelMerge.GUI.Views
 
         private void DataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(sender as FastGridControl, container);
+            var grid = copyTargetGrid = sender as FastGridControl;
+            if (grid == null)
+                return;
+
+            copyTargetGrid = grid;
+
+            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(grid, container);
 
             if (!SrcDataGrid.CurrentCell.Row.HasValue || !DstDataGrid.CurrentCell.Row.HasValue)
                 return;
@@ -587,6 +599,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextModifiedCellButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextModifiedCell();
+        }
+
+        private void MoveNextModifiedCell()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -599,6 +616,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevModifiedCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevModifiedCell();
+        }
+
+        private void MovePrevModifiedCell()
         {
             if (!ValidateDataGrids())
                 return;
@@ -613,6 +635,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextModifiedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextModifiedRow();
+        }
+
+        private void MoveNextModifiedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -625,6 +652,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevModifiedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevModifiedCell();
+        }
+
+        private void MovePrevModifiedRow()
         {
             if (!ValidateDataGrids())
                 return;
@@ -639,6 +671,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextAddedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextAddedRow();
+        }
+
+        private void MoveNextAddedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -651,6 +688,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevAddedRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevAddedRow();
+        }
+
+        private void MovePrevAddedRow()
         {
             if (!ValidateDataGrids())
                 return;
@@ -665,6 +707,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextRemovedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextRemovedRow();
+        }
+
+        private void MoveNextRemovedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -678,6 +725,11 @@ namespace ExcelMerge.GUI.Views
 
         private void PrevRemovedRowButton_Click(object sender, RoutedEventArgs e)
         {
+            MovePrevRemovedRow();
+        }
+
+        private void MovePrevRemovedRow()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -690,6 +742,11 @@ namespace ExcelMerge.GUI.Views
         }
 
         private void PrevMatchCellButton_Click(object sender, RoutedEventArgs e)
+        {
+            MovePrevMatchCell();
+        }
+
+        private void MovePrevMatchCell()
         {
             if (!ValidateDataGrids())
                 return;
@@ -721,6 +778,11 @@ namespace ExcelMerge.GUI.Views
 
         private void NextMatchCellButton_Click(object sender, RoutedEventArgs e)
         {
+            MoveNextMatchCell();
+        }
+
+        private void MoveNextMatchCell()
+        {
             if (!ValidateDataGrids())
                 return;
 
@@ -747,6 +809,270 @@ namespace ExcelMerge.GUI.Views
                 return;
 
             SrcDataGrid.CurrentCell = nextCell;
+        }
+
+        private void CopyToClipboardSelectedCells(string separator)
+        {
+            if (copyTargetGrid == null)
+                return;
+
+            var model = copyTargetGrid.Model as DiffGridModel;
+            if (model == null)
+                return;
+
+            var tsv = string.Join(Environment.NewLine,
+               copyTargetGrid.SelectedCells
+              .GroupBy(c => c.Row.Value)
+              .OrderBy(g => g.Key)
+              .Select(g => string.Join(separator, g.Select(c => model.GetCellText(c, true)))));
+
+            Clipboard.SetDataObject(tsv);
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Right:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextModifiedCell();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Left:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevModifiedCell();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Down:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextModifiedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.Up:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevModifiedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.L:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextRemovedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.O:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevRemovedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.K:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MoveNextAddedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.I:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            MovePrevAddedRow();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.F8:
+                    {
+                        MovePrevMatchCell();
+                        e.Handled = true;
+                    }
+                    break;
+                case Key.F9:
+                    {
+                        MoveNextMatchCell();
+                        e.Handled = true;
+                    }
+                    break;
+                case Key.F:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ToolExpander.IsExpanded = true;
+                            SearchTextCombobox.Focus();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.C:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            CopyToClipboardSelectedCells(Keyboard.IsKeyDown(Key.LeftShift) ? "," : "\t");
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.B:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ShowLog();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void ShowLog()
+        {
+            var log = BuildCellBaseLog();
+
+            (App.Current.MainWindow as MainWindow).WriteToConsole(log);
+        }
+
+        private void BuildCellBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            ShowLog();
+        }
+
+        private void BuildRowBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            BuildRowBaseLog();
+        }
+
+        private void BuildColumnBaseLog_Click(object sender, RoutedEventArgs e)
+        {
+            BuildColumnBaseLog();
+        }
+
+        private string BuildCellBaseLog()
+        {
+            var srcModel = SrcDataGrid.Model as DiffGridModel;
+            if (srcModel == null)
+                return string.Empty;
+
+            var dstModel = DstDataGrid.Model as DiffGridModel;
+            if (dstModel == null)
+                return string.Empty;
+
+            var builder = new StringBuilder();
+
+            var selectedCells = SrcDataGrid.SelectedCells;
+
+            var modifiedLogFormat = App.Instance.Setting.LogFormat;
+            var addedLogFormat = App.Instance.Setting.AddedRowLogFormat;
+            var removedLogFormat = App.Instance.Setting.RemovedRowLogFormat;
+
+            foreach (var row in SrcDataGrid.SelectedCells.GroupBy(c => c.Row))
+            {
+                var rowHeaderText = srcModel.GetRowHeaderText(row.Key.Value);
+                if (string.IsNullOrEmpty(rowHeaderText))
+                    rowHeaderText = dstModel.GetRowHeaderText(row.Key.Value);
+
+                if (dstModel.IsAddedRow(row.Key.Value, true))
+                {
+                    var log = addedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText));
+
+                    builder.AppendLine(log);
+
+                    continue;
+                }
+
+                if (dstModel.IsRemovedRow(row.Key.Value, true))
+                {
+                    var log = removedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText));
+
+                    builder.AppendLine(log);
+
+                    continue;
+                }
+
+                foreach (var cell in row)
+                {
+                    if (cell.Row.Value == srcModel.ColumnHeaderIndex)
+                        continue;
+
+                    var srcText = srcModel.GetCellText(cell, true);
+                    var dstText = dstModel.GetCellText(cell, true);
+                    if (srcText == dstText)
+                        continue;
+
+                    var colHeaderText = srcModel.GetColumnHeaderText(cell.Column.Value);
+
+                    if (string.IsNullOrEmpty(colHeaderText))
+                        colHeaderText = dstModel.GetColumnHeaderText(cell.Column.Value);
+
+                    if (string.IsNullOrEmpty(srcText))
+                        srcText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(dstText))
+                        dstText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(rowHeaderText))
+                        rowHeaderText = Properties.Resources.Word_Blank;
+
+                    if (string.IsNullOrEmpty(colHeaderText))
+                        colHeaderText = Properties.Resources.Word_Blank;
+
+                    var log = modifiedLogFormat
+                        .Replace("${ROW}", RemoveMultiLine(rowHeaderText))
+                        .Replace("${COL}", RemoveMultiLine(colHeaderText))
+                        .Replace("${LEFT}", RemoveMultiLine(srcText))
+                        .Replace("${RIGHT}", RemoveMultiLine(dstText));
+
+                    builder.AppendLine(log);
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private string RemoveMultiLine(string log)
+        {
+            return log.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
+        }
+
+        private void BuildRowBaseLog()
+        {
+        }
+
+        private void BuildColumnBaseLog()
+        {
+        }
+
+        private void BuildLog(string format)
+        {
+        }
+
+        private void ShowLog(string log)
+        {
         }
     }
 }
