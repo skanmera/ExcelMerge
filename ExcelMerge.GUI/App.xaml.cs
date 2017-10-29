@@ -20,10 +20,14 @@ namespace ExcelMerge.GUI
         {
             App app = new App();
             app.InitializeComponent();
+
             app.Setting = ApplicationSetting.Load();
+
+            app.Setting.EnsureCulture();
+            app.UpdateResourceCulture();
+
             if (app.Setting.Ensure())
                 app.Setting.Save();
-            app.UpdateResourceCulture();
 
             app.Run();
         }
