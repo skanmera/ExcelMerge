@@ -138,6 +138,8 @@ You can customize background colors.
 By selecting Ctrl + D or "Output log" from the context menu, you can output the change as a log.
 The format can be changed from "differential extraction setting".
 
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/log.png)
+
 
 ## Known problems
 
