@@ -119,7 +119,7 @@ namespace ExcelMerge.GUI.Views
             if (!string.IsNullOrEmpty(fileSetting.SheetName))
                 index = sheetNames.IndexOf(fileSetting.SheetName);
 
-            if (index >= sheetNames.Count)
+            if (index < 0 || index >= sheetNames.Count)
             {
                 MessageBox.Show(Properties.Resources.Msg_OutofSheetRange);
                 index = 0;
@@ -564,16 +564,6 @@ namespace ExcelMerge.GUI.Views
             diffConfig.DstSheetIndex = srcTmp;
 
             ExecuteDiff();
-        }
-
-        private void SrcSheetCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            diffConfig.SrcSheetIndex = Math.Max(SrcSheetCombobox.SelectedIndex, 0);
-        }
-
-        private void DstSheetCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            diffConfig.DstSheetIndex = Math.Max(DstSheetCombobox.SelectedIndex, 0);
         }
 
         private void DiffByHeaderSrc_Click(object sender, RoutedEventArgs e)

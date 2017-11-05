@@ -3019,7 +3019,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ExcelMerge.GUI.resources, Version=1.2.0.0, Culture=ja-JP, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ExcelMerge.GUI.resources, Version=1.2.2.0, Culture=ja-JP, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_7EECB1668C9D438BB788A7955D591C2A"
@@ -3205,7 +3205,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ExcelMerge, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ExcelMerge, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_8909B343BA3F01F21DD40010144B9A06"
@@ -4198,15 +4198,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExcelMerge"
-        "ProductCode" = "8:{9F2411DD-F9FD-4632-BAF7-0E09CEAF45CD}"
-        "PackageCode" = "8:{3AD38ED3-4BCE-4DD8-B2C6-D7D1AFBE475A}"
+        "ProductCode" = "8:{03D8EA07-1162-48D8-A8F9-D847B3DD8DAF}"
+        "PackageCode" = "8:{64B40AD1-F285-46B3-B8C2-0FDCD988B091}"
         "UpgradeCode" = "8:{BCE73A99-B5CE-4C2E-A955-2E0922068237}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.2"
+        "ProductVersion" = "8:1.2.3"
         "Manufacturer" = "8:skanmera"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
