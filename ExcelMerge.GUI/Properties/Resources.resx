@@ -441,4 +441,21 @@
   <data name="Label_RemovedRowLogFormat" xml:space="preserve">
     <value>Removed Row Log Format</value>
   </data>
+  <data name="Label_IgnoreFileSetting" xml:space="preserve">
+    <value>Ignore File Setting</value>
+  </data>
+  <data name="Msg_OutofSheetRange" xml:space="preserve">
+    <value>Sheet index of the applied file settings is out of range.
+Will use first sheet.
+If you don't want to apply file settings, enable "Ignore File Setting".</value>
+  </data>
+  <data name="Word_SheetIndex" xml:space="preserve">
+    <value>Sheet Index</value>
+  </data>
+  <data name="Word_SheetName" xml:space="preserve">
+    <value>Sheet Name</value>
+  </data>
+  <data name="Word_StartupSheet" xml:space="preserve">
+    <value>Set as Startup Sheet</value>
+  </data>
 </root>

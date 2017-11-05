@@ -12,6 +12,27 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref name, value); Update(); }
         }
 
+        private int sheetIndex;
+        public int SheetIndex
+        {
+            get { return sheetIndex; }
+            set { SetProperty(ref sheetIndex, value); Update(); }
+        }
+
+        private string sheetName = string.Empty;
+        public string SheetName
+        {
+            get { return sheetName; }
+            set { SetProperty(ref sheetName, value); Update(); }
+        }
+
+        private bool isStartupSheet;
+        public bool IsStartupSheet
+        {
+            get { return isStartupSheet; }
+            set { SetProperty(ref isStartupSheet, value); Update(); }
+        }
+
         private int columnHeaderIndex;
         public int ColumnHeaderIndex
         {
@@ -66,6 +87,9 @@ namespace ExcelMerge.GUI.Settings
         {
             return
                 Name.Equals(other.name) &&
+                SheetIndex.Equals(other.SheetIndex) &&
+                SheetName.Equals(other.SheetName) &&
+                IsStartupSheet.Equals(other.IsStartupSheet) &&
                 ColumnHeaderIndex.Equals(other.ColumnHeaderIndex) &&
                 RowHeaderIndex.Equals(other.RowHeaderIndex) &&
                 RowHeaderName.Equals(other.RowHeaderName) &&
@@ -91,6 +115,9 @@ namespace ExcelMerge.GUI.Settings
             return new FileSetting()
             {
                 Name = Name,
+                SheetIndex = SheetIndex,
+                SheetName = SheetName,
+                IsStartupSheet = IsStartupSheet,
                 ColumnHeaderIndex = ColumnHeaderIndex,
                 RowHeaderIndex = RowHeaderIndex,
                 RowHeaderName = RowHeaderName,

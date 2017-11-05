@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
         xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
+        xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="{x:Static props:Resources.Title_CommandsWindow}" Height="640" Width="960"
+        Title="{x:Static props:Resources.Title_CommandsWindow}" 
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
         Icon="/ExcelMerge.GUI;component/app.ico"
         Name="Window"
         >

@@ -441,4 +441,21 @@
   <data name="Label_RemovedRowLogFormat" xml:space="preserve">
     <value>削除された行のログのフォーマット</value>
   </data>
+  <data name="Label_IgnoreFileSetting" xml:space="preserve">
+    <value>ファイル設定を適用しない</value>
+  </data>
+  <data name="Msg_OutofSheetRange" xml:space="preserve">
+    <value>適用されたファイル設定のシートインデックスが範囲外です。
+インデックス0のシートを比較します。
+ファイル設定を適用しない場合は、「ファイル設定を適用しない」を有効にして下さい。</value>
+  </data>
+  <data name="Word_SheetIndex" xml:space="preserve">
+    <value>シートインデックス</value>
+  </data>
+  <data name="Word_SheetName" xml:space="preserve">
+    <value>シート名</value>
+  </data>
+  <data name="Word_StartupSheet" xml:space="preserve">
+    <value>起動時の比較シートにする</value>
+  </data>
 </root>

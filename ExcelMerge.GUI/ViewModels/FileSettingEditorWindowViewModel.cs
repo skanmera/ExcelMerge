@@ -42,11 +42,11 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void Apply(Window window)
         {
-            if (fileSettings.Any(f => f.Name == FileSetting.Name && f.Name != originalName))
-            {
-                MessageBox.Show($"{FileSetting.Name} is already exists.", "Failed", MessageBoxButton.OK);
-                return;
-            }
+            //if (fileSettings.Any(f => f.Name == FileSetting.Name && f.Name != originalName))
+            //{
+            //    MessageBox.Show($"{FileSetting.Name} is already exists.", "Failed", MessageBoxButton.OK);
+            //    return;
+            //}
 
             IsDone = true;
 

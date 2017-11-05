@@ -22,7 +22,7 @@ namespace ExcelMerge.GUI.Views
 {
     public partial class DiffView : UserControl
     {
-        private ExcelSheetDiffConfig diffConfig;
+        private ExcelSheetDiffConfig diffConfig = new ExcelSheetDiffConfig();
         private IUnityContainer container;
 
         private const string srcKey = "src";
@@ -74,7 +74,7 @@ namespace ExcelMerge.GUI.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ExecuteDiff();
+            ExecuteDiff(true);
 
             SrcDataGrid.ScrolledModelRows += DataGrid_Scrolled;
             SrcDataGrid.ScrolledModelColumns += DataGrid_Scrolled;
@@ -84,16 +84,48 @@ namespace ExcelMerge.GUI.Views
             ToolExpander.IsExpanded = false;
         }
 
-        private ExcelSheetDiffConfig CreateDiffConfig(FileSetting fileSetting)
+        private ExcelSheetDiffConfig CreateDiffConfig(FileSetting srcFileSetting, FileSetting dstFileSetting, bool isStartup)
         {
             var config = new ExcelSheetDiffConfig();
 
-            if (fileSetting != null)
+            config.SrcSheetIndex = SrcSheetCombobox.SelectedIndex;
+            config.DstSheetIndex = DstSheetCombobox.SelectedIndex;
+
+            if (srcFileSetting != null)
             {
-                config.HeaderIndex = fileSetting.ColumnHeaderIndex;
+                if (isStartup)
+                    config.SrcSheetIndex = GetSheetIndex(srcFileSetting, SrcSheetCombobox.Items);
+
+                config.SrcHeaderIndex = srcFileSetting.ColumnHeaderIndex;
+            }
+
+            if (dstFileSetting != null)
+            {
+                if (isStartup)
+                    config.DstSheetIndex = GetSheetIndex(dstFileSetting, DstSheetCombobox.Items);
+
+                config.DstHeaderIndex = dstFileSetting.ColumnHeaderIndex;
             }
 
             return config;
+        }
+
+        private int GetSheetIndex(FileSetting fileSetting, ItemCollection sheetNames)
+        {
+            if (fileSetting == null)
+                return -1;
+
+            var index = fileSetting.SheetIndex;
+            if (!string.IsNullOrEmpty(fileSetting.SheetName))
+                index = sheetNames.IndexOf(fileSetting.SheetName);
+
+            if (index >= sheetNames.Count)
+            {
+                MessageBox.Show(Properties.Resources.Msg_OutofSheetRange);
+                index = 0;
+            }
+
+            return index;
         }
 
         private void DataGrid_Scrolled(object sender, EventArgs e)
@@ -320,7 +352,7 @@ namespace ExcelMerge.GUI.Views
             };
         }
 
-        private void ExecuteDiff()
+        private void ExecuteDiff(bool isStartup = false)
         {
             if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
                 return;
@@ -341,9 +373,6 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
             DstDataGrid.SetMinColumnSize(App.Instance.Setting.CellWidth);
 
-            var setting = FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text)) ?? FindFilseSetting(Path.GetFileName(DstPathTextBox.Text));
-            diffConfig = CreateDiffConfig(setting);
-
             var srcPath = SrcPathTextBox.Text;
             var dstPath = DstPathTextBox.Text;
             ExcelWorkbook wb1 = null;
@@ -357,17 +386,28 @@ namespace ExcelMerge.GUI.Views
                 wb2 = ExcelWorkbook.Create(dstPath, config);
             });
 
-            var tmpSrcSheetIndex = diffConfig.SrcSheetIndex;
-            var tmpDstSheetIndex = diffConfig.DstSheetIndex;
+            FileSetting srcSetting = null;
+            FileSetting dstSetting = null;
+            if (!IgnoreFileSettingCheckbox.IsChecked.Value)
+            {
+                srcSetting =
+                    FindFilseSetting(Path.GetFileName(SrcPathTextBox.Text), SrcSheetCombobox.SelectedIndex, SrcSheetCombobox.SelectedItem.ToString(), isStartup);
 
-            SrcSheetCombobox.Items.Clear();
-            DstSheetCombobox.Items.Clear();
+                dstSetting =
+                    FindFilseSetting(Path.GetFileName(DstPathTextBox.Text), DstSheetCombobox.SelectedIndex, DstSheetCombobox.SelectedItem.ToString(), isStartup);
 
-            wb1.Sheets.Keys.ToList().ForEach(s => SrcSheetCombobox.Items.Add(s));
-            wb2.Sheets.Keys.ToList().ForEach(s => DstSheetCombobox.Items.Add(s));
+                diffConfig = CreateDiffConfig(srcSetting, dstSetting, isStartup);
+            }
+            else
+            {
+                diffConfig = new ExcelSheetDiffConfig();
 
-            SrcSheetCombobox.SelectedIndex = Math.Max(tmpSrcSheetIndex, 0);
-            DstSheetCombobox.SelectedIndex = Math.Max(tmpDstSheetIndex, 0);
+                diffConfig.SrcSheetIndex = Math.Max(SrcSheetCombobox.SelectedIndex, 0);
+                diffConfig.DstSheetIndex = Math.Max(DstSheetCombobox.SelectedIndex, 0);
+            }
+
+            SrcSheetCombobox.SelectedIndex = diffConfig.SrcSheetIndex;
+            DstSheetCombobox.SelectedIndex = diffConfig.DstSheetIndex;
 
             var sheet1 = wb1.Sheets[SrcSheetCombobox.SelectedItem.ToString()];
             var sheet2 = wb2.Sheets[DstSheetCombobox.SelectedItem.ToString()];
@@ -402,22 +442,24 @@ namespace ExcelMerge.GUI.Views
                 srcModel.HideEqualRows();
             }
 
-            if (setting != null)
+            if (srcSetting != null)
             {
-                srcModel.SetColumnHeader(setting.ColumnHeaderIndex);
-                dstModel.SetColumnHeader(setting.ColumnHeaderIndex);
-                if (string.IsNullOrEmpty(setting.RowHeaderName))
-                {
-                    srcModel.SetRowHeader(setting.RowHeaderIndex);
-                    dstModel.SetRowHeader(setting.RowHeaderIndex);
-                }
+                srcModel.SetColumnHeader(srcSetting.ColumnHeaderIndex);
+                if (string.IsNullOrEmpty(srcSetting.RowHeaderName))
+                    srcModel.SetRowHeader(srcSetting.RowHeaderIndex);
                 else
-                {
-                    srcModel.SetRowHeader(setting.RowHeaderName);
-                    dstModel.SetRowHeader(setting.RowHeaderName);
-                }
-                SrcDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
-                DstDataGrid.MaxRowHeaderWidth = setting.MaxRowHeaderWidth;
+                    srcModel.SetRowHeader(srcSetting.RowHeaderName);
+                SrcDataGrid.MaxRowHeaderWidth = srcSetting.MaxRowHeaderWidth;
+            }
+
+            if (dstSetting != null)
+            {
+                dstModel.SetColumnHeader(dstSetting.ColumnHeaderIndex);
+                if (string.IsNullOrEmpty(dstSetting.RowHeaderName))
+                    dstModel.SetRowHeader(dstSetting.RowHeaderIndex);
+                else
+                    dstModel.SetRowHeader(dstSetting.RowHeaderName);
+                DstDataGrid.MaxRowHeaderWidth = dstSetting.MaxRowHeaderWidth;
             }
 
             DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
@@ -427,32 +469,37 @@ namespace ExcelMerge.GUI.Views
                 App.Instance.UpdateRecentFiles(SrcPathTextBox.Text, DstPathTextBox.Text);
         }
 
-        private Settings.FileSetting FindFilseSetting(string fileName)
+        private FileSetting FindFilseSetting(string fileName, int sheetIndex, string sheetName, bool isStartup)
         {
+            var results = new List<FileSetting>();
             foreach (var setting in App.Instance.Setting.FileSettings)
             {
                 if (setting.UseRegex)
                 {
                     var regex = new System.Text.RegularExpressions.Regex(setting.Name);
+
                     if (regex.IsMatch(fileName))
-                        return setting;
+                        results.Add(setting);
                 }
                 else
                 {
                     if (setting.ExactMatch)
                     {
                         if (setting.Name == fileName)
-                            return setting;
+                            results.Add(setting);
                     }
                     else
                     {
                         if (fileName.Contains(setting.Name))
-                            return setting;
+                            results.Add(setting);
                     }
                 }
             }
 
-            return null;
+            if (isStartup)
+                return results.FirstOrDefault(r => r.IsStartupSheet) ?? results.FirstOrDefault() ?? null;
+
+            return results.FirstOrDefault(r => r.SheetName == sheetName) ?? results.FirstOrDefault(r => r.SheetIndex == sheetIndex) ?? null;
         }
 
         private void SetRowHeader_Click(object sender, RoutedEventArgs e)
@@ -519,29 +566,13 @@ namespace ExcelMerge.GUI.Views
             ExecuteDiff();
         }
 
-        private void SrcPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            SrcSheetCombobox.Items.Clear();
-        }
-
-        private void DstPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            DstSheetCombobox.Items.Clear();
-        }
-
         private void SrcSheetCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (diffConfig == null)
-                return;
-
             diffConfig.SrcSheetIndex = Math.Max(SrcSheetCombobox.SelectedIndex, 0);
         }
 
         private void DstSheetCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (diffConfig == null)
-                return;
-
             diffConfig.DstSheetIndex = Math.Max(DstSheetCombobox.SelectedIndex, 0);
         }
 
@@ -549,7 +580,7 @@ namespace ExcelMerge.GUI.Views
         {
             var headerIndex = SrcDataGrid.CurrentCell.Row.HasValue ? SrcDataGrid.CurrentCell.Row.Value : -1;
 
-            diffConfig.HeaderIndex = headerIndex;
+            diffConfig.SrcHeaderIndex= headerIndex;
 
             ExecuteDiff();
         }
@@ -558,7 +589,7 @@ namespace ExcelMerge.GUI.Views
         {
             var headerIndex = DstDataGrid.CurrentCell.Row.HasValue ? DstDataGrid.CurrentCell.Row.Value : -1;
 
-            diffConfig.HeaderIndex = headerIndex;
+            diffConfig.DstSheetIndex = headerIndex;
 
             ExecuteDiff();
         }
