@@ -76,7 +76,7 @@
                             <ComboBox x:Name="SrcSheetCombobox" Margin="0,0,5,0" Width="100"
                                       ItemsSource="{Binding SrcSheetNames}"
                                       SelectedIndex="{Binding SelectedSrcSheetIndex}"
-                                      SelectionChanged="SrcSheetCombobox_SelectionChanged"/>
+                                      />
                         </StackPanel>
                     </GroupBox>
 
@@ -97,8 +97,7 @@
                             <Label Content="{x:Static props:Resources.Word_Sheet}"/>
                             <ComboBox x:Name="DstSheetCombobox" Margin="5,0,0,0" Width="100"
                                       ItemsSource="{Binding DstSheetNames}"
-                                      SelectedIndex="{Binding SelectedDstSheetIndex}"
-                                      SelectionChanged="DstSheetCombobox_SelectionChanged"/>
+                                      SelectedIndex="{Binding SelectedDstSheetIndex}"/>
                         </StackPanel>
                     </GroupBox>
 
