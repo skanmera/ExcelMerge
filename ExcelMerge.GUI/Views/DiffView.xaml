@@ -9,7 +9,7 @@
              xmlns:fg="clr-namespace:FastWpfGrid;assembly=FastWpfGrid"
              xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
              xmlns:gui="clr-namespace:ExcelMerge.GUI"
-             xmlns:vc="clr-namespace:ExcelMerge.GUI.Converters"
+             xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300"
@@ -66,8 +66,7 @@
                                      Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
                                      AllowDrop="True"
                                      Text="{Binding SrcPath}"
-                                     Tag="0"
-                                     TextChanged="SrcPathTextBox_TextChanged">
+                                     Tag="0">
                                 <i:Interaction.Behaviors>
                                     <behavior:DragAcceptBehavior 
                                             Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -75,7 +74,9 @@
                             </TextBox>
                             <Label Content="{x:Static props:Resources.Word_Sheet}"/>
                             <ComboBox x:Name="SrcSheetCombobox" Margin="0,0,5,0" Width="100"
-                                          SelectionChanged="SrcSheetCombobox_SelectionChanged"/>
+                                      ItemsSource="{Binding SrcSheetNames}"
+                                      SelectedIndex="{Binding SelectedSrcSheetIndex}"
+                                      SelectionChanged="SrcSheetCombobox_SelectionChanged"/>
                         </StackPanel>
                     </GroupBox>
 
@@ -87,8 +88,7 @@
                                      Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
                                      AllowDrop="True"
                                      Text="{Binding DstPath}"
-                                     Tag="1"
-                                     TextChanged="DstPathTextBox_TextChanged">
+                                     Tag="1">
                                 <i:Interaction.Behaviors>
                                     <behavior:DragAcceptBehavior 
                                             Description="{Binding DataContext. Description,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -96,7 +96,9 @@
                             </TextBox>
                             <Label Content="{x:Static props:Resources.Word_Sheet}"/>
                             <ComboBox x:Name="DstSheetCombobox" Margin="5,0,0,0" Width="100"
-                                          SelectionChanged="DstSheetCombobox_SelectionChanged"/>
+                                      ItemsSource="{Binding DstSheetNames}"
+                                      SelectedIndex="{Binding SelectedDstSheetIndex}"
+                                      SelectionChanged="DstSheetCombobox_SelectionChanged"/>
                         </StackPanel>
                     </GroupBox>
 
@@ -247,6 +249,8 @@
                                 />
                     </StackPanel>
                 </GroupBox>
+
+                <CheckBox x:Name="IgnoreFileSettingCheckbox" Content="{x:Static props:Resources.Label_IgnoreFileSetting}" Margin="3" VerticalAlignment="Center"/>
 
             </WrapPanel>
 

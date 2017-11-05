@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:props="clr-namespace:ExcelMerge.GUI.Properties"
         xmlns:local="clr-namespace:ExcelMerge.GUI.Views"
+        xmlns:vc="clr-namespace:ExcelMerge.GUI.ValueConverters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="{x:Static props:Resources.Title_FileSettingsWindow}" Height="640" Width="1200"
+        Title="{x:Static props:Resources.Title_FileSettingsWindow}" 
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
         Icon="/ExcelMerge.GUI;component/app.ico"
         Name="Window"
         >
@@ -30,6 +33,27 @@
                     <DataGridTextColumn.CellStyle>
                         <Style>
                             <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_SheetIndex}" Binding="{Binding SheetIndex}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_SheetName}" Binding="{Binding SheetName}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static props:Resources.Word_StartupSheet}" Binding="{Binding IsStartupSheet}"  Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>

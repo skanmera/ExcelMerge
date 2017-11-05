@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using NPOI.SS.UserModel;
 
 namespace ExcelMerge
@@ -14,7 +15,7 @@ namespace ExcelMerge
 
         public static ExcelWorkbook Create(string path, ExcelSheetReadConfig config)
         {
-            if (System.IO.Path.GetExtension(path) == ".csv")
+            if (Path.GetExtension(path) == ".csv")
                 return CreateFromCsv(path, config);
 
             var srcWb = WorkbookFactory.Create(path);
@@ -28,10 +29,24 @@ namespace ExcelMerge
             return wb;
         }
 
+        public static IEnumerable<string> GetSheetNames(string path)
+        {
+            if (Path.GetExtension(path) == ".csv")
+            {
+                yield return System.IO.Path.GetFileName(path);
+            }
+            else
+            {
+                var wb = WorkbookFactory.Create(path);
+                for (int i = 0; i < wb.NumberOfSheets; i++)
+                    yield return wb.GetSheetAt(i).SheetName;
+            }
+        }
+
         private static ExcelWorkbook CreateFromCsv(string path, ExcelSheetReadConfig config)
         {
             var wb = new ExcelWorkbook();
-            wb.Sheets.Add("csv", ExcelSheet.CreateFromCsv(path, config));
+            wb.Sheets.Add(Path.GetFileName(path), ExcelSheet.CreateFromCsv(path, config));
 
             return wb;
         }

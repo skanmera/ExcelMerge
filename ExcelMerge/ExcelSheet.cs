@@ -188,14 +188,17 @@ namespace ExcelMerge
         {
             var option = new DiffOption<ExcelColumn>();
 
-            if (config.HeaderIndex >= 0)
+            if (config.SrcHeaderIndex >= 0)
             {
                 option.EqualityComparer = new HeaderComparer();
                 foreach (var sc in srcColumns)
-                    sc.HeaderIndex = config.HeaderIndex;
+                    sc.HeaderIndex = config.SrcHeaderIndex;
+            }
 
+            if (config.DstHeaderIndex >= 0)
+            {
                 foreach (var dc in dstColumns)
-                    dc.HeaderIndex = config.HeaderIndex;
+                    dc.HeaderIndex = config.DstHeaderIndex;
             }
 
             var results = DiffUtil.Diff(srcColumns, dstColumns, option);

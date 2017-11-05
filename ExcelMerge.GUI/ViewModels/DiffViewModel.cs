@@ -44,6 +44,34 @@ namespace ExcelMerge.GUI.ViewModels
             }
         }
 
+        private List<string> srcSheetNames;
+        public List<string> SrcSheetNames
+        {
+            get { return srcSheetNames; }
+            private set { SetProperty(ref srcSheetNames, value); }
+        }
+
+        private List<string> dstSheetNames;
+        public List<string> DstSheetNames
+        {
+            get { return dstSheetNames; }
+            private set { SetProperty(ref dstSheetNames, value); }
+        }
+
+        private int selectedSrcSheetIndex;
+        public int SelectedSrcSheetIndex
+        {
+            get { return selectedSrcSheetIndex; }
+            set { SetProperty(ref selectedSrcSheetIndex, value); }
+        }
+
+        private int selectedDstSheetIndex;
+        public int SelectedDstSheetIndex
+        {
+            get { return selectedDstSheetIndex; }
+            set { SetProperty(ref selectedDstSheetIndex, value); }
+        }
+
         private bool executable;
         public bool Executable
         {
@@ -182,7 +210,32 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void UpdateExecutableFlag()
         {
-            Executable = File.Exists(SrcPath) && File.Exists(DstPath);
+            var existsSrc = File.Exists(SrcPath);
+            var existsDst = File.Exists(DstPath);
+
+            if (existsSrc)
+            {
+                SrcSheetNames = ExcelWorkbook.GetSheetNames(SrcPath).ToList();
+                SelectedSrcSheetIndex = 0;
+            }
+            else
+            {
+                SrcSheetNames = new List<string>();
+                SelectedSrcSheetIndex = -1;
+            }
+
+            if (existsDst)
+            {
+                DstSheetNames = ExcelWorkbook.GetSheetNames(DstPath).ToList();
+                SelectedDstSheetIndex = 0;
+            }
+            else
+            {
+                DstSheetNames = new List<string>();
+                SelectedDstSheetIndex = -1;
+            }
+
+            Executable = existsSrc && existsDst;
         }
     }
 }
