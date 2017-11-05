@@ -268,6 +268,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Ignore File Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_IgnoreFileSetting {
+            get {
+                return ResourceManager.GetString("Label_IgnoreFileSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Modified Cell Log Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_LogFormat {
@@ -525,6 +534,17 @@ namespace ExcelMerge.GUI.Properties {
         public static string Msg_ExtractingDiff {
             get {
                 return ResourceManager.GetString("Msg_ExtractingDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sheet index of the applied file settings is out of range.
+        ///Will use first sheet.
+        ///If you don&apos;t want to apply file settings, enable &quot;Ignore File Setting&quot;. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_OutofSheetRange {
+            get {
+                return ResourceManager.GetString("Msg_OutofSheetRange", resourceCulture);
             }
         }
         
@@ -1015,11 +1035,38 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Sheet Index に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_SheetIndex {
+            get {
+                return ResourceManager.GetString("Word_SheetIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sheet Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_SheetName {
+            get {
+                return ResourceManager.GetString("Word_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Src File に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_SrcFile {
             get {
                 return ResourceManager.GetString("Word_SrcFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Set as Startup Sheet に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_StartupSheet {
+            get {
+                return ResourceManager.GetString("Word_StartupSheet", resourceCulture);
             }
         }
         

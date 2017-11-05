@@ -22,10 +22,13 @@
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
             <RowDefinition Height="16*"/>
             <RowDefinition Height="16*"/>
             <RowDefinition Height="16*"/>
@@ -40,36 +43,50 @@
         <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="300"
                  Text="{Binding FileSetting.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static props:Resources.Word_ColumnHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static props:Resources.Word_SheetIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
+                            Value="{Binding FileSetting.SheetIndex, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0"
+                            />
+
+        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static props:Resources.Word_SheetName}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="300"
+                            Text ="{Binding FileSetting.SheetName, UpdateSourceTrigger=PropertyChanged}"
+                            />
+
+        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static props:Resources.Word_StartupSheet}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding FileSetting.IsStartupSheet}" Margin="3" VerticalAlignment="Center"/>
+
+        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static props:Resources.Word_ColumnHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
                             Value="{Binding FileSetting.ColumnHeaderIndex, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="0"
                             />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static props:Resources.Word_RowHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
+        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static props:Resources.Word_RowHeaderIndex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
                             Value="{Binding FileSetting.RowHeaderIndex, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="-1"
                             />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static props:Resources.Word_RowHeaderName}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="300"
+        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static props:Resources.Word_RowHeaderName}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="300"
                             Text ="{Binding FileSetting.RowHeaderName, UpdateSourceTrigger=PropertyChanged}"
                             />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static props:Resources.Word_MaxRowHeaderWidth}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
+        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static props:Resources.Word_MaxRowHeaderWidth}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="100"
                             Value="{Binding FileSetting.MaxRowHeaderWidth, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="30"
                             />
 
-        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static props:Resources.Word_ExactMatch}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding FileSetting.ExactMatch}" Margin="3" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static props:Resources.Word_ExactMatch}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding FileSetting.ExactMatch}" Margin="3" VerticalAlignment="Center"/>
 
-        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static props:Resources.Word_Regex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
-        <CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding FileSetting.UseRegex}" Margin="3" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="9" Content="{x:Static props:Resources.Word_Regex}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Column="1" Grid.Row="9" IsChecked="{Binding FileSetting.UseRegex}" Margin="3" VerticalAlignment="Center"/>
 
-        <Grid Grid.Column="1" Grid.Row="7">
+        <Grid Grid.Column="1" Grid.Row="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="33*"/>
                 <ColumnDefinition Width="33*"/>
