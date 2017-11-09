@@ -1,3 +1,7 @@
+- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
+- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+
+
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/logo.png)
 
 ### エクセルのGUI差分ツール
@@ -5,11 +9,6 @@
 ![Demo](https://github.com/skanmera/ExcelMerge/blob/media/media/demo.gif)
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
-
-## 言語
-
-- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
-- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
 
 ## 説明
 
@@ -110,6 +109,34 @@ vdiff = excelmerge
 背景色をカスタマイズできます。
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+
+## ショートカットキー
+
+|Shortcut Key|Description|
+|---|-----------|
+|Ctrl + →|次の変更されたセルに移動|
+|Ctrl + ←|前の変更されたセルに移動|
+|Ctrl + ↓|次の変更された行に移動|
+|Ctrl + ↑|前の変更された行に移動|
+|Ctrl + K|次の追加された行に移動|
+|Ctrl + I|前の追加された行に移動|
+|Ctrl + L|次の削除された行に移動|
+|Ctrl + O|前の削除された行に移動|
+|Ctrl + F|セルを検索|
+|F9|次の検索結果に一致するセルに移動|
+|F8|前の検索結果に一致するセルに移動|
+|Ctrl + C|選択したセルをタブ区切りでコピー(エクセルへの貼り付け)|
+|Ctrl + Shift + C|選択したセルをカンマ区切りでコピー|
+|Ctrl + D|コンソールを表示(隠す)|
+|Ctrl + B|選択範囲の差分をログとして出力|
+
+## 変更をログとして出力する
+
+Ctrl+D　もしくはコンテキストメニューから「ログを出力」を選択することで、変更点をログとして出力します。
+フォーマットは「差分抽出設定」から変更可能です。
+
+![](https://github.com/skanmera/ExcelMerge/blob/media/media/log.png)
+
 
 ## 既知の問題点
 
