@@ -178,14 +178,21 @@ namespace ExcelMerge.GUI.Controls
 				{
 					this._currentSection.Invocation.SetPreviousHistory();
 					e.Handled = true;
-				}
-				else if ((e.Key == Key.Left || e.Key == Key.Back)
-					&& this.CaretIsInLeftMostOfEditArea())
-				{
-					e.Handled = true;
-				}
-			}
-			else
+                }
+                else if (e.Key == Key.Left || e.Key == Key.Back || e.Key == Key.Delete)
+                {
+                    if (CaretIsInLeftMostOfEditArea())
+                    {
+                        e.Handled = true;
+                    }
+                    else if (IsSelectedAll())
+                    {
+                        ClearConsole();
+                        e.Handled = true;
+                    }
+                }
+            }
+            else
 			{
 				if (e.Key == Key.Back || e.Key == Key.Delete)
 				{
@@ -198,7 +205,23 @@ namespace ExcelMerge.GUI.Controls
 			}
 		}
 
-		private void HandlePaste(object sender, DataObjectPastingEventArgs e)
+        private bool IsSelectedAll()
+        {
+            return Selection.Text == new TextRange(Document.ContentStart, Document.ContentEnd).Text;
+        }
+
+        public void ClearConsole()
+        {
+            (PowerShellHost as PowerShellHost).Dispose();
+
+            Document.Blocks.Clear();
+
+            var host = new PowerShellHost();
+            PowerShellHost = host;
+            host.Open();
+        }
+
+        private void HandlePaste(object sender, DataObjectPastingEventArgs e)
 		{
 			var isText = e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true);
 			if (!isText) return;
