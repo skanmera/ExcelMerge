@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace FastWpfGrid
 {
@@ -13,16 +14,16 @@ namespace FastWpfGrid
 
         public IFastGridModel Model
         {
-            get { return (IFastGridModel) this.GetValue(ModelProperty); }
+            get { return (IFastGridModel)this.GetValue(ModelProperty); }
             set { this.SetValue(ModelProperty, value); }
         }
 
         public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(
-            "Model", typeof (IFastGridModel), typeof (FastGridControl), new PropertyMetadata(null, OnModelPropertyChanged));
+            "Model", typeof(IFastGridModel), typeof(FastGridControl), new PropertyMetadata(null, OnModelPropertyChanged));
 
         private static void OnModelPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            ((FastGridControl) dependencyObject).OnModelPropertyChanged();
+            ((FastGridControl)dependencyObject).OnModelPropertyChanged();
         }
 
         #endregion
@@ -81,5 +82,58 @@ namespace FastWpfGrid
 
         #endregion
 
+        #region AlternatingColors
+
+        public Color[] AlternatingColors
+        {
+            get { return (Color[])this.GetValue(AlternatingColorsProperty); }
+            set { this.SetValue(AlternatingColorsProperty, value); }
+        }
+
+        public static readonly DependencyProperty AlternatingColorsProperty = DependencyProperty.Register(
+            "AlternatingColors", typeof(Color[]), typeof(FastGridControl), new PropertyMetadata(null, OnAlternatingColorsPropertyChanged));
+
+        private static void OnAlternatingColorsPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ((FastGridControl)dependencyObject).OnAlternatingColorsChanged();
+        }
+
+        #endregion
+
+        #region FontName
+
+        public string CellFontName
+        {
+            get { return (string)this.GetValue(CellFontNameProperty); }
+            set { this.SetValue(CellFontNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty CellFontNameProperty = DependencyProperty.Register(
+            "CellFontName", typeof(string), typeof(FastGridControl), new PropertyMetadata("Arial", OnCellFontNamePropertyChanged));
+
+        private static void OnCellFontNamePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ((FastGridControl)dependencyObject).OnCellFontNameChanged();
+        }
+
+        #endregion
+
+        #region CellFontSize
+
+        public int CellFontSize
+        {
+            get { return (int)this.GetValue(CellFontSizeProperty); }
+            set { this.SetValue(CellFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty CellFontSizeProperty = DependencyProperty.Register(
+            "CellFontSize", typeof(int), typeof(FastGridControl), new PropertyMetadata(11, OnCellFontSizePropertyChanged));
+
+        private static void OnCellFontSizePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ((FastGridControl)dependencyObject).OnCellFontSizeChanged();
+        }
+
+        #endregion
     }
 }

@@ -95,8 +95,13 @@ namespace FastWpfGrid
         public FastGridControl()
         {
             InitializeComponent();
-            //gridCore.Grid = this;
+
+            AlternatingColors = new Color[] { Colors.White };
+
             CellFontSize = 11;
+            CellFontName = "Arial";
+
+            //gridCore.Grid = this;
             _dragTimer = new DispatcherTimer();
             _dragTimer.IsEnabled = false;
             _dragTimer.Interval = TimeSpan.FromSeconds(0.05);
@@ -244,7 +249,7 @@ namespace FastWpfGrid
 
         public Color GetAlternateBackground(int row)
         {
-            return _alternatingColors[row%_alternatingColors.Length];
+            return AlternatingColors[row % AlternatingColors.Length];
         }
 
         private void hscroll_Scroll(object sender, ScrollEventArgs e)

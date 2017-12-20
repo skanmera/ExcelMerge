@@ -18,8 +18,6 @@ namespace FastWpfGrid
         private Color _limitedSelectedColor = Color.FromRgb(51, 220, 220);
         private Color _limitedSelectedTextColor = Colors.White;
         private Color _mouseOverRowColor = Color.FromRgb(235, 235, 255); // Colors.LemonChiffon; // Colors .Beige;
-        private string _cellFontName = "Arial";
-        private int _cellFontSize;
         private Color _gridLineColor = Colors.LightGray;
         private int _cellPaddingHorizontal = 2;
         private int _cellPaddingVertical = 1;
@@ -27,16 +25,6 @@ namespace FastWpfGrid
         private int _columnResizeTheresold = 2;
         private int? _minColumnWidthOverride;
         private int? _maxRowHeaderWidth = null;
-
-        private Color[] _alternatingColors = new Color[]
-            {
-                Colors.White,
-                Colors.White,
-                Color.FromRgb(235, 235, 235),
-                Colors.White,
-                Colors.White,
-                Color.FromRgb(235, 245, 255)
-            };
 
         private Color _activeRegionFrameColor = Color.FromRgb(0xAA, 0xAA, 0xFF);
         private Color _activeRegionHoverFillColor = Color.FromRgb(0xAA, 0xFF, 0xFF);
@@ -48,15 +36,15 @@ namespace FastWpfGrid
             set { _columnResizeTheresold = value; }
         }
 
-        public string CellFontName
+        private void OnAlternatingColorsChanged()
         {
-            get { return _cellFontName; }
-            set
-            {
-                _cellFontName = value;
-                RecalculateDefaultCellSize();
-                RenderChanged();
-            }
+            RenderChanged();
+        }
+
+        private void OnCellFontNameChanged()
+        {
+            RecalculateDefaultCellSize();
+            RenderChanged();
         }
 
         public int? MinColumnWidthOverride
@@ -89,15 +77,10 @@ namespace FastWpfGrid
             get { return _minColumnWidthOverride ?? _columnSizes.DefaultSize; }
         }
 
-        public int CellFontSize
+        private void OnCellFontSizeChanged()
         {
-            get { return _cellFontSize; }
-            set
-            {
-                _cellFontSize = value;
-                RecalculateDefaultCellSize();
-                InvalidateAll();
-            }
+            RecalculateDefaultCellSize();
+            RenderChanged();
         }
 
         public int RowHeightReserve
@@ -173,17 +156,6 @@ namespace FastWpfGrid
             set
             {
                 _gridLineColor = value;
-                RenderChanged();
-            }
-        }
-
-        public Color[] AlternatingColors
-        {
-            get { return _alternatingColors; }
-            set
-            {
-                if (value.Length < 1) throw new Exception("Invalid value");
-                _alternatingColors = value;
                 RenderChanged();
             }
         }
