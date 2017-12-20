@@ -37,7 +37,6 @@ namespace FastWpfGrid
         private int _headerWidth;
         private Dictionary<Tuple<bool, bool>, GlyphFont> _glyphFonts = new Dictionary<Tuple<bool, bool>, GlyphFont>();
         private Dictionary<Color, Brush> _solidBrushes = new Dictionary<Color, Brush>();
-        private int _rowHeightReserve = 5;
         //private Color _headerBackground = Color.FromRgb(0xDD, 0xDD, 0xDD);
         private WriteableBitmap _drawBuffer;
 

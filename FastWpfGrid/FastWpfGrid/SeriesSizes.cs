@@ -146,9 +146,10 @@ namespace FastWpfGrid
             int itemOrder = _positions.BinarySearch(position);
             if (itemOrder >= 0) return itemOrder;
             itemOrder = ~itemOrder; // bitwise complement - index is next larger index
-            if (itemOrder == 0) return position/DefaultSize;
+            if (DefaultSize <= 0) return 0;
+            if (itemOrder == 0) return position / DefaultSize;
             if (position <= _scrollItems[itemOrder - 1].EndPosition) return _scrollItems[itemOrder - 1].ScrollIndex;
-            return (position - _scrollItems[itemOrder - 1].Position)/DefaultSize + _scrollItems[itemOrder - 1].ScrollIndex;
+            return (position - _scrollItems[itemOrder - 1].Position) / DefaultSize + _scrollItems[itemOrder - 1].ScrollIndex;
         }
 
         public int GetFrozenIndexOnPosition(int position)
