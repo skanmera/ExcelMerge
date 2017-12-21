@@ -684,29 +684,29 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Diff Extraction Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Title_DiffSettingWindow {
+            get {
+                return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Edit External Command に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Title_CommandEditorWindow {
+        public static string Title_ExternalCommandEditorWindow {
             get {
-                return ResourceManager.GetString("Title_CommandEditorWindow", resourceCulture);
+                return ResourceManager.GetString("Title_ExternalCommandEditorWindow", resourceCulture);
             }
         }
         
         /// <summary>
         ///   External Commands に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Title_CommandsWindow {
+        public static string Title_ExternalCommandsWindow {
             get {
-                return ResourceManager.GetString("Title_CommandsWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Diff Extraction Settings に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Title_DiffSettingWindow {
-            get {
-                return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
+                return ResourceManager.GetString("Title_ExternalCommandsWindow", resourceCulture);
             }
         }
         

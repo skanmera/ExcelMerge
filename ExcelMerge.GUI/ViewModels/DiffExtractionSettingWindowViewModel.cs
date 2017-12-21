@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Media;
 using Prism.Mvvm;
 using Prism.Commands;
-using Xceed.Wpf.Toolkit;
 using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.ViewModels
@@ -50,7 +49,7 @@ namespace ExcelMerge.GUI.ViewModels
         public DiffExtractionSettingWindowViewModel()
         {
             originalSetting = App.Instance.Setting;
-            Setting = originalSetting.Clone();
+            Setting = originalSetting.DeepClone();
 
             CanRemoveAlternationColor = Setting.AlternatingColorStrings.Count > 1;
 
@@ -86,7 +85,7 @@ namespace ExcelMerge.GUI.ViewModels
         private void Reset()
         {
             Setting.PropertyChanged -= Setting_PropertyChanged;
-            Setting = originalSetting.Clone();
+            Setting = originalSetting.DeepClone();
             Setting.PropertyChanged += Setting_PropertyChanged;
 
             IsDirty = false;

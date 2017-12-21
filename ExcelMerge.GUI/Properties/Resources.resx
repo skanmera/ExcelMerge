@@ -153,10 +153,10 @@
   <data name="Message_Reboot" xml:space="preserve">
     <value>Please restart to apply the changes.</value>
   </data>
-  <data name="Title_CommandEditorWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandEditorWindow" xml:space="preserve">
     <value>Edit External Command</value>
   </data>
-  <data name="Title_CommandsWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandsWindow" xml:space="preserve">
     <value>External Commands</value>
   </data>
   <data name="Title_DiffSettingWindow" xml:space="preserve">

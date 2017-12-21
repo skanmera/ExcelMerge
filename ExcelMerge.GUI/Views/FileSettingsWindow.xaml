@@ -12,11 +12,10 @@
         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={vc:PercentageConverter}, ConverterParameter='0.7'}" 
         Icon="/ExcelMerge.GUI;component/app.ico"
-        Name="Window"
-        >
-    <Grid>
+        Name="Window">
+  <Grid>
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
             <RowDefinition Height="85*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
@@ -26,7 +25,7 @@
                   CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False"
                   HorizontalAlignment="Stretch"
                   Background="White"
-                  ItemsSource="{Binding FileSettings}"
+                  ItemsSource="{Binding SettingCollection}"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static props:Resources.Word_Name}" Binding="{Binding Name}" Width="*">

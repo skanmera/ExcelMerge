@@ -129,11 +129,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\PowerShellConsole.cs" />
+    <Compile Include="IgnoreEqualAttribute.cs" />
+    <Compile Include="Settings\ISetting.cs" />
     <Compile Include="SerializableBindableBase.cs" />
     <Compile Include="Settings\ExternalCommandCollection.cs" />
     <Compile Include="Settings\FileSettingCollection.cs" />
+    <Compile Include="Settings\Setting.cs" />
+    <Compile Include="Settings\SettingCollection.cs" />
     <Compile Include="Shell\PowerShellHost.cs" />
     <Compile Include="Shell\PowerShellInvocation.cs" />
+    <Compile Include="ViewModels\SettingCollectionWindowViewModelBase.cs" />
+    <Compile Include="ViewModels\SettingEditorWindowViewModelBase.cs" />
     <Compile Include="Views\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>
@@ -169,16 +175,16 @@
     <Compile Include="ValueConverters\FileDialogParameter.cs" />
     <Compile Include="ValueConverters\MultiEmptyStringConverter.cs" />
     <Compile Include="ValueConverters\MultiValueConverter.cs" />
-    <Compile Include="ViewModels\CommandEditorWindowViewModel.cs" />
-    <Compile Include="ViewModels\CommandsWindowViewModel.cs" />
+    <Compile Include="ViewModels\ExternalCommandEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\ExternalCommandsWindowViewModel.cs" />
     <Compile Include="ViewModels\DiffViewModel.cs" />
     <Compile Include="ViewModels\DiffExtractionSettingWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\CommandEditorWindow.xaml.cs">
-      <DependentUpon>CommandEditorWindow.xaml</DependentUpon>
+    <Compile Include="Views\ExternalCommandEditorWindow.xaml.cs">
+      <DependentUpon>ExternalCommandEditorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CommandsWindow.xaml.cs">
-      <DependentUpon>CommandsWindow.xaml</DependentUpon>
+    <Compile Include="Views\ExternalCommandsWindow.xaml.cs">
+      <DependentUpon>ExternalCommandsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DiffView.xaml.cs">
       <DependentUpon>DiffView.xaml</DependentUpon>
@@ -187,11 +193,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CommandEditorWindow.xaml">
+    <Page Include="Views\ExternalCommandEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommandsWindow.xaml">
+    <Page Include="Views\ExternalCommandsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
