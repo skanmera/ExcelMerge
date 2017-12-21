@@ -10,7 +10,8 @@ using ExcelMerge.GUI.Styles;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class ApplicationSetting : BindableBase, IEquatable<ApplicationSetting>
+    [Serializable]
+    public class ApplicationSetting : SerializableBindableBase, IEquatable<ApplicationSetting>
     {
         public static readonly string Location =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

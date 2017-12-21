@@ -1,9 +1,9 @@
 ﻿using System;
-using Prism.Mvvm;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class FileSetting : BindableBase, IEquatable<FileSetting>
+    [Serializable]
+    public class FileSetting : SerializableBindableBase, IEquatable<FileSetting>
     {
         private string name = string.Empty;
         public string Name

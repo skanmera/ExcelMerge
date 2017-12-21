@@ -1,9 +1,10 @@
 ﻿using System;
-using Prism.Mvvm;
+using YamlDotNet.Serialization;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class ExternalCommand : BindableBase, IEquatable<ExternalCommand>
+    [Serializable]
+    public class ExternalCommand : SerializableBindableBase, IEquatable<ExternalCommand>
     {
         private string name = string.Empty;
         public string Name
@@ -26,15 +27,15 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref args, value); Update(); }
         }
 
-        [YamlDotNet.Serialization.YamlIgnore]
+        [YamlIgnore]
         public bool CanExecute
         {
             get { return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Convert(Command)); }
         }
 
         private bool isValid;
-        [YamlDotNet.Serialization.YamlIgnore]
-        public bool IsValid 
+        [YamlIgnore]
+        public bool IsValid
         {
             get { return isValid; }
             private set { SetProperty(ref isValid, value); }
