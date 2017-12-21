@@ -148,7 +148,6 @@
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\DiffCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Settings\FileMatchType.cs" />
     <Compile Include="Settings\FileSetting.cs" />
     <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
