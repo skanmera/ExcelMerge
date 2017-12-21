@@ -146,15 +146,15 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref recentFileSets, value); }
         }
 
-        private List<ExternalCommand> externalCommands = new List<ExternalCommand>();
-        public List<ExternalCommand> ExternalCommands
+        private ExternalCommandCollection externalCommands = new ExternalCommandCollection();
+        public ExternalCommandCollection ExternalCommands
         {
             get { return externalCommands; }
             set { SetProperty(ref externalCommands, value); }
         }
 
-        private List<FileSetting> fileSettings = new List<FileSetting>();
-        public List<FileSetting> FileSettings
+        private FileSettingCollection fileSettings = new FileSettingCollection();
+        public FileSettingCollection FileSettings
         {
             get { return fileSettings; }
             set { SetProperty(ref fileSettings, value); }
@@ -350,8 +350,8 @@ namespace ExcelMerge.GUI.Settings
             clone.SkipFirstBlankColumns = SkipFirstBlankColumns;
             clone.TrimLastBlankRows = TrimLastBlankRows;
             clone.TrimLastBlankColumns = TrimLastBlankColumns;
-            clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
-            clone.FileSettings = FileSettings.Select(f => f.Clone()).ToList();
+            clone.ExternalCommands = new ExternalCommandCollection(ExternalCommands.Select(c => c.Clone()));
+            clone.FileSettings = new FileSettingCollection(FileSettings.Select(f => f.Clone()));
             clone.RecentFileSets = RecentFileSets.ToList();
             clone.CellWidth = CellWidth;
             clone.AlternatingColorStrings = new ObservableCollection<string>(AlternatingColorStrings);

@@ -85,7 +85,7 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void Apply()
         {
-            App.Instance.Setting.ExternalCommands = ExternalCommands.ToList();
+            App.Instance.Setting.ExternalCommands = new ExternalCommandCollection(ExternalCommands);
             App.Instance.Setting.Save();
 
             Refresh();

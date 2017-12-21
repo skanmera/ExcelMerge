@@ -88,7 +88,7 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void Apply()
         {
-            App.Instance.Setting.FileSettings = FileSettings.ToList();
+            App.Instance.Setting.FileSettings = new FileSettingCollection(FileSettings);
             App.Instance.Setting.Save();
 
             Refresh();

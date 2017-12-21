@@ -130,6 +130,8 @@
   <ItemGroup>
     <Compile Include="Controls\PowerShellConsole.cs" />
     <Compile Include="SerializableBindableBase.cs" />
+    <Compile Include="Settings\ExternalCommandCollection.cs" />
+    <Compile Include="Settings\FileSettingCollection.cs" />
     <Compile Include="Shell\PowerShellHost.cs" />
     <Compile Include="Shell\PowerShellInvocation.cs" />
     <Compile Include="Views\ProgressWindow.xaml.cs">
