@@ -164,7 +164,6 @@
     <Compile Include="Exceptions\ExcelMergeException.cs" />
     <Compile Include="Views\EventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
-    <Compile Include="Models\DiffGridModelConfig.cs" />
     <Compile Include="Models\DiffType.cs" />
     <Compile Include="Settings\ApplicationSetting.cs" />
     <Compile Include="Settings\EMEnvironmentValue.cs" />

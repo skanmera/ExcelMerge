@@ -5,12 +5,38 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.Unity;
 using FastWpfGrid;
+using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.Views
 {
     static class DataGridEventDispatcher
     {
         public static List<IDataGridEventHandler> Listeners = new List<IDataGridEventHandler>();
+
+        public static void DispatchParentLoadEvent(FastGridControl target, IUnityContainer container)
+        {
+            Listeners.ForEach(l => l.OnParentLoaded(target, container));
+        }
+
+        public static void DispatchPreExecuteDiffEvent(FastGridControl target, IUnityContainer container)
+        {
+            Listeners.ForEach(l => l.OnPreExecuteDiff(target, container));
+        }
+
+        public static void DispatchPostExecuteDiffEvent(FastGridControl target, IUnityContainer container)
+        {
+            Listeners.ForEach(l => l.OnPostExecuteDiff(target, container));
+        }
+
+        public static void DispatchFileSettingUpdateEvent(FastGridControl target, IUnityContainer container, FileSetting fileSetting)
+        {
+            Listeners.ForEach(l => l.OnFileSettingUpdated(target, container, fileSetting));
+        }
+
+        public static void DispatchApplicationSettingUpdateEvent(FastGridControl target, IUnityContainer container)
+        {
+            Listeners.ForEach(l => l.OnApplicationSettingUpdated(target, container));
+        }
 
         public static void DispatchScrollEvnet(FastGridControl target, IUnityContainer container)
         {
@@ -50,6 +76,11 @@ namespace ExcelMerge.GUI.Views
         public static void DispatchRowHeaderResetEvent(FastGridControl target, IUnityContainer container)
         {
             Listeners.ForEach(l => l.OnRowHeaderReset(target, container));
+        }
+
+        public static void DispatchDisplayFormatChanged(FastGridControl target, IUnityContainer container, bool onlyDiff)
+        {
+            Listeners.ForEach(l => l.OnDiffDisplayFormatChanged(target, container, onlyDiff));
         }
     }
 

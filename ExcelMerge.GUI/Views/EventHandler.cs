@@ -12,6 +12,7 @@ using Microsoft.Practices.Unity;
 using SKCore.Collection;
 using SKCore.Wpf.Controls.Utilities;
 using ExcelMerge.GUI.Models;
+using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.Views
 {
@@ -22,6 +23,53 @@ namespace ExcelMerge.GUI.Views
         public EventHandler(string key)
         {
             Key = key;
+        }
+
+        public void OnParentLoaded(FastGridControl target, IUnityContainer container)
+        {
+            target.ScrolledModelRows += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(target, container);
+            target.ScrolledModelColumns += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(target, container);
+        }
+
+        public void OnPreExecuteDiff(FastGridControl target, IUnityContainer container)
+        {
+            target.ScrollIntoView(FastGridCellAddress.Empty);
+            target.FirstVisibleColumnScrollIndex = 0;
+            target.FirstVisibleRowScrollIndex = 0;
+            target.InitializeComponent();
+        }
+
+        public void OnPostExecuteDiff(FastGridControl target, IUnityContainer container)
+        {
+            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(target, container);
+        }
+
+        public void OnFileSettingUpdated(FastGridControl target, IUnityContainer container, FileSetting fileSetting)
+        {
+            if (fileSetting != null)
+            {
+                var model = target.Model as DiffGridModel;
+                if (model != null)
+                {
+                    model.SetColumnHeader(fileSetting.ColumnHeaderIndex);
+                    if (string.IsNullOrEmpty(fileSetting.RowHeaderName))
+                        model.SetRowHeader(fileSetting.RowHeaderIndex);
+                    else
+                        model.SetRowHeader(fileSetting.RowHeaderName);
+                }
+
+                target.MaxRowHeaderWidth = fileSetting.MaxRowHeaderWidth;
+            }
+        }
+
+        public void OnApplicationSettingUpdated(FastGridControl target, IUnityContainer container)
+        {
+            target.AlternatingColors = App.Instance.Setting.AlternatingColors;
+            target.CellFontName = App.Instance.Setting.FontName;
+            target.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+            target.SetMinColumnSize(App.Instance.Setting.CellWidth);
+
+            DataGridEventDispatcher.DispatchModelUpdateEvent(target, container);
         }
 
         public void OnScrolled(FastGridControl target, IUnityContainer container)
@@ -339,6 +387,14 @@ namespace ExcelMerge.GUI.Views
             {
                 rtb.ScrollToVerticalOffset(e.VerticalOffset);
                 rtb.ScrollToHorizontalOffset(e.HorizontalOffset);
+            }
+        }
+
+        public void OnDiffDisplayFormatChanged(FastGridControl target, IUnityContainer container, bool onlyDiff)
+        {
+            if (onlyDiff)
+            {
+                (target.Model as DiffGridModel)?.HideEqualRows();
             }
         }
     }
