@@ -476,7 +476,7 @@
   <data name="GroupBox_Behavior" xml:space="preserve">
     <value>動作</value>
   </data>
-  <data name="Label_AlwaysShowCellDiff" xml:space="preserve">
+  <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
     <value>常にセルの差分を展開する</value>
   </data>
   <data name="Label_FitRowHeight" xml:space="preserve">
