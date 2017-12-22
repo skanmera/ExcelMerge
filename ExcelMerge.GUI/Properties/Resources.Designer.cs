@@ -250,24 +250,6 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Cell Height に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Label_CellHeight {
-            get {
-                return ResourceManager.GetString("Label_CellHeight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cell Width に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Label_CellWidth {
-            get {
-                return ResourceManager.GetString("Label_CellWidth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Color Modified Row に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ColorModifiedRow {
@@ -295,6 +277,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Column Width に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ColumnWidth {
+            get {
+                return ResourceManager.GetString("Label_ColumnWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fit Cell Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_FitRowHeight {
+            get {
+                return ResourceManager.GetString("Label_FitRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ignore File Setting に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_IgnoreFileSetting {
@@ -309,6 +309,24 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_LogFormat {
             get {
                 return ResourceManager.GetString("Label_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Max Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MaxRowHeight {
+            get {
+                return ResourceManager.GetString("Label_MaxRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Min Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MinRowHeight {
+            get {
+                return ResourceManager.GetString("Label_MinRowHeight", resourceCulture);
             }
         }
         
@@ -408,6 +426,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_RowHeaderColor {
             get {
                 return ResourceManager.GetString("Label_RowHeaderColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowlHeight {
+            get {
+                return ResourceManager.GetString("Label_RowlHeight", resourceCulture);
             }
         }
         

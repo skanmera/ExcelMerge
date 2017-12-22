@@ -108,11 +108,55 @@
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0" 
                      VerticalAlignment="Center"
-                     Content="{x:Static props:Resources.Label_CellWidth}"/>
+                     Content="{x:Static props:Resources.Label_ColumnWidth}"/>
               <xctk:IntegerUpDown Grid.Column="1" 
+                                  Width="100"
                                   HorizontalAlignment="Left"
                                   Minimum="50" 
-                                  Value="{Binding Setting.CellWidth, UpdateSourceTrigger=PropertyChanged}" />
+                                  Value="{Binding Setting.ColumnWidth, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" 
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_MinRowHeight}"/>
+              <xctk:IntegerUpDown Grid.Column="1" 
+                                  Width="100"
+                                  HorizontalAlignment="Left"
+                                  Minimum="20" 
+                                  Value="{Binding Setting.MinRowHeight, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" 
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_MaxRowHeight}"/>
+              <xctk:IntegerUpDown Grid.Column="1" 
+                                  Width="100"
+                                  HorizontalAlignment="Left"
+                                  Minimum="20" 
+                                  Value="{Binding Setting.MaxRowHeight, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" 
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_FitRowHeight}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.FitRowHeight}"/>
             </Grid>
 
             <GroupBox Header="{x:Static props:Resources.Label_RowColor}" Margin="3">

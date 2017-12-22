@@ -172,11 +172,32 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref culture, value); }
         }
 
-        private int cellWidth = 100;
-        public int CellWidth
+        private int columnWidth = 100;
+        public int ColumnWidth
         {
-            get { return cellWidth; }
-            set { SetProperty(ref cellWidth, value); }
+            get { return columnWidth; }
+            set { SetProperty(ref columnWidth, value); }
+        }
+
+        private int minRowHeight = 20;
+        public int MinRowHeight
+        {
+            get { return minRowHeight; }
+            set { SetProperty(ref minRowHeight, value); }
+        }
+
+        private int maxRowHeight = 200;
+        public int MaxRowHeight
+        {
+            get { return maxRowHeight; }
+            set { SetProperty(ref maxRowHeight, value); }
+        }
+
+        private bool fitRowHeight = false;
+        public bool FitRowHeight
+        {
+            get { return fitRowHeight; }
+            set { SetProperty(ref fitRowHeight, value); }
         }
 
         private ObservableCollection<string> searchHistory = new ObservableCollection<string>();

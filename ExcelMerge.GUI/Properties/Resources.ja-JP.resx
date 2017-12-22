@@ -228,11 +228,11 @@
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>表示形式</value>
   </data>
-  <data name="Label_CellHeight" xml:space="preserve">
-    <value>セルの高さ</value>
+  <data name="Label_RowHeight" xml:space="preserve">
+    <value>行の高さ</value>
   </data>
-  <data name="Label_CellWidth" xml:space="preserve">
-    <value>セルの幅</value>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>列の幅</value>
   </data>
   <data name="RadioButton_ShowAll" xml:space="preserve">
     <value>全て</value>
@@ -472,5 +472,14 @@
   </data>
   <data name="Message_NoDiff" xml:space="preserve">
     <value>差分は存在しません。</value>
+  </data>
+  <data name="Label_FitRowHeight" xml:space="preserve">
+    <value>行の高さを自動で調整する</value>
+  </data>
+  <data name="Label_MaxRowHeight" xml:space="preserve">
+    <value>行の高さ(最大)</value>
+  </data>
+  <data name="Label_MinRowHeight" xml:space="preserve">
+    <value>行の高さ(最小)</value>
   </data>
 </root>

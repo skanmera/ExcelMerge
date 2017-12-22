@@ -240,11 +240,11 @@
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>Display Format</value>
   </data>
-  <data name="Label_CellHeight" xml:space="preserve">
-    <value>Cell Height</value>
+  <data name="Label_RowlHeight" xml:space="preserve">
+    <value>Row Height</value>
   </data>
-  <data name="Label_CellWidth" xml:space="preserve">
-    <value>Cell Width</value>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>Column Width</value>
   </data>
   <data name="RadioButton_ShowAll" xml:space="preserve">
     <value>All</value>
@@ -472,5 +472,14 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   </data>
   <data name="Message_NoDiff" xml:space="preserve">
     <value>There is no difference.</value>
+  </data>
+  <data name="Label_FitRowHeight" xml:space="preserve">
+    <value>Fit Cell Height</value>
+  </data>
+  <data name="Label_MaxRowHeight" xml:space="preserve">
+    <value>Max Row Height</value>
+  </data>
+  <data name="Label_MinRowHeight" xml:space="preserve">
+    <value>Min Row Height</value>
   </data>
 </root>
