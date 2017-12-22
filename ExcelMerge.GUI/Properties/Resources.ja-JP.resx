@@ -473,6 +473,12 @@
   <data name="Message_NoDiff" xml:space="preserve">
     <value>差分は存在しません。</value>
   </data>
+  <data name="GroupBox_Behavior" xml:space="preserve">
+    <value>動作</value>
+  </data>
+  <data name="Label_AlwaysShowCellDiff" xml:space="preserve">
+    <value>常にセルの差分を展開する</value>
+  </data>
   <data name="Label_FitRowHeight" xml:space="preserve">
     <value>行の高さを自動で調整する</value>
   </data>

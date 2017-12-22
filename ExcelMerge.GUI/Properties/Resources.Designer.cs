@@ -187,6 +187,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Behavior に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_Behavior {
+            get {
+                return ResourceManager.GetString("GroupBox_Behavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Display Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GroupBox_DisplayFormat {
@@ -246,6 +255,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_AddedRows {
             get {
                 return ResourceManager.GetString("Label_AddedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Always expand cell diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_AlwaysExpandCellDiff {
+            get {
+                return ResourceManager.GetString("Label_AlwaysExpandCellDiff", resourceCulture);
             }
         }
         

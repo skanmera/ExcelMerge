@@ -50,6 +50,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref notifyEqual, value); }
         }
 
+        private bool alwaysExpandCellDiff;
+        public bool AlwaysExpandCellDiff
+        {
+            get { return alwaysExpandCellDiff; }
+            set { SetProperty(ref alwaysExpandCellDiff, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",

@@ -473,6 +473,12 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Message_NoDiff" xml:space="preserve">
     <value>There is no difference.</value>
   </data>
+  <data name="GroupBox_Behavior" xml:space="preserve">
+    <value>Behavior</value>
+  </data>
+  <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
+    <value>Always expand cell diff</value>
+  </data>
   <data name="Label_FitRowHeight" xml:space="preserve">
     <value>Fit Cell Height</value>
   </data>

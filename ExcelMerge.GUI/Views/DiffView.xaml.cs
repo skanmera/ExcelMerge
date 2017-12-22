@@ -192,6 +192,9 @@ namespace ExcelMerge.GUI.Views
                 (DstDataGrid.Model as DiffGridModel).GetCellText(DstDataGrid.CurrentCell.Row.Value, DstDataGrid.CurrentCell.Column.Value, true);
 
             UpdateValueDiff(srcValue, dstValue);
+
+            if (App.Instance.Setting.AlwaysExpandCellDiff)
+                SrcValueTextBox.Focus();
         }
 
         private void ValueTextBox_GotFocus(object sender, RoutedEventArgs e)
