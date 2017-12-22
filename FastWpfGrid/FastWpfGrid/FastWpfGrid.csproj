@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveSeries.cs" />
+    <Compile Include="ColumnWidthChangedEventArgs.cs" />
     <Compile Include="DataTableGridModel.cs" />
     <Compile Include="ExplicitColumnDefinition.cs" />
     <Compile Include="FastGridCellAddress.cs" />

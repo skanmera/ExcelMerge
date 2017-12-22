@@ -450,7 +450,7 @@ namespace ExcelMerge.GUI.Views
 
             DataGridEventDispatcher.DispatchFileSettingUpdateEvent(SrcDataGrid, container, srcFileSetting);
             DataGridEventDispatcher.DispatchFileSettingUpdateEvent(DstDataGrid, container, dstFileSetting);
-            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, ShowOnlyDiffRadioButton.IsChecked.Value);
+            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, ShowOnlyDiffRadioButton.IsChecked.Value);
             DataGridEventDispatcher.DispatchPostExecuteDiffEvent(container);
 
             var summary = diff.CreateSummary();
@@ -580,12 +580,12 @@ namespace ExcelMerge.GUI.Views
 
         private void ShowAllRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, false);
+            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, false);
         }
 
         private void ShowOnlyDiffRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, true);
+            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, true);
         }
 
         private bool ValidateDataGrids()

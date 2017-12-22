@@ -31,6 +31,7 @@ namespace ExcelMerge.GUI.Views
             {
                 grid.ScrolledModelRows += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(grid, container);
                 grid.ScrolledModelColumns += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(grid, container);
+                grid.ColumnWidthChanged += (sender, e) => DataGridEventDispatcher.DispatchColumnWidthChangeEvent(grid, container, e);
             }
         }
 
@@ -415,6 +416,17 @@ namespace ExcelMerge.GUI.Views
                 (grid.Model as DiffGridModel)?.ShowEqualRows();
 
             DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
+        }
+
+        public void OnColumnWidthChanged(FastGridControl target, IUnityContainer container, ColumnWidthChangedEventArgs e)
+        {
+            foreach (var grid in container.ResolveAll<FastGridControl>())
+            {
+                if (grid == target)
+                    continue;
+
+                grid.ResizeColumn(e.NewWidth, e.Column);
+            }
         }
     }
 }

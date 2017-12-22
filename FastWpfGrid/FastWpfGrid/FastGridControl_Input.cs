@@ -13,6 +13,8 @@ namespace FastWpfGrid
 {
     partial class FastGridControl
     {
+        public event EventHandler<ColumnWidthChangedEventArgs> ColumnWidthChanged;
+
         public static readonly object ToggleTransposedCommand = new object();
         public static readonly object ToggleAllowFlexibleRowsCommand = new object();
         public static readonly object SelectAllCommand = new object();
@@ -587,6 +589,30 @@ namespace FastWpfGrid
             Keyboard.Focus(image);
         }
 
+        public void ResizeColumn(int newSize, int column)
+        {
+            if (newSize == _columnSizes.GetSizeByRealIndex(column))
+                return;
+
+            if (newSize < MinColumnWidth) newSize = MinColumnWidth;
+            if (newSize > GridScrollAreaWidth) newSize = GridScrollAreaWidth;
+            _columnSizes.Resize(column, newSize);
+            if (column < _columnSizes.FrozenCount)
+            {
+                SetScrollbarMargin();
+            }
+            AdjustScrollbars();
+            InvalidateAll();
+
+            OnColumnWidthChanged(column, newSize);
+        }
+
+        private void OnColumnWidthChanged(int column, int newWidth)
+        {
+            if (ColumnWidthChanged != null)
+                ColumnWidthChanged(this, new ColumnWidthChangedEventArgs(column, newWidth));
+        }
+
         protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -609,15 +635,7 @@ namespace FastWpfGrid
                 if (_resizingColumn.HasValue)
                 {
                     int newSize = _resizingColumnStartSize.Value + (int)Math.Round(pt.X - _resizingColumnOrigin.Value.X);
-                    if (newSize < MinColumnWidth) newSize = MinColumnWidth;
-                    if (newSize > GridScrollAreaWidth) newSize = GridScrollAreaWidth;
-                    _columnSizes.Resize(_resizingColumn.Value, newSize);
-                    if (_resizingColumn < _columnSizes.FrozenCount)
-                    {
-                        SetScrollbarMargin();
-                    }
-                    AdjustScrollbars();
-                    InvalidateAll();
+                    ResizeColumn(newSize, _resizingColumn.Value);
                 }
                 else
                 {

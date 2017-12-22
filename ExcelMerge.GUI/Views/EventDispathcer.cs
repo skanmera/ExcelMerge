@@ -78,9 +78,14 @@ namespace ExcelMerge.GUI.Views
             Listeners.ForEach(l => l.OnRowHeaderReset(target, container));
         }
 
-        public static void DispatchDisplayFormatChanged(IUnityContainer container, bool onlyDiff)
+        public static void DispatchDisplayFormatChangeEvent(IUnityContainer container, bool onlyDiff)
         {
             Listeners.ForEach(l => l.OnDiffDisplayFormatChanged(container, onlyDiff));
+        }
+
+        public static void DispatchColumnWidthChangeEvent(FastGridControl target, IUnityContainer container, ColumnWidthChangedEventArgs e)
+        {
+            Listeners.ForEach(l => l.OnColumnWidthChanged(target, container, e));
         }
     }
 
