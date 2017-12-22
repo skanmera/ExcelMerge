@@ -114,6 +114,19 @@
                         IsChecked="{Binding Setting.AlwaysExpandCellDiff}"/>
             </Grid>
 
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_FocusFirstDiff}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.FocusFirstDiff}"/>
+            </Grid>
+
           </StackPanel>
         </GroupBox>
 

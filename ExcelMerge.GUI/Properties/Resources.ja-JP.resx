@@ -488,4 +488,7 @@
   <data name="Label_MinRowHeight" xml:space="preserve">
     <value>行の高さ(最小)</value>
   </data>
+  <data name="Label_FocusFirstDiff" xml:space="preserve">
+    <value>差分抽出後に最初の差分に移動する</value>
+  </data>
 </root>

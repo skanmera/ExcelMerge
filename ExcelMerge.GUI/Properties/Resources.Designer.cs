@@ -313,6 +313,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Focus first diff when extracted に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_FocusFirstDiff {
+            get {
+                return ResourceManager.GetString("Label_FocusFirstDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ignore File Setting に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_IgnoreFileSetting {

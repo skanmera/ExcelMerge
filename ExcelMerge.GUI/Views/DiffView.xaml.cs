@@ -461,6 +461,9 @@ namespace ExcelMerge.GUI.Views
 
             if (App.Instance.Setting.NotifyEqual && !summary.HasDiff)
                 MessageBox.Show(Properties.Resources.Message_NoDiff);
+
+            if (App.Instance.Setting.FocusFirstDiff)
+                MoveNextModifiedCell();
         }
 
         private FileSetting FindFilseSetting(string fileName, int sheetIndex, string sheetName, bool isStartup)

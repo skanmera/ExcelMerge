@@ -488,4 +488,7 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Label_MinRowHeight" xml:space="preserve">
     <value>Min Row Height</value>
   </data>
+  <data name="Label_FocusFirstDiff" xml:space="preserve">
+    <value>Focus first diff when extracted</value>
+  </data>
 </root>

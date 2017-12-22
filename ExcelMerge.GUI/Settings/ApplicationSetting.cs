@@ -57,6 +57,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref alwaysExpandCellDiff, value); }
         }
 
+        private bool focusFirstDiff;
+        public bool FocusFirstDiff
+        {
+            get { return focusFirstDiff; }
+            set { SetProperty(ref focusFirstDiff, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",
