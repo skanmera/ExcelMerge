@@ -349,6 +349,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Show dialog if no diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_NotifyEqual {
+            get {
+                return ResourceManager.GetString("Label_NotifyEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Removed Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_RemovedColor {
@@ -543,6 +552,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string MenuItem_View {
             get {
                 return ResourceManager.GetString("MenuItem_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is no difference. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Message_NoDiff {
+            get {
+                return ResourceManager.GetString("Message_NoDiff", resourceCulture);
             }
         }
         

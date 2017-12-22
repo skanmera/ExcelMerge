@@ -467,4 +467,10 @@
   <data name="GroupBox_Style" xml:space="preserve">
     <value>スタイル</value>
   </data>
+  <data name="Label_NotifyEqual" xml:space="preserve">
+    <value>差分が存在しないときにダイアログを表示する</value>
+  </data>
+  <data name="Message_NoDiff" xml:space="preserve">
+    <value>差分は存在しません。</value>
+  </data>
 </root>

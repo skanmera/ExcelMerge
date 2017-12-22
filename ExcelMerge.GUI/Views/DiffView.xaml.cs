@@ -448,7 +448,8 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.Model = new DiffGridModel(diff, DiffType.Source);
             DstDataGrid.Model = new DiffGridModel(diff, DiffType.Dest);
 
-            GetViewModel().UpdateDiffSummary(diff.CreateSummary());
+            var summary = diff.CreateSummary();
+            GetViewModel().UpdateDiffSummary(summary);
 
             DataGridEventDispatcher.DispatchDisplayFormatChanged(SrcDataGrid, container, ShowOnlyDiffRadioButton.IsChecked.Value);
             DataGridEventDispatcher.DispatchDisplayFormatChanged(DstDataGrid, container, ShowOnlyDiffRadioButton.IsChecked.Value);
@@ -461,6 +462,9 @@ namespace ExcelMerge.GUI.Views
 
             DataGridEventDispatcher.DispatchPostExecuteDiffEvent(SrcDataGrid, container);
             DataGridEventDispatcher.DispatchPostExecuteDiffEvent(DstDataGrid, container);
+
+            if (App.Instance.Setting.NotifyEqual && !summary.HasDiff)
+                MessageBox.Show(Properties.Resources.Message_NoDiff);
         }
 
         private FileSetting FindFilseSetting(string fileName, int sheetIndex, string sheetName, bool isStartup)

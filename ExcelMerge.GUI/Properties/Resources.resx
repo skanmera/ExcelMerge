@@ -467,4 +467,10 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="GroupBox_Style" xml:space="preserve">
     <value>Style</value>
   </data>
+  <data name="Label_NotifyEqual" xml:space="preserve">
+    <value>Show dialog if no diff</value>
+  </data>
+  <data name="Message_NoDiff" xml:space="preserve">
+    <value>There is no difference.</value>
+  </data>
 </root>

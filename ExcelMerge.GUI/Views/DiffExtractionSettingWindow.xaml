@@ -32,8 +32,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0"
                      VerticalAlignment="Center"
@@ -45,8 +45,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0" 
                      VerticalAlignment="Center" 
@@ -58,8 +58,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0"
                      VerticalAlignment="Center" 
@@ -71,8 +71,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0" 
                      VerticalAlignment="Center"
@@ -80,6 +80,19 @@
               <CheckBox Grid.Column="1" 
                         VerticalAlignment="Center"
                         IsChecked="{Binding Setting.TrimLastBlankColumns}"/>
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_NotifyEqual}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.NotifyEqual}"/>
             </Grid>
 
           </StackPanel>

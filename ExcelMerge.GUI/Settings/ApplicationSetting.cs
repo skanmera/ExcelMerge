@@ -43,6 +43,13 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref trimLastBlankColumns, value); }
         }
 
+        private bool notifyEqual = true;
+        public bool NotifyEqual
+        {
+            get { return notifyEqual; }
+            set { SetProperty(ref notifyEqual, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",
