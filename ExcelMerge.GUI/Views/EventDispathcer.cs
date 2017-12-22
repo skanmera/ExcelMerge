@@ -13,19 +13,19 @@ namespace ExcelMerge.GUI.Views
     {
         public static List<IDataGridEventHandler> Listeners = new List<IDataGridEventHandler>();
 
-        public static void DispatchParentLoadEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchParentLoadEvent(IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnParentLoaded(target, container));
+            Listeners.ForEach(l => l.OnParentLoaded(container));
         }
 
-        public static void DispatchPreExecuteDiffEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchPreExecuteDiffEvent(IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnPreExecuteDiff(target, container));
+            Listeners.ForEach(l => l.OnPreExecuteDiff(container));
         }
 
-        public static void DispatchPostExecuteDiffEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchPostExecuteDiffEvent(IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnPostExecuteDiff(target, container));
+            Listeners.ForEach(l => l.OnPostExecuteDiff(container));
         }
 
         public static void DispatchFileSettingUpdateEvent(FastGridControl target, IUnityContainer container, FileSetting fileSetting)
@@ -33,9 +33,9 @@ namespace ExcelMerge.GUI.Views
             Listeners.ForEach(l => l.OnFileSettingUpdated(target, container, fileSetting));
         }
 
-        public static void DispatchApplicationSettingUpdateEvent(FastGridControl target, IUnityContainer container)
+        public static void DispatchApplicationSettingUpdateEvent(IUnityContainer container)
         {
-            Listeners.ForEach(l => l.OnApplicationSettingUpdated(target, container));
+            Listeners.ForEach(l => l.OnApplicationSettingUpdated(container));
         }
 
         public static void DispatchScrollEvnet(FastGridControl target, IUnityContainer container)
@@ -78,9 +78,9 @@ namespace ExcelMerge.GUI.Views
             Listeners.ForEach(l => l.OnRowHeaderReset(target, container));
         }
 
-        public static void DispatchDisplayFormatChanged(FastGridControl target, IUnityContainer container, bool onlyDiff)
+        public static void DispatchDisplayFormatChanged(IUnityContainer container, bool onlyDiff)
         {
-            Listeners.ForEach(l => l.OnDiffDisplayFormatChanged(target, container, onlyDiff));
+            Listeners.ForEach(l => l.OnDiffDisplayFormatChanged(container, onlyDiff));
         }
     }
 

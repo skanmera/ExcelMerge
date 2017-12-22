@@ -79,14 +79,12 @@ namespace ExcelMerge.GUI.Views
 
         private void OnApplicationSettingUpdated()
         {
-            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(SrcDataGrid, container);
-            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(DstDataGrid, container);
+            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(container);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchParentLoadEvent(SrcDataGrid, container);
-            DataGridEventDispatcher.DispatchParentLoadEvent(DstDataGrid, container);
+            DataGridEventDispatcher.DispatchParentLoadEvent(container);
 
             ExecuteDiff(isStartup: true);
 
@@ -424,8 +422,7 @@ namespace ExcelMerge.GUI.Views
             if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
                 return;
 
-            DataGridEventDispatcher.DispatchPreExecuteDiffEvent(SrcDataGrid, container);
-            DataGridEventDispatcher.DispatchPreExecuteDiffEvent(DstDataGrid, container);
+            DataGridEventDispatcher.DispatchPreExecuteDiffEvent(container);
 
             var workbooks = ReadWorkbooks();
             var srcWorkbook = workbooks.Item1;
@@ -448,20 +445,16 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.Model = new DiffGridModel(diff, DiffType.Source);
             DstDataGrid.Model = new DiffGridModel(diff, DiffType.Dest);
 
+            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(SrcDataGrid, container, srcFileSetting);
+            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(DstDataGrid, container, dstFileSetting);
+            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, ShowOnlyDiffRadioButton.IsChecked.Value);
+            DataGridEventDispatcher.DispatchPostExecuteDiffEvent(container);
+
             var summary = diff.CreateSummary();
             GetViewModel().UpdateDiffSummary(summary);
 
-            DataGridEventDispatcher.DispatchDisplayFormatChanged(SrcDataGrid, container, ShowOnlyDiffRadioButton.IsChecked.Value);
-            DataGridEventDispatcher.DispatchDisplayFormatChanged(DstDataGrid, container, ShowOnlyDiffRadioButton.IsChecked.Value);
-
-            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(SrcDataGrid, container, srcFileSetting);
-            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(DstDataGrid, container, dstFileSetting);
-
             if (!App.Instance.KeepFileHistory)
                 App.Instance.UpdateRecentFiles(SrcPathTextBox.Text, DstPathTextBox.Text);
-
-            DataGridEventDispatcher.DispatchPostExecuteDiffEvent(SrcDataGrid, container);
-            DataGridEventDispatcher.DispatchPostExecuteDiffEvent(DstDataGrid, container);
 
             if (App.Instance.Setting.NotifyEqual && !summary.HasDiff)
                 MessageBox.Show(Properties.Resources.Message_NoDiff);
@@ -584,26 +577,12 @@ namespace ExcelMerge.GUI.Views
 
         private void ShowAllRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
-            {
-                (SrcDataGrid.Model as DiffGridModel).ShowEqualRows();
-                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
-
-                (DstDataGrid.Model as DiffGridModel).ShowEqualRows();
-                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
-            }
+            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, false);
         }
 
         private void ShowOnlyDiffRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (SrcDataGrid?.Model != null && DstDataGrid?.Model != null)
-            {
-                (SrcDataGrid.Model as DiffGridModel).HideEqualRows();
-                DataGridEventDispatcher.DispatchModelUpdateEvent(SrcDataGrid, container);
-
-                (DstDataGrid.Model as DiffGridModel).HideEqualRows();
-                DataGridEventDispatcher.DispatchModelUpdateEvent(DstDataGrid, container);
-            }
+            DataGridEventDispatcher.DispatchDisplayFormatChanged(container, true);
         }
 
         private bool ValidateDataGrids()

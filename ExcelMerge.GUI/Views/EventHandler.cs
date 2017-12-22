@@ -25,27 +25,36 @@ namespace ExcelMerge.GUI.Views
             Key = key;
         }
 
-        public void OnParentLoaded(FastGridControl target, IUnityContainer container)
+        public void OnParentLoaded(IUnityContainer container)
         {
-            target.ScrolledModelRows += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(target, container);
-            target.ScrolledModelColumns += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(target, container);
+            foreach (var grid in container.ResolveAll<FastGridControl>())
+            {
+                grid.ScrolledModelRows += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(grid, container);
+                grid.ScrolledModelColumns += (sender, e) => DataGridEventDispatcher.DispatchScrollEvnet(grid, container);
+            }
         }
 
-        public void OnPreExecuteDiff(FastGridControl target, IUnityContainer container)
+        public void OnPreExecuteDiff(IUnityContainer container)
         {
-            target.ScrollIntoView(FastGridCellAddress.Empty);
-            target.FirstVisibleColumnScrollIndex = 0;
-            target.FirstVisibleRowScrollIndex = 0;
-            target.InitializeComponent();
+            foreach (var grid in container.ResolveAll<FastGridControl>())
+            {
+                grid.Model = null;
+                grid.ScrollIntoView(FastGridCellAddress.Empty);
+                grid.FirstVisibleColumnScrollIndex = 0;
+                grid.FirstVisibleRowScrollIndex = 0;
+                grid.InitializeComponent();
+            }
+
+            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(container);
         }
 
-        public void OnPostExecuteDiff(FastGridControl target, IUnityContainer container)
-        {
-            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(target, container);
-        }
+        public void OnPostExecuteDiff(IUnityContainer container) { }
 
         public void OnFileSettingUpdated(FastGridControl target, IUnityContainer container, FileSetting fileSetting)
         {
+            if (target != container.Resolve<FastGridControl>(Key))
+                return;
+
             if (fileSetting != null)
             {
                 var model = target.Model as DiffGridModel;
@@ -62,14 +71,17 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        public void OnApplicationSettingUpdated(FastGridControl target, IUnityContainer container)
+        public void OnApplicationSettingUpdated(IUnityContainer container)
         {
-            target.AlternatingColors = App.Instance.Setting.AlternatingColors;
-            target.CellFontName = App.Instance.Setting.FontName;
-            target.SetMaxColumnSize(App.Instance.Setting.CellWidth);
-            target.SetMinColumnSize(App.Instance.Setting.CellWidth);
+            foreach (var grid in container.ResolveAll<FastGridControl>())
+            {
+                grid.AlternatingColors = App.Instance.Setting.AlternatingColors;
+                grid.CellFontName = App.Instance.Setting.FontName;
+                grid.SetMaxColumnSize(App.Instance.Setting.CellWidth);
+                grid.SetMinColumnSize(App.Instance.Setting.CellWidth);
 
-            DataGridEventDispatcher.DispatchModelUpdateEvent(target, container);
+                DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
+            }
         }
 
         public void OnScrolled(FastGridControl target, IUnityContainer container)
@@ -390,12 +402,16 @@ namespace ExcelMerge.GUI.Views
             }
         }
 
-        public void OnDiffDisplayFormatChanged(FastGridControl target, IUnityContainer container, bool onlyDiff)
+        public void OnDiffDisplayFormatChanged(IUnityContainer container, bool onlyDiff)
         {
+            var grid = container.Resolve<FastGridControl>(Key);
+
             if (onlyDiff)
-            {
-                (target.Model as DiffGridModel)?.HideEqualRows();
-            }
+                (grid.Model as DiffGridModel)?.HideEqualRows();
+            else
+                (grid.Model as DiffGridModel)?.ShowEqualRows();
+
+            DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
         }
     }
 }
