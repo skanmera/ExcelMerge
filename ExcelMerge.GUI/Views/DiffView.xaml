@@ -316,6 +316,8 @@
                  GotFocus="ValueTextBox_GotFocus"
                  LostFocus="ValueTextBox_LostFocus"
                  Focusable="True"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"
                  ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                  />
 
@@ -355,6 +357,8 @@
                  GotFocus="ValueTextBox_GotFocus"
                  LostFocus="ValueTextBox_LostFocus"
                  Focusable="True"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"
                  ScrollViewer.ScrollChanged ="ValuteTextBox_ScrollChanged"
                  />
 

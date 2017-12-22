@@ -114,58 +114,6 @@
                         IsChecked="{Binding Setting.AlwaysExpandCellDiff}"/>
             </Grid>
 
-            <Grid Margin="3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0" 
-                     VerticalAlignment="Center" 
-                     Content="{x:Static props:Resources.Label_SkipFirstBlankColumns}"/>
-              <CheckBox Grid.Column="1" 
-                        VerticalAlignment="Center" 
-                        IsChecked="{Binding Setting.SkipFirstBlankColumns}"/>
-            </Grid>
-
-            <Grid Margin="3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0"
-                     VerticalAlignment="Center" 
-                     Content="{x:Static props:Resources.Label_TrimLastBlankRows}"/>
-              <CheckBox Grid.Column="1" 
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding Setting.TrimLastBlankRows}"/>
-            </Grid>
-
-            <Grid Margin="3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0" 
-                     VerticalAlignment="Center"
-                     Content="{x:Static props:Resources.Label_TrimLastBlankColumns}"/>
-              <CheckBox Grid.Column="1" 
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding Setting.TrimLastBlankColumns}"/>
-            </Grid>
-
-            <Grid Margin="3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0"
-                     VerticalAlignment="Center"
-                     Content="{x:Static props:Resources.Label_NotifyEqual}"/>
-              <CheckBox Grid.Column="1" 
-                        VerticalAlignment="Center" 
-                        IsChecked="{Binding Setting.NotifyEqual}"/>
-            </Grid>
-
           </StackPanel>
         </GroupBox>
 
