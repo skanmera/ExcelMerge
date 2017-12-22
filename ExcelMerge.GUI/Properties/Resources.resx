@@ -458,4 +458,13 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Word_StartupSheet" xml:space="preserve">
     <value>Set as Startup Sheet</value>
   </data>
+  <data name="GroupBox_LogFormat" xml:space="preserve">
+    <value>Log Format</value>
+  </data>
+  <data name="GroupBox_ReadSetting" xml:space="preserve">
+    <value>Read Setting</value>
+  </data>
+  <data name="GroupBox_Style" xml:space="preserve">
+    <value>Style</value>
+  </data>
 </root>

@@ -458,4 +458,13 @@
   <data name="Word_StartupSheet" xml:space="preserve">
     <value>起動時の比較シートにする</value>
   </data>
+  <data name="GroupBox_LogFormat" xml:space="preserve">
+    <value>ログ形式</value>
+  </data>
+  <data name="GroupBox_ReadSetting" xml:space="preserve">
+    <value>読み込み設定</value>
+  </data>
+  <data name="GroupBox_Style" xml:space="preserve">
+    <value>スタイル</value>
+  </data>
 </root>

@@ -196,6 +196,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_LogFormat {
+            get {
+                return ResourceManager.GetString("GroupBox_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Read Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_ReadSetting {
+            get {
+                return ResourceManager.GetString("GroupBox_ReadSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Style に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_Style {
+            get {
+                return ResourceManager.GetString("GroupBox_Style", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Added Color に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_AddedColor {
