@@ -194,7 +194,7 @@ namespace ExcelMerge.GUI.Views
             UpdateValueDiff(srcValue, dstValue);
 
             if (App.Instance.Setting.AlwaysExpandCellDiff)
-                SrcValueTextBox.Focus();
+                ValueTextBoxEventDispatcher.DispatchGotFocusEvent(SrcValueTextBox, container);
         }
 
         private void ValueTextBox_GotFocus(object sender, RoutedEventArgs e)
