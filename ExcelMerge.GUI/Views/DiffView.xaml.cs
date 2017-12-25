@@ -64,27 +64,29 @@ namespace ExcelMerge.GUI.Views
 
         private void InitializeEventListeners()
         {
-            var srcEventHandler = new EventHandler(srcKey);
-            var dstEventHandler = new EventHandler(dstKey);
+            var srcEventHandler = new DiffViewEventHandler(srcKey);
+            var dstEventHandler = new DiffViewEventHandler(dstKey);
 
-            DataGridEventDispatcher.Listeners.Add(srcEventHandler);
-            DataGridEventDispatcher.Listeners.Add(dstEventHandler);
-            LocationGridEventDispatcher.Listeners.Add(srcEventHandler);
-            LocationGridEventDispatcher.Listeners.Add(dstEventHandler);
-            ViewportEventDispatcher.Listeners.Add(srcEventHandler);
-            ViewportEventDispatcher.Listeners.Add(dstEventHandler);
-            ValueTextBoxEventDispatcher.Listeners.Add(srcEventHandler);
-            ValueTextBoxEventDispatcher.Listeners.Add(dstEventHandler);
+            DataGridEventDispatcher.Instance.Listeners.Add(srcEventHandler);
+            DataGridEventDispatcher.Instance.Listeners.Add(dstEventHandler);
+            LocationGridEventDispatcher.Instance.Listeners.Add(srcEventHandler);
+            LocationGridEventDispatcher.Instance.Listeners.Add(dstEventHandler);
+            ViewportEventDispatcher.Instance.Listeners.Add(srcEventHandler);
+            ViewportEventDispatcher.Instance.Listeners.Add(dstEventHandler);
+            ValueTextBoxEventDispatcher.Instance.Listeners.Add(srcEventHandler);
+            ValueTextBoxEventDispatcher.Instance.Listeners.Add(dstEventHandler);
         }
 
         private void OnApplicationSettingUpdated()
         {
-            DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(container);
+            var e = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchApplicationSettingUpdateEvent(e);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchParentLoadEvent(container);
+            var args = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchParentLoadEvent(args);
 
             ExecuteDiff(isStartup: true);
 
@@ -138,33 +140,41 @@ namespace ExcelMerge.GUI.Views
 
         private void DataGrid_Scrolled(object sender, EventArgs e)
         {
-            DataGridEventDispatcher.DispatchScrollEvnet(sender as FastGridControl, container);
+            var args = new DiffViewEventArgs<FastGridControl>(sender as FastGridControl, container);
+            DataGridEventDispatcher.Instance.DispatchScrollEvnet(args);
         }
 
         private void LocationGrid_MouseDown(object sender, MouseEventArgs e)
         {
-            LocationGridEventDispatcher.DispatchMouseDownEvent(sender as Grid, container, e);
+            var args = new DiffViewEventArgs<Grid>(sender as Grid, container);
+            LocationGridEventDispatcher.Instance.DispatchMouseDownEvent(args, e);
         }
 
         private void LocationGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-                LocationGridEventDispatcher.DispatchMouseDownEvent(sender as Grid, container, e);
+            {
+                var args = new DiffViewEventArgs<Grid>(sender as Grid, container);
+                LocationGridEventDispatcher.Instance.DispatchMouseDownEvent(args, e);
+            }
         }
 
         private void LocationGrid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            LocationGridEventDispatcher.DispatchMouseWheelEvent(sender as Grid, container, e);
+            var args = new DiffViewEventArgs<Grid>(sender as Grid, container);
+            LocationGridEventDispatcher.Instance.DispatchMouseWheelEvent(args, e);
         }
 
         private void DataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchSizeChangeEvent(sender as FastGridControl, container, e);
+            var args = new DiffViewEventArgs<FastGridControl>(sender as FastGridControl, container);
+            DataGridEventDispatcher.Instance.DispatchSizeChangeEvent(args, e);
         }
 
         private void LocationGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            LocationGridEventDispatcher.DispatchSizeChangeEvent(SrcLocationGrid, container, e);
+            var args = new DiffViewEventArgs<Grid>(sender as Grid, container);
+            LocationGridEventDispatcher.Instance.DispatchSizeChangeEvent(args, e);
         }
 
         private void DataGrid_SelectedCellsChanged(object sender, FastWpfGrid.SelectionChangedEventArgs e)
@@ -175,7 +185,8 @@ namespace ExcelMerge.GUI.Views
 
             copyTargetGrid = grid;
 
-            DataGridEventDispatcher.DispatchSelectedCellChangeEvent(grid, container);
+            var args = new DiffViewEventArgs<FastGridControl>(sender as FastGridControl, container);
+            DataGridEventDispatcher.Instance.DispatchSelectedCellChangeEvent(args);
 
             if (!SrcDataGrid.CurrentCell.Row.HasValue || !DstDataGrid.CurrentCell.Row.HasValue)
                 return;
@@ -194,17 +205,22 @@ namespace ExcelMerge.GUI.Views
             UpdateValueDiff(srcValue, dstValue);
 
             if (App.Instance.Setting.AlwaysExpandCellDiff)
-                ValueTextBoxEventDispatcher.DispatchGotFocusEvent(SrcValueTextBox, container);
+            {
+                var a = new DiffViewEventArgs<RichTextBox>(null, container, TargetType.First);
+                ValueTextBoxEventDispatcher.Instance.DispatchGotFocusEvent(a);
+            }
         }
 
         private void ValueTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ValueTextBoxEventDispatcher.DispatchGotFocusEvent(sender as RichTextBox, container);
+            var args = new DiffViewEventArgs<RichTextBox>(sender as RichTextBox, container, TargetType.First);
+            ValueTextBoxEventDispatcher.Instance.DispatchGotFocusEvent(args);
         }
 
         private void ValueTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValueTextBoxEventDispatcher.DispatchLostFocusEvent(sender as RichTextBox, container);
+            var args = new DiffViewEventArgs<RichTextBox>(sender as RichTextBox, container, TargetType.First);
+            ValueTextBoxEventDispatcher.Instance.DispatchLostFocusEvent(args);
         }
 
         private string GetRichTextString(RichTextBox textBox)
@@ -425,7 +441,8 @@ namespace ExcelMerge.GUI.Views
             if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
                 return;
 
-            DataGridEventDispatcher.DispatchPreExecuteDiffEvent(container);
+            var args = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchPreExecuteDiffEvent(args);
 
             var workbooks = ReadWorkbooks();
             var srcWorkbook = workbooks.Item1;
@@ -448,10 +465,15 @@ namespace ExcelMerge.GUI.Views
             SrcDataGrid.Model = new DiffGridModel(diff, DiffType.Source);
             DstDataGrid.Model = new DiffGridModel(diff, DiffType.Dest);
 
-            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(SrcDataGrid, container, srcFileSetting);
-            DataGridEventDispatcher.DispatchFileSettingUpdateEvent(DstDataGrid, container, dstFileSetting);
-            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, ShowOnlyDiffRadioButton.IsChecked.Value);
-            DataGridEventDispatcher.DispatchPostExecuteDiffEvent(container);
+            args = new DiffViewEventArgs<FastGridControl>(SrcDataGrid, container);
+            DataGridEventDispatcher.Instance.DispatchFileSettingUpdateEvent(args, srcFileSetting);
+
+            args = new DiffViewEventArgs<FastGridControl>(DstDataGrid, container);
+            DataGridEventDispatcher.Instance.DispatchFileSettingUpdateEvent(args, dstFileSetting);
+
+            args = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchDisplayFormatChangeEvent(args, ShowOnlyDiffRadioButton.IsChecked.Value);
+            DataGridEventDispatcher.Instance.DispatchPostExecuteDiffEvent(args);
 
             var summary = diff.CreateSummary();
             GetViewModel().UpdateDiffSummary(summary);
@@ -506,7 +528,10 @@ namespace ExcelMerge.GUI.Views
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchRowHeaderChagneEvent(dataGrid, container);
+                {
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    DataGridEventDispatcher.Instance.DispatchRowHeaderChagneEvent(args);
+                }
             }
         }
 
@@ -517,7 +542,10 @@ namespace ExcelMerge.GUI.Views
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchRowHeaderResetEvent(sender as FastGridControl, container);
+                {
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    DataGridEventDispatcher.Instance.DispatchRowHeaderResetEvent(args);
+                }
             }
         }
 
@@ -528,7 +556,10 @@ namespace ExcelMerge.GUI.Views
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchColumnHeaderChangeEvent(dataGrid, container);
+                {
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    DataGridEventDispatcher.Instance.DispatchColumnHeaderChangeEvent(args);
+                }
             }
         }
 
@@ -539,7 +570,10 @@ namespace ExcelMerge.GUI.Views
             {
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
-                    DataGridEventDispatcher.DispatchColumnHeaderResetEvent(sender as FastGridControl, container);
+                {
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    DataGridEventDispatcher.Instance.DispatchColumnHeaderResetEvent(args);
+                }
             }
         }
 
@@ -583,12 +617,14 @@ namespace ExcelMerge.GUI.Views
 
         private void ShowAllRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, false);
+            var args = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchDisplayFormatChangeEvent(args, false);
         }
 
         private void ShowOnlyDiffRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataGridEventDispatcher.DispatchDisplayFormatChangeEvent(container, true);
+            var args = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
+            DataGridEventDispatcher.Instance.DispatchDisplayFormatChangeEvent(args, true);
         }
 
         private bool ValidateDataGrids()
@@ -598,7 +634,8 @@ namespace ExcelMerge.GUI.Views
 
         private void ValuteTextBox_ScrollChanged(object sender, RoutedEventArgs e)
         {
-            ValueTextBoxEventDispatcher.DispatchScrolledEvent(sender as RichTextBox, container, (ScrollChangedEventArgs)e);
+            var args = new DiffViewEventArgs<RichTextBox>(sender as RichTextBox, container);
+            ValueTextBoxEventDispatcher.Instance.DispatchScrolledEvent(args, (ScrollChangedEventArgs)e);
         }
 
         private void NextModifiedCellButton_Click(object sender, RoutedEventArgs e)

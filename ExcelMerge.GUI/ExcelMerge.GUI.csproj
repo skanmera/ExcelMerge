@@ -140,6 +140,7 @@
     <Compile Include="Shell\PowerShellInvocation.cs" />
     <Compile Include="ViewModels\SettingCollectionWindowViewModelBase.cs" />
     <Compile Include="ViewModels\SettingEditorWindowViewModelBase.cs" />
+    <Compile Include="Views\DiffViewEvent\DiffViewEventArgs.cs" />
     <Compile Include="Views\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>
@@ -159,10 +160,10 @@
     <Compile Include="ValueConverters\PercentageConverter.cs" />
     <Compile Include="ViewModels\FileSettingEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\FileSettingsWindowViewModel.cs" />
-    <Compile Include="Views\EventDispathcer.cs" />
-    <Compile Include="Views\EventHandler.cs" />
+    <Compile Include="Views\DiffViewEvent\DiffViewEventDispatcher.cs" />
+    <Compile Include="Views\DiffViewEvent\DiffViewEventHandler.cs" />
     <Compile Include="Exceptions\ExcelMergeException.cs" />
-    <Compile Include="Views\EventListener.cs" />
+    <Compile Include="Views\DiffViewEvent\DiffViewEventListener.cs" />
     <Compile Include="Models\DiffGridModel.cs" />
     <Compile Include="Models\DiffType.cs" />
     <Compile Include="Settings\ApplicationSetting.cs" />
