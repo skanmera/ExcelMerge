@@ -22,6 +22,11 @@ namespace FastWpfGrid
         private SeriesSizes _rowSizes = new SeriesSizes();
         private SeriesSizes _columnSizes = new SeriesSizes();
 
+        public int RealRowCount
+        {
+            get { return _realRowCount; }
+        }
+
         public int VisibleRowCount
         {
             get { return _rowSizes.GetVisibleScrollCount(FirstVisibleRowScrollIndex, GridScrollAreaHeight); }
@@ -47,6 +52,45 @@ namespace FastWpfGrid
             if (row < _rowSizes.FrozenCount) return _rowSizes.GetFrozenPosition(row) + HeaderHeight;
             return _rowSizes.GetSizeSum(FirstVisibleRowScrollIndex, row - _rowSizes.FrozenCount) + HeaderHeight + FrozenHeight;
             //return (row - FirstVisibleRow) * RowHeight + HeaderHeight;
+        }
+
+        public int GetRealRowHeight(int row)
+        {
+            return _rowSizes.GetSizeByRealIndex(row);
+        }
+
+        public int CalculateRealRowHeight(int row)
+        {
+            if (!FlexibleRows)
+                return _rowSizes.DefaultSize;
+
+            int height = 0;
+            for (int i = 0; i < _modelColumnCount; i++)
+            {
+                height = Math.Max(GetCellContentHeight(GetCell(new FastGridCellAddress(row, i))), height);
+            }
+
+            height = Math.Min(height, _rowSizes.MaxSize ?? height);
+            height = Math.Max(height, _rowSizes.DefaultSize);
+
+            return height;
+        }
+
+        public void BuildRowIndex()
+        {
+            _rowSizes.BuildIndex();
+        }
+
+        public void PutSizeOverride(int row, int size)
+        {
+            _rowSizes.PutSizeOverride(row, size);
+        }
+
+        public int RealToModelRow(int real)
+        {
+            var modelRow = RealToModel(new FastGridCellAddress(real, 0)).Row;
+
+            return modelRow.HasValue ? modelRow.Value : 0;
         }
 
         public void SetMaxRowSize(int size)

@@ -64,8 +64,8 @@ namespace ExcelMerge.GUI.Models
 
             columnCount = SheetDiff.Rows.Max(r => r.Value.Cells.Count);
             rowCount = SheetDiff.Rows.Count();
-
-            App.Instance.OnSettingUpdated += () => { NotifyRefresh(); };
+            
+            App.Instance.OnSettingUpdated += () => { InvalidateAll(); };
         }
 
         public override string GetColumnHeaderText(int column)

@@ -49,7 +49,29 @@ namespace ExcelMerge.GUI.Views
             DataGridEventDispatcher.DispatchApplicationSettingUpdateEvent(container);
         }
 
-        public void OnPostExecuteDiff(IUnityContainer container) { }
+        public void OnPostExecuteDiff(IUnityContainer container)
+        {
+            SyncRowHeight(container);
+        }
+
+        private void SyncRowHeight(IUnityContainer container)
+        {
+            var grids = container.ResolveAll<FastGridControl>();
+            if (!grids.Any())
+                return;
+
+            var maxRowCount = grids.Max(g => g.RealRowCount);
+
+            for (int i = 0; i < maxRowCount; i++)
+            {
+                var maxHeight = grids.Max(g => g.CalculateRealRowHeight(i));
+                foreach (var grid in grids)
+                {
+                    if (grid.GetRealRowHeight(i) != maxHeight)
+                        grid.PutSizeOverride(grid.RealToModelRow(i), maxHeight);
+                }
+            }
+        }
 
         public void OnFileSettingUpdated(FastGridControl target, IUnityContainer container, FileSetting fileSetting)
         {
@@ -85,6 +107,13 @@ namespace ExcelMerge.GUI.Views
 
                 DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
             }
+
+            foreach (var textBox in container.ResolveAll<RichTextBox>())
+            {
+                ValueTextBoxEventDispatcher.DispatchLostFocusEvent(textBox, container);
+            }
+
+            SyncRowHeight(container);
         }
 
         public void OnScrolled(FastGridControl target, IUnityContainer container)
@@ -407,14 +436,18 @@ namespace ExcelMerge.GUI.Views
 
         public void OnDiffDisplayFormatChanged(IUnityContainer container, bool onlyDiff)
         {
-            var grid = container.Resolve<FastGridControl>(Key);
+            foreach (var grid in container.ResolveAll<FastGridControl>())
+            {
+                if (onlyDiff)
 
-            if (onlyDiff)
-                (grid.Model as DiffGridModel)?.HideEqualRows();
-            else
-                (grid.Model as DiffGridModel)?.ShowEqualRows();
+                    (grid.Model as DiffGridModel)?.HideEqualRows();
+                else
+                    (grid.Model as DiffGridModel)?.ShowEqualRows();
 
-            DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
+                DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);
+            }
+
+            SyncRowHeight(container);
         }
 
         public void OnColumnWidthChanged(FastGridControl target, IUnityContainer container, ColumnWidthChangedEventArgs e)
