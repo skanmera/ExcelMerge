@@ -81,7 +81,6 @@ namespace ExcelMerge.GUI.Views
                 grid.SetMaxColumnSize(App.Instance.Setting.ColumnWidth);
                 grid.SetMinColumnSize(App.Instance.Setting.ColumnWidth);
                 grid.SetMaxRowSize(App.Instance.Setting.MaxRowHeight);
-                grid.SetMinRowSize(App.Instance.Setting.MinRowHeight);
                 grid.AllowFlexibleRows = App.Instance.Setting.FitRowHeight;
 
                 DataGridEventDispatcher.DispatchModelUpdateEvent(grid, container);

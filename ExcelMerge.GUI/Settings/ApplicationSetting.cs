@@ -193,13 +193,6 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref columnWidth, value); }
         }
 
-        private int minRowHeight = 20;
-        public int MinRowHeight
-        {
-            get { return minRowHeight; }
-            set { SetProperty(ref minRowHeight, value); }
-        }
-
         private int maxRowHeight = 200;
         public int MaxRowHeight
         {

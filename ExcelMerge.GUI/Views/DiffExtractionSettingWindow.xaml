@@ -155,21 +155,6 @@
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0" 
                      VerticalAlignment="Center"
-                     Content="{x:Static props:Resources.Label_MinRowHeight}"/>
-              <xctk:IntegerUpDown Grid.Column="1" 
-                                  Width="100"
-                                  HorizontalAlignment="Left"
-                                  Minimum="20" 
-                                  Value="{Binding Setting.MinRowHeight, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-
-            <Grid Margin="3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="80*"/>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0" 
-                     VerticalAlignment="Center"
                      Content="{x:Static props:Resources.Label_MaxRowHeight}"/>
               <xctk:IntegerUpDown Grid.Column="1" 
                                   Width="100"
@@ -242,7 +227,7 @@
                   <StackPanel Orientation="Horizontal" Grid.Column="1">
                     <TextBox Text="{Binding Path=SelectedColor, ElementName=NewColorPicker, Mode=OneWay}" IsReadOnly="True" Width="100" Height="25" Margin="3 0 0 0" />
                     <xctk:ColorPicker x:Name="NewColorPicker" Width="250" Height="25" Margin="3" SelectedColor="AliceBlue"/>
-                    <Button Content="+" Margin="3" Width="50"
+                    <Button Content="+" Margin="0 3 3 3" Width="50"
                         Command="{Binding AddAlternationColorCommand}"
                         CommandParameter="{Binding Path=SelectedColor, ElementName=NewColorPicker}"/>
                   </StackPanel>
