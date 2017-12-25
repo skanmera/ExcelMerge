@@ -328,7 +328,7 @@ namespace ExcelMerge.GUI.Views
             var margin = 10;
             var textHeightList = e.Container.ResolveAll<RichTextBox>().Select(rtb => CalculateTextBoxHeight(rtb) + margin);
 
-            var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 2);
+            var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 3);
 
             foreach (var rtb in e.Container.ResolveAll<RichTextBox>())
                 rtb.Height = height;
@@ -371,7 +371,6 @@ namespace ExcelMerge.GUI.Views
                 }
             }
         }
-
 
         private void SyncScroll(FastGridControl src, FastGridControl dst)
         {
