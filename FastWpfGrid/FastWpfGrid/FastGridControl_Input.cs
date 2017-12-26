@@ -597,7 +597,8 @@ namespace FastWpfGrid
 
             if (newSize < MinColumnWidth) newSize = MinColumnWidth;
             if (newSize > GridScrollAreaWidth) newSize = GridScrollAreaWidth;
-            _columnSizes.Resize(column, newSize);
+            if (!_columnSizes.Resize(column, newSize))
+                return;
             if (column < _columnSizes.FrozenCount)
             {
                 SetScrollbarMargin();

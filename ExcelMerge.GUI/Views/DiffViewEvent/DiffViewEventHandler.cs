@@ -180,36 +180,42 @@ namespace ExcelMerge.GUI.Views
 
         public void OnColumnHeaderChanged(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetColumnHeader(e.Sender.CurrentCell.Row);
+            var row = e.Sender.CurrentCell.Row;
 
-            dataGrid.NotifyRowArrangeChanged();
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                (grid.Model as DiffGridModel).SetColumnHeader(row);
+                grid.NotifyRefresh();
+            }
         }
 
         public void OnColumnHeaderReset(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetColumnHeader(0);
-
-            dataGrid.NotifyRowArrangeChanged();
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                (grid.Model as DiffGridModel).SetColumnHeader(0);
+                grid.NotifyRefresh();
+            }
         }
 
         public void OnRowHeaderChanged(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetRowHeader(e.Sender.CurrentCell.Column);
+            var column = e.Sender.CurrentCell.Column;
 
-            dataGrid.NotifyColumnArrangeChanged();
-            DataGridEventDispatcher.Instance.DispatchModelUpdateEvent(e);
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                (grid.Model as DiffGridModel).SetRowHeader(column);
+                grid.NotifyRefresh();
+            }
         }
 
         public void OnRowHeaderReset(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
-            (dataGrid.Model as DiffGridModel).SetRowHeader(-1);
-
-            dataGrid.NotifyColumnArrangeChanged();
-            DataGridEventDispatcher.Instance.DispatchModelUpdateEvent(e);
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                (grid.Model as DiffGridModel).SetRowHeader(-1);
+                grid.NotifyRefresh();
+            }
         }
 
         public void OnDiffDisplayFormatChanged(DiffViewEventArgs<FastGridControl> e, bool onlyDiff)
@@ -375,7 +381,7 @@ namespace ExcelMerge.GUI.Views
                 return;
 
             foreach (var grid in grids)
-                grid.NotifyRefresh();
+                grid.ClearRowSizeOverrides();
 
             var maxRowCount = grids.Max(g => g.ModelRowCount);
 

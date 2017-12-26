@@ -76,12 +76,17 @@ namespace FastWpfGrid
         {
             _scrollItems.Clear();
             //_itemByIndex.Clear();
-            _sizeOverridesByModelIndex.Clear();
+            //_sizeOverridesByModelIndex.Clear();
             _positions.Clear();
             _scrollIndexes.Clear();
             _frozenItems.Clear();
             _hiddenAndFrozenModelIndexes = null;
             _frozenModelIndexes = null;
+        }
+
+        public void ClearSizeOverrides()
+        {
+            _sizeOverridesByModelIndex.Clear();
         }
 
         public void PutSizeOverride(int modelIndex, int size)
@@ -349,14 +354,16 @@ namespace FastWpfGrid
             //return index;
         }
 
-        public void Resize(int realIndex, int newSize)
+        public bool Resize(int realIndex, int newSize)
         {
-            if (realIndex < 0) return;
+            if (realIndex < 0) return false;
             int modelIndex = RealToModel(realIndex);
-            if (modelIndex < 0) return;
+            if (modelIndex < 0) return false;
             // can be done more effectively
             _sizeOverridesByModelIndex[modelIndex] = newSize;
             BuildIndex();
+
+            return true;
         }
 
         public void SetExtraordinaryIndexes(HashSet<int> hidden, HashSet<int> frozen)

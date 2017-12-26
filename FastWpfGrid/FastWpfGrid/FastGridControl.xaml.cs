@@ -361,6 +361,11 @@ namespace FastWpfGrid
             InvalidateAll();
         }
 
+        public void ClearRowSizeOverrides()
+        {
+            _rowSizes.ClearSizeOverrides();
+        }
+
         private void FixCurrentCellAndSetSelectionToCurrentCell()
         {
             int? col = _currentCell.Column;

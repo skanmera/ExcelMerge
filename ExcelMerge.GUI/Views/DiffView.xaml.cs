@@ -523,7 +523,7 @@ namespace ExcelMerge.GUI.Views
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
                 {
-                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container, TargetType.First);
                     DataGridEventDispatcher.Instance.DispatchRowHeaderChagneEvent(args);
                 }
             }
@@ -537,7 +537,7 @@ namespace ExcelMerge.GUI.Views
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
                 {
-                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container, TargetType.First);
                     DataGridEventDispatcher.Instance.DispatchRowHeaderResetEvent(args);
                 }
             }
@@ -551,7 +551,7 @@ namespace ExcelMerge.GUI.Views
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
                 {
-                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container, TargetType.First);
                     DataGridEventDispatcher.Instance.DispatchColumnHeaderChangeEvent(args);
                 }
             }
@@ -565,7 +565,7 @@ namespace ExcelMerge.GUI.Views
                 var dataGrid = ((ContextMenu)menuItem.Parent).PlacementTarget as FastGridControl;
                 if (dataGrid != null)
                 {
-                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container);
+                    var args = new DiffViewEventArgs<FastGridControl>(dataGrid, container, TargetType.First);
                     DataGridEventDispatcher.Instance.DispatchColumnHeaderResetEvent(args);
                 }
             }
