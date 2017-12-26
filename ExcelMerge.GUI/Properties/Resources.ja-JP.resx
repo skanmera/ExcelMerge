@@ -331,16 +331,16 @@
     <value>マッチタイプ</value>
   </data>
   <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
-    <value>列ヘッダをリセット</value>
+    <value>↑列ヘッダをリセット</value>
   </data>
   <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
-    <value>行ヘッダをリセット</value>
+    <value>←行ヘッダをリセット</value>
   </data>
   <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
-    <value>列ヘッダにセット</value>
+    <value>↑列ヘッダにセット</value>
   </data>
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
-    <value>行ヘッダにセット</value>
+    <value>←行ヘッダにセット</value>
   </data>
   <data name="Word_Font" xml:space="preserve">
     <value>フォント</value>

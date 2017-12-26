@@ -124,7 +124,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Reset Column Header に類似しているローカライズされた文字列を検索します。
+        ///   ↑Reset Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_ResetColumnHeader {
             get {
@@ -133,7 +133,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Reset Row Header に類似しているローカライズされた文字列を検索します。
+        ///   ←Reset Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_ResetRowHeader {
             get {
@@ -142,7 +142,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Set Column Header に類似しているローカライズされた文字列を検索します。
+        ///   ↑Set Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_SetColumnHeader {
             get {
@@ -151,7 +151,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Set Row Header に類似しているローカライズされた文字列を検索します。
+        ///   ←Set Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_SetRowHeader {
             get {

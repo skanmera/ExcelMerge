@@ -226,16 +226,16 @@
     <value>Extract diff with this row as column header.</value>
   </data>
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
-    <value>Set Row Header</value>
+    <value>←Set Row Header</value>
   </data>
   <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
-    <value>Reset Row Header</value>
+    <value>←Reset Row Header</value>
   </data>
   <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
-    <value>Set Column Header</value>
+    <value>↑Set Column Header</value>
   </data>
   <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
-    <value>Reset Column Header</value>
+    <value>↑Reset Column Header</value>
   </data>
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>Display Format</value>
