@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Icon="/ExcelMerge.GUI;component/app.ico"
-        Title="{x:Static props:Resources.Title_DiffSettingWindow}" Height="640" Width="800">
+        Title="{x:Static props:Resources.Title_GeneralSettingWindow}" Height="640" Width="800">
 
   <Window.Resources>
     <vc:MultiValueConverter x:Key="multiValueConverter"/>

@@ -129,8 +129,8 @@
   <data name="MenuItem_ExternalCommands" xml:space="preserve">
     <value>External Commands</value>
   </data>
-  <data name="MenuItem_DiffExtractionSetting" xml:space="preserve">
-    <value>Diff Extraction Setting</value>
+  <data name="MenuItem_GeneralSetting" xml:space="preserve">
+    <value>General Setting</value>
   </data>
   <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
     <value>Open as Dst File</value>
@@ -159,8 +159,8 @@
   <data name="Title_ExternalCommandsWindow" xml:space="preserve">
     <value>External Commands</value>
   </data>
-  <data name="Title_DiffSettingWindow" xml:space="preserve">
-    <value>Diff Extraction Settings</value>
+  <data name="Title_GeneralSettingWindow" xml:space="preserve">
+    <value>General Settings</value>
   </data>
   <data name="ToolTip_DstFilePath" xml:space="preserve">
     <value>Dst File Path</value>
@@ -250,7 +250,7 @@
     <value>All</value>
   </data>
   <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
-    <value>Only Difference</value>
+    <value>Only Diff</value>
   </data>
   <data name="ToolTip_Swap" xml:space="preserve">
     <value>Swap src and dst</value>

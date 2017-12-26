@@ -529,15 +529,6 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Diff Extraction Setting に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string MenuItem_DiffExtractionSetting {
-            get {
-                return ResourceManager.GetString("MenuItem_DiffExtractionSetting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Execute external command に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuItem_ExeExternalCmd {
@@ -561,6 +552,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string MenuItem_FileSettings {
             get {
                 return ResourceManager.GetString("MenuItem_FileSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   General Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_GeneralSetting {
+            get {
+                return ResourceManager.GetString("MenuItem_GeneralSetting", resourceCulture);
             }
         }
         
@@ -702,7 +702,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Only Difference に類似しているローカライズされた文字列を検索します。
+        ///   Only Diff に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string RadioButton_ShowOnlyDiff {
             get {
@@ -801,15 +801,6 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Diff Extraction Settings に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Title_DiffSettingWindow {
-            get {
-                return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Edit External Command に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Title_ExternalCommandEditorWindow {
@@ -842,6 +833,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Title_FileSettingsWindow {
             get {
                 return ResourceManager.GetString("Title_FileSettingsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   General Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Title_GeneralSettingWindow {
+            get {
+                return ResourceManager.GetString("Title_GeneralSettingWindow", resourceCulture);
             }
         }
         
