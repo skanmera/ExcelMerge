@@ -22,6 +22,11 @@ namespace FastWpfGrid
         private SeriesSizes _rowSizes = new SeriesSizes();
         private SeriesSizes _columnSizes = new SeriesSizes();
 
+        public int ModelRowCount
+        {
+            get { return _modelRowCount; }
+        }
+
         public int RealRowCount
         {
             get { return _realRowCount; }
@@ -54,24 +59,28 @@ namespace FastWpfGrid
             //return (row - FirstVisibleRow) * RowHeight + HeaderHeight;
         }
 
+        public int GetModelRowHeight(int row)
+        {
+            return _rowSizes.GetSizeByModelIndex(row);
+        }
+
         public int GetRealRowHeight(int row)
         {
             return _rowSizes.GetSizeByRealIndex(row);
         }
 
-        public int CalculateRealRowHeight(int row)
+        public int CalculateModelRowHeight(int row)
         {
             if (!FlexibleRows)
                 return _rowSizes.DefaultSize;
 
             int height = 0;
             for (int i = 0; i < _modelColumnCount; i++)
-            {
-                height = Math.Max(GetCellContentHeight(GetCell(new FastGridCellAddress(row, i))), height);
-            }
+                height = Math.Max(GetCellContentHeight(GetModelCell(row, i)), height);
 
             height = Math.Min(height, _rowSizes.MaxSize ?? height);
             height = Math.Max(height, _rowSizes.DefaultSize);
+            height = height + 2 * CellPaddingVertical + 2 + RowHeightReserve;
 
             return height;
         }
@@ -612,14 +621,18 @@ namespace FastWpfGrid
                 int modelRow = _rowSizes.RealToModel(row);
                 if (_rowSizes.HasSizeOverride(modelRow)) continue;
                 changed = true;
+
+                var cellContentHeight = 0;
                 for (int col = 0; col < colCount; col++)
                 {
                     var cell = _isTransposed ? GetModelCell(col, row) : GetModelCell(row, col);
-                    var cellContentHeight = Math.Min(GetCellContentHeight(cell), _rowSizes.MaxSize.Value);
-
-                    if (cellContentHeight > _rowSizes.DefaultSize)
-                        _rowSizes.PutSizeOverride(modelRow, cellContentHeight + 2 * CellPaddingVertical + 2 + RowHeightReserve);
+                    cellContentHeight = Math.Max(GetCellContentHeight(cell), cellContentHeight);
                 }
+
+                cellContentHeight = Math.Min(cellContentHeight, _rowSizes.MaxSize.Value);
+
+                if (cellContentHeight > _rowSizes.DefaultSize)
+                    _rowSizes.PutSizeOverride(modelRow, cellContentHeight + 2 * CellPaddingVertical + 2 + RowHeightReserve);
             }
             _rowSizes.BuildIndex();
             //AdjustVerticalScrollBarRange();

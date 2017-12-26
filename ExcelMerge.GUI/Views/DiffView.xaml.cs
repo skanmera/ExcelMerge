@@ -138,12 +138,6 @@ namespace ExcelMerge.GUI.Views
             return index;
         }
 
-        private void DataGrid_Scrolled(object sender, EventArgs e)
-        {
-            var args = new DiffViewEventArgs<FastGridControl>(sender as FastGridControl, container);
-            DataGridEventDispatcher.Instance.DispatchScrollEvnet(args);
-        }
-
         private void LocationGrid_MouseDown(object sender, MouseEventArgs e)
         {
             var args = new DiffViewEventArgs<Grid>(sender as Grid, container);

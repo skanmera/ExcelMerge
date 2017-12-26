@@ -58,7 +58,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnPostExecuteDiff(DiffViewEventArgs<FastGridControl> e)
         {
-            SyncRowHeight(e.Container);
+            //SyncRowHeight(e.Container);
         }
 
         public void OnFileSettingUpdated(DiffViewEventArgs<FastGridControl> e, FileSetting fileSetting)
@@ -359,17 +359,23 @@ namespace ExcelMerge.GUI.Views
             if (!grids.Any())
                 return;
 
-            var maxRowCount = grids.Max(g => g.RealRowCount);
+            foreach (var grid in grids)
+                grid.NotifyRefresh();
+
+            var maxRowCount = grids.Max(g => g.ModelRowCount);
 
             for (int i = 0; i < maxRowCount; i++)
             {
-                var maxHeight = grids.Max(g => g.CalculateRealRowHeight(i));
+                var maxHeight = grids.Max(g => g.CalculateModelRowHeight(i));
                 foreach (var grid in grids)
                 {
-                    if (grid.GetRealRowHeight(i) != maxHeight)
-                        grid.PutSizeOverride(grid.RealToModelRow(i), maxHeight);
+                    if (grid.GetModelRowHeight(i) != maxHeight)
+                        grid.PutSizeOverride(i, maxHeight);
                 }
             }
+
+            foreach (var grid in grids)
+                grid.BuildRowIndex();
         }
 
         private void SyncScroll(FastGridControl src, FastGridControl dst)
