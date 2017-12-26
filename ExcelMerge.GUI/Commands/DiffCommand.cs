@@ -9,7 +9,7 @@ namespace ExcelMerge.GUI.Commands
     {
         public static readonly List<string> DefaultEnabledExtensions = new List<string>
         {
-            ".xls", ".xlsx", ".csv",
+            ".xls", ".xlsx", ".csv", "tsv",
         };
 
         public CommandLineOption Option { get; }

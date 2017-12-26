@@ -85,6 +85,7 @@
     <Compile Include="ExcelWorkbook.cs" />
     <Compile Include="ExcelWorkbookType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TsvReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

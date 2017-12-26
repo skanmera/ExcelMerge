@@ -30,6 +30,13 @@ namespace ExcelMerge
             return CreateSheet(rows, config);
         }
 
+        public static ExcelSheet CreateFromTsv(string path, ExcelSheetReadConfig config)
+        {
+            var rows = TsvReader.Read(path);
+
+            return CreateSheet(rows, config);
+        }
+
         private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows, ExcelSheetReadConfig config)
         {
             var sheet = CreateSheet(rows);

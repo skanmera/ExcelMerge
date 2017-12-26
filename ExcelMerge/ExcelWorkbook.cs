@@ -18,6 +18,9 @@ namespace ExcelMerge
             if (Path.GetExtension(path) == ".csv")
                 return CreateFromCsv(path, config);
 
+            if (Path.GetExtension(path) == ".tsv")
+                return CreateFromTsv(path, config);
+
             var srcWb = WorkbookFactory.Create(path);
             var wb = new ExcelWorkbook();
             for (int i = 0; i < srcWb.NumberOfSheets; i++)
@@ -35,6 +38,10 @@ namespace ExcelMerge
             {
                 yield return System.IO.Path.GetFileName(path);
             }
+            else if (Path.GetExtension(path) == ".tsv")
+            {
+                yield return System.IO.Path.GetFileName(path);
+            }
             else
             {
                 var wb = WorkbookFactory.Create(path);
@@ -47,6 +54,14 @@ namespace ExcelMerge
         {
             var wb = new ExcelWorkbook();
             wb.Sheets.Add(Path.GetFileName(path), ExcelSheet.CreateFromCsv(path, config));
+
+            return wb;
+        }
+
+        private static ExcelWorkbook CreateFromTsv(string path, ExcelSheetReadConfig config)
+        {
+            var wb = new ExcelWorkbook();
+            wb.Sheets.Add(Path.GetFileName(path), ExcelSheet.CreateFromTsv(path, config));
 
             return wb;
         }
