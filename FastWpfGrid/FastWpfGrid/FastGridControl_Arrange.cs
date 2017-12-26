@@ -22,6 +22,16 @@ namespace FastWpfGrid
         private SeriesSizes _rowSizes = new SeriesSizes();
         private SeriesSizes _columnSizes = new SeriesSizes();
 
+        public int ModelRowCount
+        {
+            get { return _modelRowCount; }
+        }
+
+        public int RealRowCount
+        {
+            get { return _realRowCount; }
+        }
+
         public int VisibleRowCount
         {
             get { return _rowSizes.GetVisibleScrollCount(FirstVisibleRowScrollIndex, GridScrollAreaHeight); }
@@ -47,6 +57,49 @@ namespace FastWpfGrid
             if (row < _rowSizes.FrozenCount) return _rowSizes.GetFrozenPosition(row) + HeaderHeight;
             return _rowSizes.GetSizeSum(FirstVisibleRowScrollIndex, row - _rowSizes.FrozenCount) + HeaderHeight + FrozenHeight;
             //return (row - FirstVisibleRow) * RowHeight + HeaderHeight;
+        }
+
+        public int GetModelRowHeight(int row)
+        {
+            return _rowSizes.GetSizeByModelIndex(row);
+        }
+
+        public int GetRealRowHeight(int row)
+        {
+            return _rowSizes.GetSizeByRealIndex(row);
+        }
+
+        public int CalculateModelRowHeight(int row)
+        {
+            if (!FlexibleRows)
+                return _rowSizes.DefaultSize;
+
+            int height = 0;
+            for (int i = 0; i < _modelColumnCount; i++)
+                height = Math.Max(GetCellContentHeight(GetModelCell(row, i)), height);
+
+            height = Math.Min(height, _rowSizes.MaxSize ?? height);
+            height = Math.Max(height, _rowSizes.DefaultSize);
+            height = height + 2 * CellPaddingVertical + 2 + RowHeightReserve;
+
+            return height;
+        }
+
+        public void BuildRowIndex()
+        {
+            _rowSizes.BuildIndex();
+        }
+
+        public void PutSizeOverride(int row, int size)
+        {
+            _rowSizes.PutSizeOverride(row, size);
+        }
+
+        public int RealToModelRow(int real)
+        {
+            var modelRow = RealToModel(new FastGridCellAddress(real, 0)).Row;
+
+            return modelRow.HasValue ? modelRow.Value : 0;
         }
 
         public void SetMaxRowSize(int size)
@@ -568,11 +621,18 @@ namespace FastWpfGrid
                 int modelRow = _rowSizes.RealToModel(row);
                 if (_rowSizes.HasSizeOverride(modelRow)) continue;
                 changed = true;
+
+                var cellContentHeight = 0;
                 for (int col = 0; col < colCount; col++)
                 {
                     var cell = _isTransposed ? GetModelCell(col, row) : GetModelCell(row, col);
-                    _rowSizes.PutSizeOverride(modelRow, GetCellContentHeight(cell) + 2 * CellPaddingVertical + 2 + RowHeightReserve);
+                    cellContentHeight = Math.Max(GetCellContentHeight(cell), cellContentHeight);
                 }
+
+                cellContentHeight = Math.Min(cellContentHeight, _rowSizes.MaxSize.Value);
+
+                if (cellContentHeight > _rowSizes.DefaultSize)
+                    _rowSizes.PutSizeOverride(modelRow, cellContentHeight + 2 * CellPaddingVertical + 2 + RowHeightReserve);
             }
             _rowSizes.BuildIndex();
             //AdjustVerticalScrollBarRange();

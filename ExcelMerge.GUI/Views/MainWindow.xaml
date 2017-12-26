@@ -89,7 +89,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="{x:Static props:Resources.Word_Setting}">
-                <MenuItem Header="{x:Static props:Resources.MenuItem_DiffExtractionSetting}"
+                <MenuItem Header="{x:Static props:Resources.MenuItem_GeneralSetting}"
                           Command="{Binding OpenDiffExtractionSettingsWindowCommand}"/>
                 <MenuItem Header="{x:Static props:Resources.MenuItem_ExternalCommands}"
                           Command="{Binding OpenExternalCommandsWindowCommand}"/>

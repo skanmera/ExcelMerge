@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Threading;
 using ExcelMerge.GUI.Commands;
 using ExcelMerge.GUI.Settings;
 
@@ -20,9 +19,7 @@ namespace ExcelMerge.GUI
         {
             App app = new App();
             app.InitializeComponent();
-
             app.Setting = ApplicationSetting.Load();
-
             app.Setting.EnsureCulture();
             app.UpdateResourceCulture();
 
@@ -107,7 +104,7 @@ namespace ExcelMerge.GUI
 
         public void UpdateSetting(ApplicationSetting setting)
         {
-            Setting = setting.Clone();
+            Setting = setting.DeepClone();
 
             if (OnSettingUpdated == null)
                 OnSettingUpdated += () => { };
@@ -135,7 +132,7 @@ namespace ExcelMerge.GUI
                 updated.RemoveAt(updated.Count - 1);
             }
 
-            Setting.RecentFileSets = updated;
+            Setting.RecentFileSets = new System.Collections.ObjectModel.ObservableCollection<string>(updated);
             Setting.Save();
         }
 

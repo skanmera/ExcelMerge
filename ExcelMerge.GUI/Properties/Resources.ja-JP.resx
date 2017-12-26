@@ -129,8 +129,8 @@
   <data name="MenuItem_ExternalCommands" xml:space="preserve">
     <value>外部コマンド</value>
   </data>
-  <data name="MenuItem_DiffExtractionSetting" xml:space="preserve">
-    <value>差分抽出設定</value>
+  <data name="MenuItem_GeneralSetting" xml:space="preserve">
+    <value>一般設定</value>
   </data>
   <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
     <value>右側として開く</value>
@@ -153,14 +153,14 @@
   <data name="Message_Reboot" xml:space="preserve">
     <value>変更を適用するには再起動して下さい。</value>
   </data>
-  <data name="Title_CommandEditorWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandEditorWindow" xml:space="preserve">
     <value>外部コマンド編集</value>
   </data>
-  <data name="Title_CommandsWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandsWindow" xml:space="preserve">
     <value>外部コマンド</value>
   </data>
-  <data name="Title_DiffSettingWindow" xml:space="preserve">
-    <value>差分抽出設定</value>
+  <data name="Title_GeneralSettingWindow" xml:space="preserve">
+    <value>一般設定</value>
   </data>
   <data name="ToolTip_DstFilePath" xml:space="preserve">
     <value>右側のファイルパス</value>
@@ -228,11 +228,11 @@
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>表示形式</value>
   </data>
-  <data name="Label_CellHeight" xml:space="preserve">
-    <value>セルの高さ</value>
+  <data name="Label_RowHeight" xml:space="preserve">
+    <value>行の高さ</value>
   </data>
-  <data name="Label_CellWidth" xml:space="preserve">
-    <value>セルの幅</value>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>列の幅</value>
   </data>
   <data name="RadioButton_ShowAll" xml:space="preserve">
     <value>全て</value>
@@ -331,16 +331,16 @@
     <value>マッチタイプ</value>
   </data>
   <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
-    <value>列ヘッダをリセット</value>
+    <value>↑列ヘッダをリセット</value>
   </data>
   <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
-    <value>行ヘッダをリセット</value>
+    <value>←行ヘッダをリセット</value>
   </data>
   <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
-    <value>列ヘッダにセット</value>
+    <value>↑列ヘッダにセット</value>
   </data>
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
-    <value>行ヘッダにセット</value>
+    <value>←行ヘッダにセット</value>
   </data>
   <data name="Word_Font" xml:space="preserve">
     <value>フォント</value>
@@ -457,5 +457,44 @@
   </data>
   <data name="Word_StartupSheet" xml:space="preserve">
     <value>起動時の比較シートにする</value>
+  </data>
+  <data name="GroupBox_LogFormat" xml:space="preserve">
+    <value>ログ形式</value>
+  </data>
+  <data name="GroupBox_ReadSetting" xml:space="preserve">
+    <value>読み込み設定</value>
+  </data>
+  <data name="GroupBox_Style" xml:space="preserve">
+    <value>スタイル</value>
+  </data>
+  <data name="Label_NotifyEqual" xml:space="preserve">
+    <value>差分が存在しないときにダイアログを表示する</value>
+  </data>
+  <data name="Message_NoDiff" xml:space="preserve">
+    <value>差分は存在しません。</value>
+  </data>
+  <data name="GroupBox_Behavior" xml:space="preserve">
+    <value>動作</value>
+  </data>
+  <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
+    <value>常にセルの差分を展開する</value>
+  </data>
+  <data name="Label_FitRowHeight" xml:space="preserve">
+    <value>行の高さを自動で調整する</value>
+  </data>
+  <data name="Label_MaxRowHeight" xml:space="preserve">
+    <value>行の高さ(最大)</value>
+  </data>
+  <data name="Label_MinRowHeight" xml:space="preserve">
+    <value>行の高さ(最小)</value>
+  </data>
+  <data name="Label_FocusFirstDiff" xml:space="preserve">
+    <value>差分抽出後に最初の差分に移動する</value>
+  </data>
+  <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
+    <value>CSV形式でコピー</value>
+  </data>
+  <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
+    <value>TSV形式でコピー</value>
   </data>
 </root>

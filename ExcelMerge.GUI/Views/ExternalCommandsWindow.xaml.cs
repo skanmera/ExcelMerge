@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ExcelMerge.GUI.Views
 {
     /// <summary>
-    /// CommandsWindow.xaml の相互作用ロジック
+    /// ExternalCommandsWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class CommandsWindow : Window
+    public partial class ExternalCommandsWindow : Window
     {
-        public CommandsWindow()
+        public ExternalCommandsWindow()
         {
             InitializeComponent();
         }

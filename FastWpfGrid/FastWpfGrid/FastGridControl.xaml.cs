@@ -37,7 +37,6 @@ namespace FastWpfGrid
         private int _headerWidth;
         private Dictionary<Tuple<bool, bool>, GlyphFont> _glyphFonts = new Dictionary<Tuple<bool, bool>, GlyphFont>();
         private Dictionary<Color, Brush> _solidBrushes = new Dictionary<Color, Brush>();
-        private int _rowHeightReserve = 5;
         //private Color _headerBackground = Color.FromRgb(0xDD, 0xDD, 0xDD);
         private WriteableBitmap _drawBuffer;
 
@@ -95,8 +94,13 @@ namespace FastWpfGrid
         public FastGridControl()
         {
             InitializeComponent();
-            //gridCore.Grid = this;
+
+            AlternatingColors = new Color[] { Colors.White };
+
             CellFontSize = 11;
+            CellFontName = "Arial";
+
+            //gridCore.Grid = this;
             _dragTimer = new DispatcherTimer();
             _dragTimer.IsEnabled = false;
             _dragTimer.Interval = TimeSpan.FromSeconds(0.05);
@@ -244,7 +248,7 @@ namespace FastWpfGrid
 
         public Color GetAlternateBackground(int row)
         {
-            return _alternatingColors[row%_alternatingColors.Length];
+            return AlternatingColors[row % AlternatingColors.Length];
         }
 
         private void hscroll_Scroll(object sender, ScrollEventArgs e)
@@ -355,6 +359,11 @@ namespace FastWpfGrid
             SetScrollbarMargin();
             FixScrollPosition();
             InvalidateAll();
+        }
+
+        public void ClearRowSizeOverrides()
+        {
+            _rowSizes.ClearSizeOverrides();
         }
 
         private void FixCurrentCellAndSetSelectionToCurrentCell()
@@ -619,15 +628,17 @@ namespace FastWpfGrid
         }
 
 
-        private void SetHoverRow(int? row)
+        private bool SetHoverRow(int? row)
         {
-            if (row == _mouseOverRow) return;
+            if (row == _mouseOverRow) return false;
             using (var ctx = CreateInvalidationContext())
             {
                 if (_mouseOverRow.HasValue) InvalidateRow(_mouseOverRow.Value);
                 _mouseOverRow = row;
                 if (_mouseOverRow.HasValue) InvalidateRow(_mouseOverRow.Value);
             }
+
+            return true;
         }
 
         private void SetHoverRowHeader(int? row)

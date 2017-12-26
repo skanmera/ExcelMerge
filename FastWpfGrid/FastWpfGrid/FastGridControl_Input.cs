@@ -13,6 +13,9 @@ namespace FastWpfGrid
 {
     partial class FastGridControl
     {
+        public event EventHandler<ColumnWidthChangedEventArgs> ColumnWidthChanged;
+        public event EventHandler<HoverRowChangedEventArgs> HoverRowChanged;
+
         public static readonly object ToggleTransposedCommand = new object();
         public static readonly object ToggleAllowFlexibleRowsCommand = new object();
         public static readonly object SelectAllCommand = new object();
@@ -587,6 +590,31 @@ namespace FastWpfGrid
             Keyboard.Focus(image);
         }
 
+        public void ResizeColumn(int newSize, int column)
+        {
+            if (newSize == _columnSizes.GetSizeByRealIndex(column))
+                return;
+
+            if (newSize < MinColumnWidth) newSize = MinColumnWidth;
+            if (newSize > GridScrollAreaWidth) newSize = GridScrollAreaWidth;
+            if (!_columnSizes.Resize(column, newSize))
+                return;
+            if (column < _columnSizes.FrozenCount)
+            {
+                SetScrollbarMargin();
+            }
+            AdjustScrollbars();
+            InvalidateAll();
+
+            OnColumnWidthChanged(column, newSize);
+        }
+
+        private void OnColumnWidthChanged(int column, int newWidth)
+        {
+            if (ColumnWidthChanged != null)
+                ColumnWidthChanged(this, new ColumnWidthChangedEventArgs(column, newWidth));
+        }
+
         protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -609,15 +637,7 @@ namespace FastWpfGrid
                 if (_resizingColumn.HasValue)
                 {
                     int newSize = _resizingColumnStartSize.Value + (int)Math.Round(pt.X - _resizingColumnOrigin.Value.X);
-                    if (newSize < MinColumnWidth) newSize = MinColumnWidth;
-                    if (newSize > GridScrollAreaWidth) newSize = GridScrollAreaWidth;
-                    _columnSizes.Resize(_resizingColumn.Value, newSize);
-                    if (_resizingColumn < _columnSizes.FrozenCount)
-                    {
-                        SetScrollbarMargin();
-                    }
-                    AdjustScrollbars();
-                    InvalidateAll();
+                    ResizeColumn(newSize, _resizingColumn.Value);
                 }
                 else
                 {
@@ -633,10 +653,12 @@ namespace FastWpfGrid
                     SetSelectedRectangle(_dragStartCell, cell);
                 }
 
-                SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null);
-                SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
-                SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
-                SetHoverCell(cell);
+                //SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null);
+                //SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
+                //SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
+                //SetHoverCell(cell);
+
+                SetHoverRow(cell);
 
                 var currentRegion = CurrentCellActiveRegions.FirstOrDefault(x => x.Rect.Contains(pt));
                 if (currentRegion != CurrentHoverRegion)
@@ -646,6 +668,24 @@ namespace FastWpfGrid
             }
 
             HandleMouseMoveTooltip();
+        }
+
+        public void SetHoverRow(FastGridCellAddress cell)
+        {
+            if (!SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null))
+                return;
+
+            SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
+            SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
+            SetHoverCell(cell);
+
+            OnHoverRowChanged(cell);
+        }
+
+        private void OnHoverRowChanged(FastGridCellAddress cell)
+        {
+            if (HoverRowChanged != null)
+                HoverRowChanged(this, new HoverRowChangedEventArgs(cell));
         }
 
         private void HandleMouseMoveTooltip()

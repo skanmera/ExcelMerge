@@ -129,8 +129,8 @@
   <data name="MenuItem_ExternalCommands" xml:space="preserve">
     <value>External Commands</value>
   </data>
-  <data name="MenuItem_DiffExtractionSetting" xml:space="preserve">
-    <value>Diff Extraction Setting</value>
+  <data name="MenuItem_GeneralSetting" xml:space="preserve">
+    <value>General Setting</value>
   </data>
   <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
     <value>Open as Dst File</value>
@@ -153,14 +153,14 @@
   <data name="Message_Reboot" xml:space="preserve">
     <value>Please restart to apply the changes.</value>
   </data>
-  <data name="Title_CommandEditorWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandEditorWindow" xml:space="preserve">
     <value>Edit External Command</value>
   </data>
-  <data name="Title_CommandsWindow" xml:space="preserve">
+  <data name="Title_ExternalCommandsWindow" xml:space="preserve">
     <value>External Commands</value>
   </data>
-  <data name="Title_DiffSettingWindow" xml:space="preserve">
-    <value>Diff Extraction Settings</value>
+  <data name="Title_GeneralSettingWindow" xml:space="preserve">
+    <value>General Settings</value>
   </data>
   <data name="ToolTip_DstFilePath" xml:space="preserve">
     <value>Dst File Path</value>
@@ -226,31 +226,31 @@
     <value>Extract diff with this row as column header.</value>
   </data>
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
-    <value>Set Row Header</value>
+    <value>←Set Row Header</value>
   </data>
   <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
-    <value>Reset Row Header</value>
+    <value>←Reset Row Header</value>
   </data>
   <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
-    <value>Set Column Header</value>
+    <value>↑Set Column Header</value>
   </data>
   <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
-    <value>Reset Column Header</value>
+    <value>↑Reset Column Header</value>
   </data>
   <data name="GroupBox_DisplayFormat" xml:space="preserve">
     <value>Display Format</value>
   </data>
-  <data name="Label_CellHeight" xml:space="preserve">
-    <value>Cell Height</value>
+  <data name="Label_RowlHeight" xml:space="preserve">
+    <value>Row Height</value>
   </data>
-  <data name="Label_CellWidth" xml:space="preserve">
-    <value>Cell Width</value>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>Column Width</value>
   </data>
   <data name="RadioButton_ShowAll" xml:space="preserve">
     <value>All</value>
   </data>
   <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
-    <value>Only Difference</value>
+    <value>Only Diff</value>
   </data>
   <data name="ToolTip_Swap" xml:space="preserve">
     <value>Swap src and dst</value>
@@ -457,5 +457,44 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   </data>
   <data name="Word_StartupSheet" xml:space="preserve">
     <value>Set as Startup Sheet</value>
+  </data>
+  <data name="GroupBox_LogFormat" xml:space="preserve">
+    <value>Log Format</value>
+  </data>
+  <data name="GroupBox_ReadSetting" xml:space="preserve">
+    <value>Read Setting</value>
+  </data>
+  <data name="GroupBox_Style" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="Label_NotifyEqual" xml:space="preserve">
+    <value>Show dialog if no diff</value>
+  </data>
+  <data name="Message_NoDiff" xml:space="preserve">
+    <value>There is no difference.</value>
+  </data>
+  <data name="GroupBox_Behavior" xml:space="preserve">
+    <value>Behavior</value>
+  </data>
+  <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
+    <value>Always expand cell diff</value>
+  </data>
+  <data name="Label_FitRowHeight" xml:space="preserve">
+    <value>Fit Cell Height</value>
+  </data>
+  <data name="Label_MaxRowHeight" xml:space="preserve">
+    <value>Max Row Height</value>
+  </data>
+  <data name="Label_MinRowHeight" xml:space="preserve">
+    <value>Min Row Height</value>
+  </data>
+  <data name="Label_FocusFirstDiff" xml:space="preserve">
+    <value>Focus first diff when extracted</value>
+  </data>
+  <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
+    <value>Copy as CSV</value>
+  </data>
+  <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
+    <value>Copy as TSV</value>
   </data>
 </root>

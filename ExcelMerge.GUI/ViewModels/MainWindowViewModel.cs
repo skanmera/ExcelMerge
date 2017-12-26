@@ -114,12 +114,12 @@ namespace ExcelMerge.GUI.ViewModels
 
         private void OpenExternalCommandsWindow()
         {
-            var commandsWindow = new CommandsWindow()
+            var externalCommandsWindow = new ExternalCommandsWindow()
             {
-                DataContext = new CommandsWindowViewModel()
+                DataContext = new ExternalCommandsWindowViewModel()
             };
 
-            commandsWindow.ShowDialog();
+            externalCommandsWindow.ShowDialog();
         }
 
         private void OpenFileSettingsWindow()

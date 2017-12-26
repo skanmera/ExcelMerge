@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Windows.Media;
-using Prism.Mvvm;
 using YamlDotNet.Serialization;
 using ExcelMerge.GUI.Styles;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class ApplicationSetting : BindableBase, IEquatable<ApplicationSetting>
+    [Serializable]
+    public class ApplicationSetting : Setting<ApplicationSetting>
     {
         public static readonly string Location =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -44,6 +43,27 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref trimLastBlankColumns, value); }
         }
 
+        private bool notifyEqual = true;
+        public bool NotifyEqual
+        {
+            get { return notifyEqual; }
+            set { SetProperty(ref notifyEqual, value); }
+        }
+
+        private bool alwaysExpandCellDiff;
+        public bool AlwaysExpandCellDiff
+        {
+            get { return alwaysExpandCellDiff; }
+            set { SetProperty(ref alwaysExpandCellDiff, value); }
+        }
+
+        private bool focusFirstDiff;
+        public bool FocusFirstDiff
+        {
+            get { return focusFirstDiff; }
+            set { SetProperty(ref focusFirstDiff, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",
@@ -53,7 +73,7 @@ namespace ExcelMerge.GUI.Settings
             get { return alternatingColorStrings; }
             set { SetProperty(ref alternatingColorStrings, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color[] AlternatingColors
         {
             get { return AlternatingColorStrings.Select(c => (Color)ColorConverter.ConvertFromString(c)).ToArray(); }
@@ -65,7 +85,7 @@ namespace ExcelMerge.GUI.Settings
             get { return columnHeaderColorString; }
             set { SetProperty(ref columnHeaderColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color ColumnHeaderColor
         {
             get { return (Color)ColorConverter.ConvertFromString(ColumnHeaderColorString); }
@@ -77,7 +97,7 @@ namespace ExcelMerge.GUI.Settings
             get { return rowHeaderColorString; }
             set { SetProperty(ref rowHeaderColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color RowHeaderColor
         {
             get { return (Color)ColorConverter.ConvertFromString(RowHeaderColorString); }
@@ -89,7 +109,7 @@ namespace ExcelMerge.GUI.Settings
             get { return addedColorString; }
             set { SetProperty(ref addedColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color AddedColor
         {
             get { return (Color)ColorConverter.ConvertFromString(AddedColorString); }
@@ -101,7 +121,7 @@ namespace ExcelMerge.GUI.Settings
             get { return removedColorString; }
             set { SetProperty(ref removedColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color RemovedColor
         {
             get { return (Color)ColorConverter.ConvertFromString(RemovedColorString); }
@@ -113,7 +133,7 @@ namespace ExcelMerge.GUI.Settings
             get { return modifiedColorString; }
             set { SetProperty(ref modifiedColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color ModifiedColor
         {
             get { return (Color)ColorConverter.ConvertFromString(modifiedColorString); }
@@ -132,28 +152,28 @@ namespace ExcelMerge.GUI.Settings
             get { return modifiedRowColorString; }
             set { SetProperty(ref modifiedRowColorString, value); }
         }
-        [YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public Color ModifiedRowColor
         {
             get { return (Color)ColorConverter.ConvertFromString(ModifiedRowColorString); }
         }
 
-        private List<string> recentFileSets = new List<string>();
-        public List<string> RecentFileSets
+        private ObservableCollection<string> recentFileSets = new ObservableCollection<string>();
+        public ObservableCollection<string> RecentFileSets
         {
             get { return recentFileSets; }
             set { SetProperty(ref recentFileSets, value); }
         }
 
-        private List<ExternalCommand> externalCommands = new List<ExternalCommand>();
-        public List<ExternalCommand> ExternalCommands
+        private ExternalCommandCollection externalCommands = new ExternalCommandCollection();
+        public ExternalCommandCollection ExternalCommands
         {
             get { return externalCommands; }
             set { SetProperty(ref externalCommands, value); }
         }
 
-        private List<FileSetting> fileSettings = new List<FileSetting>();
-        public List<FileSetting> FileSettings
+        private FileSettingCollection fileSettings = new FileSettingCollection();
+        public FileSettingCollection FileSettings
         {
             get { return fileSettings; }
             set { SetProperty(ref fileSettings, value); }
@@ -166,11 +186,25 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref culture, value); }
         }
 
-        private int cellWidth = 100;
-        public int CellWidth
+        private int columnWidth = 100;
+        public int ColumnWidth
         {
-            get { return cellWidth; }
-            set { SetProperty(ref cellWidth, value); }
+            get { return columnWidth; }
+            set { SetProperty(ref columnWidth, value); }
+        }
+
+        private int maxRowHeight = 200;
+        public int MaxRowHeight
+        {
+            get { return maxRowHeight; }
+            set { SetProperty(ref maxRowHeight, value); }
+        }
+
+        private bool fitRowHeight = false;
+        public bool FitRowHeight
+        {
+            get { return fitRowHeight; }
+            set { SetProperty(ref fitRowHeight, value); }
         }
 
         private ObservableCollection<string> searchHistory = new ObservableCollection<string>();
@@ -214,16 +248,7 @@ namespace ExcelMerge.GUI.Settings
             if (!File.Exists(Location))
                 using (var fs = File.Create(Location)) { }
 
-            ApplicationSetting setting = null;
-            using (var sr = new StreamReader(Location))
-            {
-                using (var input = new StringReader(sr.ReadToEnd()))
-                {
-                    var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-                    setting = deserializer.Deserialize<ApplicationSetting>(input);
-                }
-            }
-
+            ApplicationSetting setting = Deserialize(Location);
             if (setting == null)
             {
                 setting = new ApplicationSetting();
@@ -235,165 +260,123 @@ namespace ExcelMerge.GUI.Settings
 
         public void Save()
         {
-            Serialize();
+            Serialize(this, Location);
         }
 
-        public bool EnsureCulture()
+        public bool EnsureCulture(bool isChanged = false)
         {
             if (string.IsNullOrEmpty(Culture))
             {
                 Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-                return true;
+                isChanged |= true;
             }
 
-            return false;
+            return isChanged;
         }
 
-        public bool Ensure()
+        public override bool Ensure(bool isChanged = false)
         {
-            bool changed = EnsureCulture();
+            isChanged = EnsureCulture(isChanged);
 
             if (AlternatingColorStrings == null || !AlternatingColorStrings.Any())
             {
                 AlternatingColorStrings = new ObservableCollection<string> { "#FFFFFF" };
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(ColumnHeaderColorString))
             {
                 ColumnHeaderColorString = EMColor.LightBlue.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(RowHeaderColorString))
             {
                 RowHeaderColorString = EMColor.LightBlue.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(AddedColorString))
             {
                 AddedColorString = EMColor.Orange.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(RemovedColorString))
             {
                 RemovedColorString = EMColor.LightGray.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(ModifiedColorString))
             {
                 ModifiedColorString = EMColor.Orange.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(ModifiedRowColorString))
             {
                 ModifiedRowColorString = EMColor.PaleOrange.ToString();
-                changed |= true;
+                isChanged |= true;
             }
 
             foreach (var ec in ExternalCommands)
             {
-                changed |= ec.Ensure();
+                isChanged |= ec.Ensure();
             }
 
             foreach (var fs in FileSettings)
             {
-                changed |= fs.Ensure();
+                isChanged |= fs.Ensure();
             }
 
             if (string.IsNullOrEmpty(FontName))
             {
                 FontName = "Arial";
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(LogFormat))
             {
                 LogFormat = Properties.Resources.DefaultLogFormat;
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(AddedRowLogFormat))
             {
                 AddedRowLogFormat = Properties.Resources.DefaultLogFormatAddedRow;
-                changed |= true;
+                isChanged |= true;
             }
 
             if (string.IsNullOrEmpty(RemovedRowLogFormat))
             {
                 RemovedRowLogFormat = Properties.Resources.DefaultLogFormatRemovedRow;
-                changed |= true;
+                isChanged |= true;
             }
 
-            return changed;
+            return isChanged;
         }
 
-        private void Serialize()
+        private static void Serialize(ApplicationSetting setting, string path)
         {
             var serializer = new SerializerBuilder().EmitDefaults().Build();
-            var yml = serializer.Serialize(this);
-            using (var sr = new StreamWriter(Location))
+            var yml = serializer.Serialize(setting);
+            using (var sr = new StreamWriter(path))
             {
                 sr.Write(yml);
             }
         }
 
-        public ApplicationSetting Clone()
+        private static ApplicationSetting Deserialize(string path)
         {
-            var clone = new ApplicationSetting();
-            clone.SkipFirstBlankRows = SkipFirstBlankRows;
-            clone.SkipFirstBlankColumns = SkipFirstBlankColumns;
-            clone.TrimLastBlankRows = TrimLastBlankRows;
-            clone.TrimLastBlankColumns = TrimLastBlankColumns;
-            clone.ExternalCommands = ExternalCommands.Select(c => c.Clone()).ToList();
-            clone.FileSettings = FileSettings.Select(f => f.Clone()).ToList();
-            clone.RecentFileSets = RecentFileSets.ToList();
-            clone.CellWidth = CellWidth;
-            clone.AlternatingColorStrings = new ObservableCollection<string>(AlternatingColorStrings);
-            clone.ColumnHeaderColorString = ColumnHeaderColorString;
-            clone.RowHeaderColorString = RowHeaderColorString;
-            clone.AddedColorString = AddedColorString;
-            clone.RemovedColorString = RemovedColorString;
-            clone.modifiedColorString = ModifiedColorString;
-            clone.ModifiedRowColorString = ModifiedRowColorString;
-            clone.ColorModifiedRow = ColorModifiedRow;
-            clone.SearchHistory = new ObservableCollection<string>(SearchHistory);
-            clone.FontName = FontName;
-            clone.LogFormat = LogFormat;
-            clone.AddedRowLogFormat = AddedRowLogFormat;
-            clone.RemovedRowLogFormat = RemovedRowLogFormat;
-
-            return clone;
-        }
-
-        public bool Equals(ApplicationSetting other)
-        {
-            return
-                SkipFirstBlankRows == other.skipFirstBlankRows &&
-                SkipFirstBlankColumns == other.SkipFirstBlankColumns &&
-                TrimLastBlankRows == other.TrimLastBlankRows &&
-                TrimLastBlankColumns == other.TrimLastBlankColumns &&
-                ExternalCommands.SequenceEqual(other.ExternalCommands) &&
-                FileSettings.SequenceEqual(other.FileSettings) &&
-                RecentFileSets.SequenceEqual(other.RecentFileSets) &&
-                CellWidth == other.cellWidth &&
-                AlternatingColorStrings.SequenceEqual(other.AlternatingColorStrings) &&
-                ColumnHeaderColorString.Equals(other.ColumnHeaderColorString) &&
-                RowHeaderColorString.Equals(other.RowHeaderColorString) &&
-                AddedColorString.Equals(other.AddedColorString) &&
-                RemovedColorString.Equals(other.RemovedColorString) &&
-                ModifiedColorString.Equals(other.ModifiedColorString) &&
-                ModifiedRowColorString.Equals(other.ModifiedRowColorString) &&
-                ColorModifiedRow.Equals(other.ColorModifiedRow) &&
-                SearchHistory.Equals(other.SearchHistory) &&
-                FontName.Equals(other.FontName) &&
-                LogFormat.Equals(other.LogFormat) &&
-                AddedRowLogFormat.Equals(other.AddedRowLogFormat) &&
-                RemovedRowLogFormat.Equals(other.RemovedRowLogFormat);
+            using (var sr = new StreamReader(path))
+            {
+                using (var input = new StringReader(sr.ReadToEnd()))
+                {
+                    var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+                    return deserializer.Deserialize<ApplicationSetting>(input);
+                }
+            }
         }
     }
 }

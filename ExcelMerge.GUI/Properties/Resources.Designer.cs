@@ -97,6 +97,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Copy as CSV に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_CopyAsCsv {
+            get {
+                return ResourceManager.GetString("ContextMenu_CopyAsCsv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Copy as TSV に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_CopyAsTsv {
+            get {
+                return ResourceManager.GetString("ContextMenu_CopyAsTsv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Extract diff with this row as column header. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_DiffAsHeader {
@@ -106,7 +124,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Reset Column Header に類似しているローカライズされた文字列を検索します。
+        ///   ↑Reset Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_ResetColumnHeader {
             get {
@@ -115,7 +133,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Reset Row Header に類似しているローカライズされた文字列を検索します。
+        ///   ←Reset Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_ResetRowHeader {
             get {
@@ -124,7 +142,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Set Column Header に類似しているローカライズされた文字列を検索します。
+        ///   ↑Set Column Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_SetColumnHeader {
             get {
@@ -133,7 +151,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Set Row Header に類似しているローカライズされた文字列を検索します。
+        ///   ←Set Row Header に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_SetRowHeader {
             get {
@@ -187,11 +205,47 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Behavior に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_Behavior {
+            get {
+                return ResourceManager.GetString("GroupBox_Behavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Display Format に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GroupBox_DisplayFormat {
             get {
                 return ResourceManager.GetString("GroupBox_DisplayFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Log Format に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_LogFormat {
+            get {
+                return ResourceManager.GetString("GroupBox_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Read Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_ReadSetting {
+            get {
+                return ResourceManager.GetString("GroupBox_ReadSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Style に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GroupBox_Style {
+            get {
+                return ResourceManager.GetString("GroupBox_Style", resourceCulture);
             }
         }
         
@@ -223,20 +277,11 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Cell Height に類似しているローカライズされた文字列を検索します。
+        ///   Always expand cell diff に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Label_CellHeight {
+        public static string Label_AlwaysExpandCellDiff {
             get {
-                return ResourceManager.GetString("Label_CellHeight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cell Width に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Label_CellWidth {
-            get {
-                return ResourceManager.GetString("Label_CellWidth", resourceCulture);
+                return ResourceManager.GetString("Label_AlwaysExpandCellDiff", resourceCulture);
             }
         }
         
@@ -268,6 +313,33 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Column Width に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_ColumnWidth {
+            get {
+                return ResourceManager.GetString("Label_ColumnWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fit Cell Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_FitRowHeight {
+            get {
+                return ResourceManager.GetString("Label_FitRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Focus first diff when extracted に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_FocusFirstDiff {
+            get {
+                return ResourceManager.GetString("Label_FocusFirstDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ignore File Setting に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_IgnoreFileSetting {
@@ -282,6 +354,24 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_LogFormat {
             get {
                 return ResourceManager.GetString("Label_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Max Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MaxRowHeight {
+            get {
+                return ResourceManager.GetString("Label_MaxRowHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Min Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MinRowHeight {
+            get {
+                return ResourceManager.GetString("Label_MinRowHeight", resourceCulture);
             }
         }
         
@@ -318,6 +408,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_ModifiedRows {
             get {
                 return ResourceManager.GetString("Label_ModifiedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Show dialog if no diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_NotifyEqual {
+            get {
+                return ResourceManager.GetString("Label_NotifyEqual", resourceCulture);
             }
         }
         
@@ -376,6 +475,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Row Height に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_RowlHeight {
+            get {
+                return ResourceManager.GetString("Label_RowlHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Skip first blank columns に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_SkipFirstBlankColumns {
@@ -421,15 +529,6 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Diff Extraction Setting に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string MenuItem_DiffExtractionSetting {
-            get {
-                return ResourceManager.GetString("MenuItem_DiffExtractionSetting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Execute external command に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuItem_ExeExternalCmd {
@@ -453,6 +552,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string MenuItem_FileSettings {
             get {
                 return ResourceManager.GetString("MenuItem_FileSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   General Setting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuItem_GeneralSetting {
+            get {
+                return ResourceManager.GetString("MenuItem_GeneralSetting", resourceCulture);
             }
         }
         
@@ -516,6 +624,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string MenuItem_View {
             get {
                 return ResourceManager.GetString("MenuItem_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is no difference. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Message_NoDiff {
+            get {
+                return ResourceManager.GetString("Message_NoDiff", resourceCulture);
             }
         }
         
@@ -585,7 +702,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Only Difference に類似しているローカライズされた文字列を検索します。
+        ///   Only Diff に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string RadioButton_ShowOnlyDiff {
             get {
@@ -686,27 +803,18 @@ namespace ExcelMerge.GUI.Properties {
         /// <summary>
         ///   Edit External Command に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Title_CommandEditorWindow {
+        public static string Title_ExternalCommandEditorWindow {
             get {
-                return ResourceManager.GetString("Title_CommandEditorWindow", resourceCulture);
+                return ResourceManager.GetString("Title_ExternalCommandEditorWindow", resourceCulture);
             }
         }
         
         /// <summary>
         ///   External Commands に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Title_CommandsWindow {
+        public static string Title_ExternalCommandsWindow {
             get {
-                return ResourceManager.GetString("Title_CommandsWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Diff Extraction Settings に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Title_DiffSettingWindow {
-            get {
-                return ResourceManager.GetString("Title_DiffSettingWindow", resourceCulture);
+                return ResourceManager.GetString("Title_ExternalCommandsWindow", resourceCulture);
             }
         }
         
@@ -725,6 +833,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Title_FileSettingsWindow {
             get {
                 return ResourceManager.GetString("Title_FileSettingsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   General Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Title_GeneralSettingWindow {
+            get {
+                return ResourceManager.GetString("Title_GeneralSettingWindow", resourceCulture);
             }
         }
         

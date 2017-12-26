@@ -2,9 +2,9 @@
 
 namespace ExcelMerge.GUI.Views
 {
-    public partial class CommandEditorWindow : Window
+    public partial class ExternalCommandEditorWindow : Window
     {
-        public CommandEditorWindow()
+        public ExternalCommandEditorWindow()
         {
             InitializeComponent();
         }

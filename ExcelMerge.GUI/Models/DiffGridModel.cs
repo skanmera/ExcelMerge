@@ -53,23 +53,19 @@ namespace ExcelMerge.GUI.Models
         }
 
         public int ColumnHeaderIndex { get; private set; }
-        public int RowHeaderIndex { get; private set; }
+        public int RowHeaderIndex { get; private set; } = -1;
         public DiffType DiffType { get; private set; }
         public ExcelSheetDiff SheetDiff { get; private set; }
-        public DiffGridModelConfig Config { get; private set; }
 
-        public DiffGridModel(DiffType type, ExcelSheetDiff sheetDiff, DiffGridModelConfig config) : base()
+        public DiffGridModel(ExcelSheetDiff sheetDiff, DiffType type) : base()
         {
-            SheetDiff = sheetDiff;
-            Config = config;
-            ColumnHeaderIndex = Config.ColumnHeaderIndex;
-            RowHeaderIndex = Config.RowHeaderIndex;
             DiffType = type;
+            SheetDiff = sheetDiff;
 
             columnCount = SheetDiff.Rows.Max(r => r.Value.Cells.Count);
             rowCount = SheetDiff.Rows.Count();
-
-            App.Instance.OnSettingUpdated += () => { NotifyRefresh(); };
+            
+            App.Instance.OnSettingUpdated += () => { InvalidateAll(); };
         }
 
         public override string GetColumnHeaderText(int column)

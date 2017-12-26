@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveSeries.cs" />
+    <Compile Include="ColumnWidthChangedEventArgs.cs" />
     <Compile Include="DataTableGridModel.cs" />
     <Compile Include="ExplicitColumnDefinition.cs" />
     <Compile Include="FastGridCellAddress.cs" />
@@ -59,9 +60,9 @@
     <Compile Include="FastGridControl_Invalidation.cs" />
     <Compile Include="FastGridControl_Render.cs" />
     <Compile Include="FastGridControl_Selection.cs" />
-    <Compile Include="FastGridControl_StyleProps.cs" />
     <Compile Include="FastGridCellImpl.cs" />
     <Compile Include="FastGridModelBase.cs" />
+    <Compile Include="HoverRowChangedEventArgs.cs" />
     <Compile Include="IFastGridCell.cs" />
     <Compile Include="IFastGridCellBlock.cs" />
     <Compile Include="IFastGridModel.cs" />

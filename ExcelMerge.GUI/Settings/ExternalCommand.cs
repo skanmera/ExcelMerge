@@ -1,40 +1,42 @@
 ﻿using System;
-using Prism.Mvvm;
+using System.ComponentModel;
+using YamlDotNet.Serialization;
 
 namespace ExcelMerge.GUI.Settings
 {
-    public class ExternalCommand : BindableBase, IEquatable<ExternalCommand>
+    [Serializable]
+    public class ExternalCommand : Setting<ExternalCommand>
     {
         private string name = string.Empty;
         public string Name
         {
             get { return name; }
-            set { SetProperty(ref name, value); Update(); }
+            set { SetProperty(ref name, value); }
         }
 
         private string command = string.Empty;
         public string Command
         {
             get { return command; }
-            set { SetProperty(ref command, value); Update(); }
+            set { SetProperty(ref command, value); }
         }
 
         private string args = string.Empty;
         public string Args
         {
             get { return args; }
-            set { SetProperty(ref args, value); Update(); }
+            set { SetProperty(ref args, value); }
         }
 
-        [YamlDotNet.Serialization.YamlIgnore]
+        [YamlIgnore, IgnoreEqual]
         public bool CanExecute
         {
             get { return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Convert(Command)); }
         }
 
         private bool isValid;
-        [YamlDotNet.Serialization.YamlIgnore]
-        public bool IsValid 
+        [YamlIgnore, IgnoreEqual]
+        public bool IsValid
         {
             get { return isValid; }
             private set { SetProperty(ref isValid, value); }
@@ -58,36 +60,12 @@ namespace ExcelMerge.GUI.Settings
             return Name;
         }
 
-        public override bool Equals(object obj)
+        protected override void OnPropertyChanged<TValue>(PropertyChangedEventArgs<TValue> args)
         {
-            var other = obj as ExternalCommand;
-            if (other == null)
-                return false;
+            base.OnPropertyChanged(args);
 
-            return Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            var hash = 17;
-            hash = hash * 23 + Name.GetHashCode();
-            hash = hash * 23 + Command.GetHashCode();
-            hash = hash * 23 + Args.GetHashCode();
-
-            return hash;
-        }
-
-        public bool Equals(ExternalCommand other)
-        {
-            if (other == null)
-                return false;
-
-            return Name.Equals(other.Name) && Command.Equals(other.Command) && Args.Equals(other.Args);
-        }
-
-        private void Update()
-        {
-            IsValid = !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Command);
+            if (args.PropertyName == nameof(Name) || args.PropertyName == nameof(Command))
+                IsValid = !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Command);
         }
 
         public void Execute(bool wait)
@@ -101,16 +79,6 @@ namespace ExcelMerge.GUI.Settings
         private static string Convert(string str)
         {
             return str.Replace("${SRC}", EMEnvironmentValue.Get("SRC")).Replace("${DST}", EMEnvironmentValue.Get("DST"));
-        }
-
-        public ExternalCommand Clone()
-        {
-            return new ExternalCommand(Name, Command, Args);
-        }
-
-        public bool Ensure()
-        {
-            return false;
         }
     }
 }

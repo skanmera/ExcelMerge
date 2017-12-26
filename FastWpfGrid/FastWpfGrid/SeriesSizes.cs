@@ -76,12 +76,17 @@ namespace FastWpfGrid
         {
             _scrollItems.Clear();
             //_itemByIndex.Clear();
-            _sizeOverridesByModelIndex.Clear();
+            //_sizeOverridesByModelIndex.Clear();
             _positions.Clear();
             _scrollIndexes.Clear();
             _frozenItems.Clear();
             _hiddenAndFrozenModelIndexes = null;
             _frozenModelIndexes = null;
+        }
+
+        public void ClearSizeOverrides()
+        {
+            _sizeOverridesByModelIndex.Clear();
         }
 
         public void PutSizeOverride(int modelIndex, int size)
@@ -146,9 +151,10 @@ namespace FastWpfGrid
             int itemOrder = _positions.BinarySearch(position);
             if (itemOrder >= 0) return itemOrder;
             itemOrder = ~itemOrder; // bitwise complement - index is next larger index
-            if (itemOrder == 0) return position/DefaultSize;
+            if (DefaultSize <= 0) return 0;
+            if (itemOrder == 0) return position / DefaultSize;
             if (position <= _scrollItems[itemOrder - 1].EndPosition) return _scrollItems[itemOrder - 1].ScrollIndex;
-            return (position - _scrollItems[itemOrder - 1].Position)/DefaultSize + _scrollItems[itemOrder - 1].ScrollIndex;
+            return (position - _scrollItems[itemOrder - 1].Position) / DefaultSize + _scrollItems[itemOrder - 1].ScrollIndex;
         }
 
         public int GetFrozenIndexOnPosition(int position)
@@ -348,14 +354,16 @@ namespace FastWpfGrid
             //return index;
         }
 
-        public void Resize(int realIndex, int newSize)
+        public bool Resize(int realIndex, int newSize)
         {
-            if (realIndex < 0) return;
+            if (realIndex < 0) return false;
             int modelIndex = RealToModel(realIndex);
-            if (modelIndex < 0) return;
+            if (modelIndex < 0) return false;
             // can be done more effectively
             _sizeOverridesByModelIndex[modelIndex] = newSize;
             BuildIndex();
+
+            return true;
         }
 
         public void SetExtraordinaryIndexes(HashSet<int> hidden, HashSet<int> frozen)
