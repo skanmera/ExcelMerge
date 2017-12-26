@@ -224,6 +224,8 @@ namespace ExcelMerge.GUI.Views
 
                 var args = new DiffViewEventArgs<FastGridControl>(grid, e.Container);
                 DataGridEventDispatcher.Instance.DispatchModelUpdateEvent(args);
+
+                grid.FirstVisibleRowScrollIndex = 0;
             }
 
             SyncRowHeight(e.Container);
