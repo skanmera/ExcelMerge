@@ -107,6 +107,11 @@ namespace ExcelMerge.GUI.Views
         {
             Dispatch((l) => l.OnColumnWidthChanged(e, ce), e);
         }
+
+        public void DispatchHoverRowChangeEvent(DiffViewEventArgs<FastGridControl> e, HoverRowChangedEventArgs he)
+        {
+            Dispatch((l) => l.OnHoverRowChanged(e, he), e);
+        }
     }
 
     class LocationGridEventDispatcher : DiffViewEventDispatcher<Grid, ILocationGridEventListener>

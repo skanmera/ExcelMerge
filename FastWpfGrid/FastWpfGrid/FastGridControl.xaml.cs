@@ -623,15 +623,17 @@ namespace FastWpfGrid
         }
 
 
-        private void SetHoverRow(int? row)
+        private bool SetHoverRow(int? row)
         {
-            if (row == _mouseOverRow) return;
+            if (row == _mouseOverRow) return false;
             using (var ctx = CreateInvalidationContext())
             {
                 if (_mouseOverRow.HasValue) InvalidateRow(_mouseOverRow.Value);
                 _mouseOverRow = row;
                 if (_mouseOverRow.HasValue) InvalidateRow(_mouseOverRow.Value);
             }
+
+            return true;
         }
 
         private void SetHoverRowHeader(int? row)

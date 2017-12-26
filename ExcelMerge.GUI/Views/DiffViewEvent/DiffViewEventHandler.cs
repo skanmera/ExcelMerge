@@ -39,6 +39,8 @@ namespace ExcelMerge.GUI.Views
                     => DataGridEventDispatcher.Instance.DispatchScrollEvnet(a);
                 grid.ColumnWidthChanged += (sender, args)
                     => DataGridEventDispatcher.Instance.DispatchColumnWidthChangeEvent(a, args);
+                grid.HoverRowChanged += (sender, args)
+                    => DataGridEventDispatcher.Instance.DispatchHoverRowChangeEvent(a, args);
             }
         }
 
@@ -235,6 +237,17 @@ namespace ExcelMerge.GUI.Views
                     continue;
 
                 grid.ResizeColumn(ce.NewWidth, ce.Column);
+            }
+        }
+
+        public void OnHoverRowChanged(DiffViewEventArgs<FastGridControl> e, HoverRowChangedEventArgs he)
+        {
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                if (e.Sender == grid)
+                    continue;
+
+                grid.SetHoverRow(he.Cell);
             }
         }
 

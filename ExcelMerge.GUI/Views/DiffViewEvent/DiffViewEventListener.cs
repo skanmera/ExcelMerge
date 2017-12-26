@@ -25,6 +25,7 @@ namespace ExcelMerge.GUI.Views
         void OnRowHeaderReset(DiffViewEventArgs<FastGridControl> e);
         void OnDiffDisplayFormatChanged(DiffViewEventArgs<FastGridControl> e, bool onlyDiff);
         void OnColumnWidthChanged(DiffViewEventArgs<FastGridControl> e, ColumnWidthChangedEventArgs ce);
+        void OnHoverRowChanged(DiffViewEventArgs<FastGridControl> e, HoverRowChangedEventArgs he);
     }
 
     interface ILocationGridEventListener

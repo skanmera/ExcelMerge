@@ -14,6 +14,7 @@ namespace FastWpfGrid
     partial class FastGridControl
     {
         public event EventHandler<ColumnWidthChangedEventArgs> ColumnWidthChanged;
+        public event EventHandler<HoverRowChangedEventArgs> HoverRowChanged;
 
         public static readonly object ToggleTransposedCommand = new object();
         public static readonly object ToggleAllowFlexibleRowsCommand = new object();
@@ -651,10 +652,12 @@ namespace FastWpfGrid
                     SetSelectedRectangle(_dragStartCell, cell);
                 }
 
-                SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null);
-                SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
-                SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
-                SetHoverCell(cell);
+                //SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null);
+                //SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
+                //SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
+                //SetHoverCell(cell);
+
+                SetHoverRow(cell);
 
                 var currentRegion = CurrentCellActiveRegions.FirstOrDefault(x => x.Rect.Contains(pt));
                 if (currentRegion != CurrentHoverRegion)
@@ -664,6 +667,24 @@ namespace FastWpfGrid
             }
 
             HandleMouseMoveTooltip();
+        }
+
+        public void SetHoverRow(FastGridCellAddress cell)
+        {
+            if (!SetHoverRow(cell.IsCell ? cell.Row.Value : (int?)null))
+                return;
+
+            SetHoverRowHeader(cell.IsRowHeader ? cell.Row.Value : (int?)null);
+            SetHoverColumnHeader(cell.IsColumnHeader ? cell.Column.Value : (int?)null);
+            SetHoverCell(cell);
+
+            OnHoverRowChanged(cell);
+        }
+
+        private void OnHoverRowChanged(FastGridCellAddress cell)
+        {
+            if (HoverRowChanged != null)
+                HoverRowChanged(this, new HoverRowChangedEventArgs(cell));
         }
 
         private void HandleMouseMoveTooltip()
