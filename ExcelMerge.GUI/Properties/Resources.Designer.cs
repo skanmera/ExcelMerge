@@ -97,6 +97,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Copy as CSV に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_CopyAsCsv {
+            get {
+                return ResourceManager.GetString("ContextMenu_CopyAsCsv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Copy as TSV に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ContextMenu_CopyAsTsv {
+            get {
+                return ResourceManager.GetString("ContextMenu_CopyAsTsv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Extract diff with this row as column header. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ContextMenu_DiffAsHeader {

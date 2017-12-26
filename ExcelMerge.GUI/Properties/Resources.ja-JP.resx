@@ -491,4 +491,10 @@
   <data name="Label_FocusFirstDiff" xml:space="preserve">
     <value>差分抽出後に最初の差分に移動する</value>
   </data>
+  <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
+    <value>CSV形式でコピー</value>
+  </data>
+  <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
+    <value>TSV形式でコピー</value>
+  </data>
 </root>

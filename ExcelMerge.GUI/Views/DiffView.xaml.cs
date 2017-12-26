@@ -966,7 +966,7 @@ namespace ExcelMerge.GUI.Views
                     {
                         if (Keyboard.IsKeyDown(Key.LeftCtrl))
                         {
-                            CopyToClipboardSelectedCells(Keyboard.IsKeyDown(Key.LeftShift) ? "," : "\t");
+                            CopyToClipboardSelectedCells(Keyboard.IsKeyDown(Key.RightShift) || Keyboard.IsKeyDown(Key.LeftShift) ? "," : "\t");
                             e.Handled = true;
                         }
                     }
@@ -1082,6 +1082,16 @@ namespace ExcelMerge.GUI.Views
         private string RemoveMultiLine(string log)
         {
             return log.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
+        }
+
+        private void CopyAsTsv_Click(object sender, RoutedEventArgs e)
+        {
+            CopyToClipboardSelectedCells("\t");
+        }
+
+        private void CopyAsCsv_Click(object sender, RoutedEventArgs e)
+        {
+            CopyToClipboardSelectedCells(",");
         }
     }
 }

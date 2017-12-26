@@ -491,4 +491,10 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Label_FocusFirstDiff" xml:space="preserve">
     <value>Focus first diff when extracted</value>
   </data>
+  <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
+    <value>Copy as CSV</value>
+  </data>
+  <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
+    <value>Copy as TSV</value>
+  </data>
 </root>

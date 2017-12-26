@@ -307,6 +307,8 @@
           <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
           <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderSrc_Click" />
           <MenuItem Header="{x:Static props:Resources.ContextMenu_BuildCellBaseLog}" Click="BuildCellBaseLog_Click"/>
+          <MenuItem Header="{x:Static props:Resources.ContextMenu_CopyAsTsv}" Click="CopyAsTsv_Click" InputGestureText="Ctrl + c"/>
+          <MenuItem Header="{x:Static props:Resources.ContextMenu_CopyAsCsv}" Click="CopyAsCsv_Click" InputGestureText="Ctrl + C"/>
         </ContextMenu>
       </fg:FastGridControl.ContextMenu>
 
@@ -346,6 +348,8 @@
           <MenuItem Header="{x:Static props:Resources.ContextMenu_ResetColumnHeader}" Click="ResetColumnHeader_Click" />
           <MenuItem Header="{x:Static props:Resources.ContextMenu_DiffAsHeader}" Click="DiffByHeaderDst_Click" />
           <MenuItem Header="{x:Static props:Resources.ContextMenu_BuildCellBaseLog}" Click="BuildCellBaseLog_Click"/>
+          <MenuItem Header="{x:Static props:Resources.ContextMenu_CopyAsTsv}" Click="CopyAsTsv_Click" InputGestureText="Ctrl + c"/>
+          <MenuItem Header="{x:Static props:Resources.ContextMenu_CopyAsCsv}" Click="CopyAsCsv_Click" InputGestureText="Ctrl + C"/>
           <!--<MenuItem Header="{x:Static props:Resources.ContextMenu_BuildRowBaseLog}" Click="BuildRowBaseLog_Click"/>
                     <MenuItem Header="{x:Static props:Resources.ContextMenu_BuildColumnBaseLog}" Click="BuildColumnBaseLog_Click"/>-->
         </ContextMenu>
