@@ -351,6 +351,7 @@ namespace FastWpfGrid
 
             UpdateSeriesCounts();
             RecalculateHeaderSize();
+            RecalculateDefaultCellSize();
             FixCurrentCellAndSetSelectionToCurrentCell();
 
             RecountColumnWidths();
