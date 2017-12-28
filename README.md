@@ -25,6 +25,7 @@ It can also be used as a diff tool for Git or Mercurial.
 - .xls
 - .xlsx
 - .csv
+- .tsv
 
 ## Installation
 
