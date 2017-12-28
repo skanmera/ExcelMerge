@@ -15,6 +15,7 @@ namespace FastWpfGrid
     {
         public event EventHandler<ColumnWidthChangedEventArgs> ColumnWidthChanged;
         public event EventHandler<HoverRowChangedEventArgs> HoverRowChanged;
+        public event EventHandler<FontSizeChangedEventArgs> FontSizeChanged;
 
         public static readonly object ToggleTransposedCommand = new object();
         public static readonly object ToggleAllowFlexibleRowsCommand = new object();
@@ -467,23 +468,14 @@ namespace FastWpfGrid
                 if (e.Delta > 0 && CellFontSize < 20) CellFontSize++;
                 if (e.Delta < 0 && CellFontSize > 6) CellFontSize--;
 
-                RecountColumnWidths();
-                RecountRowHeights();
-                AdjustScrollbars();
-                SetScrollbarMargin();
-                FixScrollPosition();
-                InvalidateAll();
-                foreach (var grids in syncScrollGroups)
-                {
-                    if (grids.Value.Contains(this))
-                    {
-                        foreach (var g in grids.Value)
-                        {
-                            if (g != this)
-                                g.OnFontSizeChanged(sender, e);
-                        }
-                    }
-                }
+                //RecountColumnWidths();
+                //RecountRowHeights();
+                //AdjustScrollbars();
+                //SetScrollbarMargin();
+                //FixScrollPosition();
+                //InvalidateAll();
+
+                OnFontSizeChanged(CellFontSize);
             }
             else
             {
@@ -493,17 +485,10 @@ namespace FastWpfGrid
             }
         }
 
-        private void OnFontSizeChanged(object sender, MouseWheelEventArgs e)
+        private void OnFontSizeChanged(int newSize)
         {
-            if (e.Delta > 0 && CellFontSize < 20) CellFontSize++;
-            if (e.Delta < 0 && CellFontSize > 6) CellFontSize--;
-
-            RecountColumnWidths();
-            RecountRowHeights();
-            AdjustScrollbars();
-            SetScrollbarMargin();
-            FixScrollPosition();
-            InvalidateAll();
+            if (FontSizeChanged != null)
+                FontSizeChanged(this, new FontSizeChangedEventArgs(newSize));
         }
 
         private static bool ControlPressed

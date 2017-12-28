@@ -112,6 +112,11 @@ namespace ExcelMerge.GUI.Views
         {
             Dispatch((l) => l.OnHoverRowChanged(e, he), e);
         }
+
+        public void DispatchFontSizeChangeEvent(DiffViewEventArgs<FastGridControl> e, FontSizeChangedEventArgs fe)
+        {
+            Dispatch((l) => l.OnFontSizeChanged(e, fe), e);
+        }
     }
 
     class LocationGridEventDispatcher : DiffViewEventDispatcher<Grid, ILocationGridEventListener>
