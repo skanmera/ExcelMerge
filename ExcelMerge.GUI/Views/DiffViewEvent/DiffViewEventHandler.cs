@@ -270,6 +270,8 @@ namespace ExcelMerge.GUI.Views
 
                 grid.CellFontSize = fe.NewSize;
             }
+
+            SyncRowHeight(e.Container);
         }
 
         #endregion
