@@ -3856,7 +3856,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FastWpfGrid, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FastWpfGrid, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_DD1498699C36C412ADB56C50EB06B85E"
@@ -4198,15 +4198,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExcelMerge"
-        "ProductCode" = "8:{F4382BDE-EDB8-478B-BBE6-65D5679FFD72}"
-        "PackageCode" = "8:{7FD87431-5494-466B-9AF7-C02DB5386F4A}"
+        "ProductCode" = "8:{A1EE143F-A3F9-4950-A544-505441D2DE79}"
+        "PackageCode" = "8:{CE0B485C-958B-4B6C-A540-17B93FB082B2}"
         "UpgradeCode" = "8:{BCE73A99-B5CE-4C2E-A955-2E0922068237}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.3.1"
+        "ProductVersion" = "8:1.3.2"
         "Manufacturer" = "8:skanmera"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
