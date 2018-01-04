@@ -293,6 +293,7 @@
                         SelectedCellsChanged="DataGrid_SelectedCellsChanged"
                         AllowDrop="True"
                         Tag="0"
+                        RowHeightReserve="0"
                         >
       <i:Interaction.Behaviors>
         <behavior:DragAcceptBehavior 
@@ -334,6 +335,7 @@
                         SelectedCellsChanged="DataGrid_SelectedCellsChanged"
                         AllowDrop="True"
                         Tag="1"
+                        RowHeightReserve="0"
                         >
       <i:Interaction.Behaviors>
         <behavior:DragAcceptBehavior 
