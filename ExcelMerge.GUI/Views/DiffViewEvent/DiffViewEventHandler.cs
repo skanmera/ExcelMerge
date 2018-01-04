@@ -41,6 +41,8 @@ namespace ExcelMerge.GUI.Views
                     => DataGridEventDispatcher.Instance.DispatchColumnWidthChangeEvent(a, args);
                 grid.HoverRowChanged += (sender, args)
                     => DataGridEventDispatcher.Instance.DispatchHoverRowChangeEvent(a, args);
+                grid.FontSizeChanged += (sender, args)
+                    => DataGridEventDispatcher.Instance.DispatchFontSizeChangeEvent(a, args);
             }
         }
 
@@ -257,6 +259,19 @@ namespace ExcelMerge.GUI.Views
 
                 grid.SetHoverRow(he.Cell);
             }
+        }
+
+        public void OnFontSizeChanged(DiffViewEventArgs<FastGridControl> e, FontSizeChangedEventArgs fe)
+        {
+            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            {
+                if (e.Sender == grid)
+                    continue;
+
+                grid.CellFontSize = fe.NewSize;
+            }
+
+            SyncRowHeight(e.Container);
         }
 
         #endregion

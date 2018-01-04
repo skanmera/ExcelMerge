@@ -62,6 +62,7 @@
     <Compile Include="FastGridControl_Selection.cs" />
     <Compile Include="FastGridCellImpl.cs" />
     <Compile Include="FastGridModelBase.cs" />
+    <Compile Include="FontSizeChangedEventArgs.cs" />
     <Compile Include="HoverRowChangedEventArgs.cs" />
     <Compile Include="IFastGridCell.cs" />
     <Compile Include="IFastGridCellBlock.cs" />

@@ -572,7 +572,12 @@ namespace FastWpfGrid
         private void OnCellFontSizeChanged()
         {
             RecalculateDefaultCellSize();
-            RenderChanged();
+            RecountColumnWidths();
+            RecountRowHeights();
+            AdjustScrollbars();
+            SetScrollbarMargin();
+            FixScrollPosition();
+            InvalidateAll();
         }
 
         private void OnActiveRegionHoverFillColorChanged() { }
