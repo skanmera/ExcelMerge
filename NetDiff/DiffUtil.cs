@@ -124,6 +124,8 @@ namespace NetDiff
 
                     if (dstIndex < 0)
                     {
+                        currentIndex = srcIndex;
+
                         while (currentIndex < max / 2 - 1)
                         {
                             if (targetArray[currentIndex + 1] == null)
