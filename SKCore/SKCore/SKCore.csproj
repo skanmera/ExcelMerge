@@ -45,6 +45,7 @@
     <Compile Include="Collection\MakePairs.cs" />
     <Compile Include="Collection\Times.cs" />
     <Compile Include="Collection\SplitBy.cs" />
+    <Compile Include="IO\PathUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\Serialization\SerializationUtility.cs" />
   </ItemGroup>
