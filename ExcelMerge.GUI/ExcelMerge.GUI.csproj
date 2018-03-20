@@ -67,14 +67,6 @@
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SKCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SKCore.1.0.1\lib\net452\SKCore.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SKCore.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SKCore.Wpf.1.0.2\lib\net452\SKCore.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -292,6 +284,14 @@
     <ProjectReference Include="..\NetDiff\NetDiff\NetDiff.csproj">
       <Project>{00a6267d-dde3-42cc-9c99-9166c334053e}</Project>
       <Name>NetDiff</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SKCore\SKCore.Wpf\SKCore.Wpf.csproj">
+      <Project>{5314f788-9fd8-4099-a254-4452835bf69e}</Project>
+      <Name>SKCore.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SKCore\SKCore\SKCore.csproj">
+      <Project>{86e52d96-25d9-4163-b063-3f0b1caa9ac8}</Project>
+      <Name>SKCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

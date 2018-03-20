@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelMerge", "ExcelMerge\ExcelMerge.csproj", "{BFF4C33C-7395-4428-8587-AA22062E4A24}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetDiff", "NetDiff\NetDiff\NetDiff.csproj", "{00A6267D-DDE3-42CC-9C99-9166C334053E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetDiff.Test", "NetDiff\NetDiff.Test\NetDiff.Test.csproj", "{AAFA1775-1F46-4AA5-97D3-DE88D591828D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKCore", "SKCore\SKCore\SKCore.csproj", "{86E52D96-25D9-4163-B063-3F0B1CAA9AC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKCore.Wpf", "SKCore\SKCore.Wpf\SKCore.Wpf.csproj", "{5314F788-9FD8-4099-A254-4452835BF69E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,8 +63,19 @@ Global
 		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAFA1775-1F46-4AA5-97D3-DE88D591828D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E52D96-25D9-4163-B063-3F0B1CAA9AC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E52D96-25D9-4163-B063-3F0B1CAA9AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E52D96-25D9-4163-B063-3F0B1CAA9AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E52D96-25D9-4163-B063-3F0B1CAA9AC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5314F788-9FD8-4099-A254-4452835BF69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5314F788-9FD8-4099-A254-4452835BF69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5314F788-9FD8-4099-A254-4452835BF69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5314F788-9FD8-4099-A254-4452835BF69E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {663E3270-6CC1-4E6C-AC35-311A1E4E828F}
 	EndGlobalSection
 EndGlobal

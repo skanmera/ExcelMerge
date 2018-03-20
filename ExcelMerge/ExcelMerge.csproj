@@ -52,10 +52,6 @@
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SKCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SKCore.1.0.1\lib\net452\SKCore.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -94,6 +90,10 @@
     <ProjectReference Include="..\NetDiff\NetDiff\NetDiff.csproj">
       <Project>{00a6267d-dde3-42cc-9c99-9166c334053e}</Project>
       <Name>NetDiff</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SKCore\SKCore\SKCore.csproj">
+      <Project>{86e52d96-25d9-4163-b063-3f0b1caa9ac8}</Project>
+      <Name>SKCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
