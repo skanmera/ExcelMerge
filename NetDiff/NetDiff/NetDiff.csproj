@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="DiffOption.cs" />
     <Compile Include="DiffResult.cs" />
+    <Compile Include="DiffResultEqualityCompare.cs" />
+    <Compile Include="DiffResultExtension.cs" />
     <Compile Include="EditGraph.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="DiffUtil.cs" />

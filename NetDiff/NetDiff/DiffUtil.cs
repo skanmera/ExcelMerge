@@ -22,6 +22,16 @@ namespace NetDiff
             return MakeResults<T>(waypoints, seq1, seq2);
         }
 
+        public static IEnumerable<DiffResult<T>> OptimizedDiff<T>(IEnumerable<T> seq1, IEnumerable<T> seq2)
+        {
+            return OptimizedDiff(seq1, seq2, new DiffOption<T>());
+        }
+
+        public static IEnumerable<DiffResult<T>> OptimizedDiff<T>(IEnumerable<T> seq1, IEnumerable<T> seq2, DiffOption<T> option)
+        {
+            return Diff(seq1, seq2, option).Optimize(option.EqualityComparer);
+        }
+
         public static IEnumerable<T> CreateSrc<T>(IEnumerable<DiffResult<T>> diffResults)
         {
             return diffResults.Where(r => r.Status != DiffStatus.Inserted).Select(r => r.Obj1);
@@ -32,41 +42,150 @@ namespace NetDiff
             return diffResults.Where(r => r.Status != DiffStatus.Deleted).Select(r => r.Obj2);
         }
 
-        public static IEnumerable<DiffResult<T>> OptimizeCaseDeletedFirst<T>(IEnumerable<DiffResult<T>> diffResults)
+        public static IEnumerable<DiffResult<T>> Optimaize<T>(IEnumerable<DiffResult<T>> diffResults, IEqualityComparer<T> compare = null)
         {
-            return Optimize(diffResults, true);
-        }
+            var srcArray = new NullableDiffObject<T>[diffResults.Count()];
+            var dstArray = new NullableDiffObject<T>[srcArray.Length];
 
-        public static IEnumerable<DiffResult<T>> OptimizeCaseInsertedFirst<T>(IEnumerable<DiffResult<T>> diffResults)
-        {
-            return Optimize(diffResults, false);
-        }
-
-        private static IEnumerable<DiffResult<T>> Optimize<T>(IEnumerable<DiffResult<T>> diffResults, bool deleteFirst = true)
-        {
-            var currentStatus = deleteFirst ? DiffStatus.Deleted : DiffStatus.Inserted;
-            var nextStatus = deleteFirst ? DiffStatus.Inserted : DiffStatus.Deleted;
-
-            var queue = new Queue<DiffResult<T>>(diffResults);
-            while (queue.Any())
+            var count = 0;
+            foreach (var result in diffResults)
             {
-                var result = queue.Dequeue();
-                if (result.Status == currentStatus)
+                switch (result.Status)
                 {
-                    if (queue.Any() && queue.Peek().Status == nextStatus)
-                    {
-                        var obj1 = deleteFirst ? result.Obj1 : queue.Dequeue().Obj1;
-                        var obj2 = deleteFirst ? queue.Dequeue().Obj2 : result.Obj2;
-                        yield return new DiffResult<T>(obj1, obj2, DiffStatus.Modified);
-                    }
-                    else
-                        yield return result;
+                    case DiffStatus.Deleted:
+                        srcArray[count] = new NullableDiffObject<T>(result.Obj1);
+                        break;
+                    case DiffStatus.Equal:
+                        srcArray[count] = new NullableDiffObject<T>(result.Obj1);
+                        dstArray[count] = new NullableDiffObject<T>(result.Obj2);
+                        break;
+                    case DiffStatus.Inserted:
+                        dstArray[count] = new NullableDiffObject<T>(result.Obj2);
+                        break;
+                }
 
+                count++;
+            }
+
+            var compactedCount = Compact(ref srcArray, ref dstArray);
+
+            for (int i = 0, max = srcArray.Length; i < max; i++)
+            {
+                if (dstArray[i] == null)
+                {
+                    yield return new DiffResult<T>(srcArray[i].Obj, default(T), DiffStatus.Deleted);
+                }
+                else if (srcArray[i] == null)
+                {
+                    yield return new DiffResult<T>(default(T), dstArray[i].Obj, DiffStatus.Inserted);
+                }
+                else if (Equals(srcArray[i].Obj, dstArray[i].Obj, compare))
+                {
+                    yield return new DiffResult<T>(srcArray[i].Obj, dstArray[i].Obj, DiffStatus.Equal);
+                }
+                else
+                {
+                    yield return new DiffResult<T>(srcArray[i].Obj, dstArray[i].Obj, DiffStatus.Modified);
+                }
+            }
+        }
+
+        private static int Compact<T>(ref NullableDiffObject<T>[] srcArray, ref NullableDiffObject<T>[] dstArray, IEqualityComparer<T> compare = null)
+        {
+            for (int i = 0, max = srcArray.Length * 2; i < max; i++)
+            {
+                var isTargetSrc = i % 2 == 0;
+                var srcIndex = i / 2;
+
+                var targetArray = isTargetSrc ? srcArray : dstArray;
+                var oppositeArray = isTargetSrc ? dstArray : srcArray;
+
+                if (targetArray[srcIndex] != null && oppositeArray[srcIndex] == null)
+                {
+                    var currentIndex = srcIndex;
+                    var dstIndex = -1;
+
+                    while (currentIndex > 0)
+                    {
+                        if (targetArray[currentIndex - 1] == null)
+                        {
+                            currentIndex--;
+                            dstIndex = currentIndex;
+                        }
+                        else if (Equals(targetArray[currentIndex - 1].Obj, targetArray[srcIndex].Obj, compare))
+                        {
+                            currentIndex--;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (dstIndex < 0)
+                    {
+                        while (currentIndex < max / 2 - 1)
+                        {
+                            if (targetArray[currentIndex + 1] == null)
+                            {
+                                currentIndex++;
+                                dstIndex = currentIndex;
+                            }
+                            else if (Equals(targetArray[currentIndex + 1].Obj, targetArray[srcIndex].Obj, compare))
+                            {
+                                currentIndex++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (dstIndex >= 0)
+                    {
+                        targetArray[dstIndex] = targetArray[srcIndex];
+                        targetArray[srcIndex] = null;
+                    }
+                }
+            }
+
+            var srcList = new List<NullableDiffObject<T>>(srcArray.Length);
+            var dstList = new List<NullableDiffObject<T>>(srcList.Capacity);
+
+            var compactedCount = 0;
+            for (int i = 0; i < srcArray.Length; i++)
+            {
+                if (srcArray[i] == null && dstArray[i] == null)
+                {
+                    compactedCount++;
                     continue;
                 }
 
-                yield return result;
+                srcList.Add(srcArray[i]);
+                dstList.Add(dstArray[i]);
             }
+
+            srcArray = srcList.ToArray();
+            dstArray = dstList.ToArray();
+
+            return compactedCount;
+        }
+
+        private static bool Equals<T>(T x, T y, IEqualityComparer<T> compare = null)
+        {
+            if (compare != null)
+                return compare.Equals(x, y);
+
+            if (x == null)
+            {
+                if (y == null)
+                    return true;
+                else
+                    return false;
+            }
+
+            return x.Equals(y);
         }
 
         private static IEnumerable<DiffResult<T>> MakeResults<T>(IEnumerable<Point> waypoints, IEnumerable<T> seq1, IEnumerable<T> seq2)
@@ -111,31 +230,7 @@ namespace NetDiff
 
         public static IEnumerable<DiffResult<T>> Order<T>(IEnumerable<DiffResult<T>> results, DiffOrderType orderType)
         {
-            var resultArray = results.ToArray();
-
-            for (int i = 0; i < resultArray.Length; i++)
-            {
-                if (resultArray[i].Status == DiffStatus.Deleted)
-                {
-                    while (i - 1 >= 0)
-                    {
-                        if (resultArray[i - 1].Status == DiffStatus.Equal && resultArray[i].Obj1.Equals(resultArray[i - 1].Obj1))
-                        {
-                            var tmp = resultArray[i];
-                            resultArray[i] = resultArray[i - 1];
-                            resultArray[i - 1] = tmp;
-
-                            i--;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            var resultQueue = new Queue<DiffResult<T>>(resultArray);
+            var resultQueue = new Queue<DiffResult<T>>(results);
             var additionQueue = new Queue<DiffResult<T>>();
             var deletionQueue = new Queue<DiffResult<T>>();
 
@@ -215,6 +310,16 @@ namespace NetDiff
                     }
                 }
             }
+        }
+    }
+
+    class NullableDiffObject<T>
+    {
+        public T Obj { get; }
+
+        public NullableDiffObject(T obj)
+        {
+            Obj = obj;
         }
     }
 }

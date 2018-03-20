@@ -73,7 +73,7 @@ namespace NetDiff
         private DiffOption<T> option;
         private List<Node> heads;
         private Point endpoint;
-        private int[] farthestPoints;
+        private int?[] farthestPoints;
         private int offset;
         private bool isEnd;
 
@@ -105,7 +105,7 @@ namespace NetDiff
 
         private void Initialize()
         {
-            farthestPoints = new int[seq1.Length + seq2.Length + 1];
+            farthestPoints = new int?[seq1.Length + seq2.Length + 1];
             heads = new List<Node>();
         }
 
@@ -267,7 +267,7 @@ namespace NetDiff
             var k = point.X - point.Y;
             var y = farthestPoints[k + offset];
 
-            if (point.Y <= y)
+            if (y.HasValue && point.Y <= y)
                 return false;
 
             farthestPoints[k + offset] = point.Y;
