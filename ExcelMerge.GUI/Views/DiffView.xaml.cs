@@ -12,6 +12,7 @@ using System.Windows.Media;
 using Microsoft.Practices.Unity;
 using FastWpfGrid;
 using NetDiff;
+using SKCore.IO;
 using SKCore.Collection;
 using ExcelMerge.GUI.ViewModels;
 using ExcelMerge.GUI.Settings;
@@ -373,8 +374,15 @@ namespace ExcelMerge.GUI.Views
         {
             ExcelWorkbook swb = null;
             ExcelWorkbook dwb = null;
-            var srcPath = SrcPathTextBox.Text;
-            var dstPath = DstPathTextBox.Text;
+            var srcPath = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(SrcPathTextBox.Text));
+            var dstPath = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(DstPathTextBox.Text));
+
+            PathUtility.CopyTree(SrcPathTextBox.Text, srcPath, overwrite: true);
+            File.SetAttributes(srcPath, FileAttributes.Normal);
+
+            PathUtility.CopyTree(DstPathTextBox.Text, dstPath, overwrite: true);
+            File.SetAttributes(dstPath, FileAttributes.Normal);
+
             ProgressWindow.DoWorkWithModal(progress =>
             {
                 progress.Report(Properties.Resources.Msg_ReadingFiles);
@@ -417,6 +425,7 @@ namespace ExcelMerge.GUI.Views
         private ExcelSheetDiff ExecuteDiff(ExcelSheet srcSheet, ExcelSheet dstSheet)
         {
             ExcelSheetDiff diff = null;
+
             ProgressWindow.DoWorkWithModal(progress =>
             {
                 progress.Report(Properties.Resources.Msg_ExtractingDiff);

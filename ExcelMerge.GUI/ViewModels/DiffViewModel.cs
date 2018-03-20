@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using Prism.Mvvm;
 using FastWpfGrid;
+using SKCore.IO;
 using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Behaviors;
 
@@ -215,7 +216,10 @@ namespace ExcelMerge.GUI.ViewModels
 
             if (existsSrc)
             {
-                SrcSheetNames = ExcelWorkbook.GetSheetNames(SrcPath).ToList();
+                var tmp = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(SrcPath));
+                PathUtility.CopyTree(SrcPath, tmp, overwrite: true);
+                File.SetAttributes(tmp, FileAttributes.Normal);
+                SrcSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
                 SelectedSrcSheetIndex = 0;
             }
             else
@@ -226,7 +230,10 @@ namespace ExcelMerge.GUI.ViewModels
 
             if (existsDst)
             {
-                DstSheetNames = ExcelWorkbook.GetSheetNames(DstPath).ToList();
+                var tmp = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(DstPath));
+                PathUtility.CopyTree(DstPath, tmp, overwrite: true);
+                File.SetAttributes(tmp, FileAttributes.Normal);
+                DstSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
                 SelectedDstSheetIndex = 0;
             }
             else

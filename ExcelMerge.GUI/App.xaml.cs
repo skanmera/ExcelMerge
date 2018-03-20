@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using ExcelMerge.GUI.Commands;
 using ExcelMerge.GUI.Settings;
 
@@ -9,6 +12,11 @@ namespace ExcelMerge.GUI
 {
     public partial class App : Application
     {
+        public static readonly string TempDirectory = Path.Combine(
+            Path.GetTempPath(),
+            ((GuidAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(GuidAttribute))).Value,
+            DateTime.Now.Ticks.ToString());
+
         public ApplicationSetting Setting { get; private set; }
         public CommandLineOption CommandLineOption { get; private set; }
 
@@ -179,6 +187,23 @@ namespace ExcelMerge.GUI
         public bool KeepFileHistory
         {
             get { return CommandLineOption.KeepFileHistory; }
+        }
+
+        public static string GetTempFileName()
+        {
+            return Path.Combine(TempDirectory, Path.GetRandomFileName());
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            try
+            {
+                if (Directory.Exists(TempDirectory))
+                    Directory.Delete(TempDirectory, true);
+            }
+            catch
+            {
+            }
         }
     }
 }
