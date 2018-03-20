@@ -166,9 +166,7 @@ namespace ExcelMerge
                 row.UpdateCells(shifted);
             }
 
-            var r = DiffUtil.Diff(src.Rows.Values, dst.Rows.Values, option);
-            r = DiffUtil.Order(r, DiffOrderType.LazyDeleteFirst);
-            var resultArray = DiffUtil.OptimizeCaseDeletedFirst(r).ToArray();
+            var resultArray = DiffUtil.OptimizedDiff(src.Rows.Values, dst.Rows.Values, option).ToArray();
             if (resultArray.Length > 10000)
             {
                 var count = 0;
@@ -208,9 +206,7 @@ namespace ExcelMerge
                     dc.HeaderIndex = config.DstHeaderIndex;
             }
 
-            var results = DiffUtil.Diff(srcColumns, dstColumns, option);
-            results = DiffUtil.Order(results, DiffOrderType.LazyDeleteFirst);
-            results = DiffUtil.OptimizeCaseDeletedFirst(results);
+            var results = DiffUtil.OptimizedDiff(srcColumns, dstColumns, option);
             var ret = new Dictionary<int, ExcelColumnStatus>();
             var columnIndex = 0;
             foreach (var result in results)

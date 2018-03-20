@@ -226,9 +226,7 @@ namespace ExcelMerge.GUI.Views
 
         private IEnumerable<DiffResult<string>> DiffCellValue(IEnumerable<string> src, IEnumerable<string> dst)
         {
-            var r = DiffUtil.Diff(src, dst);
-            r = DiffUtil.Order(r, DiffOrderType.LazyDeleteFirst);
-            return DiffUtil.OptimizeCaseDeletedFirst(r);
+            return DiffUtil.OptimizedDiff(src, dst);
         }
 
         private string ConvertWhiteSpaces(string str)
@@ -323,9 +321,7 @@ namespace ExcelMerge.GUI.Views
                 }
                 else if (lineDiffResult.Status == DiffStatus.Modified)
                 {
-                    var charDiffResults = DiffUtil.Diff(lineDiffResult.Obj1, lineDiffResult.Obj2);
-                    charDiffResults = DiffUtil.Order(charDiffResults, DiffOrderType.LazyDeleteFirst);
-                    charDiffResults = DiffUtil.OptimizeCaseDeletedFirst(charDiffResults);
+                    var charDiffResults = DiffUtil.OptimizedDiff(lineDiffResult.Obj1, lineDiffResult.Obj2);
 
                     DiffModifiedLine(charDiffResults.Where(r => r.Status != DiffStatus.Inserted), srcRange, true);
                     DiffModifiedLine(charDiffResults.Where(r => r.Status != DiffStatus.Deleted), dstRange, false);
