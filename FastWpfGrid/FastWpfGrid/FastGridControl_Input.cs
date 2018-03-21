@@ -49,6 +49,8 @@ namespace FastWpfGrid
         private FastGridCellAddress _shiftDragStartCell;
         private bool _inlineTextChanged;
         public event EventHandler ScrolledModelRows;
+        public event EventHandler ScrolledBeyondEnd;
+        public event EventHandler ScrolledBeyondStart;
         public event EventHandler ScrolledModelColumns;
         private FastGridCellAddress _showCellEditorIfMouseUp;
 
@@ -481,7 +483,8 @@ namespace FastWpfGrid
             {
                 if (e.Delta < 0) vscroll.Value = vscroll.Value + vscroll.LargeChange / 2;
                 if (e.Delta > 0) vscroll.Value = vscroll.Value - vscroll.LargeChange / 2;
-                ScrollChanged();
+
+                ScrollChanged(e.Delta);
             }
         }
 
@@ -831,6 +834,16 @@ namespace FastWpfGrid
         private void OnScrolledModelRows()
         {
             if (ScrolledModelRows != null) ScrolledModelRows(this, EventArgs.Empty);
+        }
+
+        private void OnScrolledBeyondEnd()
+        {
+            ScrolledBeyondEnd?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnScrolledBeyondStart()
+        {
+            ScrolledBeyondStart?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnScrolledModelColumns()

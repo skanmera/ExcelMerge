@@ -64,6 +64,20 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref focusFirstDiff, value); }
         }
 
+        private bool moveNextSheetWhenScrolledBeyondEnd;
+        public bool MoveNextSheetWhenScrolledBeyondEnd
+        {
+            get { return moveNextSheetWhenScrolledBeyondEnd; }
+            set { SetProperty(ref moveNextSheetWhenScrolledBeyondEnd, value); }
+        }
+
+        private bool movePrevSheetWhenScrolledBeyondStart;
+        public bool MovePrevSheetWhenScrolledBeyondStart
+        {
+            get { return movePrevSheetWhenScrolledBeyondStart; }
+            set { SetProperty(ref movePrevSheetWhenScrolledBeyondStart, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",

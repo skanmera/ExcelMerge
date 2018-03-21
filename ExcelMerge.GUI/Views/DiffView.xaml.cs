@@ -27,6 +27,7 @@ namespace ExcelMerge.GUI.Views
         private IUnityContainer container;
         private const string srcKey = "src";
         private const string dstKey = "dst";
+        private bool isLock = false;
 
         private FastGridControl copyTargetGrid;
 
@@ -42,6 +43,11 @@ namespace ExcelMerge.GUI.Views
 
             // In order to enable Ctrl + F immediately after startup.
             ToolExpander.IsExpanded = true;
+
+            SrcDataGrid.ScrolledBeyondEnd += OnScrolledBeyondEnd;
+            DstDataGrid.ScrolledBeyondEnd += OnScrolledBeyondEnd;
+            SrcDataGrid.ScrolledBeyondStart += OnScrolledBeyondStart;
+            DstDataGrid.ScrolledBeyondStart += OnScrolledBeyondStart;
         }
 
         private DiffViewModel GetViewModel()
@@ -82,6 +88,56 @@ namespace ExcelMerge.GUI.Views
         {
             var e = new DiffViewEventArgs<FastGridControl>(null, container, TargetType.First);
             DataGridEventDispatcher.Instance.DispatchApplicationSettingUpdateEvent(e);
+        }
+
+        public void OnScrolledBeyondEnd(object sender, EventArgs e)
+        {
+            if (App.Instance.Setting.MoveNextSheetWhenScrolledBeyondEnd)
+                ShowNextSheetDiff();
+        }
+
+        public void OnScrolledBeyondStart(object sender, EventArgs e)
+        {
+            if (App.Instance.Setting.MovePrevSheetWhenScrolledBeyondStart)
+                ShowPrevSheetDiff();
+        }
+
+        private void ShowNextSheetDiff()
+        {
+            if (isLock)
+                return;
+
+            if (SrcSheetCombobox.SelectedIndex + 1 >= SrcSheetCombobox.Items.Count ||
+                DstSheetCombobox.SelectedIndex + 1 >= DstSheetCombobox.Items.Count)
+                return;
+
+            isLock = true;
+
+            SrcSheetCombobox.SelectedIndex = SrcSheetCombobox.SelectedIndex + 1;
+            DstSheetCombobox.SelectedIndex = DstSheetCombobox.SelectedIndex + 1;
+
+            ExecuteDiff();
+
+            isLock = false;
+        }
+
+        private void ShowPrevSheetDiff()
+        {
+            if (isLock)
+                return;
+
+            if (SrcSheetCombobox.SelectedIndex - 1 < 0 ||
+                DstSheetCombobox.SelectedIndex - 1 < 0)
+                return;
+
+            isLock = true;
+
+            SrcSheetCombobox.SelectedIndex = SrcSheetCombobox.SelectedIndex - 1;
+            DstSheetCombobox.SelectedIndex = DstSheetCombobox.SelectedIndex - 1;
+
+            ExecuteDiff();
+
+            isLock = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -303,8 +359,8 @@ namespace ExcelMerge.GUI.Views
 
         private void UpdateValueDiff(string srcValue, string dstValue)
         {
-            SrcValueTextBox.Document.Blocks.First().ContentStart.Paragraph.Inlines.Clear();
-            DstValueTextBox.Document.Blocks.First().ContentStart.Paragraph.Inlines.Clear();
+            SrcValueTextBox.Document.Blocks.FirstOrDefault()?.ContentStart.Paragraph.Inlines.Clear();
+            DstValueTextBox.Document.Blocks.FirstOrDefault()?.ContentStart.Paragraph.Inlines.Clear();
 
             var srcLines = srcValue.Split('\n').Select(s => s.TrimEnd());
             var dstLines = dstValue.Split('\n').Select(s => s.TrimEnd());
@@ -1097,6 +1153,16 @@ namespace ExcelMerge.GUI.Views
         private void CopyAsCsv_Click(object sender, RoutedEventArgs e)
         {
             CopyToClipboardSelectedCells(",");
+        }
+
+        private void PrevSheetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPrevSheetDiff();
+        }
+
+        private void NextSheetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowNextSheetDiff();
         }
     }
 }

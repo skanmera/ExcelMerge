@@ -62,7 +62,10 @@ namespace ExcelMerge.GUI.Views
 
         public void OnPostExecuteDiff(DiffViewEventArgs<FastGridControl> e)
         {
-            //SyncRowHeight(e.Container);
+            foreach (var textBox in e.Container.ResolveAll<RichTextBox>())
+            {
+                textBox.Document.Blocks.FirstOrDefault()?.ContentStart.Paragraph.Inlines.Clear();
+            }
         }
 
         public void OnFileSettingUpdated(DiffViewEventArgs<FastGridControl> e, FileSetting fileSetting)

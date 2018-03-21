@@ -90,8 +90,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0"
                      VerticalAlignment="Center"
@@ -103,8 +103,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0"
                      VerticalAlignment="Center"
@@ -116,8 +116,8 @@
 
             <Grid Margin="3">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0"
                      VerticalAlignment="Center"
@@ -125,6 +125,32 @@
               <CheckBox Grid.Column="1" 
                         VerticalAlignment="Center" 
                         IsChecked="{Binding Setting.FocusFirstDiff}"/>
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_MoveNextSheetWhenScrolledBeyondEnd}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.MoveNextSheetWhenScrolledBeyondEnd}"/>
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_MovePrevSheetWhenScrolledBeyondStart}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.MovePrevSheetWhenScrolledBeyondStart}"/>
             </Grid>
 
           </StackPanel>

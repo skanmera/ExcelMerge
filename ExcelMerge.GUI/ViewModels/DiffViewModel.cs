@@ -63,21 +63,47 @@ namespace ExcelMerge.GUI.ViewModels
         public int SelectedSrcSheetIndex
         {
             get { return selectedSrcSheetIndex; }
-            set { SetProperty(ref selectedSrcSheetIndex, value); }
+            set
+            {
+                SetProperty(ref selectedSrcSheetIndex, value);
+                UpdateOtherSheetsExecutableFlag();
+            }
         }
 
         private int selectedDstSheetIndex;
         public int SelectedDstSheetIndex
         {
             get { return selectedDstSheetIndex; }
-            set { SetProperty(ref selectedDstSheetIndex, value); }
+            set
+            {
+                SetProperty(ref selectedDstSheetIndex, value);
+                UpdateOtherSheetsExecutableFlag();
+            }
         }
 
         private bool executable;
         public bool Executable
         {
             get { return executable; }
-            private set { SetProperty(ref executable, value); }
+            private set
+            {
+                SetProperty(ref executable, value);
+                UpdateOtherSheetsExecutableFlag();
+            }
+        }
+
+        private bool executableNext;
+        public bool ExecutableNext
+        {
+            get { return executableNext; }
+            private set { SetProperty(ref executableNext, value); }
+        }
+
+        private bool executablePrev;
+        public bool ExecutablePrev
+        {
+            get { return executablePrev; }
+            private set { SetProperty(ref executablePrev, value); }
         }
 
         private int modifiedCellCount;
@@ -243,6 +269,17 @@ namespace ExcelMerge.GUI.ViewModels
             }
 
             Executable = existsSrc && existsDst;
+        }
+
+        private void UpdateOtherSheetsExecutableFlag()
+        {
+            ExecutableNext = Executable &&
+                SelectedSrcSheetIndex + 1 < SrcSheetNames.Count &&
+            SelectedDstSheetIndex + 1 < dstSheetNames.Count;
+
+            ExecutablePrev = Executable &&
+                SelectedSrcSheetIndex - 1 >= 0 &&
+                SelectedDstSheetIndex - 1 >= 0;
         }
     }
 }

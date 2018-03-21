@@ -14,6 +14,9 @@ namespace FastWpfGrid
 {
     partial class FastGridControl
     {
+        private int _scrolledCount = 0;
+        private long _scrolledTick = 0;
+
         private void RenderGrid()
         {
             var start = DateTime.Now;
@@ -374,10 +377,54 @@ namespace FastWpfGrid
             return image;
         }
 
-        private void ScrollContent(int row, int column)
+        private void ScrollContent(int row, int column, int wheeledDelta = 0)
         {
             if (row == FirstVisibleRowScrollIndex && column == FirstVisibleColumnScrollIndex)
             {
+                if (FirstVisibleRowScrollIndex + 1 == RealRowCount || RealRowCount == 0 || row == 0)
+                {
+                    var tick = DateTime.Now.Ticks;
+                    if (tick - _scrolledTick < 5000000)
+                    {
+                        if (wheeledDelta > 0)
+                        {
+                            _scrolledCount--;
+                        }
+                        else if (wheeledDelta < 0)
+                        {
+                            _scrolledCount++;
+                        }
+                        else
+                        {
+                            if (row == 0)
+                            {
+                                _scrolledCount--;
+                            }
+                            else
+                            {
+                                _scrolledCount++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _scrolledCount = 0;
+                    }
+
+                    _scrolledTick = tick;
+
+                    if (_scrolledCount > 10)
+                    {
+                        OnScrolledBeyondEnd();
+                        _scrolledCount = 0;
+                    }
+                    else if (_scrolledCount < -10)
+                    {
+                        OnScrolledBeyondStart();
+                        _scrolledCount = 0;
+                    }
+                }
+
                 return;
             }
 
@@ -387,6 +434,7 @@ namespace FastWpfGrid
                 using (var ctx = CreateInvalidationContext())
                 {
                     int scrollY = _rowSizes.GetScroll(FirstVisibleRowScrollIndex, row);
+
                     _rowSizes.InvalidateAfterScroll(FirstVisibleRowScrollIndex, row, InvalidateRow, GridScrollAreaHeight);
                     FirstVisibleRowScrollIndex = row;
 

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Button_ExtractDiff" xml:space="preserve">
-    <value>Extract Diff</value>
+    <value>Extract</value>
   </data>
   <data name="Label_SkipFirstBlankRows" xml:space="preserve">
     <value>Skip first blank rows</value>
@@ -496,5 +496,29 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   </data>
   <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
     <value>Copy as TSV</value>
+  </data>
+  <data name="Button_NextSheet" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Button_PrevSheet" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="Button_Swap" xml:space="preserve">
+    <value>Swap</value>
+  </data>
+  <data name="Label_MoveNextSheetWhenScrolledBeyondEnd" xml:space="preserve">
+    <value>Move to next sheets when scrolled beyond end</value>
+  </data>
+  <data name="Label_MovePrevSheetWhenScrolledBeyondStart" xml:space="preserve">
+    <value>Move to prev sheets when scrolled beyond start</value>
+  </data>
+  <data name="ToolTip_ExtractDiff" xml:space="preserve">
+    <value>Extract diff</value>
+  </data>
+  <data name="ToolTip_NextSheet" xml:space="preserve">
+    <value>Extract and show next sheets diff</value>
+  </data>
+  <data name="ToolTip_PrevSheet" xml:space="preserve">
+    <value>Extract and show prev sheets diff</value>
   </data>
 </root>

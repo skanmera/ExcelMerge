@@ -209,7 +209,7 @@ namespace FastWpfGrid
         //    get { return _columnWidth; }
         //}
 
-        private void ScrollChanged()
+        private void ScrollChanged(int wheeledDelta = 0)
         {
             //int rowIndex = _rowSizes.GetScrollIndexOnPosition((int) vscroll.Value);
             //int columnIndex = _columnSizes.GetScrollIndexOnPosition((int) hscroll.Value);
@@ -220,7 +220,7 @@ namespace FastWpfGrid
             //FirstVisibleRow = rowIndex;
             //FirstVisibleColumn = columnIndex;
             //RenderGrid();
-            ScrollContent(rowIndex, columnIndex);
+            ScrollContent(rowIndex, columnIndex, wheeledDelta);
             AdjustInlineEditorPosition();
             AdjustSelectionMenuPosition();
 

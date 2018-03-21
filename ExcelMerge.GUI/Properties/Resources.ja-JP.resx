@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Button_ExtractDiff" xml:space="preserve">
-    <value>差分抽出</value>
+    <value>抽出</value>
   </data>
   <data name="Label_SkipFirstBlankRows" xml:space="preserve">
     <value>先頭の空行を無視する</value>
@@ -241,7 +241,7 @@
     <value>差分のみ</value>
   </data>
   <data name="ToolTip_Swap" xml:space="preserve">
-    <value>左右を入れ替え</value>
+    <value>左右を入れ替えて差分を再抽出</value>
   </data>
   <data name="Word_Path" xml:space="preserve">
     <value>パス</value>
@@ -496,5 +496,29 @@
   </data>
   <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
     <value>TSV形式でコピー</value>
+  </data>
+  <data name="Button_NextSheet" xml:space="preserve">
+    <value>次のシート</value>
+  </data>
+  <data name="Button_PrevSheet" xml:space="preserve">
+    <value>前のシート</value>
+  </data>
+  <data name="Button_Swap" xml:space="preserve">
+    <value>入れ替え</value>
+  </data>
+  <data name="Label_MoveNextSheetWhenScrolledBeyondEnd" xml:space="preserve">
+    <value>終端のスクロールで次のシートへ移動する</value>
+  </data>
+  <data name="ToolTip_ExtractDiff" xml:space="preserve">
+    <value>差分を抽出</value>
+  </data>
+  <data name="ToolTip_NextSheet" xml:space="preserve">
+    <value>次のシートの差分を抽出して表示</value>
+  </data>
+  <data name="ToolTip_PrevSheet" xml:space="preserve">
+    <value>前のシートの差分を抽出して表示</value>
+  </data>
+  <data name="Label_MovePrevSheetWhenScrolledBeyondStart" xml:space="preserve">
+    <value>始点のスクロールで前のシートへ移動する</value>
   </data>
 </root>

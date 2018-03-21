@@ -38,9 +38,36 @@
         <WrapPanel Orientation="Horizontal" Margin="3">
 
           <Button x:Name="DiffButton" Content="{x:Static props:Resources.Button_ExtractDiff}" 
-                  Margin="10,0,0,0" Height="40" Padding="5,5"
+                  ToolTip="{x:Static props:Resources.ToolTip_ExtractDiff}"
+                  Margin="5,0,0,0" 
+                  Height="32" 
+                  Padding="3"
                   Click="DiffButton_Click"
                   IsEnabled="{Binding Executable}"/>
+
+          <Button x:Name="SwapButton" Content="{x:Static props:Resources.Button_Swap}"
+                  ToolTip="{x:Static props:Resources.ToolTip_Swap}"
+                  Click="SwapButton_Click" 
+                  Margin="5,0,0,0" 
+                  Height="32" 
+                  Padding="3"
+                  IsEnabled="{Binding Executable}"/>
+
+          <Button x:Name="PrevSheetButton" Content="{x:Static props:Resources.Button_PrevSheet}"
+                  ToolTip="{x:Static props:Resources.ToolTip_PrevSheet}"
+                  Click="PrevSheetButton_Click"
+                  Margin="5,0,0,0" 
+                  Height="32" 
+                  Padding="3"
+                  IsEnabled="{Binding ExecutablePrev}"/>
+
+          <Button x:Name="NextSheetButton" Content="{x:Static props:Resources.Button_NextSheet}"
+                  ToolTip="{x:Static props:Resources.ToolTip_NextSheet}"
+                  Click="NextSheetButton_Click"
+                  Margin="5,0,0,0" 
+                  Height="32" 
+                  Padding="3"
+                  IsEnabled="{Binding ExecutableNext}"/>
 
           <GroupBox Header="{x:Static props:Resources.GroupBox_DisplayFormat}"
                     Margin="10,0,0,0">
@@ -63,7 +90,7 @@
             <StackPanel Orientation="Horizontal">
               <Label Content="{x:Static props:Resources.Word_Path}"/>
               <TextBox x:Name="SrcPathTextBox" AcceptsReturn="False" Margin="1"
-                       Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
+                       Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.10'}"
                        AllowDrop="True"
                        Text="{Binding SrcPath}"
                        Tag="0">
@@ -85,7 +112,7 @@
             <StackPanel Orientation="Horizontal">
               <Label Content="{x:Static props:Resources.Word_Path}"/>
               <TextBox x:Name="DstPathTextBox" AcceptsReturn="False" Margin="1"
-                       Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.20'}"
+                       Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={vc:PercentageConverter}, ConverterParameter='0.10'}"
                        AllowDrop="True"
                        Text="{Binding DstPath}"
                        Tag="1">
@@ -226,11 +253,6 @@
       </Expander.Header>
 
       <WrapPanel Orientation="Horizontal" Margin="3">
-
-        <Button x:Name="SwapButton" Content="{x:Static props:Resources.ToolTip_Swap}"
-                Height="40"
-                Click="SwapButton_Click" Margin="33,0,0,0" Padding="5,5"
-                IsEnabled="{Binding Executable}"/>
 
         <GroupBox Header="{x:Static props:Resources.Word_Search}" Margin="10,0,0,0">
           <StackPanel Orientation="Horizontal">

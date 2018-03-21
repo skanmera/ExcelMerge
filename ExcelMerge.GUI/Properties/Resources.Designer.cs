@@ -19,7 +19,7 @@ namespace ExcelMerge.GUI.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -61,11 +61,38 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Extract Diff に類似しているローカライズされた文字列を検索します。
+        ///   Extract に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Button_ExtractDiff {
             get {
                 return ResourceManager.GetString("Button_ExtractDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Next に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Button_NextSheet {
+            get {
+                return ResourceManager.GetString("Button_NextSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Prev に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Button_PrevSheet {
+            get {
+                return ResourceManager.GetString("Button_PrevSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Swap に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Button_Swap {
+            get {
+                return ResourceManager.GetString("Button_Swap", resourceCulture);
             }
         }
         
@@ -408,6 +435,24 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_ModifiedRows {
             get {
                 return ResourceManager.GetString("Label_ModifiedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Move to next sheets when scrolled beyond end に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MoveNextSheetWhenScrolledBeyondEnd {
+            get {
+                return ResourceManager.GetString("Label_MoveNextSheetWhenScrolledBeyondEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Move to prev sheets when scrolled beyond start に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MovePrevSheetWhenScrolledBeyondStart {
+            get {
+                return ResourceManager.GetString("Label_MovePrevSheetWhenScrolledBeyondStart", resourceCulture);
             }
         }
         
@@ -860,6 +905,33 @@ namespace ExcelMerge.GUI.Properties {
         public static string ToolTip_DstSheet {
             get {
                 return ResourceManager.GetString("ToolTip_DstSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Extract diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ToolTip_ExtractDiff {
+            get {
+                return ResourceManager.GetString("ToolTip_ExtractDiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Extract and show next sheets diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ToolTip_NextSheet {
+            get {
+                return ResourceManager.GetString("ToolTip_NextSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Extract and show prev sheets diff に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ToolTip_PrevSheet {
+            get {
+                return ResourceManager.GetString("ToolTip_PrevSheet", resourceCulture);
             }
         }
         
