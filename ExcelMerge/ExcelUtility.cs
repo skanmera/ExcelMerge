@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
+using System;
+using System.IO;
 
 namespace ExcelMerge
 {
@@ -50,7 +50,6 @@ namespace ExcelMerge
                 throw new ArgumentException("The specified Excel type and path extension do not match.");
 
             var workbook = CreateWorkbook(workbookType);
-            var sheet = workbook.CreateSheet();
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {

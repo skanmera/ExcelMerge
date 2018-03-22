@@ -289,16 +289,16 @@
     <value>末尾の空行を無視する</value>
   </data>
   <data name="Label_AddedRows" xml:space="preserve">
-    <value>追加された行({0})</value>
+    <value>[追加]行({0})</value>
   </data>
   <data name="Label_ModifiedCells" xml:space="preserve">
-    <value>変更されたセル({0})</value>
+    <value>[変更]セル({0})</value>
   </data>
   <data name="Label_ModifiedRows" xml:space="preserve">
-    <value>変更された行({0})</value>
+    <value>[変更]行({0})</value>
   </data>
   <data name="Label_RemovedRows" xml:space="preserve">
-    <value>削除された行({0})</value>
+    <value>[削除]行({0})</value>
   </data>
   <data name="Word_CaseSensitive" xml:space="preserve">
     <value>大文字小文字を区別する</value>

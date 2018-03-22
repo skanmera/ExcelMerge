@@ -9,6 +9,18 @@ namespace ExcelMerge
         public ExcelSheet DstSheet { get; }
         public SortedDictionary<int, ExcelRowDiff> Rows { get; private set; }
 
+        private bool? hasAnyChanges;
+        public bool HasAnyChanges
+        {
+            get
+            {
+                if (!hasAnyChanges.HasValue)
+                    hasAnyChanges = Rows.Any(r => r.Value.IsModified() || r.Value.IsAdded() || r.Value.IsModified());
+
+                return hasAnyChanges.Value;
+            }
+        }
+
         public ExcelSheetDiff(ExcelSheet srcSheet, ExcelSheet dstSheet)
         {
             SrcSheet = srcSheet;
@@ -43,6 +55,12 @@ namespace ExcelMerge
                 modifiedCellCount += row.Value.ModifiedCellCount;
             }
 
+            hasAnyChanges =
+                addedRowCount > 0 ||
+                removedRowCount > 0 ||
+                modifiedRowCount > 0 ||
+                modifiedRowCount > 0;
+
             return new ExcelSheetDiffSummary
             {
                 AddedRowCount = addedRowCount,
@@ -50,6 +68,11 @@ namespace ExcelMerge
                 ModifiedRowCount = modifiedRowCount,
                 ModifiedCellCount = modifiedCellCount,
             };
+        }
+
+        public override string ToString()
+        {
+            return $"{SrcSheet?.Name} {DstSheet?.Name}";
         }
     }
 }

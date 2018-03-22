@@ -301,16 +301,16 @@
     <value>Trim last blank rows</value>
   </data>
   <data name="Label_AddedRows" xml:space="preserve">
-    <value>Added Rows({0})</value>
+    <value>[A]Rows({0})</value>
   </data>
   <data name="Label_ModifiedCells" xml:space="preserve">
-    <value>Modified Cells({0})</value>
+    <value>[M]Cells({0})</value>
   </data>
   <data name="Label_ModifiedRows" xml:space="preserve">
-    <value>Modified Rows({0})</value>
+    <value>[M]Rows({0})</value>
   </data>
   <data name="Label_RemovedRows" xml:space="preserve">
-    <value>Removed Rows({0})</value>
+    <value>[R]Rows({0})</value>
   </data>
   <data name="Word_CaseSensitive" xml:space="preserve">
     <value>CaseSensitive</value>

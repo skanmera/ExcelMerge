@@ -313,7 +313,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Added Rows({0}) に類似しているローカライズされた文字列を検索します。
+        ///   [A]Rows({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_AddedRows {
             get {
@@ -439,7 +439,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Modified Cells({0}) に類似しているローカライズされた文字列を検索します。
+        ///   [M]Cells({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ModifiedCells {
             get {
@@ -466,7 +466,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Modified Rows({0}) に類似しているローカライズされた文字列を検索します。
+        ///   [M]Rows({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_ModifiedRows {
             get {
@@ -520,7 +520,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Removed Rows({0}) に類似しているローカライズされた文字列を検索します。
+        ///   [R]Rows({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_RemovedRows {
             get {

@@ -18,6 +18,17 @@ namespace ExcelMerge
             Rows = new SortedDictionary<int, ExcelRow>();
         }
 
+        public static ExcelSheet CreateEmpty(string name, int index)
+        {
+            var sheet = new ExcelSheet
+            {
+                Name = name,
+                Index = index
+            };
+
+            return sheet;
+        }
+
         public static ExcelSheet Create(ISheet srcSheet, ExcelSheetReadConfig config)
         {
             var rows = ExcelReader.Read(srcSheet);

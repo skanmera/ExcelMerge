@@ -145,8 +145,8 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref description, value); }
         }
 
-        private List<ExcelSheetDiff> sheetDiffs = new List<ExcelSheetDiff>();
-        public List<ExcelSheetDiff> SheetDiffs
+        private ObservableCollection<ExcelSheetDiff> sheetDiffs = new ObservableCollection<ExcelSheetDiff>();
+        public ObservableCollection<ExcelSheetDiff> SheetDiffs
         {
             get { return sheetDiffs; }
             private set { SetProperty(ref sheetDiffs, value); }
@@ -289,6 +289,18 @@ namespace ExcelMerge.GUI.ViewModels
                 anySheet = intersection.Any();
                 SrcSheetNames = intersection.ToList();
                 DstSheetNames = intersection.ToList();
+
+                foreach (var srcSheetName in originalSrcSheetNames.Except(intersection))
+                {
+                    SrcSheetNames.Add(srcSheetName);
+                    DstSheetNames.Add(Path.GetRandomFileName());
+                }
+
+                foreach (var dstSheetName in originalDstSheetNames.Except(intersection))
+                {
+                    SrcSheetNames.Add(Path.GetRandomFileName());
+                    DstSheetNames.Add(dstSheetName);
+                }
             }
             else
             {
@@ -340,6 +352,11 @@ namespace ExcelMerge.GUI.ViewModels
             var name = originalDstSheetNames.ElementAtOrDefault(origIndex);
 
             return GetDstSheetIndex(name);
+        }
+
+        public IEnumerable<Tuple<string, string>> GetSheetNamePairs()
+        {
+            return SrcSheetNames.Zip(DstSheetNames, (s, d) => Tuple.Create(s, d));
         }
     }
 }
