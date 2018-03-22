@@ -9,6 +9,8 @@ namespace ExcelMerge
 {
     public class ExcelSheet
     {
+        public int Index { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public SortedDictionary<int, ExcelRow> Rows { get; private set; }
 
         public ExcelSheet()
@@ -19,8 +21,11 @@ namespace ExcelMerge
         public static ExcelSheet Create(ISheet srcSheet, ExcelSheetReadConfig config)
         {
             var rows = ExcelReader.Read(srcSheet);
+            var sheet = CreateSheet(rows, config);
+            sheet.Name = srcSheet.SheetName;
+            sheet.Index = srcSheet.Workbook.GetSheetIndex(sheet.Name);
 
-            return CreateSheet(rows, config);
+            return sheet;
         }
 
         public static ExcelSheet CreateFromCsv(string path, ExcelSheetReadConfig config)
@@ -182,7 +187,7 @@ namespace ExcelMerge
                 resultArray = indices.Where(i => i < resultArray.Length).Select(i => resultArray[i]).ToArray();
             }
 
-            var sheetDiff = new ExcelSheetDiff();
+            var sheetDiff = new ExcelSheetDiff(src, dst);
             DiffCells(resultArray, sheetDiff, columnStatusMap);
 
             return sheetDiff;

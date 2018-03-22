@@ -5,10 +5,14 @@ namespace ExcelMerge
 {
     public class ExcelSheetDiff
     {
+        public ExcelSheet SrcSheet { get; }
+        public ExcelSheet DstSheet { get; }
         public SortedDictionary<int, ExcelRowDiff> Rows { get; private set; }
 
-        public ExcelSheetDiff()
+        public ExcelSheetDiff(ExcelSheet srcSheet, ExcelSheet dstSheet)
         {
+            SrcSheet = srcSheet;
+            DstSheet = dstSheet;
             Rows = new SortedDictionary<int, ExcelRowDiff>();
         }
 

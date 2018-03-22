@@ -78,6 +78,20 @@ namespace ExcelMerge.GUI.Settings
             set { SetProperty(ref movePrevSheetWhenScrolledBeyondStart, value); }
         }
 
+        private bool useBatchExtraction;
+        public bool UseBatchExtraction
+        {
+            get { return useBatchExtraction; }
+            set { SetProperty(ref useBatchExtraction, value); }
+        }
+
+        private bool makeSheetPairsByName;
+        public bool MakeSheetPairsByName
+        {
+            get { return makeSheetPairsByName; }
+            set { SetProperty(ref makeSheetPairsByName, value); }
+        }
+
         private ObservableCollection<string> alternatingColorStrings = new ObservableCollection<string>
         {
             "#FFFFFF", "#FAFAFA",

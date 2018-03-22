@@ -506,11 +506,17 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Button_Swap" xml:space="preserve">
     <value>Swap</value>
   </data>
+  <data name="Label_CompareSheetName" xml:space="preserve">
+    <value>Compare Sheet Names</value>
+  </data>
   <data name="Label_MoveNextSheetWhenScrolledBeyondEnd" xml:space="preserve">
     <value>Move to next sheets when scrolled beyond end</value>
   </data>
   <data name="Label_MovePrevSheetWhenScrolledBeyondStart" xml:space="preserve">
     <value>Move to prev sheets when scrolled beyond start</value>
+  </data>
+  <data name="Label_UseBatchExtraction" xml:space="preserve">
+    <value>Use Batch Extraction</value>
   </data>
   <data name="ToolTip_ExtractDiff" xml:space="preserve">
     <value>Extract diff</value>
@@ -520,5 +526,14 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   </data>
   <data name="ToolTip_PrevSheet" xml:space="preserve">
     <value>Extract and show prev sheets diff</value>
+  </data>
+  <data name="Description_MakeSheetPairsByname" xml:space="preserve">
+    <value>*Sheet included only on one side is ignored.</value>
+  </data>
+  <data name="Description_UseBatchExtraction" xml:space="preserve">
+    <value>*Startup sheet setting is ignored.</value>
+  </data>
+  <data name="Label_MakeSheetPairsByName" xml:space="preserve">
+    <value>Make sheet pair and order by name</value>
   </data>
 </root>

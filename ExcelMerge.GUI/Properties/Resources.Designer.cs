@@ -232,6 +232,24 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   *Sheet included only on one side is ignored. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Description_MakeSheetPairsByname {
+            get {
+                return ResourceManager.GetString("Description_MakeSheetPairsByname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   *Startup sheet setting is ignored. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Description_UseBatchExtraction {
+            get {
+                return ResourceManager.GetString("Description_UseBatchExtraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Behavior に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string GroupBox_Behavior {
@@ -349,6 +367,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Compare Sheet Names に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_CompareSheetName {
+            get {
+                return ResourceManager.GetString("Label_CompareSheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Fit Cell Height に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Label_FitRowHeight {
@@ -381,6 +408,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_LogFormat {
             get {
                 return ResourceManager.GetString("Label_LogFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Make sheet pair and order by name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_MakeSheetPairsByName {
+            get {
+                return ResourceManager.GetString("Label_MakeSheetPairsByName", resourceCulture);
             }
         }
         
@@ -561,6 +597,15 @@ namespace ExcelMerge.GUI.Properties {
         public static string Label_TrimLastBlankRows {
             get {
                 return ResourceManager.GetString("Label_TrimLastBlankRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Use Batch Extraction に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Label_UseBatchExtraction {
+            get {
+                return ResourceManager.GetString("Label_UseBatchExtraction", resourceCulture);
             }
         }
         

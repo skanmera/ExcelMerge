@@ -518,7 +518,19 @@
   <data name="ToolTip_PrevSheet" xml:space="preserve">
     <value>前のシートの差分を抽出して表示</value>
   </data>
+  <data name="Label_MakeSheetPairsByName" xml:space="preserve">
+    <value>同名のシートでペアを作成して並び替える</value>
+  </data>
   <data name="Label_MovePrevSheetWhenScrolledBeyondStart" xml:space="preserve">
     <value>始点のスクロールで前のシートへ移動する</value>
+  </data>
+  <data name="Label_UseBatchExtraction" xml:space="preserve">
+    <value>一括抽出を使用する</value>
+  </data>
+  <data name="Description_MakeSheetPairsByname" xml:space="preserve">
+    <value>※片方にしか含まれないシートは除外されます</value>
+  </data>
+  <data name="Description_UseBatchExtraction" xml:space="preserve">
+    <value>※起動時のシート設定は無視されます</value>
   </data>
 </root>

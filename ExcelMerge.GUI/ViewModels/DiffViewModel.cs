@@ -45,12 +45,16 @@ namespace ExcelMerge.GUI.ViewModels
             }
         }
 
+        private List<string> originalSrcSheetNames = new List<string>();
+
         private List<string> srcSheetNames;
         public List<string> SrcSheetNames
         {
             get { return srcSheetNames; }
             private set { SetProperty(ref srcSheetNames, value); }
         }
+
+        private List<string> originalDstSheetNames = new List<string>();
 
         private List<string> dstSheetNames;
         public List<string> DstSheetNames
@@ -139,6 +143,13 @@ namespace ExcelMerge.GUI.ViewModels
         {
             get { return description; }
             private set { SetProperty(ref description, value); }
+        }
+
+        private List<ExcelSheetDiff> sheetDiffs = new List<ExcelSheetDiff>();
+        public List<ExcelSheetDiff> SheetDiffs
+        {
+            get { return sheetDiffs; }
+            private set { SetProperty(ref sheetDiffs, value); }
         }
 
         public DiffViewModel()
@@ -245,11 +256,12 @@ namespace ExcelMerge.GUI.ViewModels
                 var tmp = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(SrcPath));
                 PathUtility.CopyTree(SrcPath, tmp, overwrite: true);
                 File.SetAttributes(tmp, FileAttributes.Normal);
-                SrcSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
+                originalSrcSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
                 SelectedSrcSheetIndex = 0;
             }
             else
             {
+                originalSrcSheetNames = new List<string>();
                 SrcSheetNames = new List<string>();
                 SelectedSrcSheetIndex = -1;
             }
@@ -259,16 +271,32 @@ namespace ExcelMerge.GUI.ViewModels
                 var tmp = Path.ChangeExtension(App.GetTempFileName(), Path.GetExtension(DstPath));
                 PathUtility.CopyTree(DstPath, tmp, overwrite: true);
                 File.SetAttributes(tmp, FileAttributes.Normal);
-                DstSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
+                originalDstSheetNames = ExcelWorkbook.GetSheetNames(tmp).ToList();
                 SelectedDstSheetIndex = 0;
             }
             else
             {
+                originalDstSheetNames = new List<string>();
                 DstSheetNames = new List<string>();
                 SelectedDstSheetIndex = -1;
             }
 
-            Executable = existsSrc && existsDst;
+            var anySheet = true;
+
+            if (App.Instance.Setting.MakeSheetPairsByName)
+            {
+                var intersection = originalSrcSheetNames.Intersect(originalDstSheetNames);
+                anySheet = intersection.Any();
+                SrcSheetNames = intersection.ToList();
+                DstSheetNames = intersection.ToList();
+            }
+            else
+            {
+                SrcSheetNames = originalSrcSheetNames.ToList();
+                DstSheetNames = originalDstSheetNames.ToList();
+            }
+
+            Executable = existsSrc && existsDst && anySheet;
         }
 
         private void UpdateOtherSheetsExecutableFlag()
@@ -280,6 +308,38 @@ namespace ExcelMerge.GUI.ViewModels
             ExecutablePrev = Executable &&
                 SelectedSrcSheetIndex - 1 >= 0 &&
                 SelectedDstSheetIndex - 1 >= 0;
+        }
+
+        public void AddSheetDiff(ExcelSheetDiff diff)
+        {
+            if (SheetDiffs.Any(s => s.SrcSheet.Name == diff.SrcSheet.Name && s.DstSheet.Name == diff.DstSheet.Name))
+                return;
+
+            SheetDiffs.Add(diff);
+        }
+
+        public int GetSrcSheetIndex(string name)
+        {
+            return SrcSheetNames.IndexOf(name);
+        }
+
+        public int GetDstSheetIndex(string name)
+        {
+            return DstSheetNames.IndexOf(name);
+        }
+
+        public int GetSrcSheetIndex(int origIndex)
+        {
+            var name = originalSrcSheetNames.ElementAtOrDefault(origIndex);
+
+            return GetSrcSheetIndex(name);
+        }
+
+        public int GetDstSheetIndex(int origIndex)
+        {
+            var name = originalDstSheetNames.ElementAtOrDefault(origIndex);
+
+            return GetDstSheetIndex(name);
         }
     }
 }

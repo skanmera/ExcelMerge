@@ -153,6 +153,36 @@
                         IsChecked="{Binding Setting.MovePrevSheetWhenScrolledBeyondStart}"/>
             </Grid>
 
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="50*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_UseBatchExtraction}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.UseBatchExtraction}"/>
+              <Label Grid.Column="2" Content="{x:Static props:Resources.Description_UseBatchExtraction}" />
+            </Grid>
+
+            <Grid Margin="3">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="50*"/>
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Content="{x:Static props:Resources.Label_MakeSheetPairsByName}"/>
+              <CheckBox Grid.Column="1" 
+                        VerticalAlignment="Center" 
+                        IsChecked="{Binding Setting.MakeSheetPairsByName}"/>
+              <Label Grid.Column="2" Content="{x:Static props:Resources.Description_MakeSheetPairsByname}" />
+            </Grid>
+
           </StackPanel>
         </GroupBox>
 
