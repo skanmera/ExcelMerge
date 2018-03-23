@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Collection\Equal.cs" />
     <Compile Include="Collection\MakePairs.cs" />
+    <Compile Include="Collection\MaxOrDefault.cs" />
+    <Compile Include="Collection\MinOrDefault.cs" />
     <Compile Include="Collection\Times.cs" />
     <Compile Include="Collection\SplitBy.cs" />
     <Compile Include="IO\PathUtility.cs" />
