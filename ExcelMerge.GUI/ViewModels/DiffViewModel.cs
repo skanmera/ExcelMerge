@@ -1,18 +1,16 @@
-﻿using System;
+﻿using ExcelMerge.GUI.Behaviors;
+using Prism.Mvvm;
+using SKCore.IO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Windows;
-using Prism.Mvvm;
-using FastWpfGrid;
-using SKCore.IO;
-using ExcelMerge.GUI.Settings;
-using ExcelMerge.GUI.Behaviors;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class DiffViewModel : BindableBase
+    internal class DiffViewModel : BindableBase
     {
         private bool showLocationGridLine;
         public bool ShowLocationGridLine
@@ -145,11 +143,12 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref description, value); }
         }
 
-        private ObservableCollection<ExcelSheetDiff> sheetDiffs = new ObservableCollection<ExcelSheetDiff>();
-        public ObservableCollection<ExcelSheetDiff> SheetDiffs
+        private ObservableCollection<ExcelSheetDiffInfo> sheetDiffInfoList 
+            = new ObservableCollection<ExcelSheetDiffInfo>();
+        public ObservableCollection<ExcelSheetDiffInfo> SheetDiffInfoList
         {
-            get { return sheetDiffs; }
-            private set { SetProperty(ref sheetDiffs, value); }
+            get { return sheetDiffInfoList; }
+            private set { SetProperty(ref sheetDiffInfoList, value); }
         }
 
         public DiffViewModel()
@@ -324,10 +323,11 @@ namespace ExcelMerge.GUI.ViewModels
 
         public void AddSheetDiff(ExcelSheetDiff diff)
         {
-            if (SheetDiffs.Any(s => s.SrcSheet.Name == diff.SrcSheet.Name && s.DstSheet.Name == diff.DstSheet.Name))
+            if (SheetDiffInfoList
+                .Any(i => i.SheetDiff.SrcSheet.Name == diff.SrcSheet.Name && i.SheetDiff.DstSheet.Name == diff.DstSheet.Name))
                 return;
 
-            SheetDiffs.Add(diff);
+            SheetDiffInfoList.Add(new ExcelSheetDiffInfo(diff));
         }
 
         public int GetSrcSheetIndex(string name)
@@ -357,6 +357,22 @@ namespace ExcelMerge.GUI.ViewModels
         public IEnumerable<Tuple<string, string>> GetSheetNamePairs()
         {
             return SrcSheetNames.Zip(DstSheetNames, (s, d) => Tuple.Create(s, d));
+        }
+    }
+
+    internal class ExcelSheetDiffInfo
+    {
+        public ExcelSheetDiff SheetDiff { get; }
+        public bool IsNotified { get; set; }
+
+        public ExcelSheetDiffInfo(ExcelSheetDiff sheetDiff)
+        {
+            SheetDiff = sheetDiff;
+        }
+
+        public override string ToString()
+        {
+            return SheetDiff?.ToString();
         }
     }
 }

@@ -250,7 +250,7 @@
     <value>All</value>
   </data>
   <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
-    <value>Only Diff</value>
+    <value>Diff</value>
   </data>
   <data name="ToolTip_Swap" xml:space="preserve">
     <value>Swap src and dst</value>
@@ -535,5 +535,8 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   </data>
   <data name="Label_MakeSheetPairsByName" xml:space="preserve">
     <value>Make sheet pair and order by name</value>
+  </data>
+  <data name="Message_NoDiffAllSheet" xml:space="preserve">
+    <value>There is no difference in all sheets.</value>
   </data>
 </root>

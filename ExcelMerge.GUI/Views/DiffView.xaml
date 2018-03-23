@@ -71,17 +71,17 @@
 
           <ComboBox Margin="5,0,0,0"
                     Width="25" Height="32"
-                    ItemsSource="{Binding SheetDiffs}"
+                    ItemsSource="{Binding SheetDiffInfoList}"
                     x:Name="SelectedSheetDiffCombobox"
                     SelectionChanged="SelectedSheetDiffCombobox_SelectionChanged"
                     >
             <ComboBox.ItemContainerStyle>
               <Style TargetType="{x:Type ComboBoxItem}">
                 <Style.Triggers>
-                  <DataTrigger Binding="{Binding HasAnyChanges}" Value="True">
+                  <DataTrigger Binding="{Binding SheetDiff.HasAnyChanges}" Value="True">
                     <Setter Property="Background" Value="Red" />
                   </DataTrigger>
-                  <DataTrigger Binding="{Binding HasAnyChanges}" Value="False">
+                  <DataTrigger Binding="{Binding SheetDiff.HasAnyChanges}" Value="False">
                     <Setter Property="Background" Value="White" />
                   </DataTrigger>
                 </Style.Triggers>

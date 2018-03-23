@@ -238,7 +238,7 @@
     <value>全て</value>
   </data>
   <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
-    <value>差分のみ</value>
+    <value>差分</value>
   </data>
   <data name="ToolTip_Swap" xml:space="preserve">
     <value>左右を入れ替えて差分を再抽出</value>
@@ -532,5 +532,8 @@
   </data>
   <data name="Description_UseBatchExtraction" xml:space="preserve">
     <value>※起動時のシート設定は無視されます</value>
+  </data>
+  <data name="Message_NoDiffAllSheet" xml:space="preserve">
+    <value>全てのシートに差分は存在しません</value>
   </data>
 </root>

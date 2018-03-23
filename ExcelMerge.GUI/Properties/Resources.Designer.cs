@@ -727,6 +727,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   There is no difference in all sheets. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Message_NoDiffAllSheet {
+            get {
+                return ResourceManager.GetString("Message_NoDiffAllSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please restart to apply the changes. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Message_Reboot {
@@ -792,7 +801,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Only Diff に類似しているローカライズされた文字列を検索します。
+        ///   Diff に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string RadioButton_ShowOnlyDiff {
             get {
