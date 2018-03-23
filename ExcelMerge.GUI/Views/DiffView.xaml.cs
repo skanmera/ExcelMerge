@@ -1186,6 +1186,24 @@ namespace ExcelMerge.GUI.Views
                         }
                     }
                     break;
+                case Key.PageDown:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ShowNextSheetDiff();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
+                case Key.PageUp:
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                        {
+                            ShowPrevSheetDiff();
+                            e.Handled = true;
+                        }
+                    }
+                    break;
             }
         }
 

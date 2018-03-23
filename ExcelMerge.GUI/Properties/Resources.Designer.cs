@@ -972,7 +972,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Extract and show next sheets diff に類似しているローカライズされた文字列を検索します。
+        ///   Extract and show next sheets diff (Ctrl + PageDown) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ToolTip_NextSheet {
             get {
@@ -981,7 +981,7 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
-        ///   Extract and show prev sheets diff に類似しているローカライズされた文字列を検索します。
+        ///   Extract and show prev sheets diff (Ctrl + PageUp) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ToolTip_PrevSheet {
             get {

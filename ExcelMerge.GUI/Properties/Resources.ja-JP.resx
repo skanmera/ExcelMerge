@@ -513,10 +513,10 @@
     <value>差分を抽出</value>
   </data>
   <data name="ToolTip_NextSheet" xml:space="preserve">
-    <value>次のシートの差分を抽出して表示</value>
+    <value>次のシートの差分を抽出して表示 (Ctrl + PageDown)</value>
   </data>
   <data name="ToolTip_PrevSheet" xml:space="preserve">
-    <value>前のシートの差分を抽出して表示</value>
+    <value>前のシートの差分を抽出して表示 (Ctrl + PageUp)</value>
   </data>
   <data name="Label_MakeSheetPairsByName" xml:space="preserve">
     <value>同名のシートでペアを作成して並び替える</value>

@@ -522,10 +522,10 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
     <value>Extract diff</value>
   </data>
   <data name="ToolTip_NextSheet" xml:space="preserve">
-    <value>Extract and show next sheets diff</value>
+    <value>Extract and show next sheets diff (Ctrl + PageDown)</value>
   </data>
   <data name="ToolTip_PrevSheet" xml:space="preserve">
-    <value>Extract and show prev sheets diff</value>
+    <value>Extract and show prev sheets diff (Ctrl + PageUp)</value>
   </data>
   <data name="Description_MakeSheetPairsByname" xml:space="preserve">
     <value>*Sheet included only on one side is ignored.</value>
