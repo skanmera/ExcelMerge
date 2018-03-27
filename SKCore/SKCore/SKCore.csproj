@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection\ElementAtOrElse.cs" />
     <Compile Include="Collection\Equal.cs" />
     <Compile Include="Collection\MakePairs.cs" />
     <Compile Include="Collection\MaxOrDefault.cs" />

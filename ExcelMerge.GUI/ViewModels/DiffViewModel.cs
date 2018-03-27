@@ -1,5 +1,6 @@
 ﻿using ExcelMerge.GUI.Behaviors;
 using Prism.Mvvm;
+using SKCore.Collection;
 using SKCore.IO;
 using System;
 using System.Collections.Generic;
@@ -261,7 +262,6 @@ namespace ExcelMerge.GUI.ViewModels
             else
             {
                 originalSrcSheetNames = new List<string>();
-                SrcSheetNames = new List<string>();
                 SelectedSrcSheetIndex = -1;
             }
 
@@ -276,16 +276,15 @@ namespace ExcelMerge.GUI.ViewModels
             else
             {
                 originalDstSheetNames = new List<string>();
-                DstSheetNames = new List<string>();
                 SelectedDstSheetIndex = -1;
             }
 
-            var anySheet = true;
+            SrcSheetNames = new List<string>();
+            DstSheetNames = new List<string>();
 
             if (App.Instance.Setting.MakeSheetPairsByName)
             {
                 var intersection = originalSrcSheetNames.Intersect(originalDstSheetNames);
-                anySheet = intersection.Any();
                 SrcSheetNames = intersection.ToList();
                 DstSheetNames = intersection.ToList();
 
@@ -303,11 +302,14 @@ namespace ExcelMerge.GUI.ViewModels
             }
             else
             {
-                SrcSheetNames = originalSrcSheetNames.ToList();
-                DstSheetNames = originalDstSheetNames.ToList();
+                for (int i = 0, max = Math.Max(originalSrcSheetNames.Count, originalDstSheetNames.Count); i < max; i++)
+                {
+                    SrcSheetNames.Add(originalSrcSheetNames.ElementAtOrElse(i, Path.GetRandomFileName()));
+                    DstSheetNames.Add(originalDstSheetNames.ElementAtOrElse(i, Path.GetRandomFileName()));
+                }
             }
 
-            Executable = existsSrc && existsDst && anySheet;
+            Executable = existsSrc && existsDst && (SrcSheetNames.Any() && DstSheetNames.Any());
         }
 
         private void UpdateOtherSheetsExecutableFlag()

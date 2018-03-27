@@ -562,7 +562,10 @@ namespace ExcelMerge.GUI.Views
 
         private void ExecuteDiff(bool isStartup = false, bool useCache = false, ExcelSheetDiff specificSheetDiff = null)
         {
-            if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
+            //if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
+            //    return;
+
+            if (!GetViewModel().Executable)
                 return;
 
             SelectedSheetDiffCombobox.SelectedIndex = -1;
