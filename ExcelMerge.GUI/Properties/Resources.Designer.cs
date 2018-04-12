@@ -1062,6 +1062,15 @@ namespace ExcelMerge.GUI.Properties {
         }
         
         /// <summary>
+        ///   Chiniese に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Chinese {
+            get {
+                return ResourceManager.GetString("Word_Chinese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Column Header Index に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_ColumnHeaderIndex {

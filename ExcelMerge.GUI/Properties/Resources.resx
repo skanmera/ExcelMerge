@@ -539,4 +539,7 @@ If you don't want to apply file settings, enable "Ignore File Setting".</value>
   <data name="Message_NoDiffAllSheet" xml:space="preserve">
     <value>There is no difference in all sheets.</value>
   </data>
+  <data name="Word_Chinese" xml:space="preserve">
+    <value>Chiniese</value>
+  </data>
 </root>

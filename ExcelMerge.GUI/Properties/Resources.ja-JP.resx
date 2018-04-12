@@ -536,4 +536,7 @@
   <data name="Message_NoDiffAllSheet" xml:space="preserve">
     <value>全てのシートに差分は存在しません</value>
   </data>
+  <data name="Word_Chinese" xml:space="preserve">
+    <value>中国語</value>
+  </data>
 </root>
