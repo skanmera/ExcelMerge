@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_ExtractDiff" xml:space="preserve">
+    <value>只显示差异</value>
+  </data>
+  <data name="Label_SkipFirstBlankRows" xml:space="preserve">
+    <value>忽略第一个空白行</value>
+  </data>
+  <data name="MenuItem_ExeExternalCmd" xml:space="preserve">
+    <value>执行外部命令</value>
+  </data>
+  <data name="MenuItem_ExternalCommands" xml:space="preserve">
+    <value>外部命令</value>
+  </data>
+  <data name="MenuItem_GeneralSetting" xml:space="preserve">
+    <value>通用设置</value>
+  </data>
+  <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
+    <value>打开右边的文件</value>
+  </data>
+  <data name="MenuItem_OpenAsSrcFile" xml:space="preserve">
+    <value>打开左边的文件</value>
+  </data>
+  <data name="MenuItem_OpenDstFile" xml:space="preserve">
+    <value>打开文件到右边</value>
+  </data>
+  <data name="MenuItem_OpenSrcFile" xml:space="preserve">
+    <value>打开文件到左边</value>
+  </data>
+  <data name="MenuItem_RecentFiles" xml:space="preserve">
+    <value>最近打开的文件</value>
+  </data>
+  <data name="MenuItem_RecentFileSets" xml:space="preserve">
+    <value>最近打开的文件对比</value>
+  </data>
+  <data name="Message_Reboot" xml:space="preserve">
+    <value>请重新启动以应用更改。</value>
+  </data>
+  <data name="Title_ExternalCommandEditorWindow" xml:space="preserve">
+    <value>编辑外部命令</value>
+  </data>
+  <data name="Title_ExternalCommandsWindow" xml:space="preserve">
+    <value>外部命令</value>
+  </data>
+  <data name="Title_GeneralSettingWindow" xml:space="preserve">
+    <value>通用设置</value>
+  </data>
+  <data name="ToolTip_DstFilePath" xml:space="preserve">
+    <value>右边的文件路径</value>
+  </data>
+  <data name="ToolTip_DstSheet" xml:space="preserve">
+    <value>右边的表格</value>
+  </data>
+  <data name="ToolTip_SrcFilePath" xml:space="preserve">
+    <value>左边的文件路径</value>
+  </data>
+  <data name="ToolTip_SrcSheet" xml:space="preserve">
+    <value>左边的文件</value>
+  </data>
+  <data name="Word_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Word_Args" xml:space="preserve">
+    <value>参数</value>
+  </data>
+  <data name="Word_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Word_Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="Word_Done" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Word_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Word_English" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="Word_Executable" xml:space="preserve">
+    <value>可执行文件</value>
+  </data>
+  <data name="Word_File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Word_Japanese" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="Word_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Word_Name" xml:space="preserve">
+    <value>名字</value>
+  </data>
+  <data name="Word_Remove" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Word_Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Word_Setting" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Word_Tool" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
+    <value>将此行的差异提取为列标题。</value>
+  </data>
+  <data name="ContextMenu_SetRowHeader" xml:space="preserve">
+    <value>←设置行标题</value>
+  </data>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>←重置行标题</value>
+  </data>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>↑设置列标题</value>
+  </data>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>↑重置列标题</value>
+  </data>
+  <data name="GroupBox_DisplayFormat" xml:space="preserve">
+    <value>显示格式</value>
+  </data>
+  <data name="Label_RowlHeight" xml:space="preserve">
+    <value>行高</value>
+  </data>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>列宽</value>
+  </data>
+  <data name="RadioButton_ShowAll" xml:space="preserve">
+    <value>所有</value>
+  </data>
+  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
+    <value>只显示差异</value>
+  </data>
+  <data name="ToolTip_Swap" xml:space="preserve">
+    <value>左右交换</value>
+  </data>
+  <data name="Word_Path" xml:space="preserve">
+    <value>路径</value>
+  </data>
+  <data name="Word_Sheet" xml:space="preserve">
+    <value>表格</value>
+  </data>
+  <data name="Word_DstFile" xml:space="preserve">
+    <value>右边的文件</value>
+  </data>
+  <data name="Word_SrcFile" xml:space="preserve">
+    <value>左边的文件</value>
+  </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>添加颜色</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>修改行背景颜色</value>
+  </data>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>行标题颜色</value>
+  </data>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>列标题颜色</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>修改颜色</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>修改行颜色</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>删除颜色</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>行颜色</value>
+  </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>忽略第一个空白列</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>忽略最后的空白列</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>忽略最后的空白行</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>添加行({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>修改单元格({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>修改行({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>删除行({0})</value>
+  </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>完全相同</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>正则表达式</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>文件设置</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>编辑文件设置</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>文件设置</value>
+  </data>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>行标题索引</value>
+  </data>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>列标题索引</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>匹配方式</value>
+  </data>
+  <data name="Word_Font" xml:space="preserve">
+    <value>字体</value>
+  </data>
+  <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
+    <value>最大行标题宽度</value>
+  </data>
+  <data name="Msg_ExtractingDiff" xml:space="preserve">
+    <value>显示差异...</value>
+  </data>
+  <data name="Msg_ReadingFiles" xml:space="preserve">
+    <value>读取文件 ...</value>
+  </data>
+  <data name="Msg_WarnSize" xml:space="preserve">
+    <value>记录太多，只显示差异</value>
+  </data>
+  <data name="Word_RowHeaderName" xml:space="preserve">
+    <value>行标题名称</value>
+  </data>
+  <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
+    <value>输出日志</value>
+  </data>
+  <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
+    <value>创建基于列的日志</value>
+  </data>
+  <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
+    <value>创建基于行的日志</value>
+  </data>
+  <data name="DefaultLogFormat" xml:space="preserve">
+    <value>将 "${ROW}" 的 "${COL}" 从 "${LEFT}" 更改为 "${RIGHT}"</value>
+  </data>
+  <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="DefaultRowBaseLogFormat" xml:space="preserve">
+    <value>${LEFT} → ${RIGHT}</value>
+  </data>
+  <data name="Label_LogFormat" xml:space="preserve">
+    <value>修改的单元格日志格式</value>
+  </data>
+  <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
+    <value>基于列的日志格式</value>
+  </data>
+  <data name="Label_RowBaseLogFormat" xml:space="preserve">
+    <value>基于行的日志格式</value>
+  </data>
+  <data name="MenuItem_Console" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="MenuItem_View" xml:space="preserve">
+    <value>窗口</value>
+  </data>
+  <data name="Msg_Undisplayable" xml:space="preserve">
+    <value>不会显示</value>
+  </data>
+  <data name="Shortcut_Ctrl_Down" xml:space="preserve">
+    <value>Ctrl + Down</value>
+  </data>
+  <data name="Shortcut_Ctrl_I" xml:space="preserve">
+    <value>Ctrl + I</value>
+  </data>
+  <data name="Shortcut_Ctrl_K" xml:space="preserve">
+    <value>Ctrl + K</value>
+  </data>
+  <data name="Shortcut_Ctrl_L" xml:space="preserve">
+    <value>Ctrl + L</value>
+  </data>
+  <data name="Shortcut_Ctrl_Left" xml:space="preserve">
+    <value>Ctrl + Left</value>
+  </data>
+  <data name="Shortcut_Ctrl_O" xml:space="preserve">
+    <value>Ctrl + O</value>
+  </data>
+  <data name="Shortcut_Ctrl_Right" xml:space="preserve">
+    <value>Ctrl + Right</value>
+  </data>
+  <data name="Shortcut_Ctrl_Up" xml:space="preserve">
+    <value>Ctrl + Up</value>
+  </data>
+  <data name="Shortcut_F8" xml:space="preserve">
+    <value>F8</value>
+  </data>
+  <data name="Shortcut_F9" xml:space="preserve">
+    <value>F9</value>
+  </data>
+  <data name="Word_Blank" xml:space="preserve">
+    <value>空白</value>
+  </data>
+  <data name="DefaultLogFormatAddedRow" xml:space="preserve">
+    <value>"${ROW}" 已添加。</value>
+  </data>
+  <data name="DefaultLogFormatRemovedRow" xml:space="preserve">
+    <value>"${ROW}" 已删除。</value>
+  </data>
+  <data name="Label_AddedRowLogFormat" xml:space="preserve">
+    <value>添加行日志格式</value>
+  </data>
+  <data name="Label_RemovedRowLogFormat" xml:space="preserve">
+    <value>删除行日志格式</value>
+  </data>
+  <data name="Label_IgnoreFileSetting" xml:space="preserve">
+    <value>忽略文件设置</value>
+  </data>
+  <data name="Msg_OutofSheetRange" xml:space="preserve">
+    <value>应用文件设置后表格索引超出范围。
+将使用第一张表。
+如果您不想应用文件设置，请弃用“忽略文件设置”。</value>
+  </data>
+  <data name="Word_SheetIndex" xml:space="preserve">
+    <value>表格索引</value>
+  </data>
+  <data name="Word_SheetName" xml:space="preserve">
+    <value>表格名称</value>
+  </data>
+  <data name="Word_StartupSheet" xml:space="preserve">
+    <value>设置为启动时的对照表</value>
+  </data>
+  <data name="GroupBox_LogFormat" xml:space="preserve">
+    <value>日志格式</value>
+  </data>
+  <data name="GroupBox_ReadSetting" xml:space="preserve">
+    <value>读取设定</value>
+  </data>
+  <data name="GroupBox_Style" xml:space="preserve">
+    <value>样式</value>
+  </data>
+  <data name="Label_NotifyEqual" xml:space="preserve">
+    <value>如果没有差异显示对话框</value>
+  </data>
+  <data name="Message_NoDiff" xml:space="preserve">
+    <value>没有区别。</value>
+  </data>
+  <data name="GroupBox_Behavior" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
+    <value>总是扩展显示单元格差异</value>
+  </data>
+  <data name="Label_FitRowHeight" xml:space="preserve">
+    <value>匹配单元格高度</value>
+  </data>
+  <data name="Label_MaxRowHeight" xml:space="preserve">
+    <value>最大行高</value>
+  </data>
+  <data name="Label_MinRowHeight" xml:space="preserve">
+    <value>最小行高</value>
+  </data>
+  <data name="Label_FocusFirstDiff" xml:space="preserve">
+    <value>查看差异时自动聚焦于第一个差异</value>
+  </data>
+  <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
+    <value>以CSV格式复制</value>
+  </data>
+  <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
+    <value>以TSV格式复制</value>
+  </data>
+  <data name="Word_Chinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+</root>

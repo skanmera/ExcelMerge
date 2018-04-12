@@ -23,7 +23,14 @@ namespace ExcelMerge
                 switch (type)
                 {
                     case CellType.Numeric:
-                        return cell.NumericCellValue;
+                        if (DateUtil.IsCellDateFormatted(cell))
+                        {
+                            return cell.DateCellValue;
+                        }
+                        else
+                        {
+                            return cell.NumericCellValue;
+                        }
                     case CellType.String:
                         return cell.StringCellValue;
                     case CellType.Boolean:
