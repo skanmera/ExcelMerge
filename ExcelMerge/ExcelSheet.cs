@@ -43,14 +43,21 @@ namespace ExcelMerge
         {
             var rows = CsvReader.Read(path);
 
-            return CreateSheet(rows, config);
+            var sheet = CreateSheet(rows, config);
+            sheet.Name = "csv";
+
+            return sheet;
+
         }
 
         public static ExcelSheet CreateFromTsv(string path, ExcelSheetReadConfig config)
         {
             var rows = TsvReader.Read(path);
 
-            return CreateSheet(rows, config);
+            var sheet = CreateSheet(rows, config);
+            sheet.Name = "tsv";
+
+            return sheet;
         }
 
         private static ExcelSheet CreateSheet(IEnumerable<ExcelRow> rows, ExcelSheetReadConfig config)
