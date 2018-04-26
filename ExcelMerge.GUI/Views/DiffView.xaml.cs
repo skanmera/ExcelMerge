@@ -540,7 +540,7 @@ namespace ExcelMerge.GUI.Views
                 var srcSheet = srcWorkbook.Sheets.Values.FirstOrDefault(v => v.Name == srcName);
                 if (srcSheet == null)
                 {
-                    srcSheet = ExcelSheet.CreateEmpty(srcName, srcWorkbook.Sheets.Max(s => s.Value.Index) + 1);
+                    srcSheet = ExcelSheet.CreateEmpty(srcName, srcWorkbook.Sheets.MaxOrDefault(s => s.Value.Index) + 1);
                     srcWorkbook.Sheets.Add(srcSheet.Name, srcSheet);
                 }
 
@@ -548,7 +548,7 @@ namespace ExcelMerge.GUI.Views
                 var dstSheet = dstWorkbook.Sheets.Values.FirstOrDefault(v => v.Name == dstName);
                 if (dstSheet == null)
                 {
-                    dstSheet = ExcelSheet.CreateEmpty(dstName, dstWorkbook.Sheets.Max(s => s.Value.Index) + 1);
+                    dstSheet = ExcelSheet.CreateEmpty(dstName, dstWorkbook.Sheets.MaxOrDefault(s => s.Value.Index) + 1);
                     dstWorkbook.Sheets.Add(dstSheet.Name, dstSheet);
                 }
 
