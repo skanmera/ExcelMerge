@@ -37,7 +37,7 @@ Download ExcelMergeSetup.msi from [here](https://github.com/skanmera/ExcelMerge/
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/shortcut.png)
 
-### From exproler context menu
+### From Explorer context menu
 
 ![](https://github.com/skanmera/ExcelMerge/blob/media/media/context.png)
 
