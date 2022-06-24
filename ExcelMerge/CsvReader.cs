@@ -8,8 +8,14 @@ namespace ExcelMerge
     {
         internal static IEnumerable<ExcelRow> Read(string path)
         {
-            using (var sr = new StreamReader(path, Encoding.UTF8))
+            using (var stream = File.OpenRead(path))
             {
+                var detector = new Ude.CharsetDetector();
+                detector.Feed(stream);
+                detector.DataEnd();
+                var encoding = detector.IsDone() ? Encoding.GetEncoding(detector.Charset) : Encoding.Default;
+                stream.Position = 0;
+                var sr = new StreamReader(stream, encoding);
                 var rowIndex = 0;
                 while (!sr.EndOfStream)
                 {
@@ -22,5 +28,6 @@ namespace ExcelMerge
                 }
             }
         }
+
     }
 }
