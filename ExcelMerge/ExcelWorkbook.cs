@@ -15,10 +15,11 @@ namespace ExcelMerge
 
         public static ExcelWorkbook Create(string path, ExcelSheetReadConfig config)
         {
-            if (Path.GetExtension(path) == ".csv")
+            var ext = Path.GetExtension(path).ToLower();
+            if (ext == ".csv")
                 return CreateFromCsv(path, config);
 
-            if (Path.GetExtension(path) == ".tsv")
+            if (ext == ".tsv")
                 return CreateFromTsv(path, config);
 
             var srcWb = WorkbookFactory.Create(path);
@@ -34,11 +35,12 @@ namespace ExcelMerge
 
         public static IEnumerable<string> GetSheetNames(string path)
         {
-            if (Path.GetExtension(path) == ".csv")
+            var ext = Path.GetExtension(path).ToLower();
+            if (ext == ".csv")
             {
                 yield return "csv";
             }
-            else if (Path.GetExtension(path) == ".tsv")
+            else if (ext == ".tsv")
             {
                 yield return "tsv";
             }
